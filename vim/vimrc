@@ -1,0 +1,38 @@
+" General behavior
+
+se nocompatible         " Use vim defaults, should be first entry
+
+" Initialize bundles, `call pathogen#helptags()` to regenerate docs
+
+silent! call pathogen#runtime_append_all_bundles()
+
+" Syntax highlighting
+
+syntax on
+colo elflord
+"se cursorline
+
+" General options
+
+se history=1000         " Increase history
+se nobackup             " Do not backup files on overwrite
+se dir=/tmp,/var/tmp    " Directory to put swap file
+se hidden
+se enc=utf8
+
+se number
+se hlsearch
+
+" Indentation
+
+se autoindent
+
+" General mappings
+
+let mapleader=","       " Use the comma as leader
+
+" Scrolling
+
+se scrolljump=3
+se scrolloff=3
+
