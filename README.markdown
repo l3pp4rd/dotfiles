@@ -1,17 +1,15 @@
-About
-=====
+# About
 
-Here is my configuration for vim, git, bash and other tools.
+My .dotfiles for vim git and zsh
 
-Installation
-============
+# Installation
 
 Clone the repository:
 
-    $ clone git://github.com/Herzult/dotfiles.git ~/.dotfiles
+    $ clone git://github.com/l3pp4rd/dotfiles.git ~/.dotfiles
 
+**NOTE:** the setup.sh will remive your current, **.zshrc**, **.vimrc**, **.gitconfig** files
 Execute the setup script:
 
     $ ./.dotfiles/setup.sh
 
-You are right!
