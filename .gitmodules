@@ -27,7 +27,7 @@
 	url = git://github.com/msanders/snipmate.vim.git
 [submodule "vim/bundle/command-t"]
 	path = vim/bundle/command-t
-	url = git://github.com/wincent/Command-T.git
+	url = git://git.wincent.com/command-t.git
 [submodule "vim/bundle/js"]
 	path = vim/bundle/js
 	url = git://github.com/pangloss/vim-javascript.git

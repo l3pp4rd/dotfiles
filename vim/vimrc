@@ -4,35 +4,149 @@ se nocompatible         " Use vim defaults, should be first entry
 
 " Initialize bundles, `call pathogen#helptags()` to regenerate docs
 
-silent! call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
+syntax on
+filetype plugin indent on
 
 " Syntax highlighting
 
-syntax on
-colo elflord
+colo jellybeans
 "se cursorline
+se background=dark
+se t_Co=256
 
 " General options
 
-se history=1000         " Increase history
-se nobackup             " Do not backup files on overwrite
-se dir=/tmp,/var/tmp    " Directory to put swap file
+se history=100                  " Increase history
+se nobackup                     " Do not backup files on overwrite
+se dir=/tmp,/var/tmp            " Directory to put swap file
 se hidden
-se enc=utf8
+se enc=utf8                     " encoding
+se cmdheight=2                  " command bar height
+se laststatus=2                 " always show status bar
+se completeopt=menuone,preview  " autocompletion options
+se ruler
 
-se number
-se hlsearch
+se wildmenu                     " command line autocompletion
+se wildmode=list:longest,full   " options for autocompletion
+se wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs
+
+" Search related options
+
+se smartcase                    " case-sensitive search if expression contains a capital letter.
+se hlsearch                     " Highlight matches.
+se ignorecase                   " Case-insensitive searching.
+se incsearch                    " Highlight matches as you type.
+se showmatch
 
 " Indentation
 
+se list listchars=eol:$,tab:»·,trail:·,extends:>,precedes:<,nbsp:·
 se autoindent
+se expandtab
+se smartindent
+se tabstop=4
+se tildeop
+se shiftwidth=4
+se softtabstop=4
 
-" General mappings
-
-let mapleader=","       " Use the comma as leader
-
-" Scrolling
+" scrolling
 
 se scrolljump=3
 se scrolloff=3
 
+" wrapping linebreak
+
+se wrap linebreak
+se textwidth=100
+se colorcolumn=100
+se formatoptions=qrn1
+
+" -------------MAPPINGS-------------
+
+let mapleader=","       " Use the comma as leader
+nmap <leader>2 :setlocal tabstop=2<cr>:setlocal shiftwidth=2<cr>:setlocal softtabstop=2<cr>
+nmap <leader>4 :setlocal tabstop=4<cr>:setlocal shiftwidth=4<cr>:setlocal softtabstop=4<cr>
+
+" launch help in vert mode split to the right window
+nmap <Leader>h <Esc>:botright vert help<cr>:vert resize 80<cr>:help<space>
+
+" run write with root perms
+cmap w!!    w !sudo tee % >/dev/null
+
+" strip tralling whitespaces
+nmap <silent> <leader>c :call <SID>StripTrailingWhitespaces()<cr>
+
+" ------------PLUGINS---------------
+
+" ACK
+nnoremap <leader>a :Ack
+
+" PHP namespace
+map <leader>u :call PhpInsertUse()<cr>
+
+" -------------FUNCTIONS-------------
+
+function! <SID>StripTrailingWhitespaces()
+    " Preparation save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+function! <SID>MkdirsIfNotExists(directory)
+    if(!isdirectory(a:directory))
+        call system('mkdir -p '.shellescape(a:directory))
+    endif
+endfunction
+
+"
+"+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+"|
+"|  > AUTOCMD
+"|
+"|
+filetype on
+filetype plugin on
+filetype indent on
+
+if has('autocmd')
+    au BufWinEnter *     set foldlevel=999999 
+    au FocusLost silent! :wa
+    au FileType helpfile setlocal nonumber
+
+    """"""""""""""""""""""""""""""""""""""""
+    "
+    "  FILE TYPES
+    "
+    au BufRead,BufNewFile *.phps        setlocal filetype=php
+    au BufRead,BufNewFile *.twig        setlocal filetype=django
+    au BufRead,BufNewFile *.html.twig   setlocal filetype=htmldjango
+    au BufRead,BufNewFile *.ejs         setlocal filetype=html
+    au BufRead,BufNewFile *.json        setlocal filetype=javascript
+
+    """"""""""""""""""""""""""""""""""""""""
+    "
+    "  TABS
+    "
+    au BufRead,BufNewFile *.class.php   setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    au BufRead,BufNewFile *.jade        setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    au BufRead,BufNewFile *.yml         setlocal tabstop=4 shiftwidth=4 softtabstop=4
+    au BufRead,BufNewFile *.feature     setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    au BufRead,BufNewFile *.css         setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    au BufRead,BufNewFile *.scss        setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    au BufRead,BufNewFile *.js          setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    au BufRead,BufNewFile *.coffee      setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
+    """"""""""""""""""""""""""""""""""""""""
+    "
+    "  COMMANDS
+    "
+    au BufWrite *.php,*.js,*.feature,*.json :call <SID>StripTrailingWhitespaces()
+    au BufWrite * :call <SID>MkdirsIfNotExists(expand('<afile>:h'))
+endif
