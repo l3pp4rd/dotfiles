@@ -25,7 +25,10 @@ se enc=utf8                     " encoding
 se cmdheight=2                  " command bar height
 se laststatus=2                 " always show status bar
 se completeopt=menuone,preview  " autocompletion options
-se ruler
+se ruler                        " show the cursor position all the time
+se nolazyredraw                 " turn off lazy redraw
+se number                       " line numbers
+se noshowcmd                    " don't display incomplete commands
 
 se wildmenu                     " command line autocompletion
 se wildmode=list:longest,full   " options for autocompletion
@@ -42,8 +45,8 @@ se showmatch
 " Indentation
 
 se list listchars=eol:$,tab:»·,trail:·,extends:>,precedes:<,nbsp:·
-se autoindent
-se expandtab
+se autoindent                   " automatic indent new lines
+se expandtab                    " expand tabs to spaces
 se smartindent
 se tabstop=4
 se tildeop
@@ -72,7 +75,7 @@ nmap <leader>4 :setlocal tabstop=4<cr>:setlocal shiftwidth=4<cr>:setlocal softta
 nmap <Leader>h <Esc>:botright vert help<cr>:vert resize 80<cr>:help<space>
 
 " run write with root perms
-cmap w!!    w !sudo tee % >/dev/null
+cmap w!! w !sudo tee % >/dev/null<CR>:e!<CR><CR>
 
 " strip tralling whitespaces
 nmap <silent> <leader>c :call <SID>StripTrailingWhitespaces()<cr>
