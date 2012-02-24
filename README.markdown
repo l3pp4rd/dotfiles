@@ -1,8 +1,12 @@
-# About
+## About
 
 My .dotfiles for vim git and zsh
 
-# Installation
+## Requirements
+
+- You will need VIM >= **7.0** with a support of **ruby** interpreter
+
+## Installation
 
 Clone the repository:
 
@@ -12,4 +16,11 @@ Clone the repository:
 Execute the setup script:
 
     $ ./.dotfiles/setup.sh
+
+After that, for [command-t](http://github.com/wincent/Command-T) bundle you will need
+to compile a **C** extension.
+
+    cd ~/.vim/bundle/command-t
+    ruby extconf.rb
+    make
 
