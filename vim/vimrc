@@ -34,7 +34,6 @@ se enc=utf-8 nobomb             " Use UTF-8 without BOM
 se wildmenu                     " command line autocompletion
 se wildmode=list:longest,full   " options for autocompletion
 se wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs
-se mouse=a                      " Enable mouse in all modes
 
 " Search related options
 
