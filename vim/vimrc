@@ -15,7 +15,7 @@ se background=dark
 se t_Co=256
 
 " General options
-
+se clipboard=unnamedplus        " Use default X-System register for copy and paste
 se history=100                  " Increase history
 se nobackup                     " Do not backup files on overwrite
 se dir=/tmp,/var/tmp            " Directory to put swap file
