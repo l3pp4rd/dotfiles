@@ -39,6 +39,7 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bi
 if [ -d "$HOME/bin" ]; then
     export PATH=$PATH:$HOME/bin
 fi
+export PATH=$PATH:/usr/bin/vendor_perl
 export PATH=$PATH:$HOME/.dotfiles/bin
 
 # --------------OTHER--------------

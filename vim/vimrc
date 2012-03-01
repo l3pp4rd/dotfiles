@@ -11,7 +11,6 @@ filetype plugin indent on
 " Syntax highlighting
 
 colo jellybeans
-"se cursorline
 se background=dark
 se t_Co=256
 
@@ -54,7 +53,7 @@ se tildeop
 se shiftwidth=4
 se softtabstop=4
 
-" Highlite cursor line
+" Highlight cursor line
 autocmd insertEnter * set cursorline
 autocmd insertLeave * set nocursorline
 highlight cursorline term=underline cterm=underline ctermbg=0 guibg=#000000
@@ -72,6 +71,12 @@ se colorcolumn=100
 se formatoptions=qrn1
 
 " -------------MAPPINGS-------------
+
+" Restore cursor position
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm$"|endif|endif
+
+" Clear search highlight
+nmap <silent> <leader>/ :let @/=""<cr>
 
 let mapleader=","       " Use the comma as leader
 nmap <leader>2 :setlocal tabstop=2<cr>:setlocal shiftwidth=2<cr>:setlocal softtabstop=2<cr>
@@ -93,6 +98,9 @@ nnoremap <leader>a :Ack
 
 " PHP namespace
 map <leader>u :call PhpInsertUse()<cr>
+
+" Snipmate
+let g:snips_author = 'Gediminas Morkevicius <gediminas.morkevicius@gmail.com>'
 
 " -------------FUNCTIONS-------------
 
