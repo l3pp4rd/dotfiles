@@ -32,7 +32,7 @@ se ttyfast                      " Optimize for fast terminal connections
 se enc=utf-8 nobomb             " Use UTF-8 without BOM
 se wildmenu                     " command line autocompletion
 se wildmode=list:longest,full   " options for autocompletion
-se wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs
+se wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs,*/tmp,*/vendor
 
 " Search related options
 
@@ -90,6 +90,11 @@ cmap w!! w !sudo tee % >/dev/null<CR>:e!<CR><CR>
 
 " strip tralling whitespaces
 nmap <silent> <leader>c :call <SID>StripTrailingWhitespaces()<cr>
+
+" exclude vendor directory
+nmap <leader>ev :se wig+=*/vendor<CR>:CommandTFlush<CR>
+" include vendor directory
+nmap <leader>iv :se wig-=*/vendor<CR>:CommandTFlush<CR>
 
 " ------------PLUGINS---------------
 
