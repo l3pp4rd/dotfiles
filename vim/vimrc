@@ -98,6 +98,9 @@ nmap <leader>iv :se wig-=*/vendor<CR>:CommandTFlush<CR>
 
 " ------------PLUGINS---------------
 
+" Matrix screen
+map <leader>m :Matrix<CR>
+
 " ACK
 nnoremap <leader>a :Ack
 
