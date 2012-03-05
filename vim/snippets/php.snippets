@@ -1,19 +1,16 @@
 snippet cls
 	<?php
-	
-	namespace `substitute(substitute(substitute(expand("%:p"), '\v(.*\/\l+)((\/\u\w+)+)\/\u\w+.php$', '\2', ''), '\/', '\\\', 'g'), '^\\\', '', '')`;
-	
-	/**
-	 * ${1:`Filename('', 'myClass')`}.
-	 */
+
+	namespace ${1:`substitute(substitute(expand("%:h"), '\v^\w+\/(\u)', '\1', ''), '\/', '\\\', 'g')`};
+
 	class ${2:`Filename('', 'myClass')`}
-	{${3}
+	{
+		${3}
 	}
 snippet ctrl
 	<?php
-
-	namespace `substitute(substitute(substitute(expand("%:p"), '\v(.*\/\l+)((\/\u\w+)+)\/\u\w+.php$', '\2', ''), '\/', '\\\', 'g'), '^\\\', '', '')`;
-
+	
+	namespace ${1:`substitute(substitute(expand("%:h"), '\v^\w+\/(\u)', '\1', ''), '\/', '\\\', 'g')`};
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 	/**
@@ -25,7 +22,7 @@ snippet ctrl
 snippet ent
 	<?php
 	
-	namespace `substitute(substitute(substitute(expand("%:p"), '\v(.*\/\l+)((\/\u\w+)+)\/\u\w+.php$', '\2', ''), '\/', '\\\', 'g'), '^\\\', '', '')`;
+	namespace ${1:`substitute(substitute(expand("%:h"), '\v^\w+\/(\u)', '\1', ''), '\/', '\\\', 'g')`};
 	
 	use Doctrine\ORM\Mapping as ORM;
 	

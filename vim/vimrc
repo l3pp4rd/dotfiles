@@ -16,15 +16,20 @@ se t_Co=256
 
 " General options
 se clipboard=unnamedplus        " Use default X-System register for copy and paste
-se history=100                  " Increase history
-se nobackup                     " Do not backup files on overwrite
-se dir=/tmp,/var/tmp            " Directory to put swap file
+se history=200                  " Sets how many lines of history VIM has to remember
+se undolevels=1000              " use many levels of undo
+se noundofile                   " Don't keep a persistent undofile
+se autoread                     " Automatically read a file that has changed on disk
+se nobackup                     " Don't make a backup before overwriting a file.
+se nowritebackup                " And again.
+se noswapfile                   " Use an SCM instead of swap files
+se nospell                      " Disable spell checking
 se hidden
 se cmdheight=2                  " command bar height
 se laststatus=2                 " always show status bar
 se completeopt=menuone,preview  " autocompletion options
 se ruler                        " show the cursor position all the time
-se nolazyredraw                 " turn off lazy redraw
+se lazyredraw                   " turn on lazy redraw
 se number                       " line numbers
 se noshowcmd                    " don't display incomplete commands
 se esckeys                      " Allow cursor keys in insert mode
@@ -32,7 +37,9 @@ se ttyfast                      " Optimize for fast terminal connections
 se enc=utf-8 nobomb             " Use UTF-8 without BOM
 se wildmenu                     " command line autocompletion
 se wildmode=list:longest,full   " options for autocompletion
-se wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs,*/tmp,*/vendor
+se wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs,*/tmp,*.swp,*.jpg,*.png,*.xpm,*.gif,*.ico,*/vendor,web/css,web/js,web/bundles
+" Reduce timeout for key codes
+se timeout timeoutlen=500 ttimeoutlen=0
 
 " Search related options
 
@@ -44,6 +51,7 @@ se showmatch
 
 " Indentation
 
+se backspace=indent,eol,start   " Intuitive backspacing.
 se list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:·
 se autoindent                   " automatic indent new lines
 se expandtab                    " expand tabs to spaces
