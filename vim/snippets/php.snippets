@@ -1,7 +1,7 @@
 snippet cls
 	<?php
-
-	namespace ${1:`substitute(substitute(expand("%:h"), '\v^\w+\/(\u)', '\1', ''), '\/', '\\\', 'g')`};
+	
+	namespace ${1:`substitute(substitute(substitute(expand("%:p"), '\v(.*\/\l+)((\/\u\w+)+)\/\u\w+.php$', '\2', ''), '\/', '\\\', 'g'), '^\\\', '', '')`};
 
 	class ${2:`Filename('', 'myClass')`}
 	{
@@ -10,7 +10,8 @@ snippet cls
 snippet ctrl
 	<?php
 	
-	namespace ${1:`substitute(substitute(expand("%:h"), '\v^\w+\/(\u)', '\1', ''), '\/', '\\\', 'g')`};
+	namespace ${1:`substitute(substitute(substitute(expand("%:p"), '\v(.*\/\l+)((\/\u\w+)+)\/\u\w+.php$', '\2', ''), '\/', '\\\', 'g'), '^\\\', '', '')`};
+
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 	/**
@@ -22,7 +23,7 @@ snippet ctrl
 snippet ent
 	<?php
 	
-	namespace ${1:`substitute(substitute(expand("%:h"), '\v^\w+\/(\u)', '\1', ''), '\/', '\\\', 'g')`};
+	namespace ${1:`substitute(substitute(substitute(expand("%:p"), '\v(.*\/\l+)((\/\u\w+)+)\/\u\w+.php$', '\2', ''), '\/', '\\\', 'g'), '^\\\', '', '')`};
 	
 	use Doctrine\ORM\Mapping as ORM;
 	
@@ -34,6 +35,14 @@ snippet ent
 	 */
 	class ${3:`Filename('', 'myClass')`}
 	{${4}
+	}
+snippet tst
+	/**
+	 * @test
+	 */
+	function should${1:Run}()
+	{
+		${2}
 	}
 snippet eid
 	/**
@@ -54,32 +63,34 @@ snippet eid
 	}${2}
 snippet ecol
 	/**
-	 * @ORM\Column(type="${1:string}"${2})
+	 * @ORM\Column(type="${1:integer}"${2})
 	 */
 	${3:private} $${4:col};
 	
 	/**
-	 * Sets $4.
+	 * Set $4.
 	 * 
-	 * @param mixed $$4
+	 * @param $1 $$4
+	 * @return ${6:`Filename('', 'myClass')`}
 	 */
 	public function set${5:$4}($$4)
 	{
 		$this->$4 = $$4;
+		return $this;
 	}
 	
 	/**
-	 * Returns $4.
+	 * Get $4.
 	 * 
-	 * @return mixed
+	 * @return $1
 	 */
 	public function get$5()
 	{
 		return $this->$4;
-	}${6}
+	}
 snippet setget
 	/**
-	 * Sets ${1:User}.
+	 * Set ${1:User}.
 	 * 
 	 * @param ${4:$3}$${2:user}
 	 */
@@ -96,5 +107,5 @@ snippet setget
 	public function get$1()
 	{
 		return $this->$2;
-	}${4}
+	}
 
