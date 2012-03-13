@@ -138,6 +138,14 @@ function! <SID>MkdirsIfNotExists(directory)
     endif
 endfunction
 
+" Lookup the file in the local directory and execute if readable
+func! TryToReadFileInLocalDir(fname)
+    let s=findfile(a:fname, expand("%:p:h") . ';')
+    if filereadable(s)
+        exe 'sou ' . s
+    endif
+endfunc
+
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 "|
@@ -152,6 +160,20 @@ if has('autocmd')
     au BufWinEnter *     set foldlevel=999999 
     au FocusLost silent! :wa
     au FileType helpfile setlocal nonumber
+
+    """""""""""""""""""""""""""""""""""""""
+    " Define a group so we can delete them when this file is sourced, and we don't
+    " end up with multiple autocmd entries if this file is sourced more than once.
+    "
+    " Tries to read .vimlocal settings based on the directory vim is executed. Helps with specific
+    " settings based per project
+    "
+    " Source code is used from
+    " <http://github.com/chazy/dirsettings/blob/master/plugin/dirsettings.vim>
+    " Author - Tye Z. < z d r o @ y a h o o . c o m >
+    augroup dirsettings
+    au! dirsettings
+    au dirsettings BufNew,BufNewFile,BufReadPost,VimEnter * call TryToReadFileInLocalDir('.vimlocal')
 
     """"""""""""""""""""""""""""""""""""""""
     "
