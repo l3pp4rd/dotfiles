@@ -40,3 +40,6 @@
 [submodule "vim/bundle/matrix"]
 	path = vim/bundle/matrix
 	url = git://github.com/vim-scripts/matrix.vim--Yang.git
+[submodule "vim/bundle/go"]
+	path = vim/bundle/go
+	url = git://github.com/jnwhiteh/vim-golang.git

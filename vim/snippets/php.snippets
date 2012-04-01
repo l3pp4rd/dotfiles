@@ -1,40 +1,33 @@
 snippet cls
 	<?php
-	
-	namespace ${1:`substitute(substitute(substitute(expand("%:p"), '\v(.*\/\l+)((\/\u\w+)+)\/\u\w+.php$', '\2', ''), '\/', '\\\', 'g'), '^\\\', '', '')`};
+	namespace `substitute(substitute(substitute(expand("%:p"), '\v(.*\/\l+)((\/\u\w+)+)\/\u\w+.php$', '\2', ''), '\/', '\\\', 'g'), '^\\\', '', '')`;
 
-	class ${2:`Filename('', 'myClass')`}
-	{
-		${3}
+	class ${1:`Filename('', 'myClass')`}
+	{${2}
 	}
 snippet ctrl
 	<?php
 	
-	namespace ${1:`substitute(substitute(substitute(expand("%:p"), '\v(.*\/\l+)((\/\u\w+)+)\/\u\w+.php$', '\2', ''), '\/', '\\\', 'g'), '^\\\', '', '')`};
+	namespace `substitute(substitute(substitute(expand("%:p"), '\v(.*\/\l+)((\/\u\w+)+)\/\u\w+.php$', '\2', ''), '\/', '\\\', 'g'), '^\\\', '', '')`;
 
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-	/**
-	 * ${1:`Filename('', 'myClass')`}.
-	 */
-	class ${2:`Filename('', 'myClass')`} extends Controller
-	{${3}
+	class ${1:`Filename('', 'myClass')`} extends Controller
+	{${2}
 	}
 snippet ent
 	<?php
 	
-	namespace ${1:`substitute(substitute(substitute(expand("%:p"), '\v(.*\/\l+)((\/\u\w+)+)\/\u\w+.php$', '\2', ''), '\/', '\\\', 'g'), '^\\\', '', '')`};
+	namespace `substitute(substitute(substitute(expand("%:p"), '\v(.*\/\l+)((\/\u\w+)+)\/\u\w+.php$', '\2', ''), '\/', '\\\', 'g'), '^\\\', '', '')`;
 	
 	use Doctrine\ORM\Mapping as ORM;
 	
 	/**
-	 * ${1:`Filename('', 'myClass')`}.
-	 *
 	 * @ORM\Entity
-	 * @ORM\Table(name="${2:`substitute(substitute(Filename('', 'myClass'), '\v^(.)', '\l\1', ''), '\v(\u)', '_\l\1', 'g')`}")
+	 * @ORM\Table(name="${1:`substitute(substitute(Filename('', 'myClass'), '\v^(.)', '\l\1', ''), '\v(\u)', '_\l\1', 'g')`}")
 	 */
-	class ${3:`Filename('', 'myClass')`}
-	{${4}
+	class ${2:`Filename('', 'myClass')`}
+	{${3}
 	}
 snippet tst
 	/**

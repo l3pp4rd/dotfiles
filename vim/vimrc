@@ -118,6 +118,10 @@ map <leader>u :call PhpInsertUse()<cr>
 " Snipmate
 let g:snips_author = 'Gediminas Morkevicius <gediminas.morkevicius@gmail.com>'
 
+" GO
+se rtp+=$GOROOT/misc/vim
+
+
 " -------------FUNCTIONS-------------
 
 function! <SID>StripTrailingWhitespaces()
@@ -197,11 +201,12 @@ if has('autocmd')
     au BufRead,BufNewFile *.scss        setlocal tabstop=2 shiftwidth=2 softtabstop=2
     au BufRead,BufNewFile *.js          setlocal tabstop=2 shiftwidth=2 softtabstop=2
     au BufRead,BufNewFile *.coffee      setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    au BufRead,BufNewFile *.go          setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
     """"""""""""""""""""""""""""""""""""""""
     "
     "  COMMANDS
     "
-    au BufWrite *.php,*.js,*.feature,*.json :call <SID>StripTrailingWhitespaces()
+    au BufWrite *.php,*.js,*.feature,*.json,*.go :call <SID>StripTrailingWhitespaces()
     au BufWrite * :call <SID>MkdirsIfNotExists(expand('<afile>:h'))
 endif

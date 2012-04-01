@@ -39,8 +39,15 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bi
 if [ -d "$HOME/bin" ]; then
     export PATH=$PATH:$HOME/bin
 fi
+
+# perl stuff
 export PATH=$PATH:/usr/bin/vendor_perl
+# bin of dotfiles
 export PATH=$PATH:$HOME/.dotfiles/bin
+# go lang
+export PATH=$PATH:/usr/local/go/bin
+
+export GOROOT=/usr/local/go
 
 # --------------OTHER--------------
 export EDITOR=vim
