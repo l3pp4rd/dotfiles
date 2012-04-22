@@ -6,7 +6,6 @@ se nocompatible         " Use vim defaults, should be first entry
 
 call pathogen#infect()
 syntax on
-filetype plugin indent on
 
 " Syntax highlighting
 
@@ -38,8 +37,6 @@ se enc=utf-8 nobomb             " Use UTF-8 without BOM
 se wildmenu                     " command line autocompletion
 se wildmode=list:longest,full   " options for autocompletion
 se wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs,*/tmp,*.swp,*.jpg,*.png,*.xpm,*.gif,*.ico,*/vendor,web/css,web/js,web/bundles
-" Reduce timeout for key codes
-se timeout timeoutlen=500 ttimeoutlen=0
 
 " Search related options
 
@@ -61,10 +58,6 @@ se tildeop
 se shiftwidth=4
 se softtabstop=4
 
-" Highlight cursor line
-autocmd insertEnter * set cursorline
-autocmd insertLeave * set nocursorline
-highlight cursorline term=underline cterm=underline ctermbg=0 guibg=#000000
 
 " scrolling
 
@@ -80,15 +73,12 @@ se formatoptions=qrn1
 
 " -------------MAPPINGS-------------
 
-" Restore cursor position
-au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm$"|endif|endif
-
-" Clear search highlight
-nmap <silent> <leader>/ :let @/=""<cr>
-
 let mapleader=","       " Use the comma as leader
 nmap <leader>2 :setlocal tabstop=2<cr>:setlocal shiftwidth=2<cr>:setlocal softtabstop=2<cr>
 nmap <leader>4 :setlocal tabstop=4<cr>:setlocal shiftwidth=4<cr>:setlocal softtabstop=4<cr>
+
+" Clear search highlight
+nmap <silent> <leader>ch :let @/=""<cr>
 
 " launch help in vert mode split to the right window
 nmap <Leader>h <Esc>:botright vert help<cr>:vert resize 80<cr>:help<space>
@@ -97,7 +87,7 @@ nmap <Leader>h <Esc>:botright vert help<cr>:vert resize 80<cr>:help<space>
 cmap w!! w !sudo tee % >/dev/null<CR>:e!<CR><CR>
 
 " strip tralling whitespaces
-nmap <silent> <leader>c :call <SID>StripTrailingWhitespaces()<cr>
+nmap <silent> <leader>cw :call <SID>StripTrailingWhitespaces()<cr>
 
 " exclude vendor directory
 nmap <leader>ev :se wig+=*/vendor<CR>:CommandTFlush<CR>
@@ -161,9 +151,17 @@ filetype plugin on
 filetype indent on
 
 if has('autocmd')
-    au BufWinEnter *     set foldlevel=999999 
+    au BufWinEnter * set foldlevel=999999
     au FocusLost silent! :wa
     au FileType helpfile setlocal nonumber
+
+    " Highlight cursor line
+    au insertEnter * se cursorline
+    au insertLeave * se nocursorline
+    highlight cursorline term=underline cterm=underline ctermbg=0 guibg=#000000
+
+    " Restore cursor position
+    au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm$"|endif|endif
 
     """""""""""""""""""""""""""""""""""""""
     " Define a group so we can delete them when this file is sourced, and we don't
