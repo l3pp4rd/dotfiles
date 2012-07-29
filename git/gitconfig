@@ -19,7 +19,7 @@
     changed = yellow
     untracked = red
 [core]
-    editor = nano
+    editor = vim
 [apply]
     whitespace = nowarn
 [alias]

@@ -39,7 +39,10 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bi
 if [ -d "$HOME/bin" ]; then
     export PATH=$PATH:$HOME/bin
 fi
-
+# scala
+if [ -d "$HOME/scala/play/current" ]; then
+    export PATH=$PATH:$HOME/scala/play/current
+fi
 # perl stuff
 export PATH=$PATH:/usr/bin/vendor_perl
 # bin of dotfiles
@@ -51,4 +54,8 @@ export GOROOT=/usr/local/go
 
 # --------------OTHER--------------
 export EDITOR=vim
+
+export LANGUAGE=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 

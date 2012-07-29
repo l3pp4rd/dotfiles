@@ -43,3 +43,9 @@
 [submodule "vim/bundle/go"]
 	path = vim/bundle/go
 	url = git://github.com/jnwhiteh/vim-golang.git
+[submodule "vim/bundle/scala"]
+	path = vim/bundle/scala
+	url = git://github.com/ornicar/vim-scala.git
+[submodule "vim/bundle/play2"]
+	path = vim/bundle/play2
+	url = git://github.com/gre/play2vim.git

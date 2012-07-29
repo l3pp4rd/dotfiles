@@ -94,6 +94,10 @@ nmap <leader>ev :se wig+=*/vendor<CR>:CommandTFlush<CR>
 " include vendor directory
 nmap <leader>iv :se wig-=*/vendor<CR>:CommandTFlush<CR>
 
+" XClip, sometimes x register just does not work
+vmap <leader>y :!xclip -f -sel clip<CR>
+map <leader>p :-1r !xclip -o -sel clip<CR>
+
 " ------------PLUGINS---------------
 
 " Matrix screen
