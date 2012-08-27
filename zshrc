@@ -35,23 +35,36 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 # --------------PATH---------------
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 if [ -d "$HOME/bin" ]; then
     export PATH=$PATH:$HOME/bin
 fi
+
 # scala
 if [ -d "$HOME/scala/play/current" ]; then
     export PATH=$PATH:$HOME/scala/play/current
 fi
+export SBT_OPTS="-Dfile.encoding=UTF8 -Xms512M -Xmx768M -Xss2M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512M"
+
 # perl stuff
-export PATH=$PATH:/usr/bin/vendor_perl
+if [ -d "/usr/bin/vendor_perl" ]; then
+    export PATH=$PATH:/usr/bin/core_perl
+    export PATH=$PATH:/usr/bin/vendor_perl
+fi
+
 # bin of dotfiles
 export PATH=$PATH:$HOME/.dotfiles/bin
+
 # go lang
-export PATH=$PATH:/usr/local/go/bin
+if [ -d "/usr/local/go/bin" ]; then
+    export PATH=$PATH:/usr/local/go/bin
+    export GOROOT=/usr/local/go
+fi
 
-export GOROOT=/usr/local/go
-
+# ruby executables
+if [ -d "$HOME/.gem/ruby/1.9.1/bin" ]; then
+    export PATH=$PATH:$HOME/.gem/ruby/1.9.1/bin
+fi
 # --------------OTHER--------------
 export EDITOR=vim
 

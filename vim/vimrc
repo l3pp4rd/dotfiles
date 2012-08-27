@@ -209,6 +209,6 @@ if has('autocmd')
     "
     "  COMMANDS
     "
-    au BufWrite *.php,*.js,*.feature,*.json,*.go :call <SID>StripTrailingWhitespaces()
+    au BufWrite *.php,*.js,*.feature,*.json,*.go,*.scala,*.twig :call <SID>StripTrailingWhitespaces()
     au BufWrite * :call <SID>MkdirsIfNotExists(expand('<afile>:h'))
 endif
