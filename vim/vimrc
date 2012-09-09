@@ -9,9 +9,13 @@ syntax on
 
 " Syntax highlighting
 
-colo jellybeans
 se background=dark
 se t_Co=256
+" solarized options
+let g:solarized_termcolors=256
+let g:solarized_visibility="high"
+let g:solarized_contrast="high"
+colo jellybeans
 
 " General options
 se clipboard=unnamedplus        " Use default X-System register for copy and paste
@@ -37,6 +41,7 @@ se enc=utf-8 nobomb             " Use UTF-8 without BOM
 se wildmenu                     " command line autocompletion
 se wildmode=list:longest,full   " options for autocompletion
 se wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs,*/tmp,*.swp,*.jpg,*.png,*.xpm,*.gif,*.ico,*/vendor,web/css,web/js,web/bundles
+se tags+=vendor.tags            " read vendor.tags also
 
 " Search related options
 

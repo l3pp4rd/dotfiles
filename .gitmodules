@@ -49,3 +49,9 @@
 [submodule "vim/bundle/play2"]
 	path = vim/bundle/play2
 	url = git://github.com/gre/play2vim.git
+[submodule "vim/bundle/solarized"]
+	path = vim/bundle/solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "extra/bashmarks"]
+	path = extra/bashmarks
+	url = git://github.com/huyng/bashmarks.git

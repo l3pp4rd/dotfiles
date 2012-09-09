@@ -28,5 +28,6 @@ process_step "$HOME/.dotfiles/vimrc" "$HOME/.vimrc" ".vimrc will be replaced (Y/
 process_step "$HOME/.dotfiles/git/gitconfig" "$HOME/.gitconfig" ".gitconfig will be replaced (Y/n)"
 process_step "$HOME/.dotfiles/git/gitignore" "$HOME/.gitignore" ".gitignore will be replaced (Y/n)"
 process_step "$HOME/.dotfiles/zshrc" "$HOME/.zshrc" ".zshrc will be replaced (Y/n)"
+process_step "$HOME/.dotfiles/ctags" "$HOME/.ctags" ".ctags will be replaced (Y/n)"
 
 
