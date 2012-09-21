@@ -55,3 +55,9 @@
 [submodule "extra/bashmarks"]
 	path = extra/bashmarks
 	url = git://github.com/huyng/bashmarks.git
+[submodule "vim/bundle/nerd-commenter"]
+	path = vim/bundle/nerd-commenter
+	url = git://github.com/scrooloose/nerdcommenter.git
+[submodule "vim/bundle/vim-behat"]
+	path = vim/bundle/vim-behat
+	url = git://github.com/veloce/vim-behat.git
