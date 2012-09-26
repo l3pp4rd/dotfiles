@@ -29,5 +29,7 @@ process_step "$HOME/.dotfiles/git/gitconfig" "$HOME/.gitconfig" ".gitconfig will
 process_step "$HOME/.dotfiles/git/gitignore" "$HOME/.gitignore" ".gitignore will be replaced (Y/n)"
 process_step "$HOME/.dotfiles/zshrc" "$HOME/.zshrc" ".zshrc will be replaced (Y/n)"
 process_step "$HOME/.dotfiles/ctags" "$HOME/.ctags" ".ctags will be replaced (Y/n)"
+process_step "$HOME/.dotfiles/Xresources" "$HOME/.Xresources" ".Xresources will be replaced (Y/n)"
+process_step "$HOME/.dotfiles/xinitrc" "$HOME/.xinitrc" ".xinitrc will be replaced (Y/n)"
 
 
