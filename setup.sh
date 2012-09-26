@@ -32,7 +32,7 @@ process_step "$HOME/.dotfiles/ctags" "$HOME/.ctags" ".ctags will be replaced (Y/
 process_step "$HOME/.dotfiles/Xresources" "$HOME/.Xresources" ".Xresources will be replaced (Y/n)"
 process_step "$HOME/.dotfiles/xinitrc" "$HOME/.xinitrc" ".xinitrc will be replaced (Y/n)"
 if [ -d "$HOME/.xmonad" ]; then
-    process_step "$HOME/.dotfiles/xmonad.hs" "$HOME/.xmonad/xmonad.hs" ".xmonad/xmonad.hs will be replaced (Y/n)"
+    process_step "$HOME/.dotfiles/xmonad/xmonad.hs" "$HOME/.xmonad/xmonad.hs" ".xmonad/xmonad.hs will be replaced (Y/n)"
 fi
 
 

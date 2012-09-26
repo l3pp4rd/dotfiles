@@ -39,7 +39,10 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 if [ -d "$HOME/bin" ]; then
     export PATH=$PATH:$HOME/bin
 fi
-
+# cabal
+if [ -d "$HOME/.cabal/bin" ]; then
+    export PATH=$PATH:$HOME/.cabal/bin
+fi
 # scala
 if [ -d "$HOME/scala/play/current" ]; then
     export PATH=$PATH:$HOME/scala/play/current
