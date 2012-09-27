@@ -122,7 +122,12 @@ let g:snips_author = 'Gediminas Morkevicius <gediminas.morkevicius@gmail.com>'
 " GO
 se rtp+=$GOROOT/misc/vim
 
-
+" Command-T fix the arrow keys
+if &term =~ "rxvt-unicode" || &term =~ "xterm"
+  let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
+  let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
+  let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
+endif
 " -------------FUNCTIONS-------------
 
 function! <SID>StripTrailingWhitespaces()
