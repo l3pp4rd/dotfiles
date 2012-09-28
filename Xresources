@@ -17,6 +17,7 @@ Xft.hinting: true
 Xft.rgba: rgb
 ! }}}
 ! Urxvt {{{
+URxvt.iconFile: /usr/share/icons/AwOken/clear/24x24/apps/terminal.png
 URxvt.font: xft:Inconsolata:size=14
 
 URxvt.scrollBar: false
@@ -29,17 +30,26 @@ URxvt.buffered: true
 
 URxvt.background: #272727
 URxvt.foreground: #fbfbfb
-URxvt.transparent: false
-URxvt.shading: 100
+URxvt.transparent: true
+! URxvt.shading: 0 to 99 darkens, 101 to 200 lightens
+URxvt.shading: 10
 URxvt.color7: gray90
 
 URxvt.intensityStyles: true
 URxvt.urgentOnBell: true
 URxvt.cursorBlink: true
 
+! Extensions
+URxvt.perl-ext: default,url-select,tabbedex,clipboard
+
 ! Yankable urls
-URxvt.perl-ext: default,url-select
 URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.url-select.launcher: firefox
+URxvt.url-select.launcher: firefox -new-tab
 URxvt.url-select.underline: true
+
+! Tabs
+URxvt.keysym.Mod4-x: perl:tabbedex:new_tab
+URxvt.keysym.Mod4-a: perl:tabbedex:next_tab
+URxvt.keysym.Mod4-z: perl:tabbedex:prev_tab
+URxvt.tabbedex.title: true
 ! }}}
