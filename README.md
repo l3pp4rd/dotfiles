@@ -19,11 +19,10 @@ of bash - install **zsh** first and use it as your default shell by running:
 
     chsh -s $(which zsh)
 
+**NOTE:** setup.sh will replace vim git configs in home directory
 Execute the setup script:
 
     ./.dotfiles/setup.sh
-
-**NOTE:** it must be cloned as **~/.dotfiles**
 
 Install submodules
 
@@ -32,7 +31,7 @@ Install submodules
 After that, for [command-t](http://github.com/wincent/Command-T) bundle you will need
 to compile a **C** extension.
 
-    cd ~/.vim/bundle/command-t
+    cd ~/.vim/bundle/command-t/ruby/commant-t
     ruby extconf.rb
     make
 

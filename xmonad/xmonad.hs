@@ -35,23 +35,23 @@ main = do
         `additionalKeysP` [
         ("C-<Space>", windows W.focusDown)
         , ("M-S-l",   sendMessage NextLayout) -- next layout
-        , ("M-o",   spawn "~/.dotfiles/scripts/path_dmenu")
-        , ("M-p",   spawn "~/.dotfiles/scripts/path_dmenu")
+        , ("M-o",   spawn "~/scripts/path_dmenu")
+        , ("M-p",   spawn "~/scripts/path_dmenu")
         , ("<XF86AudioRaiseVolume>",  spawn "amixer -q set Master 2+ unmute")
         , ("<XF86AudioLowerVolume>",  spawn "amixer -q set Master 2- unmute")
         , ("<XF86AudioMute>",  spawn "amixer -q set Master toggle")
         , ("M-r",   spawn "urxvt -e ranger")
         , ("M-m",   spawn "urxvt")
-        , ("M-e",   spawn "~/.dotfiles/scripts/email/check_mailbox.sh ~/accounts.dat")
+        , ("M-e",   spawn "~/scripts/email/check_mailbox.sh ~/accounts.dat")
         , ("M-a",   spawn "urxvt -e alsamixer")
         , ("M-S-t", spawn "urxvt -e ~/.tmux/menu")
         , ("M-S-b", spawn "firefox")
         , ("M-s",   spawn "urxvt -e ~/.scripts/music ui")
         , ("M-t",   spawn "urxvt -e ~/.scripts/music toggle")
         , ("M-w",   spawn "urxvt -e wicd-curses")
-        , ("C-m",   spawn "~/.dotfiles/scripts/touchpad_toggle")
+        , ("C-m",   spawn "~/scripts/touchpad_toggle")
         , ("M-C-r", spawn "killall dzen2 && xmonad --recompile && xmonad --restart")
-        , ("M-S-p", spawn "~/.dotfiles/scripts/screenshot")           -- Take a screenshot
+        , ("M-S-p", spawn "~/scripts/screenshot")           -- Take a screenshot
         ]
 
 
@@ -85,7 +85,7 @@ myStatusBar :: Double -> String
 myStatusBar screenWidth = "dzen2 -x '" ++ show myPomodoroBarWidth ++ "' -y '0' -w '" ++ show (screenWidth - (myRightBarWidth + myPomodoroBarWidth)) ++ "' -h '" ++ myDzenHeight ++ "' -ta 'l' -fg '" ++ myDzenFGColor ++ "' -bg '" ++ myDzenBGColor ++ "' -fn '" ++ myFont ++ "' -p -e ''"
 
 myRightBar :: Double -> String
-myRightBar screenWidth = "~/.dotfiles/scripts/dzen_status | dzen2 -x '" ++ show (screenWidth - myRightBarWidth) ++ "' -w '" ++ show (myRightBarWidth) ++ "' -y '0' -h '" ++ myDzenHeight ++ "' -ta 'r' -fg '" ++ myDzenFGColor ++ "' -bg '" ++ myDzenBGColor ++ "' -fn '" ++ myFont ++ "' -p -e''"
+myRightBar screenWidth = "~/scripts/dzen_status | dzen2 -x '" ++ show (screenWidth - myRightBarWidth) ++ "' -w '" ++ show (myRightBarWidth) ++ "' -y '0' -h '" ++ myDzenHeight ++ "' -ta 'r' -fg '" ++ myDzenFGColor ++ "' -bg '" ++ myDzenBGColor ++ "' -fn '" ++ myFont ++ "' -p -e''"
 
 -- Customize the display of xmonad informations
 myDzenPP outputPipe =
