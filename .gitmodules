@@ -52,9 +52,6 @@
 [submodule "vim/bundle/solarized"]
 	path = vim/bundle/solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
-[submodule "extra/bashmarks"]
-	path = extra/bashmarks
-	url = git://github.com/huyng/bashmarks.git
 [submodule "vim/bundle/nerd-commenter"]
 	path = vim/bundle/nerd-commenter
 	url = git://github.com/scrooloose/nerdcommenter.git

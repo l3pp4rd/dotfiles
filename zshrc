@@ -71,12 +71,6 @@ if [ -d "$HOME/.gem/ruby/1.9.1/bin" ]; then
     export PATH=$PATH:$HOME/.gem/ruby/1.9.1/bin
 fi
 
-# bashmarks
-if [ -f "$HOME/.dotfiles/extra/bashmarks/bashmarks.sh" ]; then
-    source $HOME/.dotfiles/extra/bashmarks/bashmarks.sh
-    alias l='l' # is aliased by default to "ls -la" on oh-my-zsh extension
-fi
-
 # --------------OTHER--------------
 export EDITOR=vim
 
