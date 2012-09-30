@@ -99,7 +99,7 @@ myRightBar screenWidth = "~/scripts/dzen_status | dzen2 -x '" ++ show (screenWid
 
 -- Stalonetray pipe def
 myStaloneTrayBar :: String
-myStaloneTrayBar = "stalonetray -f 0 --sticky -bg '" ++ myBarBGColor ++ "' -i 16 -geometry " ++ myBarHeight ++ "x" ++ show (myStaloneTrayWidth) ++ "+0+0 &>/dev/null"
+myStaloneTrayBar = "stalonetray -f 0 --sticky -bg '" ++ myBarBGColor ++ "' -i 8 -geometry " ++ myBarHeight ++ "x" ++ show (myStaloneTrayWidth) ++ "+0+0 &>/dev/null"
 
 -- Customize the display of xmonad informations
 myDzenPP outputPipe =
