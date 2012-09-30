@@ -20,6 +20,7 @@ main = do
     -- Some help from IRC: http://hpaste.org/65912#line8
     width    <- screenWidth 0
     dzenPipe <- spawnPipe $ myStatusBar width
+    stalproc <- spawnPipe myStaloneTrayBar
     rightBar <- spawnPipe $ myRightBar width
     xmonad $ withUrgencyHook dzenUrgencyHook { args = ["-bg", "darkgreen", "-xs", "1"] }
            $ defaultConfig
@@ -37,21 +38,16 @@ main = do
         , ("M-S-l",   sendMessage NextLayout) -- next layout
         , ("M-o",   spawn "~/scripts/path_dmenu")
         , ("M-p",   spawn "~/scripts/path_dmenu")
-        , ("<XF86AudioRaiseVolume>",  spawn "amixer -q set Master 2+ unmute")
-        , ("<XF86AudioLowerVolume>",  spawn "amixer -q set Master 2- unmute")
-        , ("<XF86AudioMute>",  spawn "amixer -q set Master toggle")
+        , ("M-s",   spawn "sudo /usr/sbin/pm-suspend")
         , ("M-r",   spawn "urxvt -e ranger")
         , ("M-m",   spawn "urxvt")
+        , ("M-c",   kill)  -- close focused window shortcut
         , ("M-e",   spawn "~/scripts/email/check_mailbox.sh ~/accounts.dat")
         , ("M-a",   spawn "urxvt -e alsamixer")
-        , ("M-S-t", spawn "urxvt -e ~/.tmux/menu")
-        , ("M-S-b", spawn "firefox")
-        , ("M-s",   spawn "urxvt -e ~/.scripts/music ui")
-        , ("M-t",   spawn "urxvt -e ~/.scripts/music toggle")
         , ("M-w",   spawn "urxvt -e wicd-curses")
         , ("C-m",   spawn "~/scripts/touchpad_toggle")
-        , ("M-C-r", spawn "killall dzen2 && xmonad --recompile && xmonad --restart")
-        , ("M-S-p", spawn "~/scripts/screenshot")           -- Take a screenshot
+        , ("M-C-r", spawn "killall dzen2 stalonetray && xmonad --recompile && xmonad --restart")
+        , ("M-S-p", spawn "~/scripts/screenshot")  -- Take a screenshot
         ]
 
 
@@ -60,10 +56,11 @@ myLayoutHook = noBorders (Full ||| Accordion)
 -- http://www.chipstips.com/?p=488
 myManageHook = composeAll
     [ className =? "Gimp"           --> doFloat
-    , className =? "Pidgin"         --> doF (W.shift "2")
-    , className =? "Skype"          --> doF (W.shift "2")
+    , className =? "Pidgin"         --> doF (W.shift "9")
+    , className =? "Skype"          --> doF (W.shift "3")
     , className =? "Thunderbird"    --> doF (W.shift "9")
     , className =? "Firefox"        --> doF (W.shift "1")
+    , className =? "stalonetray"    --> doIgnore
     , manageDocks
     ] <+> manageHook defaultConfig
 
@@ -72,20 +69,23 @@ myManageHook = composeAll
 -- Color, font and iconpath definitions:
 myFont = "InconsolataSansMono:size=11"
 
-myDzenFGColor = "#839496"
-myDzenBGColor = "#073642"
-myDzenHeight = "18"
-
+myBarFGColor = "#839496"
+myBarBGColor = "#073642"
+myBarHeight = "18"
 
 myRightBarWidth = 620
-myPomodoroBarWidth = 0
+myStaloneTrayWidth = 190
 
 -- To read for flexible width: https://bbs.archlinux.org/viewtopic.php?pid=907346#p907346
 myStatusBar :: Double -> String
-myStatusBar screenWidth = "dzen2 -x '" ++ show myPomodoroBarWidth ++ "' -y '0' -w '" ++ show (screenWidth - (myRightBarWidth + myPomodoroBarWidth)) ++ "' -h '" ++ myDzenHeight ++ "' -ta 'l' -fg '" ++ myDzenFGColor ++ "' -bg '" ++ myDzenBGColor ++ "' -fn '" ++ myFont ++ "' -p -e ''"
+myStatusBar screenWidth = "dzen2 -x '" ++ show myStaloneTrayWidth ++ "' -y '0' -w '" ++ show (screenWidth - (myRightBarWidth + myStaloneTrayWidth)) ++ "' -h '" ++ myBarHeight ++ "' -ta 'l' -fg '" ++ myBarFGColor ++ "' -bg '" ++ myBarBGColor ++ "' -fn '" ++ myFont ++ "' -p -e ''"
 
 myRightBar :: Double -> String
-myRightBar screenWidth = "~/scripts/dzen_status | dzen2 -x '" ++ show (screenWidth - myRightBarWidth) ++ "' -w '" ++ show (myRightBarWidth) ++ "' -y '0' -h '" ++ myDzenHeight ++ "' -ta 'r' -fg '" ++ myDzenFGColor ++ "' -bg '" ++ myDzenBGColor ++ "' -fn '" ++ myFont ++ "' -p -e''"
+myRightBar screenWidth = "~/scripts/dzen_status | dzen2 -x '" ++ show (screenWidth - myRightBarWidth) ++ "' -w '" ++ show (myRightBarWidth) ++ "' -y '0' -h '" ++ myBarHeight ++ "' -ta 'r' -fg '" ++ myBarFGColor ++ "' -bg '" ++ myBarBGColor ++ "' -fn '" ++ myFont ++ "' -p -e''"
+
+-- Stalonetray pipe def
+myStaloneTrayBar :: String
+myStaloneTrayBar = "stalonetray -f 0 --sticky -bg '" ++ myBarBGColor ++ "' -i 16 -geometry " ++ myBarHeight ++ "x" ++ show (myStaloneTrayWidth) ++ "+0+0 &>/dev/null"
 
 -- Customize the display of xmonad informations
 myDzenPP outputPipe =
