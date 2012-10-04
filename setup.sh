@@ -24,4 +24,7 @@ link "$D/ctags" "$HOME/.ctags"
 link "$D/Xresources" "$HOME/.Xresources"
 link "$D/xinitrc" "$HOME/.xinitrc"
 link "$D/xmonad" "$HOME/.xmonad"
+link "$D/tmux.conf" "$HOME/.tmux.conf"
+link "$D/tmux" "$HOME/.tmux"
+link "$D/tmuxinator" "$HOME/.tmuxinator"
 

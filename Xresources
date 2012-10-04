@@ -40,16 +40,10 @@ URxvt.urgentOnBell: true
 URxvt.cursorBlink: true
 
 ! Extensions
-URxvt.perl-ext: default,url-select,tabbedex,clipboard
+URxvt.perl-ext: default,url-select,clipboard
 
 ! Yankable urls
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: firefox -new-tab
 URxvt.url-select.underline: true
-
-! Tabs
-URxvt.keysym.Mod4-x: perl:tabbedex:new_tab
-URxvt.keysym.Mod4-a: perl:tabbedex:next_tab
-URxvt.keysym.Mod4-z: perl:tabbedex:prev_tab
-URxvt.tabbedex.title: true
 ! }}}

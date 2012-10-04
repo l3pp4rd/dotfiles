@@ -26,7 +26,7 @@ main = do
            $ defaultConfig
         {
           terminal      = "urxvtc"
-        , modMask       = mod1Mask
+        , modMask       = mod4Mask
         , borderWidth   = 0
         , layoutHook    = myLayoutHook
         , keys          = newKeys
@@ -34,20 +34,33 @@ main = do
         , manageHook    = myManageHook
         , workspaces    = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         }
+        `removeKeysP` [
+        "M-n"         -- Resize viewed windows to the correct size
+        , "M-w"       -- Switch to physical/Xinerama screens 1
+        , "M-e"       -- Switch to physical/Xinerama screens 2
+        , "M-r"       -- Switch to physical/Xinerama screens 3
+        , "M-h"       -- Shrink the master area
+        , "M-l"       -- Extend the master area
+        , "M-j"       -- Next window
+        , "M-k"       -- Prev window
+        , "M-m"       -- Master window
+        , "M-p"       -- Bin menu
+        , "M-<Enter>" -- Swap focused/master windows
+        , "M-S-<Enter>" -- Launch terminal
+        , "M-<Space>" -- Rotate layout algorithm
+        , "M-S-p"     -- gmrun
+        ]
         `additionalKeysP` [
         ("C-<Space>", windows W.focusDown)
         , ("M-S-l", sendMessage NextLayout) -- next layout
-        , ("M-o",   spawn "~/scripts/path_dmenu")
-        , ("M-p",   spawn "~/scripts/path_dmenu")
+        , ("M-r",   spawn "~/scripts/path_dmenu")
         , ("M-s",   spawn "sudo /usr/sbin/pm-suspend")
-        , ("M-r",   spawn "urxvt -e ranger")
-        , ("M-m",   spawn "urxvt")
+        , ("M-t",   spawn "urxvtc") -- more convienent shortcut
         , ("M-c",   kill)  -- close focused window shortcut
         , ("M-e",   spawn "~/scripts/email/check_mailbox.sh ~/accounts.dat")
-        , ("M-a",   spawn "urxvt -e alsamixer")
-        , ("M-w",   spawn "urxvt -e wicd-curses")
+        , ("M-a",   spawn "urxvtc -e alsamixer")
         , ("M-b",   sendMessage $ ToggleStrut U) -- toggle top bar
-        , ("C-m",   spawn "~/scripts/touchpad_toggle")
+        , ("<F12>", spawn "~/scripts/touchpad_toggle")
         , ("M-C-r", spawn "killall dzen2 stalonetray && xmonad --recompile && xmonad --restart")
         , ("<Print>", spawn "scrot '%Y-%m-%d-%H%M%S_$wx$h.png' -e 'mv $f ~/images/screenshots'")  -- Take a screenshot
         ]

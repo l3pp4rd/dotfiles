@@ -42,7 +42,7 @@ se ttyfast                      " Optimize for fast terminal connections
 se enc=utf-8 nobomb             " Use UTF-8 without BOM
 se wildmenu                     " command line autocompletion
 se wildmode=list:longest,full   " options for autocompletion
-se wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs,*/tmp,*.swp,*.jpg,*.png,*.xpm,*.gif,*.ico,*/vendor,web/css,web/js,web/bundles
+se wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs,*/tmp,*.swp,*.jpg,*.png,*.xpm,*.gif,*.ico,*/vendor,web/css,web/js,web/bundles,*/target/*
 se tags+=vendor.tags            " read vendor.tags also
 
 " Search related options
@@ -216,6 +216,8 @@ if has('autocmd')
     au BufRead,BufNewFile *.js          setlocal tabstop=2 shiftwidth=2 softtabstop=2
     au BufRead,BufNewFile *.coffee      setlocal tabstop=2 shiftwidth=2 softtabstop=2
     au BufRead,BufNewFile *.go          setlocal tabstop=4 shiftwidth=4 softtabstop=4
+    au BufRead,BufNewFile *.scala       setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    au BufRead,BufNewFile *.html        setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
     """"""""""""""""""""""""""""""""""""""""
     "

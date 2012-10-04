@@ -31,11 +31,12 @@ DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
 
+# load oh-my-zsh environment
 source $ZSH/oh-my-zsh.sh
 
+# activate keychain to store rsa
 eval `keychain --eval --agents ssh --nogui -Q -q id_rsa`
 
-# Customize to your needs...
 # --------------PATH---------------
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 if [ -d "$HOME/bin" ]; then
@@ -46,8 +47,8 @@ if [ -d "$HOME/.cabal/bin" ]; then
     export PATH=$PATH:$HOME/.cabal/bin
 fi
 # scala
-if [ -d "$HOME/scala/play/current" ]; then
-    export PATH=$PATH:$HOME/scala/play/current
+if [ -d "$HOME/scala/play" ]; then
+    export PATH=$PATH:$HOME/scala/play
 fi
 export SBT_OPTS="-Dfile.encoding=UTF8 -Xms512M -Xmx768M -Xss2M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512M"
 
@@ -60,16 +61,14 @@ fi
 # bin of dotfiles
 export PATH=$PATH:$HOME/.dotfiles/bin
 
-# go lang
-if [ -d "/usr/local/go/bin" ]; then
-    export PATH=$PATH:/usr/local/go/bin
-    export GOROOT=/usr/local/go
-fi
-
 # ruby executables
 if [ -d "$HOME/.gem/ruby/1.9.1/bin" ]; then
     export PATH=$PATH:$HOME/.gem/ruby/1.9.1/bin
 fi
+
+# ---------TMUX----------
+# start tmux on every shell session except tty1
+[[ $TERM != "screen" && $(tty) != /dev/tty1 ]] && exec tmux
 
 # --------------OTHER--------------
 export EDITOR=vim

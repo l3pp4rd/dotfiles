@@ -1,0 +1,8 @@
+# ~/.tmuxinator/jirafe.yml
+
+project_name: jirafe
+project_root: ~/php/jirafe/api
+tabs:
+  - vim: cd ~/php/jirafe/api && vim
+  - shell: cd ~/php/jirafe/api
+  - behat: cd ~/php/jirafe/api # todo add panes for selenium
