@@ -1,0 +1,11 @@
+# ~/.tmuxinator/charon.yml
+
+project_name: charon
+project_root: ~/scala/charon
+tabs:
+  - main: 
+      layout: even-horizontal
+      panes: 
+        - cd ~/scala/charon && ./bin/play
+        - cd ~/scala/charon && vim
+  - shell: cd ~/scala/charon

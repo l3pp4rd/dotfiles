@@ -37,6 +37,9 @@ source $ZSH/oh-my-zsh.sh
 # activate keychain to store rsa
 eval `keychain --eval --agents ssh --nogui -Q -q id_rsa`
 
+# start MPD music daemon
+[[ -d "~/.mpd" && ! -f "~/.mpd/mpd.pid" ]] && mpd ~/.mpd/mpd.conf 2> /dev/null
+
 # --------------PATH---------------
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 if [ -d "$HOME/bin" ]; then

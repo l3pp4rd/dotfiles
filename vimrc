@@ -3,23 +3,29 @@
 se nocompatible         " Use vim defaults, should be first entry
 
 " Initialize bundles, `call pathogen#helptags()` to regenerate docs
-
+" Infect Vim with pathogen >:)
+runtime bundle/autoload/pathogen.vim
 call pathogen#infect()
+
 syntax on
+filetype plugin indent on       " enable detection, plugins and indenting in one step
 
 let feature_filetype='behat'
 
 " Syntax highlighting
 
-se background=dark
+" Colorsheme
 se t_Co=256
-" solarized options
 let g:solarized_termcolors=256
-let g:solarized_visibility="high"
-let g:solarized_contrast="high"
+let g:solarized_termtrans=0
+let g:solarized_menu=0
+let g:solarized_italic=0
+se background=dark
+"colo solarized
 colo jellybeans
 
 " General options
+se autoread                     " Automatically read a file that has changed on disk
 se clipboard=unnamedplus        " Use default X-System register for copy and paste
 se history=200                  " Sets how many lines of history VIM has to remember
 se undolevels=1000              " use many levels of undo
@@ -84,6 +90,12 @@ let mapleader=","       " Use the comma as leader
 nmap <leader>2 :setlocal tabstop=2<cr>:setlocal shiftwidth=2<cr>:setlocal softtabstop=2<cr>
 nmap <leader>4 :setlocal tabstop=4<cr>:setlocal shiftwidth=4<cr>:setlocal softtabstop=4<cr>
 
+" Toggle line numbering
+nnoremap <silent> <leader>nn :set nonumber!<cr>
+
+" Toggle nowrap
+nnoremap <silent> <leader>nw :set nowrap!<cr>
+
 " Clear search highlight
 nmap <silent> <leader>ch :let @/=""<cr>
 
@@ -105,10 +117,15 @@ nmap <leader>iv :se wig-=*/vendor<CR>:CommandTFlush<CR>
 vmap <leader>y :!xclip -f -sel clip<CR>
 map <leader>p :-1r !xclip -o -sel clip<CR>
 
-" ------------PLUGINS---------------
+" CTAGS
+" Rebuild tags
+nmap <leader>ct :!ctags&<cr><cr>
+" Jump to next tag match
+nmap ]t :bd<cr>:tnext<cr>
+" Jump to previous tag match
+nmap [t :bd<cr>:tprevious<cr>
 
-" Matrix screen
-map <leader>m :Matrix<CR>
+" ------------PLUGINS---------------
 
 " ACK
 nnoremap <leader>a :Ack
@@ -119,8 +136,8 @@ map <leader>u :call PhpInsertUse()<cr>
 " Snipmate
 let g:snips_author = 'Gediminas Morkevicius <gediminas.morkevicius@gmail.com>'
 
-" GO
-se rtp+=$GOROOT/misc/vim
+" Behat
+let feature_filetype='behat'
 
 " Command-T fix the arrow keys
 if &term =~ "rxvt-unicode" || &term =~ "xterm"
@@ -156,15 +173,21 @@ func! TryToReadFileInLocalDir(fname)
     endif
 endfunc
 
+"  Clean code function
+function! CleanCode()
+  %retab          " Replace tabs with spaces
+  %s/\r/\r/eg     " Turn DOS returns ^M into real returns
+  %s=  *$==e      " Delete end of line blanks
+  echo "Cleaned up this mess."
+endfunction
+nmap <leader>C :call CleanCode()<cr>
+
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 "|
 "|  > AUTOCMD
 "|
 "|
-filetype on
-filetype plugin on
-filetype indent on
 
 if has('autocmd')
     au BufWinEnter * set foldlevel=999999
@@ -218,6 +241,7 @@ if has('autocmd')
     au BufRead,BufNewFile *.go          setlocal tabstop=4 shiftwidth=4 softtabstop=4
     au BufRead,BufNewFile *.scala       setlocal tabstop=2 shiftwidth=2 softtabstop=2
     au BufRead,BufNewFile *.html        setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    au BufRead,BufNewFile *.twig        setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
     """"""""""""""""""""""""""""""""""""""""
     "
