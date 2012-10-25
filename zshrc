@@ -1,3 +1,6 @@
+# launch x when booted
+[[ $(tty) == /dev/tty1 ]] && startx
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.dotfiles/oh-my-zsh
 
@@ -38,7 +41,7 @@ source $ZSH/oh-my-zsh.sh
 eval `keychain --eval --agents ssh --nogui -Q -q id_rsa`
 
 # start MPD music daemon
-[[ -d "~/.mpd" && ! -f "~/.mpd/mpd.pid" ]] && mpd ~/.mpd/mpd.conf 2> /dev/null
+#[[ -d "~/.mpd" && ! -f "~/.mpd/mpd.pid" ]] && mpd ~/.mpd/mpd.conf 2> /dev/null
 
 # -------------Aliases-------------
 alias music="ncmpc"

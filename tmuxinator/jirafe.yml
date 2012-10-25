@@ -5,4 +5,16 @@ project_root: ~/php/jirafe/api
 tabs:
   - vim: cd ~/php/jirafe/api && vim
   - shell: cd ~/php/jirafe/api
-  - behat: cd ~/php/jirafe/api # todo add panes for selenium
+  - logs:
+      layout: even-horizontal
+      panes:
+        - cd ~/php/jirafe/api/app/logs && tail -f dev.log
+        - cd ~/php/jirafe/api/app/logs && tail -f api.log
+        - tail -f /var/log/nginx/jirafe-api.error.log
+  - assets: cd ~/php/jirafe/api && php app/console jirafe:assets:dump --watch
+  - behat:
+      layout: even-horizontal
+      panes:
+        - cd ~/selenium && java -jar selenium-server-standalone-2.25.0.jar
+        - cd ~/php/jirafe/api
+

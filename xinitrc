@@ -11,4 +11,4 @@ mpd &
 # start apps
 firefox &
 
-exec xmonad
+exec /home/gedi/.cabal/bin/xmonad
