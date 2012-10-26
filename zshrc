@@ -1,6 +1,3 @@
-# launch x when booted
-[[ $(tty) == /dev/tty1 ]] && startx
-
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.dotfiles/oh-my-zsh
 
@@ -75,14 +72,17 @@ if [ -d "$HOME/.gem/ruby/1.9.1/bin" ]; then
     export PATH=$PATH:$HOME/.gem/ruby/1.9.1/bin
 fi
 
-# ---------TMUX----------
-# start tmux on every shell session except tty1
-[[ $TERM != "screen" && $(tty) != /dev/tty1 ]] && exec tmux
-
 # --------------OTHER--------------
 export EDITOR=vim
 
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+
+# launch x when booted
+[[ $(tty) == /dev/tty1 ]] && startx
+
+# ---------TMUX----------
+# start tmux on every shell session except tty1
+[[ $TERM != "screen" && $(tty) != /dev/tty1 ]] && exec tmux
 
