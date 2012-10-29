@@ -1,6 +1,14 @@
-import XMonad
+import XMonad hiding ( (|||) )
+import XMonad.Layout.Reflect
+import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.NoBorders
-import XMonad.Layout.Accordion
+import XMonad.Layout.Named
+import XMonad.Layout.LayoutCombinators
+import XMonad.Layout.TwoPane
+import XMonad.Layout.PerWorkspace
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.Grid
+import XMonad.Layout.IM
 import XMonad.Actions.CycleWS
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
@@ -47,7 +55,7 @@ main = do
         , "M-p"       -- Bin menu
         , "M-<Enter>" -- Swap focused/master windows
         , "M-S-<Enter>" -- Launch terminal
-        , "M-<Space>" -- Rotate layout algorithm
+        --, "M-<Space>" -- Rotate layout algorithm
         , "M-S-p"     -- gmrun
         ]
         `additionalKeysP` [
@@ -63,26 +71,35 @@ main = do
         , ("<F12>", spawn "~/scripts/touchpad_toggle")
         , ("M-C-r", spawn "killall dzen2 stalonetray && xmonad --recompile && xmonad --restart")
         , ("<Print>", spawn "scrot '%Y-%m-%d-%H%M%S_$wx$h.png' -e 'mv $f ~/images/screenshots'")  -- Take a screenshot
+        , ("C-<Print>", spawn "sleep 0.2; scrot '%Y-%m-%d-%H%M%S_$wx$h.png' -e 'mv $f ~/images/screenshots' -s")  -- Sleep is required, Take a screenshot of area
         ]
 
-
-myLayoutHook = avoidStruts (noBorders Full ||| noBorders tiled) ||| noBorders Full
+-- Layouts
+myLayoutHook = onWorkspace "3" jpL $  onWorkspace "7" fullL $ onWorkspace "8" gimpL $ standardLayouts
     where
-      -- default tiling algorithm partitions the screen into two panes
-      tiled = Tall nmaster delta ratio
+        --Layouts
+        tiled     = noBorders (ResizableTall 1 (2/100) (1/2) [])
+        reflectTiled = (reflectHoriz tiled)
+        full      = (noBorders Full)
 
-      -- The default number of windows in the master pane
-      nmaster = 1
+        --Std layout
+        standardLayouts = avoidStruts $ (tiled ||| reflectTiled ||| Mirror tiled ||| Grid ||| full)
 
-      -- Default proportion of screen occupied by master pane
-      ratio = 1/2
+        --Jp layout
+        jpL = full ||| (avoidStruts $ (tiled ||| reflectTiled ||| Mirror tiled ||| Grid ||| full))
 
-      -- Percent of screen to increment by when resizing panes
-      delta = 3/100
+        --Gimp Layout
+        gimpL = avoidStruts $ noBorders $ withIM (0.11) (Role "gimp-toolbox") $ reflectHoriz $ withIM (0.15) (Role "gimp-dock") Full
+
+        --Web Layout
+        webL = full ||| (avoidStruts $ tiled ||| reflectHoriz tiled ||| full)
+
+        --VirtualLayout
+        fullL = full
 
 -- http://www.chipstips.com/?p=488
 myManageHook = composeAll
-    [ className =? "Gimp"           --> doFloat
+    [ className =? "Gimp"           --> doF (W.shift "8")
     , className =? "Pidgin"         --> doF (W.shift "9")
     , className =? "Skype"          --> doF (W.shift "5")
     , className =? "Thunderbird"    --> doF (W.shift "9")

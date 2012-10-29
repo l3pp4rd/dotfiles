@@ -72,50 +72,81 @@ fmem() {
     printf "%s%s%% %s^fg()^bg()" "$modifier" "$memory" "$icon"
 }
 
+_cpu_temp() {
+    # CPUs temp
+    temp=$(sensors | awk -F+ '{print $2}' | grep 'crit' | awk -F. '{print $1}')
+    if [ "$temp" -gt 80 ]; then
+        modifier='^bg(#dc322f)^fg(white)'
+    elif [ "$temp" -gt 60 ]; then
+        modifier='^fg(#b58900)'
+    else
+        modifier='^fg(#859900)'
+    fi
+    printf "%s%s°C^fg()^bg()" "$modifier" "$temp"
+}
+
+_active_network_interface() {
+    ACTIVE="eth0" # default to eth0 in case if none active
+    for iface in  `ifconfig | egrep 'eth[0-9]|wlan[0-9]' | awk -F': ' '{print $1}'` ; do
+        ifconfig $iface | grep -q 'inet ' && ACTIVE="$iface"
+    done
+
+    echo $ACTIVE
+}
 
 # Main
-INTERFACE=wlan0
+INTERFACE=$(_active_network_interface)
 
 # Here we remember the previous rx/tx counts
 RXB=`cat /sys/class/net/${INTERFACE}/statistics/rx_bytes`
 TXB=`cat /sys/class/net/${INTERFACE}/statistics/tx_bytes`
 
 while true; do
-   PGTIME=$(fgtime)
-   PDATE=$(fdate)
-   PBAT=$(fbattery)
-   LOAD=$(fload)
-   MEM=$(fmem)
+    PGTIME=$(fgtime)
+    PDATE=$(fdate)
+    PBAT=$(fbattery)
+    LOAD=$(fload)
+    MEM=$(fmem)
+    TEMP=$(_cpu_temp)
 
-   # get new rx/tx counts
-   RXBN=`cat /sys/class/net/${INTERFACE}/statistics/rx_bytes`
-   TXBN=`cat /sys/class/net/${INTERFACE}/statistics/tx_bytes`
+    # use active network interface
+    INTERFACE=$(_active_network_interface)
 
-   # calculate the rates
-   # format the values to 4 digit fields
-   RXR=$(printf "%4d\n" $(echo "($RXBN - $RXB) / 1024/${INTERVAL}" | bc))
-   TXR=$(printf "%4d\n" $(echo "($TXBN - $TXB) / 1024/${INTERVAL}" | bc))
+    # get new rx/tx counts
+    RXBN=`cat /sys/class/net/${INTERFACE}/statistics/rx_bytes`
+    TXBN=`cat /sys/class/net/${INTERFACE}/statistics/tx_bytes`
 
-   if [ $RXR -eq 0 ]; then
-       rxColor=""
-   else
-       rxColor="#859900"
-   fi
+    # calculate the rates
+    # format the values to 4 digit fields
+    RXR=$(printf "%4d\n" $(echo "($RXBN - $RXB) / 1024/${INTERVAL}" | bc))
+    TXR=$(printf "%4d\n" $(echo "($TXBN - $TXB) / 1024/${INTERVAL}" | bc))
 
-   if [ $TXR -eq 0 ]; then
-       txColor=""
-   else
-       txColor="#dc322f"
-   fi
+    if [ $RXR -eq 0 ]; then
+        rxColor=""
+    else
+        rxColor="#859900"
+    fi
+
+    if [ $TXR -eq 0 ]; then
+        txColor=""
+    else
+        txColor="#dc322f"
+    fi
+
+    if [ "$INTERFACE" = "wlan0" ]; then
+        netIcon="$DZEN_ICONPATH/net-wifi.xbm"
+    else
+        netIcon="$DZEN_ICONPATH/net-wired2.xbm"
+    fi
 
    # print out the rates with some nice formatting
-   echo -n "^fg($rxColor)${RXR} K^p(3)^i($DZEN_ICONPATH/arr_down.xbm)^fg($txColor)${TXR} K^i($DZEN_ICONPATH/arr_up.xbm)^fg() "
+   echo -n "^i($netIcon)^fg(#859900) ^fg($rxColor)${RXR} K^p(3)^i($DZEN_ICONPATH/arr_down.xbm)^fg($txColor)${TXR} K^i($DZEN_ICONPATH/arr_up.xbm)^fg() "
 
    # reset old rates
    RXB=$RXBN; TXB=$TXBN
 
    # Arrange and print the status line
-   print "| $PBAT $LOAD $MEM | $PGTIME $PDATE"
- 
+   print "| $TEMP $PBAT $LOAD $MEM | $PGTIME $PDATE"
+
    sleep $INTERVAL
 done
