@@ -140,7 +140,7 @@ while true; do
     fi
 
    # print out the rates with some nice formatting
-   echo -n "^i($netIcon)^fg(#859900) ^fg($rxColor)${RXR} K^p(3)^i($DZEN_ICONPATH/arr_down.xbm)^fg($txColor)${TXR} K^i($DZEN_ICONPATH/arr_up.xbm)^fg() "
+   echo -n "^i($netIcon)^fg(#859900)^fg($rxColor)${RXR} K^p(3)^i($DZEN_ICONPATH/arr_down.xbm)^fg($txColor)${TXR} K^i($DZEN_ICONPATH/arr_up.xbm)^fg() "
 
    # reset old rates
    RXB=$RXBN; TXB=$TXBN

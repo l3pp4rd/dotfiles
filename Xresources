@@ -1,12 +1,6 @@
-!---------------------------------------
-! file: ~/.Xresources
-! author: Vincent Velociter
-! vim:ft=xdefaults:fdm=marker
-! --------------------------------------
-
 
 ! -- Colorscheme -- !
-#include "xcolors/tango"
+#include "xcolors/solarized"
 
 ! -- Fonts {{{
 Xft.autohint: false
@@ -19,6 +13,7 @@ Xft.rgba: rgb
 ! Urxvt {{{
 URxvt.iconFile: /usr/share/icons/AwOken/clear/24x24/apps/terminal.png
 URxvt.font: xft:Inconsolata:size=14
+URxvt*termName: rxvt-unicode-256color
 
 URxvt.scrollBar: false
 URxvt.jumpScroll: true

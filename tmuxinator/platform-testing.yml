@@ -1,0 +1,8 @@
+# ~/.tmuxinator/platform-testing.yml
+
+project_name: "platforms"
+project_root: "~/php/jirafe/platform-testing"
+tabs:
+  - vim: "cd ~/php/jirafe/platform-testing && vim"
+  - shell: "cd ~/php/jirafe/platform-testing"
+

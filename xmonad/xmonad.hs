@@ -63,7 +63,7 @@ main = do
         , ("M-S-l", sendMessage NextLayout) -- next layout
         , ("M-r",   spawn "~/scripts/path_dmenu")
         , ("M-s",   spawn "sudo /usr/sbin/pm-suspend")
-        , ("M-t",   spawn "urxvtc") -- more convienent shortcut
+        , ("M-t",   spawn "urxvtc -e zsh -c tmux") -- more convienent shortcut, open with tmux session
         , ("M-c",   kill)  -- close focused window shortcut
         , ("M-e",   spawn "~/scripts/email/check_mailbox.sh ~/accounts.dat")
         , ("M-a",   spawn "urxvtc -e alsamixer")

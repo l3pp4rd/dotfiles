@@ -10,19 +10,32 @@ call pathogen#infect()
 syntax on
 filetype plugin indent on       " enable detection, plugins and indenting in one step
 
-let feature_filetype='behat'
-
 " Syntax highlighting
 
 " Colorsheme
-se t_Co=256
-let g:solarized_termcolors=256
-let g:solarized_termtrans=0
-let g:solarized_menu=0
-let g:solarized_italic=0
+se t_Co=16
 se background=dark
-"colo solarized
-colo jellybeans
+
+let g:solarized_termcolors=16
+let g:solarized_termtrans=0
+let g:solarized_degrade=0
+let g:solarized_bold=1
+let g:solarized_underline=1
+let g:solarized_italic=1
+let g:solarized_contrast="low"
+let g:solarized_visibility="high"
+
+if $TERM =~ "-256color"
+  se t_Co=256
+  let g:solarized_termcolors=256
+  let g:solarized_contrast="high"
+  let g:solarized_termtrans=1
+
+  let g:jellybeans_background_color_256="NONE"
+endif
+
+"colo jellybeans
+colo solarized
 
 " General options
 se autoread                     " Automatically read a file that has changed on disk

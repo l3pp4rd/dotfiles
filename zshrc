@@ -43,6 +43,13 @@ eval `keychain --eval --agents ssh --nogui -Q -q id_rsa`
 # -------------Aliases-------------
 alias music="ncmpc"
 
+# archlinux services
+alias start="sudo rc.d start"
+alias restart="sudo rc.d restart"
+alias stop="sudo rc.d stop"
+
+# modify tmux
+alias tmux="tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -n$USER -s$USER@$HOSTNAME"
 # --------------PATH---------------
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 if [ -d "$HOME/bin" ]; then
@@ -74,6 +81,7 @@ fi
 
 # --------------OTHER--------------
 export EDITOR=vim
+#export TERM=rxvt-unicode-256color
 
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -81,8 +89,4 @@ export LC_ALL=en_US.UTF-8
 
 # launch x when booted
 [[ $(tty) == /dev/tty1 ]] && startx
-
-# ---------TMUX----------
-# start tmux on every shell session except tty1
-[[ $TERM != "screen" && $(tty) != /dev/tty1 ]] && exec tmux
 
