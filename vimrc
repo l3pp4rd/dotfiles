@@ -7,13 +7,13 @@ se nocompatible         " Use vim defaults, should be first entry
 runtime bundle/autoload/pathogen.vim
 call pathogen#infect()
 
-syntax on
 filetype plugin indent on       " enable detection, plugins and indenting in one step
+syntax on                       " syntax highlighting
 
 " Syntax highlighting
 
 " Colorsheme
-se t_Co=16
+se t_Co=16                      " number of colors supported
 se background=dark
 
 let g:solarized_termcolors=16
@@ -41,7 +41,8 @@ colo solarized
 se autoread                     " Automatically read a file that has changed on disk
 se clipboard=unnamedplus        " Use default X-System register for copy and paste
 se history=200                  " Sets how many lines of history VIM has to remember
-se undolevels=1000              " use many levels of undo
+se undolevels=1000              " Number of changes that can be undone
+se undoreload=10000             " Number lines to save for undo on a buffer reload
 se noundofile                   " Don't keep a persistent undofile
 se autoread                     " Automatically read a file that has changed on disk
 se nobackup                     " Don't make a backup before overwriting a file.
@@ -63,6 +64,7 @@ se wildmenu                     " command line autocompletion
 se wildmode=list:longest,full   " options for autocompletion
 se wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs,*/tmp,*.swp,*.jpg,*.png,*.xpm,*.gif,*.ico,*/vendor,web/css,web/js,web/bundles,*/target/*
 se tags+=vendor.tags            " read vendor.tags also
+se gdefault                     " the /g flag on :s substitutions by default
 
 " Search related options
 
@@ -93,8 +95,8 @@ se scrolloff=3
 " wrapping linebreak
 
 se wrap linebreak
-se textwidth=100
-se colorcolumn=100
+se textwidth=120
+se colorcolumn=120
 se formatoptions=qrn1
 
 " -------------MAPPINGS-------------
@@ -110,7 +112,7 @@ nnoremap <silent> <leader>nn :set nonumber!<cr>
 nnoremap <silent> <leader>nw :set nowrap!<cr>
 
 " Clear search highlight
-nmap <silent> <leader>ch :let @/=""<cr>
+nmap <silent> <leader>/ :let @/=""<cr>
 
 " launch help in vert mode split to the right window
 nmap <Leader>h <Esc>:botright vert help<cr>:vert resize 80<cr>:help<space>
@@ -150,7 +152,7 @@ map <leader>u :call PhpInsertUse()<cr>
 let g:snips_author = 'Gediminas Morkevicius <gediminas.morkevicius@gmail.com>'
 
 " Behat
-let feature_filetype='behat'
+let feature_filetype = 'behat'
 
 " Command-T fix the arrow keys
 if &term =~ "rxvt-unicode" || &term =~ "xterm"
@@ -158,6 +160,11 @@ if &term =~ "rxvt-unicode" || &term =~ "xterm"
   let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
   let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
 endif
+
+" Delimit mate
+let delimitMate_autoclose = 1
+let delimitMate_matchpairs = "(:),[:],{:}"
+
 " -------------FUNCTIONS-------------
 
 function! <SID>StripTrailingWhitespaces()
@@ -178,14 +185,6 @@ function! <SID>MkdirsIfNotExists(directory)
     endif
 endfunction
 
-" Lookup the file in the local directory and execute if readable
-func! TryToReadFileInLocalDir(fname)
-    let s=findfile(a:fname, expand("%:p:h") . ';')
-    if filereadable(s)
-        exe 'sou ' . s
-    endif
-endfunc
-
 "  Clean code function
 function! CleanCode()
   %retab          " Replace tabs with spaces
@@ -203,7 +202,6 @@ nmap <leader>C :call CleanCode()<cr>
 "|
 
 if has('autocmd')
-    au BufWinEnter * set foldlevel=999999
     au FocusLost silent! :wa
     au FileType helpfile setlocal nonumber
 
@@ -215,43 +213,23 @@ if has('autocmd')
     " Restore cursor position
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm$"|endif|endif
 
-    """""""""""""""""""""""""""""""""""""""
-    " Define a group so we can delete them when this file is sourced, and we don't
-    " end up with multiple autocmd entries if this file is sourced more than once.
-    "
-    " Tries to read .vimlocal settings based on the directory vim is executed. Helps with specific
-    " settings based per project
-    "
-    " Source code is used from
-    " <http://github.com/chazy/dirsettings/blob/master/plugin/dirsettings.vim>
-    " Author - Tye Z. < z d r o @ y a h o o . c o m >
-    augroup dirsettings
-    au! dirsettings
-    au dirsettings BufNew,BufNewFile,BufReadPost,VimEnter * call TryToReadFileInLocalDir('.vimlocal')
-
     """"""""""""""""""""""""""""""""""""""""
     "
     "  FILE TYPES
     "
-    au BufRead,BufNewFile *.phps        setlocal filetype=php
     au BufRead,BufNewFile *.twig        setlocal filetype=django
     au BufRead,BufNewFile *.html.twig   setlocal filetype=htmldjango
-    au BufRead,BufNewFile *.ejs         setlocal filetype=html
     au BufRead,BufNewFile *.json        setlocal filetype=javascript
 
     """"""""""""""""""""""""""""""""""""""""
     "
     "  TABS
     "
-    au BufRead,BufNewFile *.class.php   setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    au BufRead,BufNewFile *.jade        setlocal tabstop=2 shiftwidth=2 softtabstop=2
     au BufRead,BufNewFile *.yml         setlocal tabstop=4 shiftwidth=4 softtabstop=4
     au BufRead,BufNewFile *.feature     setlocal tabstop=2 shiftwidth=2 softtabstop=2
     au BufRead,BufNewFile *.css         setlocal tabstop=2 shiftwidth=2 softtabstop=2
     au BufRead,BufNewFile *.scss        setlocal tabstop=2 shiftwidth=2 softtabstop=2
     au BufRead,BufNewFile *.js          setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    au BufRead,BufNewFile *.coffee      setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    au BufRead,BufNewFile *.go          setlocal tabstop=4 shiftwidth=4 softtabstop=4
     au BufRead,BufNewFile *.scala       setlocal tabstop=2 shiftwidth=2 softtabstop=2
     au BufRead,BufNewFile *.html        setlocal tabstop=2 shiftwidth=2 softtabstop=2
     au BufRead,BufNewFile *.twig        setlocal tabstop=2 shiftwidth=2 softtabstop=2
@@ -260,6 +238,16 @@ if has('autocmd')
     "
     "  COMMANDS
     "
-    au BufWrite *.php,*.js,*.feature,*.json,*.go,*.scala,*.twig :call <SID>StripTrailingWhitespaces()
+    au BufWrite *.php,*.js,*.feature,*.json,*.scala,*.twig :call <SID>StripTrailingWhitespaces()
     au BufWrite * :call <SID>MkdirsIfNotExists(expand('<afile>:h'))
+endif
+
+" Source user settings
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
+
+" Source project settings
+if filereadable('.vimrc.local')
+  source .vimrc.local
 endif

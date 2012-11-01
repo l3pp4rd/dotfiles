@@ -2,22 +2,21 @@
 #
 # xmonad statusline, (c) 2007 by Robert Manea
 #
- 
+
 # Configuration
 DATE_FORMAT='%a %d %b %H:%M'
 DZEN_ICONPATH=$HOME/.xmonad/icons
-#MAILDIR=
- 
+
 # Main loop interval in seconds
 INTERVAL=1
- 
+
 # Functions
 fdate() {
     icon="^i($DZEN_ICONPATH/clock.xpm)"
     today=$(date +$DATE_FORMAT)
     printf "^fg(white)%s %s^fg()" "$icon" "$today"
 }
- 
+
 fgtime() {
     print -n "NY:" $(TZ='America/New_York' date +'%H:%M')
 }
