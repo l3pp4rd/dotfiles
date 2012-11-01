@@ -49,7 +49,7 @@ se nobackup                     " Don't make a backup before overwriting a file.
 se nowritebackup                " And again.
 se noswapfile                   " Use an SCM instead of swap files
 se nospell                      " Disable spell checking
-se hidden
+se hidden                       " Handle multiple buffers better.
 se cmdheight=2                  " command bar height
 se laststatus=2                 " always show status bar
 se completeopt=menuone,preview  " autocompletion options
@@ -86,21 +86,46 @@ se tildeop
 se shiftwidth=4
 se softtabstop=4
 
-
 " scrolling
-
 se scrolljump=3
 se scrolloff=3
 
 " wrapping linebreak
-
 se wrap linebreak
 se textwidth=120
 se colorcolumn=120
 se formatoptions=qrn1
 
-" -------------MAPPINGS-------------
+" Use perl regex style
+nnoremap / /\v
+vnoremap / /\v
+nnoremap ? ?\v
+vnoremap ? ?\v
 
+" Highlight cursor line
+au insertEnter * se cursorline
+au insertLeave * se nocursorline
+highlight cursorline term=underline cterm=underline ctermbg=0 guibg=#000000
+
+" Restore cursor position
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm$"|endif|endif
+
+" ------ Actions on file types -----
+au FileType helpfile setlocal nonumber
+
+au BufRead,BufNewFile *.html.twig   setlocal filetype=htmldjango
+au BufRead,BufNewFile *.json        setlocal filetype=javascript
+
+" set tab width to 2
+au BufRead,BufNewFile *.feature,*.css,*.scss,*.js,*.scala,*.yml,*.html,*.twig setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
+" strip trailing space on write
+au BufWrite *.php,*.js,*.feature,*.json,*.scala,*.twig :call <SID>StripTrailingWhitespaces()
+
+" create directory when writing
+au BufWrite * :call <SID>MkdirsIfNotExists(expand('<afile>:h'))
+
+" -------------MAPPINGS-------------
 let mapleader=","       " Use the comma as leader
 nmap <leader>2 :setlocal tabstop=2<cr>:setlocal shiftwidth=2<cr>:setlocal softtabstop=2<cr>
 nmap <leader>4 :setlocal tabstop=4<cr>:setlocal shiftwidth=4<cr>:setlocal softtabstop=4<cr>
@@ -139,7 +164,7 @@ nmap <leader>ct :!ctags&<cr><cr>
 nmap ]t :bd<cr>:tnext<cr>
 " Jump to previous tag match
 nmap [t :bd<cr>:tprevious<cr>
-
+" testers
 " ------------PLUGINS---------------
 
 " ACK
@@ -153,6 +178,8 @@ let g:snips_author = 'Gediminas Morkevicius <gediminas.morkevicius@gmail.com>'
 
 " Behat
 let feature_filetype = 'behat'
+
+"au FileType *.html,*.xhtml,*.xml,*.twig ru ftplugin/autoclose_tag.vim
 
 " Command-T fix the arrow keys
 if &term =~ "rxvt-unicode" || &term =~ "xterm"
@@ -190,62 +217,9 @@ function! CleanCode()
   %retab          " Replace tabs with spaces
   %s/\r/\r/eg     " Turn DOS returns ^M into real returns
   %s=  *$==e      " Delete end of line blanks
-  echo "Cleaned up this mess."
+  echo "Cleaned"
 endfunction
 nmap <leader>C :call CleanCode()<cr>
-
-"
-"+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-"|
-"|  > AUTOCMD
-"|
-"|
-
-if has('autocmd')
-    au FocusLost silent! :wa
-    au FileType helpfile setlocal nonumber
-
-    " Highlight cursor line
-    au insertEnter * se cursorline
-    au insertLeave * se nocursorline
-    highlight cursorline term=underline cterm=underline ctermbg=0 guibg=#000000
-
-    " Restore cursor position
-    au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm$"|endif|endif
-
-    """"""""""""""""""""""""""""""""""""""""
-    "
-    "  FILE TYPES
-    "
-    au BufRead,BufNewFile *.twig        setlocal filetype=django
-    au BufRead,BufNewFile *.html.twig   setlocal filetype=htmldjango
-    au BufRead,BufNewFile *.json        setlocal filetype=javascript
-
-    """"""""""""""""""""""""""""""""""""""""
-    "
-    "  TABS
-    "
-    au BufRead,BufNewFile *.yml         setlocal tabstop=4 shiftwidth=4 softtabstop=4
-    au BufRead,BufNewFile *.feature     setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    au BufRead,BufNewFile *.css         setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    au BufRead,BufNewFile *.scss        setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    au BufRead,BufNewFile *.js          setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    au BufRead,BufNewFile *.scala       setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    au BufRead,BufNewFile *.html        setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    au BufRead,BufNewFile *.twig        setlocal tabstop=2 shiftwidth=2 softtabstop=2
-
-    """"""""""""""""""""""""""""""""""""""""
-    "
-    "  COMMANDS
-    "
-    au BufWrite *.php,*.js,*.feature,*.json,*.scala,*.twig :call <SID>StripTrailingWhitespaces()
-    au BufWrite * :call <SID>MkdirsIfNotExists(expand('<afile>:h'))
-endif
-
-" Source user settings
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
 
 " Source project settings
 if filereadable('.vimrc.local')
