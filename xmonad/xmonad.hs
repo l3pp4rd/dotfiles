@@ -75,27 +75,23 @@ main = do
         ]
 
 -- Layouts
-myLayoutHook = onWorkspace "3" jpL $  onWorkspace "7" fullL $ onWorkspace "8" gimpL $ standardLayouts
+myLayoutHook = onWorkspace "1" webL $ onWorkspace "7" mediaL $ onWorkspace "8" gimpL $ standardLayouts
     where
         --Layouts
-        tiled     = noBorders (ResizableTall 1 (2/100) (1/2) [])
-        reflectTiled = (reflectHoriz tiled)
-        full      = (noBorders Full)
+        tiled = noBorders (ResizableTall 1 (2/100) (1/2) [])
+        full = (noBorders Full)
 
-        --Std layout
-        standardLayouts = avoidStruts $ (tiled ||| reflectTiled ||| Mirror tiled ||| Grid ||| full)
-
-        --Jp layout
-        jpL = full ||| (avoidStruts $ (tiled ||| reflectTiled ||| Mirror tiled ||| Grid ||| full))
+        --Std layout variants
+        standardLayouts = avoidStruts $ (tiled ||| full)
 
         --Gimp Layout
         gimpL = avoidStruts $ noBorders $ withIM (0.11) (Role "gimp-toolbox") $ reflectHoriz $ withIM (0.15) (Role "gimp-dock") Full
 
-        --Web Layout
-        webL = full ||| (avoidStruts $ tiled ||| reflectHoriz tiled ||| full)
+        --Web Layout (with or without top menu)
+        webL = full ||| (avoidStruts $ full)
 
         --VirtualLayout
-        fullL = full
+        mediaL = full
 
 -- http://www.chipstips.com/?p=488
 myManageHook = composeAll
