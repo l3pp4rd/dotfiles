@@ -25,7 +25,6 @@ import Dzen (DzenConf(..), TextAlign(..), defaultDzenXft,
                 spawnDzen, spawnToDzen, screenWidth)
 
 main = do
-    -- Some help from IRC: http://hpaste.org/65912#line8
     width    <- screenWidth 0
     dzenPipe <- spawnPipe $ myStatusBar width
     stalproc <- spawnPipe myStaloneTrayBar
@@ -69,13 +68,16 @@ main = do
         , ("M-a",   spawn "urxvtc -e alsamixer")
         , ("M-b",   sendMessage $ ToggleStrut U) -- toggle top bar
         , ("<F12>", spawn "~/scripts/touchpad_toggle")
-        , ("M-C-r", spawn "killall dzen2 stalonetray && xmonad --recompile && xmonad --restart")
+        , ("M-C-r", spawn "xmonad --recompile && xmonad --restart")
         , ("<Print>", spawn "scrot '%Y-%m-%d-%H%M%S_$wx$h.png' -e 'mv $f ~/images/screenshots'")  -- Take a screenshot
         , ("C-<Print>", spawn "sleep 0.2; scrot '%Y-%m-%d-%H%M%S_$wx$h.png' -e 'mv $f ~/images/screenshots' -s")  -- Sleep is required, Take a screenshot of area
         ]
 
 -- Layouts
-myLayoutHook = onWorkspace "1" webL $ onWorkspace "7" mediaL $ onWorkspace "8" gimpL $ standardLayouts
+myLayoutHook =
+        onWorkspace "1" webL $
+        onWorkspace "7" mediaL $
+        onWorkspace "8" gimpL $ standardLayouts
     where
         --Layouts
         tiled = noBorders (ResizableTall 1 (2/100) (1/2) [])
@@ -88,15 +90,13 @@ myLayoutHook = onWorkspace "1" webL $ onWorkspace "7" mediaL $ onWorkspace "8" g
         gimpL = avoidStruts $ noBorders $ withIM (0.11) (Role "gimp-toolbox") $ reflectHoriz $ withIM (0.15) (Role "gimp-dock") Full
 
         --Web Layout (with or without top menu)
-        webL = full ||| (avoidStruts $ full)
+        webL = avoidStruts $ (full ||| tiled)
 
         --VirtualLayout
         mediaL = full
 
--- http://www.chipstips.com/?p=488
 myManageHook = composeAll
     [ className =? "Gimp"           --> doF (W.shift "8")
-    , className =? "Pidgin"         --> doF (W.shift "9")
     , className =? "Skype"          --> doF (W.shift "5")
     , className =? "Thunderbird"    --> doF (W.shift "9")
     , className =? "Firefox"        --> doF (W.shift "1")
@@ -104,8 +104,6 @@ myManageHook = composeAll
     , manageDocks
     ] <+> manageHook defaultConfig
 
--- Taken from http://www.haskell.org/haskellwiki/Xmonad/Config_archive/And1%27s_xmonad.hs
--- TODO: https://leohart.wordpress.com/2011/02/20/pomodoro-technique-for-xmonad-users/
 -- Color, font and iconpath definitions:
 myFont = "InconsolataSansMono:size=11"
 

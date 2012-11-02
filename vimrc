@@ -193,7 +193,6 @@ let delimitMate_autoclose = 1
 let delimitMate_matchpairs = "(:),[:],{:}"
 
 " -------------FUNCTIONS-------------
-
 function! <SID>StripTrailingWhitespaces()
     " Preparation save last search, and cursor position.
     let _s=@/
