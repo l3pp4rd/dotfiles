@@ -12,7 +12,6 @@ syntax on                       " syntax highlighting
 
 " Syntax highlighting
 
-" Colorsheme
 se t_Co=16                      " number of colors supported
 se background=dark
 
@@ -30,11 +29,8 @@ if $TERM =~ "-256color"
   let g:solarized_termcolors=256
   let g:solarized_contrast="high"
   let g:solarized_termtrans=1
-
-  let g:jellybeans_background_color_256="NONE"
 endif
 
-"colo jellybeans
 colo solarized
 
 " General options
