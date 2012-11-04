@@ -1,12 +1,13 @@
 ## About
 
-My .dotfiles for vim git and zsh
+My .dotfiles **ViM, Xmonad, zsh**
+Mainly inspired from [ornicar](https://github.com/ornicar/dotfiles)
 
 ## Requirements
 
 - You will need VIM >= **7.0** with a support of **ruby** interpreter
-- **git** on your system
-- **zsh** is optional
+- **git**
+- **zsh**
 
 ## Installation
 

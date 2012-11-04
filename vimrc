@@ -4,7 +4,7 @@ se nocompatible         " Use vim defaults, should be first entry
 
 " Initialize bundles, `call pathogen#helptags()` to regenerate docs
 " Infect Vim with pathogen >:)
-runtime bundle/autoload/pathogen.vim
+runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
 filetype plugin indent on       " enable detection, plugins and indenting in one step
