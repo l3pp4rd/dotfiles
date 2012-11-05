@@ -1,0 +1,9 @@
+# ~/.tmuxinator/d2ext.yml
+
+project_name: d2ext
+project_root: ~/php/extensions
+tabs:
+  - vim: cd ~/php/extensions && vim
+  - shell: cd ~/php/extensions
+  - tests: cd ~/php/extensions/tests
+

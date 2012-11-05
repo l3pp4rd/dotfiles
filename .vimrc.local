@@ -1,0 +1,15 @@
+" ignore vim bundles
+set wig+=*/vim/*
+
+" ignore php compile targets
+set wig+=*/compile/*/*/*
+
+" ignore ohmyzsh
+set wig+=*/oh-my-zsh/*
+
+" ignore zsh extensions
+set wig+=*/zsh/*/*
+
+" ignore non editables
+set wig+=*.o,*.hi,*.xbm
+

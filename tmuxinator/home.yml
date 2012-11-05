@@ -1,0 +1,9 @@
+# ~/.tmuxinator/home.yml
+
+project_name: home
+project_root: ~/.dotfiles
+tabs:
+  - music: cd && music
+  - dotfiles: cd ~/.dotfiles
+  - vim: cd ~/.dotfiles && vim
+

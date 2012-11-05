@@ -4,10 +4,10 @@
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 if [ -d "$DIR/dwm" ]; then
-    rm -rf $DIR/dwm
+    #rm -rf $DIR/dwm
 fi
 
-$(hg clone http://hg.suckless.org/dwm ${DIR}/dwm)
+#$(hg clone http://hg.suckless.org/dwm ${DIR}/dwm)
 cd $DIR
 cp -f config.h dwm/.
 cp -f config.mk dwm/.
