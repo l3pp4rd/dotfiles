@@ -10,6 +10,7 @@ mpd &
 thunar --daemon &
 
 # start apps
-firefox &
+#firefox &
 
+# exec ~/.dotfiles/bin/dwm
 exec /home/gedi/.cabal/bin/xmonad
