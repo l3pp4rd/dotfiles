@@ -1,40 +1,107 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "InconsolataSansMono:size=11";
-static const char normbordercolor[] = "#444444";
-static const char normbgcolor[]     = "#222222";
-static const char normfgcolor[]     = "#bbbbbb";
-static const char selbordercolor[]  = "#005577";
-static const char selbgcolor[]      = "#005577";
-static const char selfgcolor[]      = "#eeeeee";
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
-static const unsigned int snap      = 0;       /* snap pixel */
-static const Bool showbar           = True;     /* False means no bar */
-static const Bool topbar            = True;     /* False means bottom bar */
+static const char font[]             = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
+static const char normbordercolor[]  = "#cccccc";
+static const char normbgcolor[]      = "#cccccc";
+static const char normfgcolor[]      = "#000000";
+static const char selbordercolor[]   = "#0066ff";
+static const char selbgcolor[]       = "#0066ff";
+static const char selfgcolor[]       = "#ffffff";
+static const char* colors[][ColLast] = {
+    /* border          foreground   background         use */
+    { normbordercolor, normfgcolor, normbgcolor },  /* normal */
+    { normbordercolor, "#ff0000",   normbgcolor },  /* error */
+    { normbordercolor, "#276CC2",   normbgcolor },  /* delim */
 
-/* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+    { normbordercolor, "#e0b020",   normbgcolor },  /* artist */
+    { normbordercolor, "#e06000",   normbgcolor },  /* title */
+    { normbordercolor, "#b10000",   normbgcolor },  /* hot */
+    { normbordercolor, "#b15c00",   normbgcolor },  /* medium */
+    { normbordercolor, "#6cb100",   normbgcolor },  /* cool */
+};
+static const unsigned int borderpx   = 0;    /* border pixel of windows */
+static const unsigned int snap       = 0;   /* snap pixel */
+static const double shade            = 0.9;  /* opacity of unfocussed clients */
+static const unsigned int gappx      = 0;    /* gap between clients */
+static const Bool showbar            = True; /* False means no bar */
+static const Bool topbar             = True; /* False means bottom bar */
+static const Bool monobar            = True; /* Draw selected window title not inverse */
+static const Bool barline            = True; /* Draw a single line below the statusbar */
+static const int nmaster             = 1;    /* default number of clients in the master area */
+
+static const Bool systray_enable     = True; /* Provide a Systray */
+static const int systray_spacing     = 1;    /* Pixel between Systray Symbols */
+
+#include "bitmaps.h"
+
+char sstrings[][30] = {
+    "^[f276CC2;|^[f;",
+    "^[f276CC2;·^[f;",
+};
 
 static const Rule rules[] = {
-    /* class            instance    title       tags mask     isfloating   monitor */
-    { "Gimp",           NULL,       NULL,       1 << 7,       True,        -1 },
-    { "Firefox",        NULL,       NULL,       1 << 0,       False,       -1 },
-    { "Thunderbird",    NULL,       NULL,       1 << 8,       False,       -1 },
-    { "Skype",          NULL,       NULL,       1 << 4,       True,        -1 },
+    /* class            instance               title        tags mask     isfloating   monitor  opacity  panel   scratchpad */
+    { "Gimp",           NULL,                  NULL,        0,            True,        -1,       -1,     False,  False },
+    { "Firefox",        NULL,                  NULL,        1 << 8,       False,       -1,        2,     False,  False }, /* opacity is always 1 when 2 */
+    { "URxvt",          NULL,                  NULL,        0,            False,       -1,      0.98,    False,  False }, /* opacity between 0 and 1 overrides default maximum */
+
+    { "DWM-TAG1",       NULL,                  NULL,        1 << 0,       False,       -1,       -1,     False,  False },
+    { "DWM-TAG2",       NULL,                  NULL,        1 << 1,       False,       -1,       -1,     False,  False },
+    { "DWM-TAG3",       NULL,                  NULL,        1 << 2,       False,       -1,       -1,     False,  False },
+    { "DWM-TAG4",       NULL,                  NULL,        1 << 3,       False,       -1,       -1,     False,  False },
+    { "DWM-TAG5",       NULL,                  NULL,        1 << 4,       False,       -1,       -1,     False,  False },
+    { "DWM-TAG6",       NULL,                  NULL,        1 << 5,       False,       -1,       -1,     False,  False },
+    { "DWM-TAG7",       NULL,                  NULL,        1 << 6,       False,       -1,       -1,     False,  False },
+    { "DWM-TAG8",       NULL,                  NULL,        1 << 7,       False,       -1,       -1,     False,  False },
+    { "DWM-TAG9",       NULL,                  NULL,        1 << 8,       False,       -1,       -1,     False,  False },
+
+    { "stalonetray",    NULL,                  NULL,        ~0,           True,        -1,      1.6,     True,   False }, /* opacity is static when between 1 and 2 */
+    { NULL,             "dwm-scratchpad",      NULL,        ~0,           True,        -1,      0.8,     False,  1  } /* multiple scratchpads are possible, just number them */
 };
 
 /* layout(s) */
-static const float mfact      = 0.55; /* factor of master area size [0.05..0.95] */
-static const int nmaster      = 1;    /* number of clients in master area */
-static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
+static const float mfact             = 0.55;       /* factor of master area size [0.05..0.95] */
+static const Bool resizehints        = True;       /* True means respect size hints in tiled resizals */
+static const float attachmode        = AttAsFirst; /* Attach Mode */
+
+/* addons: layouts */
+#include "layouts/nbstack.c"       /* bottom stack (tiling) */
+#include "layouts/bstackhoriz.c"   /* bottom stack (tower like stack)  */
+#include "layouts/grid.c"          /* regular grid */
+#include "layouts/gaplessgrid.c"   /* best fitting grid */
+#include "layouts/fibonacci.c"     /* spiral like arrangement */
 
 static const Layout layouts[] = {
-    /* symbol       arrange function */
-    { "[M]",        monocle },  /* full screen */
-    { "[T]",        tile },     /* tiling */
-    { "[F]",        NULL },     /* floating */
+    /* symbol     gap?    arrange */
+    { "[]=",      True,   ntile },       /* Tiled (first entry is default) */
+    { "><>",      False,  NULL },        /* Floating */
+    { "[M]",      False,  monocle },     /* Monocle */
+    { "TTT",      True,   nbstack },     /* Bottom Stack */
+    { "###",      True,   gaplessgrid }, /* Non Regular Grid */
+    { "+++",      True,   grid },        /* Regular Grid */
+    { "===",      True,   bstackhoriz }, /* Bottom Stack with horizontal Stack */
+    { "(@)",      True,   spiral },      /* Spiral (like Tiled, but ordered like in golden ratio */
+    { "[\\]",     True,   dwindle },     /* Dwindle (Like Spiral, but inverted */
 };
+
+/* tagging */
+static const Tag tags[] = {
+    /* name layout         mfact, showbar, topbar, attachmode, nmaster */
+    { "1", &layouts[3],    0.65,  -1,      -1,     -1,         -1 },
+    { "2", &layouts[2],     -1,   -1,      -1,     AttBelow,   -1 },
+    { "3", &layouts[8],     -1,   -1,      -1,     AttAside,   -1 },
+    { "4", &layouts[1],     -1,   -1,      -1,     -1,         -1 },
+    { "5", &layouts[0],     -1,   -1,      -1,     -1,         -1 },
+    { "6", &layouts[0],     -1,   -1,      -1,     -1,         -1 },
+    { "7", &layouts[0],     -1,   -1,      -1,     -1,         -1 },
+    { "8", &layouts[0],     -1,   -1,      -1,     -1,         -1 },
+    { "9", &layouts[0],     -1,   -1,      -1,     -1,         -1 },
+};
+
+/* addons: other */
+#include "other/togglemax.c"
+#include "other/push.c"
 
 /* key definitions */
 #define MODKEY Mod4Mask
