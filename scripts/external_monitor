@@ -1,0 +1,20 @@
+#! /bin/zsh
+LAPTOP="LVDS1"
+EXT1="VGA1"
+
+#--mode 1920x1080 --pos 0x0 --rotate normal --primary
+CONNECTED=`xrandr | grep "$EXT1 connected" | wc -l`
+# check if external monitor is connected
+if [ $CONNECTED -gt 0 ]; then
+    ON=`xrandr | grep "$EXT1 connected" | grep "+" | wc -l`
+    # check if its on allready
+    if [ $ON -gt 0 ]; then
+        # turn external monitor off, laptop monitor on
+        xrandr --output $EXT1 --off --output $LAPTOP --auto
+    else
+        # turn laptop monitor off, external on
+        xrandr --output $EXT1 --mode 1600x900 --output $LAPTOP --off
+    fi
+else
+    echo "$EXT1 is not connected"
+fi

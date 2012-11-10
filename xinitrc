@@ -13,5 +13,5 @@ thunar --daemon &
 # start apps
 #firefox &
 
-# exec startdwm
+# exec dwm
 exec xmonad
