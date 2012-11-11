@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sleep 0.2; scrot -m "$HOME/images/screenshots/%Y-%m-%d-%H%M%S_$wx$h.png" -e "mv $f $HOME/images/screenshots" -s

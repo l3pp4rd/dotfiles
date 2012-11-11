@@ -4,8 +4,6 @@ while true; do
     # run in loop
     dwm 2> ~/.dwm.log
     # recompile and start again
-    echo "building dwm"
     zsh -c "$HOME/.dotfiles/compile/dwm-wm/build.sh"
-    echo "restarting"
 done
 

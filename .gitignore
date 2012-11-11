@@ -2,4 +2,4 @@ vim/tmp/*
 !vim/tmp/.empty
 vim/.netrwhist
 bin/dwm
-bin/man
+man

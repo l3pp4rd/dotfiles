@@ -1,12 +1,15 @@
 #!/bin/zsh
-#
-# xmonad statusline, (c) 2007 by Robert Manea
-#
 
 # Configuration
 DATE_FORMAT='%a %d %b %H:%M'
-DZEN_ICONPATH=$HOME/.xmonad/icons
-
+DZEN_ICONPATH=$HOME/.dotfiles/xbm
+BG='#073642'
+FG='#839496'
+X=880
+Y=0
+HEIGHT=20
+WIDTH=630
+FONT='InconsolataSansMono:size=11'
 # Main loop interval in seconds
 INTERVAL=1
 
@@ -34,14 +37,6 @@ fbattery() {
     fi
 
     percent="$percent%"
-
-#    case $state in
-#        "Charging") sign="|+|";;
-#        "Discharging") sign="|-|" ;;
-#        "Unknown") sign=" ⚡";;
-#        "Full") sign="⚡"; percent= ;;
-#        *) sign="$state" ;;
-#    esac
 
     sign="^i($DZEN_ICONPATH/power-bat.xbm)"
 
@@ -154,4 +149,5 @@ while true; do
     print "| $TEMP $PBAT $LOAD $MEM | $PGTIME $PDATE"
 
     sleep $INTERVAL
-done
+done | dzen2 -x $X -y $Y -w $WIDTH -h $HEIGHT -bg $BG -fg $FG -ta 'r' -fn $FONT -p
+
