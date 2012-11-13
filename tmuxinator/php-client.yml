@@ -1,9 +1,9 @@
 # ~/.tmuxinator/php-client.yml
 
 project_name: php-client
-project_root: ~/php/jirafe/php-client-src
+project_root: ~/php/jirafe/php-client
 tabs:
-  - vim: cd ~/php/jirafe/php-client-src && vim
-  - shell: cd ~/php/jirafe/php-client-src
-  - tests: cd ~/php/jirafe/php-client-tests
+  - vim: cd ~/php/jirafe/php-client && vim
+  - shell: cd ~/php/jirafe/php-client
+  - tests: cd ~/php/jirafe/php-client
 

@@ -5,5 +5,6 @@ project_root: ~/.dotfiles
 tabs:
   - music: cd && music
   - dotfiles: cd ~/.dotfiles
+  - dwm: cd ~/c-dev/dwm && vim
   - vim: cd ~/.dotfiles && vim
 

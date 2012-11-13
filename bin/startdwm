@@ -3,6 +3,9 @@
 while true; do
     # run in loop
     dwm 2> ~/.dwm.log
+    if [ $? -eq 0 ]; then
+        exit 0
+    fi
     # recompile and start again
     zsh -c "$HOME/.dotfiles/compile/dwm-wm/build.sh"
 done
