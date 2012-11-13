@@ -1,12 +1,21 @@
 #!/bin/sh
 
+STATUS="$HOME/.dotfiles/scripts/dwm_status"
+BUILD="$HOME/.dotfiles/compile/dwm-wm/build.sh"
+
 while true; do
-    # run in loop
+    (sleep 0.5 && volumeicon) &     # volume icon in systray
+    (sleep 0.5 && zsh -c $STATUS) & # run dzen2 status bar, need to make sure wm loads first
+
+    # start dwm
     dwm 2> ~/.dwm.log
+    # read exit status
     if [ $? -eq 0 ]; then
-        exit 0
+        exit 0 # means exit clean => quit
     fi
     # recompile and start again
-    zsh -c "$HOME/.dotfiles/compile/dwm-wm/build.sh"
+    zsh -c $BUILD
+    # kill running processes
+    killall dzen_status volumeicon
 done
 
