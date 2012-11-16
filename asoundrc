@@ -1,0 +1,5 @@
+# use primary card as master
+defaults.pcm.card 0
+defaults.pcm.device 0
+defaults.ctl.card 0
+

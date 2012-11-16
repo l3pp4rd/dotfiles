@@ -16,6 +16,6 @@ while true; do
     # recompile and start again
     zsh -c $BUILD
     # kill running processes
-    killall dzen_status volumeicon
+    killall volumeicon dwm_status
 done
 
