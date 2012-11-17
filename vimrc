@@ -116,7 +116,7 @@ au BufRead,BufNewFile *.json        setlocal filetype=javascript
 au BufRead,BufNewFile *.feature,*.css,*.scss,*.js,*.scala,*.yml,*.html,*.twig setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 " strip trailing space on write
-au BufWrite *.php,*.js,*.feature,*.json,*.scala,*.twig :call <SID>StripTrailingWhitespaces()
+au BufWrite * :call <SID>StripTrailingWhitespaces()
 
 " create directory when writing
 au BufWrite * :call <SID>MkdirsIfNotExists(expand('<afile>:h'))
