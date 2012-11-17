@@ -1,20 +1,22 @@
 #!/bin/sh
 
-STATUS="$HOME/.dotfiles/scripts/dwm_status"
-BUILD="$HOME/.dotfiles/compile/dwm-wm/build.sh"
+DZEN2_STATUS="$HOME/.dotfiles/scripts/dwm_status"
+REBUILD_DWM="$HOME/.dotfiles/compile/dwm-wm/build.sh"
 
 while true; do
-    (sleep 0.5 && volumeicon) &     # volume icon in systray
-    (sleep 0.5 && zsh -c $STATUS) & # run dzen2 status bar, need to make sure wm loads first
+    (sleep 0.5 && volumeicon) &    # volume icon in systray
+    (sleep 0.5 && $DZEN2_STATUS) & # run dzen2 status bar, need to make sure wm loads first
 
     # start dwm
-    dwm 2> ~/.dwm.log
+    dwm > ~/.dwm.log
     # read exit status
     if [ $? -eq 0 ]; then
         exit 0 # means exit clean => quit
+    elif [ $? -ne 5]; then
+        mv ~/.dwm.log ~/.dwm.failure # a failure occured, save the log
     fi
-    # recompile and start again
-    zsh -c $BUILD
+    # recompile dwm and start again
+    $REBUILD_DWM
     # kill running processes
     killall volumeicon dwm_status
 done

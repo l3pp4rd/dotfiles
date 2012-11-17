@@ -16,3 +16,4 @@ firefox &                                       # firefox browser
 (sleep 1.5 && urxvtc -name 'work' -e tmux) &    # named instance of terminal with tmux(aliased on zsh conf) for work
 
 exec startdwm
+
