@@ -1,15 +1,17 @@
 ## About
 
-My .dotfiles **ViM, Xmonad, zsh**
-Mainly inspired from [ornicar](https://github.com/ornicar/dotfiles)
+My .dotfiles **ViM, DWM, zsh** and I use **ArchLinux** as my linux distribution
+Mainly inspired by [ornicar](https://github.com/ornicar/dotfiles)
 
 ## Requirements
 
-- You will need VIM >= **7.0** with a support of **ruby** interpreter
+- You will need latest **ViM** with a support of **ruby** interpreter
 - **git**
 - **zsh**
 
 ## Installation
+
+If you are tired of bloated desktops like gnome, kde.. whatever, would recommend to try [dwm](http://dwm.suckless.org/)
 
 Clone the repository:
 
