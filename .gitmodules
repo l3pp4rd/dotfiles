@@ -82,3 +82,6 @@
 [submodule "zsh/dircolors-solarized"]
 	path = zsh/dircolors-solarized
 	url = git://github.com/seebi/dircolors-solarized.git
+[submodule "vim/bundle/alternate"]
+	path = vim/bundle/alternate
+	url = git://github.com/vim-scripts/a.vim.git

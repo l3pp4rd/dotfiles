@@ -135,9 +135,6 @@ nnoremap <silent> <leader>nw :set nowrap!<cr>
 " Clear search highlight
 nmap <silent> <leader>/ :let @/=""<cr>
 
-" launch help in vert mode split to the right window
-nmap <Leader>h <Esc>:botright vert help<cr>:vert resize 80<cr>:help<space>
-
 " run write with root perms
 cmap w!! w !sudo tee % >/dev/null<CR>:e!<CR><CR>
 
@@ -187,6 +184,16 @@ endif
 " Delimit mate
 let delimitMate_autoclose = 1
 let delimitMate_matchpairs = "(:),[:],{:}"
+
+" Syntastic
+let g:syntastic_enable_signs=1
+let g:syntastic_enable_balloons=1
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['scala'] }
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" Alternate
+nnoremap <leader>h :A<cr>
 
 " -------------FUNCTIONS-------------
 function! <SID>StripTrailingWhitespaces()
