@@ -5,6 +5,9 @@ export SBT_OPTS="-Dfile.encoding=UTF8 -Xms512M -Xmx768M -Xss2M -XX:+CMSClassUnlo
 # oh-my-zsh configuration
 export DISABLE_AUTO_TITLE="true"
 
+# skype 4.0 bugs
+export GTK2_RC_FILES="/etc/gtk-2.0/gtkrc:$HOME/.gtkrc-2.0"
+
 # Enable more syntax highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 

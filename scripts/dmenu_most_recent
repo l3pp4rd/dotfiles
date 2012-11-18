@@ -11,7 +11,7 @@ function get_indexed_cache(array $cached) {
     }
     return $indexed;
 }
-$cache = realpath($_SERVER['HOME'] . '/' . (isset($argv[1]) ? $argv[1] : '.dmenu_recent_cache'));
+$cache = realpath(isset($argv[1]) ? $argv[1] : $_SERVER['HOME'].'/.dmenu_recent_cache');
 // read from stdin
 $fd = fopen("php://stdin", "r");
 $data = '';
