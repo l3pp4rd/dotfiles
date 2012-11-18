@@ -29,5 +29,5 @@ if [ "$NOTE" ]; then
         sed "s/$NOTE@$IDX/$NOTE@$NEXT/" $CACHE > "$CACHE.tmp"
         mv "$CACHE.tmp" $CACHE
     fi
-    vim "$NOTE_PATH/$NOTE"
+    gvim "$NOTE_PATH/$NOTE"
 fi
