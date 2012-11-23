@@ -5,29 +5,16 @@
 
 source ${XDG_CONFIG_HOME:-$HOME/.config}/solarized/colors.ini
 
-CACHE="$HOME/.note_cache"
-SORT="$HOME/.dotfiles/scripts/dmenu_most_recent"
+HIST="$HOME/.dmenu/notes_hist"
 NOTE_PATH="$HOME/.notes"
+FN="xft:Inconsolata:size=16"
 
 [[ -d "$NOTE_PATH" ]] || {
     mkdir $NOTE_PATH
 }
 
-[[ -f "$CACHE" ]] || {
-    touch $CACHE
-}
+NOTE=$(ls $NOTE_PATH | cat | dmenu -i -nb $base03 -nf $base0 -sb $base02 -sf $orange -fn "$FN" -p "Note:" -hf "$HIST")
 
-NOTE=$(ls $NOTE_PATH | cat | $SORT "$CACHE" | dmenu -i -nb $base03 -nf $base0 -sb $base02 -sf $orange -fn 'xft:Inconsolata:size=16' -p "Note:")
-
-# TODO make a C patch and have own dmenu version for all that
 if [ "$NOTE" ]; then
-    IDX=`cat $CACHE | grep "$NOTE@" | awk -F '@' '{print $2}'`
-    if [ ! "$IDX" ]; then
-        echo "$NOTE@1" >> $CACHE
-    else
-        NEXT=`expr $IDX + 1`
-        sed "s/$NOTE@$IDX/$NOTE@$NEXT/" $CACHE > "$CACHE.tmp"
-        mv "$CACHE.tmp" $CACHE
-    fi
     gvim "$NOTE_PATH/$NOTE"
 fi

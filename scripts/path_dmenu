@@ -1,28 +1,14 @@
 #!/bin/sh
 
-# requires dmenu-xft, for the font
+# uses custom dmenu with XFT and historical priority
 
 source ${XDG_CONFIG_HOME:-$HOME/.config}/solarized/colors.ini
 
-sorter="$HOME/.dotfiles/scripts/dmenu_most_recent"
-app=$(dmenu_path_c | $sorter | dmenu -i -nb $base03 -nf $base0 -sb $base02 -sf $orange -fn 'xft:Inconsolata:size=16' -p "Run")
+FN="xft:Inconsolata:size=16"
+HIST="$HOME/.dmenu/path_hist"
+APP=$(dmenu -pe -i -nb $base03 -nf $base0 -sb $base02 -sf $orange -fn "$FN" -p "Run" -hf "$HIST")
 
-if [ "$app" ]; then
-    zsh -c $app &
-
-    cache="$HOME/.dmenu_recent_cache"
-
-    if [ ! -f "$cache" ]; then
-        touch $cache
-    fi
-
-    IDX=`cat $cache | grep "$app@" | awk -F '@' '{print $2}'`
-    if [ ! "$IDX" ]; then
-        echo "$app@1" >> $cache
-    else
-        NEXT=`expr $IDX + 1`
-        sed "s/$app@$IDX/$app@$NEXT/" $cache > "$cache.tmp"
-        mv "$cache.tmp" $cache
-    fi
+if [ "$APP" ]; then
+    zsh -c $APP
 fi
 

@@ -58,7 +58,7 @@ se ttyfast                      " Optimize for fast terminal connections
 se enc=utf-8 nobomb             " Use UTF-8 without BOM
 se wildmenu                     " command line autocompletion
 se wildmode=list:longest,full   " options for autocompletion
-se wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs,*/tmp,*.swp,*.jpg,*.png,*.xpm,*.gif,*.ico,*/vendor,web/css,web/js,web/bundles,*/target/*
+se wildignore+=*.o,*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs,*/tmp,*.swp,*.jpg,*.png,*.xpm,*.gif,*.ico,*/vendor,web/css,web/js,web/bundles,*/target/*
 se tags+=vendor.tags            " read vendor.tags also
 se gdefault                     " the /g flag on :s substitutions by default
 

@@ -1,0 +1,9 @@
+# ~/.tmuxinator/website.yml
+
+project_name: website
+project_root: ~/php/jirafe/website
+tabs:
+  - vim: cd ~/php/jirafe/website && vim
+  - shell: cd ~/php/jirafe/website
+  - tests: cd ~/php/jirafe/website
+
