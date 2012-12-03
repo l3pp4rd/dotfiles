@@ -4,7 +4,6 @@ DZEN2_STATUS="$HOME/.dotfiles/scripts/dwm_status"
 REBUILD_DWM="$HOME/.dotfiles/compile/dwm-wm/build.sh"
 
 while true; do
-    (sleep 0.5 && volumeicon) &    # volume icon in systray
     (sleep 0.5 && $DZEN2_STATUS) & # run dzen2 status bar, need to make sure wm loads first
 
     # start dwm
@@ -18,6 +17,6 @@ while true; do
     # recompile dwm and start again
     $REBUILD_DWM
     # kill running processes
-    killall volumeicon dwm_status
+    killall dwm_status
 done
 

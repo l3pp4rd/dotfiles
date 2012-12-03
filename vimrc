@@ -113,7 +113,7 @@ au BufRead,BufNewFile *.html.twig   setlocal filetype=htmldjango
 au BufRead,BufNewFile *.json        setlocal filetype=javascript
 
 " set tab width to 2
-au BufRead,BufNewFile *.feature,*.css,*.scss,*.js,*.scala,*.yml,*.html,*.twig setlocal tabstop=2 shiftwidth=2 softtabstop=2
+au BufRead,BufNewFile *.feature,*.css,*.scss,*.js,*.scala,*.yml,*.html,*.twig,*.sql setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 " strip trailing space on write
 au BufWrite * :call <SID>StripTrailingWhitespaces()

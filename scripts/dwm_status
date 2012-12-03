@@ -5,10 +5,10 @@ DATE_FORMAT='%a %d %b %H:%M'
 DZEN_ICONPATH=$HOME/.dotfiles/xbm
 BG='#073642'
 FG='#839496'
-X=880
+X=860
 Y=0
 HEIGHT=20
-WIDTH=630
+WIDTH=690
 FONT='InconsolataSansMono:size=11'
 # Main loop interval in seconds
 INTERVAL=1
@@ -27,20 +27,25 @@ fgtime() {
 
 # BATTERY
 fbattery() {
-    infos=$(acpi -b)
-    percent=$(echo $infos|sed "s/Battery .: [a-z]*, \([0-9]*\)%\(,.*\|$\)/\1/i")
-    state=$(echo $infos|sed "s/Battery .: \([a-z]*\),.*/\1/i")
-    if [ "$percent" -lt 5 ]; then modifier="^bg(#dc322f)^fg(white)"
-    elif [ "$percent" -lt 20 ]; then modifier="^bg(#cb4b16)^fg(white)"
-    elif [ "$percent" -lt 50 ]; then modifier="^fg(#b58900)"
-    else modifier="^fg(#859900)"
+    ac=`acpi -a | grep on-line | wc -l`
+    if [ $ac -gt 0 ]; then
+        printf "^i($DZEN_ICONPATH/power-ac.xbm)"
+    else
+        infos=$(acpi -b)
+        percent=$(echo $infos|sed "s/Battery .: [a-z]*, \([0-9]*\)%\(,.*\|$\)/\1/i")
+        state=$(echo $infos|sed "s/Battery .: \([a-z]*\),.*/\1/i")
+        if [ "$percent" -lt 5 ]; then modifier="^bg(#dc322f)^fg(white)"
+        elif [ "$percent" -lt 20 ]; then modifier="^bg(#cb4b16)^fg(white)"
+        elif [ "$percent" -lt 50 ]; then modifier="^fg(#b58900)"
+        else modifier="^fg(#859900)"
+        fi
+
+        percent="$percent%"
+
+        sign="^i($DZEN_ICONPATH/power-bat.xbm)"
+
+        printf "$modifier%s%s^fg()^bg()" "$percent" "$sign"
     fi
-
-    percent="$percent%"
-
-    sign="^i($DZEN_ICONPATH/power-bat.xbm)"
-
-    printf "$modifier%s%s^fg()^bg()" "$percent" "$sign"
 }
 
 # LOAD AVERAGE
@@ -79,6 +84,16 @@ _cpu_temp() {
     printf "%s%s°C^fg()^bg()" "$modifier" "$temp"
 }
 
+_sound() {
+    on=`amixer get Master | awk -F '[' '{print $4}' | grep on | wc -l`
+    if [ $on -gt 0 ]; then
+        percent=$(amixer get Master | awk -F '[' '{print $2}' | grep '%' | awk -F ']' '{print $1}')
+        printf "%s ^i($DZEN_ICONPATH/vol-hi.xbm)" "$percent"
+    else
+        printf "^i($DZEN_ICONPATH/vol-mute.xbm)"
+    fi
+}
+
 _active_network_interface() {
     ACTIVE="none" # default to eth0 in case if none active
     for iface in  `ifconfig | egrep 'eth[0-9]|wlan[0-9]' | awk -F': ' '{print $1}'` ; do
@@ -95,6 +110,11 @@ CURR_IFACE=$(_active_network_interface)
 RXB=`cat /sys/class/net/${CURR_IFACE}/statistics/rx_bytes`
 TXB=`cat /sys/class/net/${CURR_IFACE}/statistics/tx_bytes`
 
+# will check and update unread count every minute
+UNREAD_GEDI=0
+UNREAD_JIRAFE=0
+MAILCHECK_INTERVAL=60
+
 while true; do
     PGTIME=$(fgtime)
     PDATE=$(fdate)
@@ -102,6 +122,20 @@ while true; do
     LOAD=$(fload)
     MEM=$(fmem)
     TEMP=$(_cpu_temp)
+    SOUND=$(_sound)
+
+    # mailbox info
+    if [ "$MAILCHECK_INTERVAL" -gt 60 ]; then
+        MAILCHECK_INTERVAL=0
+        UNREAD_GEDI=`zsh -c '~/scripts/email/check_mailbox.sh ~/accounts.dat Gedi'`
+        UNREAD_JIRAFE=`zsh -c '~/scripts/email/check_mailbox.sh ~/accounts.dat Jirafe'`
+    fi
+    if [[ "$UNREAD_JIRAFE" -gt 0 || "$UNREAD_GEDI" -gt 0 ]]; then
+        mailClr="#dc322f"
+    else
+        mailClr=""
+    fi
+    echo -n "^i($DZEN_ICONPATH/mail.xpm)^fg(${mailClr}) ${UNREAD_GEDI}/${UNREAD_JIRAFE} ^fg()"
 
     # use active network interface
     CURR_IFACE=$(_active_network_interface)
@@ -136,18 +170,19 @@ while true; do
         fi
 
         # print out the rates with some nice formatting
-        echo -n "^i($netIcon)^fg(#859900)^fg($rxColor)${RXR} K^p(3)^i($DZEN_ICONPATH/arr_down.xbm)^fg($txColor)${TXR} K^i($DZEN_ICONPATH/arr_up.xbm)^fg() "
+        echo -n "^i($netIcon)^fg($rxColor)${RXR} K^p(3)^i($DZEN_ICONPATH/arr_down.xbm)^fg($txColor)${TXR} K^i($DZEN_ICONPATH/arr_up.xbm)^fg()"
 
         # reset old rates
         RXB=$RXBN; TXB=$TXBN
     else
         # not connected
         netIcon="$DZEN_ICONPATH/net-wired.xbm"
-        echo -n "^i($netIcon) "
+        echo -n "^i($netIcon)"
     fi
     # Arrange and print the status line
-    print "| $TEMP $PBAT $LOAD $MEM | $PGTIME $PDATE"
+    print " $TEMP $PBAT $LOAD $MEM $SOUND | $PGTIME $PDATE"
 
+    MAILCHECK_INTERVAL=$((MAILCHECK_INTERVAL + 1))
     sleep $INTERVAL
 done | dzen2 -x $X -y $Y -w $WIDTH -h $HEIGHT -bg $BG -fg $FG -ta 'r' -fn $FONT -p
 

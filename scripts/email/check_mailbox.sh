@@ -10,8 +10,17 @@ do
     USERNAME=$(echo $line | cut -f2 -d '|')
     PASSWORD=$(echo $line | cut -f3 -d '|')
 
-    COUNT=$(wget -q -O - https://mail.google.com/a/gmail.com/feed/atom --http-user=$USERNAME --http-password="$PASSWORD" --no-check-certificate | grep fullcount | sed 's/<[^0-9]*>//g')
-
+    if [[ $# -eq 1 || "$MAILBOX" == "$2" ]]; then
+        COUNT=$(wget -q -O - https://mail.google.com/a/gmail.com/feed/atom --http-user=$USERNAME --http-password="$PASSWORD" --no-check-certificate | grep fullcount | sed 's/<[^0-9]*>//g')
+        if [[ $# -eq 2 ]]; then
+            # only count requested for specific mailbox
+            if [ -z "$COUNT" ]; then
+                COUNT=0
+            fi
+            echo "$COUNT"
+            exit 0
+        fi
+    fi
     if [ -z "$COUNT" ]; then
         MSG="${MSG}Connection error for $MAILBOX mailbox !\n"
     else
