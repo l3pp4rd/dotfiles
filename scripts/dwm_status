@@ -87,8 +87,8 @@ _cpu_temp() {
 _sound() {
     on=`amixer get Master | awk -F '[' '{print $4}' | grep on | wc -l`
     if [ $on -gt 0 ]; then
-        percent=$(amixer get Master | awk -F '[' '{print $2}' | grep '%' | awk -F ']' '{print $1}')
-        printf "%s ^i($DZEN_ICONPATH/vol-hi.xbm)" "$percent"
+        percent=$(amixer get Master | awk -F '[' '{print $2}' | grep '%' | awk -F '%' '{print $1}')
+        printf "%s ^i($DZEN_ICONPATH/vol-hi.xbm)" "$percent%"
     else
         printf "^i($DZEN_ICONPATH/vol-mute.xbm)"
     fi
