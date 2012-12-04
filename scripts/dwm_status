@@ -135,7 +135,7 @@ while true; do
     else
         mailClr=""
     fi
-    echo -n "^i($DZEN_ICONPATH/mail.xpm)^fg(${mailClr}) ${UNREAD_GEDI}/${UNREAD_JIRAFE} ^fg()"
+    echo -n "^i($DZEN_ICONPATH/mail.xbm)^fg(${mailClr}) ${UNREAD_GEDI}/${UNREAD_JIRAFE} ^fg()"
 
     # use active network interface
     CURR_IFACE=$(_active_network_interface)
