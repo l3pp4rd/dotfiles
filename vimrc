@@ -175,7 +175,7 @@ let feature_filetype = 'behat'
 "au FileType *.html,*.xhtml,*.xml,*.twig ru ftplugin/autoclose_tag.vim
 
 " Command-T fix the arrow keys
-if &term =~ "rxvt-unicode" || &term =~ "xterm"
+if &term =~ "rxvt" || &term =~ "xterm"
   let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
   let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
   let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']

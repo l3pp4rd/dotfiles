@@ -8,13 +8,17 @@ tabs:
   - logs:
       layout: even-horizontal
       panes:
-        - cd ~/php/jirafe/api/app/logs && tail -f dev.log | grep -B 3 ERROR # show also 3 lines before error
-        - cd ~/php/jirafe/api/app/logs && tail -f api.log                   # show api calls
-        - tail -f /var/log/nginx/jirafe-api.error.log                       # nginx error log
-  - assets: cd ~/php/jirafe/api && php app/console jirafe:assets:dump --watch
+          - cd ~/php/jirafe/api/app/logs && tail -f dev.log | grep -B 3 ERROR # show also 3 lines before error
+          - cd ~/php/jirafe/api/app/logs && tail -f api.log                   # show api calls
+          - tail -f /var/log/nginx/jirafe-api.error.log                       # nginx error log
+  - assets:
+      layout: even-horizontal
+      panes:
+          - cd ~/php/jirafe/api && php app/console jirafe:assets:dump --watch
+          - cd ~/php/jirafe/api/assets && compass watch
   - behat:
       layout: even-horizontal
       panes:
-        - cd ~/selenium && java -jar selenium-server-standalone-2.25.0.jar
-        - cd ~/php/jirafe/api
+          - cd ~/selenium && java -jar selenium-server-standalone-2.28.0.jar
+          - cd ~/php/jirafe/api
 
