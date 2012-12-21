@@ -9,6 +9,10 @@ Mainly inspired by [ornicar](https://github.com/ornicar/dotfiles)
 - **git**
 - **zsh**
 
+## Screen
+
+![Screenshot](https://raw.github.com/l3pp4rd/dotfiles/master/screen.png)
+
 ## Installation
 
 If you are tired of bloated desktops like gnome, kde.. whatever, would recommend to try [dwm](http://dwm.suckless.org/)
