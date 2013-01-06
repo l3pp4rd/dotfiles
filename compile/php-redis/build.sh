@@ -12,7 +12,6 @@ cd $D/phpredis
 
 phpize &&
 ./configure &&
-make &&
 sudo make install &&
 echo "extension=redis.so" > $D/phpredis/redis.ini &&
 sudo cp -f $D/phpredis/redis.ini /etc/php/conf.d/redis.ini

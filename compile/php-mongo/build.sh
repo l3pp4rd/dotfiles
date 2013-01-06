@@ -12,7 +12,6 @@ cd $D/phpmongo
 
 phpize &&
 ./configure &&
-make &&
 sudo make install &&
 echo "extension=mongo.so" > $D/phpmongo/mongo.ini &&
 sudo cp -f $D/phpmongo/mongo.ini /etc/php/conf.d/mongo.ini
