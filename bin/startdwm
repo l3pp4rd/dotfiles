@@ -12,7 +12,7 @@ while true; do
     if [ $? -eq 0 ]; then
         exit 0 # means exit clean => quit
     elif [ $? -ne 5 ]; then
-        mv ~/.dwm.log ~/.dwm.failure # a failure occured, save the log
+        mv ~/.dwm.log ~/.dwm.failure.log # a failure occured, save the log, never happened so far
     fi
     # recompile dwm and start again
     $REBUILD_DWM

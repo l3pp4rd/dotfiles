@@ -153,14 +153,11 @@ map <leader>p :-1r !xclip -o -sel clip<CR>
 " CTAGS
 " Rebuild tags
 nmap <leader>ct :!ctags&<cr><cr>
-" Jump to next tag match
-nmap ]t :bd<cr>:tnext<cr>
-" Jump to previous tag match
-nmap [t :bd<cr>:tprevious<cr>
-" testers
+
 " ------------PLUGINS---------------
 
-" ACK
+" ACK, used for silver search aka ag
+let g:ackprg = 'ag --nogroup --nocolor --column'
 nnoremap <leader>a :Ack
 
 " PHP namespace
