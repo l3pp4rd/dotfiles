@@ -5,10 +5,11 @@
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 if [ $# -lt 1 ] ; then
-echo -e "Wrong number of parameters."
-echo -e "Usage:"
-echo -e " build\n 'source' - php source directory, etc.: '~/php/php-5.4'\n"
-exit 1
+    echo -e "Wrong number of parameters."
+    echo -e "Usage:"
+    echo -e " build\n 'source' - php source directory, etc.: '~/php/php-5.4'\n"
+    echo -e " run make install afterwards, or make test first\n"
+    exit 0
 fi
 
 if [ ! -d "$1" ]
@@ -73,8 +74,8 @@ CONF="--prefix=/usr \
     --with-pear \
     --enable-cli \
     --enable-fpm \
-    --with-fpm-user=gedi \
-    --with-fpm-group=users \
+    --with-fpm-user=http \
+    --with-fpm-group=http \
     --disable-debug
 "
 
@@ -86,7 +87,19 @@ export PEAR_INSTALLDIR
 EXTRA_LIBS=-lstdc++
 export EXTRA_LIBS
 
+if [ ! -d "/usr/lib/php/modules" ] ; then
+    sudo mkdir -p /usr/lib/php/modules
+fi
+
+if [ ! -d "/etc/php/conf.d" ] ; then
+    sudo mkdir -p /etc/php/conf.d
+fi
+
+if [ ! -d "/usr/share/pear" ] ; then
+    sudo mkdir -p /usr/share/pear
+fi
+
 cd "$1"
 ./configure ${CONF}
-sudo make install
+make
 

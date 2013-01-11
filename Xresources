@@ -13,7 +13,7 @@ Xft.rgba: rgb
 ! Urxvt {{{
 URxvt.iconFile: /usr/share/icons/AwOken/clear/24x24/apps/terminal.png
 URxvt.font: xft:Inconsolata:size=14
-URxvt*termName: rxvt-unicode-256color
+! URxvt*termName: rxvt-unicode-256color
 
 URxvt.scrollBar: false
 URxvt.jumpScroll: true
@@ -41,4 +41,8 @@ URxvt.perl-ext: default,url-select,clipboard
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: firefox -new-tab
 URxvt.url-select.underline: true
+! }}}
+
+! -- dzen2 {{{
+dzen2.font: xft:Inconsolata:size=24
 ! }}}

@@ -1,7 +1,0 @@
-# ~/.tmuxinator/charon.yml
-
-project_name: charon
-project_root: ~/scala/charon
-tabs:
-  - vim: cd ~/scala/charon && vim
-  - shell: cd ~/scala/charon && ./bin/start
