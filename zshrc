@@ -37,3 +37,6 @@ for zsh_file ($DOTFILES/zsh/*.zsh) source $zsh_file
 # launch x when booted
 [[ $(tty) == /dev/tty1 ]] && startx
 
+# tell me a fortune :)
+fortune | cowsay
+

@@ -1,0 +1,45 @@
+#!/bin/sh
+
+# For ArchLinux environment
+
+DIR="$( cd "$( dirname "$0" )" && pwd )"
+
+if [ $# -lt 1 ] ; then
+    echo -e "Wrong number of parameters."
+    echo -e "Usage:"
+    echo -e " php_switch\n 'to' - php version, like: '5.4.9'\n"
+    exit 0
+fi
+
+VERSION_OK="$(echo "$1" | grep '5.[2-4].*')"
+if [ ! "$VERSION_OK" ]
+then
+    echo "PHP versions supported are only between 5.2.x to 5.4.x"
+    exit 1
+fi
+
+cd "$DIR/../compile/php"
+if [ ! -d "$DIR/../compile/php/php-$1" ]
+then
+    wget "http://lt1.php.net/get/php-${1}.tar.gz/from/this/mirror" -O - | tar zxpf -
+    ./build.sh "php-$1"
+fi
+
+# install php
+./build.sh "php-$1"
+cd "php-$1"
+sudo make install
+
+# build and install mongo extension
+cd ../../php-mongo
+sudo rm -rf phpmongo
+./build.sh
+
+# build and install redis extension
+cd ../php-redis
+sudo rm -rf phpredis
+./build.sh
+
+# restart php-fpm service
+sudo systemctl restart php-fpm
+

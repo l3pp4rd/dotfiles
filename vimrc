@@ -109,8 +109,8 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 " ------ Actions on file types -----
 au FileType helpfile setlocal nonumber
 
-au BufRead,BufNewFile *.html.twig   setlocal filetype=htmldjango
-au BufRead,BufNewFile *.json        setlocal filetype=javascript
+au BufRead,BufNewFile *.html.twig,*.html    setlocal filetype=htmldjango
+au BufRead,BufNewFile *.json                setlocal filetype=javascript
 
 " set tab width to 2
 au BufRead,BufNewFile *.feature,*.css,*.scss,*.js,*.scala,*.yml,*.html,*.twig,*.sql setlocal tabstop=2 shiftwidth=2 softtabstop=2
@@ -148,7 +148,7 @@ nmap <leader>iv :se wig-=*/vendor<CR>:CommandTFlush<CR>
 
 " XClip, sometimes x register just does not work
 vmap <leader>y :!xclip -f -sel clip<CR>
-map <leader>p :-1r !xclip -o -sel clip<CR>
+map <leader>p :r !xclip -o<CR>
 
 " CTAGS
 " Rebuild tags
