@@ -127,10 +127,13 @@ nmap <leader>2 :setlocal tabstop=2<cr>:setlocal shiftwidth=2<cr>:setlocal softta
 nmap <leader>4 :setlocal tabstop=4<cr>:setlocal shiftwidth=4<cr>:setlocal softtabstop=4<cr>
 
 " Toggle line numbering
-nnoremap <silent> <leader>nn :set nonumber!<cr>
+nmap <silent> <leader>nn :set nonumber!<cr>
+
+" Rename current file
+nmap <leader>r :Rename
 
 " Toggle nowrap
-nnoremap <silent> <leader>nw :set nowrap!<cr>
+nmap <silent> <leader>nw :set nowrap!<cr>
 
 " Clear search highlight
 nmap <silent> <leader>/ :let @/=""<cr>
