@@ -159,9 +159,13 @@ nmap <leader>ct :!ctags&<cr><cr>
 
 " ------------PLUGINS---------------
 
+" Nerd tree
+nmap <Leader>lt :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<CR>
+nmap <Leader>ld :let NERDTreeQuitOnOpen = 0<bar>NERDTreeToggle<CR>
+
 " ACK, used for silver search aka ag
 let g:ackprg = 'ag --nogroup --nocolor --column'
-nnoremap <leader>a :Ack
+nmap <leader>a :Ack
 
 " PHP namespace
 map <leader>u :call PhpInsertUse()<cr>
