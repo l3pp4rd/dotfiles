@@ -35,10 +35,27 @@ Install submodules
 
     cd ~/.dotfiles && git submodule update --init
 
+### Command-T
+
 After that, for [command-t](http://github.com/wincent/Command-T) bundle you will need
 to compile a **C** extension.
 
     cd ~/.vim/bundle/command-t/ruby/commant-t
     ruby extconf.rb
     make
+
+### YouCompleteMe
+
+For [awesome autocompletion](https://github.com/Valloric/YouCompleteMe) bundle you will need to compile **C++** ycm
+package in order to get the match lookup fast.
+
+For archlinux steps are simple:
+
+    cd ~/.vim/bundle/you-complete-me/cpp
+    cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON
+    make ycm_core
+    rm compile_commands.json
+
+You will need **cmake, clang** packages additionaly here. Otherwise read [installation
+docs](http://valloric.github.com/YouCompleteMe/) carefully.
 
