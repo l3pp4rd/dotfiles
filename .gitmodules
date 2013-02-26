@@ -88,3 +88,6 @@
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
+[submodule "vim/bundle/you-complete-me"]
+	path = vim/bundle/you-complete-me
+	url = git://github.com/Valloric/YouCompleteMe.git

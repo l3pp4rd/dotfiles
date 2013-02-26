@@ -3,4 +3,5 @@ vim/tmp/*
 vim/.netrwhist
 bin/dwm
 man
+tags
 .vimrc.local
