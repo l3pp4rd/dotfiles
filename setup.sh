@@ -15,10 +15,13 @@ link()
     ln -s $1 $2
 }
 
+if [ !-d "$HOME/.config" ]; then
+    mkdir "$HOME/.config"
+fi
+
 link "$D/scripts" "$HOME/scripts"
 link "$D/vim" "$HOME/.vim"
 link "$D/vimrc" "$HOME/.vimrc"
-link "$D/gitconfig" "$HOME/.gitconfig"
 link "$D/zshrc" "$HOME/.zshrc"
 link "$D/ctags" "$HOME/.ctags"
 link "$D/Xresources" "$HOME/.Xresources"

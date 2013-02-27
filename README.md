@@ -21,12 +21,21 @@ Clone the repository:
 
     clone git://github.com/l3pp4rd/dotfiles.git ~/.dotfiles
 
+### ViM
+
+If you do not have latest **ViM** with ruby support and all patches. You can use a shell script to install it.
+Note: you will need GCC and all that build stuff to compile it.
+
+    ./.dotfiles/compile/vim/build.sh
+
+### Zsh
+
 If you do not use **zsh** ignore the .zshrc installation, otherwise you could try to use it instead
 of bash - install **zsh** first and use it as your default shell by running:
 
     chsh -s $(which zsh)
 
-**NOTE:** setup.sh will replace vim git configs in home directory
+**NOTE:** setup.sh will replace vim configs in home directory
 Execute the setup script:
 
     ./.dotfiles/setup.sh
@@ -40,7 +49,7 @@ Install submodules
 After that, for [command-t](http://github.com/wincent/Command-T) bundle you will need
 to compile a **C** extension.
 
-    cd ~/.vim/bundle/command-t/ruby/commant-t
+    cd ~/.vim/bundle/command-t/ruby/command-t
     ruby extconf.rb
     make
 
@@ -50,12 +59,12 @@ For [awesome autocompletion](https://github.com/Valloric/YouCompleteMe) bundle y
 package in order to get the match lookup fast.
 
 For archlinux steps are simple:
+You will need **cmake, clang** packages additionaly here.
 
     cd ~/.vim/bundle/you-complete-me/cpp
     cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON
     make ycm_core
     rm compile_commands.json
 
-You will need **cmake, clang** packages additionaly here. Otherwise read [installation
-docs](http://valloric.github.com/YouCompleteMe/) carefully.
+Otherwise read [installation docs](http://valloric.github.com/YouCompleteMe/) carefully.
 

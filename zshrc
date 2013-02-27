@@ -38,5 +38,8 @@ for zsh_file ($DOTFILES/zsh/*.zsh) source $zsh_file
 [[ $(tty) == /dev/tty1 ]] && startx
 
 # tell me a fortune :)
-fortune | cowsay
-
+NAF=`which furtune | grep "not found" | wc -l`
+NAC=`which cowsay | grep "not found" | wc -l`
+if [ $NAF -eq 1 && $NAC -eq 1 ]; then
+    fortune | cowsay
+fi

@@ -21,12 +21,11 @@ stty -ixon -ixoff
 # Add dircolors
 eval $(dircolors $DOTFILES/zsh/dircolors-solarized/dircolors.ansi-dark)
 
-# Remember ssh key authentication
-eval `keychain --eval --agents ssh --nogui -Q -q id_rsa`
+# Remember ssh key authentication, check for availability first
+NA=`which keychain | grep "not found" | wc -l`
+if [ $NA -eq 1 ]; then
+    eval `keychain --eval --agents ssh --nogui -Q -q id_rsa`
+fi
 
 export EDITOR=vim
-
-export LANGUAGE=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
 
