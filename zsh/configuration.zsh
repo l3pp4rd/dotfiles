@@ -22,8 +22,7 @@ stty -ixon -ixoff
 eval $(dircolors $DOTFILES/zsh/dircolors-solarized/dircolors.ansi-dark)
 
 # Remember ssh key authentication, check for availability first
-NA=`which keychain | grep "not found" | wc -l`
-if [ $NA -eq 1 ]; then
+if [ `which keychain | grep "not found" | wc -l` -eq 0 ]; then
     eval `keychain --eval --agents ssh --nogui -Q -q id_rsa`
 fi
 
