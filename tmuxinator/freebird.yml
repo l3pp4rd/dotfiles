@@ -1,6 +1,0 @@
-project_name: freebird
-project_root: /home/gedi/php/testing/freebird
-tabs:
-  - vim: cd ~/php/testing/freebird && vim
-  - shell: cd ~/php/testing/freebird
-

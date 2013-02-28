@@ -1,9 +1,0 @@
-# ~/.tmuxinator/php-client.yml
-
-project_name: php-client
-project_root: ~/php/testing/php-client
-tabs:
-  - vim: cd ~/php/testing/php-client && vim
-  - shell: cd ~/php/testing/php-client
-  - tests: cd ~/php/testing/php-client
-

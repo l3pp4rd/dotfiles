@@ -1,0 +1,23 @@
+
+project_name: blog
+project_root: ~/php/blog
+tabs:
+    - vim: cd ~/php/blog && vim
+    - shell: cd ~/php/blog
+    - demo: cd ~/php/demo
+    - behat:
+        layout: even-horizontal
+        panes:
+            - cd ~/selenium && java -jar selenium-server-standalone-2.29.0.jar
+            - cd ~/php/blog
+    - logs:
+        layout: even-horizontal
+        panes:
+            - cd ~/php/demo/app/logs && tail -f prod.log | grep -B 3 ERROR # show also 3 lines before error
+            - cd ~/php/blog/tmp/logs && tail -f app.log # main blog log
+            - tail -f /var/log/nginx/blog.error.log # nginx error log
+    - assets:
+        layout: even-horizontal
+        panes:
+            - cd ~/php/blog && php bin/console assets:dump --watch
+
