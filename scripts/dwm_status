@@ -21,7 +21,7 @@ fdate() {
 }
 
 fgtime() {
-    print -n "NY:" $(TZ='America/New_York' date +'%H:%M')
+    print -n "AU:" $(TZ='Australia/Sydney' date +'%H:%M')
 }
 
 
@@ -112,7 +112,6 @@ TXB=`cat /sys/class/net/${CURR_IFACE}/statistics/tx_bytes`
 
 # will check and update unread count every minute
 UNREAD_GEDI=0
-UNREAD_JIRAFE=0
 MAILCHECK_INTERVAL=60
 
 while true; do
@@ -128,14 +127,13 @@ while true; do
     if [ "$MAILCHECK_INTERVAL" -gt 60 ]; then
         MAILCHECK_INTERVAL=0
         UNREAD_GEDI=`zsh -c '~/scripts/email/check_mailbox.sh ~/accounts.dat Gedi'`
-        UNREAD_JIRAFE=`zsh -c '~/scripts/email/check_mailbox.sh ~/accounts.dat Jirafe'`
     fi
-    if [[ "$UNREAD_JIRAFE" -gt 0 || "$UNREAD_GEDI" -gt 0 ]]; then
+    if [[ "$UNREAD_GEDI" -gt 0 ]]; then
         mailClr="#dc322f"
     else
         mailClr=""
     fi
-    echo -n "^i($DZEN_ICONPATH/mail.xbm)^fg(${mailClr}) ${UNREAD_GEDI}/${UNREAD_JIRAFE} ^fg()"
+    echo -n "^i($DZEN_ICONPATH/mail.xbm)^fg(${mailClr}) ${UNREAD_GEDI} ^fg()"
 
     # use active network interface
     CURR_IFACE=$(_active_network_interface)

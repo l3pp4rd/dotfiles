@@ -8,7 +8,7 @@ tabs:
     - behat:
         layout: even-horizontal
         panes:
-            - cd ~/selenium && java -jar selenium-server-standalone-2.29.0.jar
+            - cd ~/selenium && java -jar selenium-server-standalone-2.31.0.jar
             - cd ~/php/blog
     - logs:
         layout: even-horizontal
