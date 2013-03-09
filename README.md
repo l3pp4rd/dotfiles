@@ -1,7 +1,9 @@
-## About
+# About my dotfiles
 
 My .dotfiles **ViM, DWM, zsh** and I use **ArchLinux** as my linux distribution
-Mainly inspired by [ornicar](https://github.com/ornicar/dotfiles)
+Mainly inspired by [ornicar](https://github.com/ornicar/dotfiles). For all my programs and shell I use [solarized
+colors](http://ethanschoonover.com/solarized). There are some other scripts for convenience, like
+unread gmail checks, dzen2 status bar shell script and maby other scripts which might not be needed for others at all.
 
 ## Requirements
 
@@ -24,7 +26,7 @@ Clone the repository:
 ### ViM
 
 If you do not have latest **ViM** with ruby support and all patches. You can use a shell script to install it.
-Note: you will need GCC and all that build stuff to compile it.
+**Note:** you will need GCC and all that build stuff to compile it.
 
     ./.dotfiles/compile/vim/build.sh
 
@@ -35,14 +37,14 @@ of bash - install **zsh** first and use it as your default shell by running:
 
     chsh -s $(which zsh)
 
+Install submodules
+
+    cd ~/.dotfiles && git submodule update --init
+
 **NOTE:** setup.sh will replace vim configs in home directory
 Execute the setup script:
 
     ./.dotfiles/setup.sh
-
-Install submodules
-
-    cd ~/.dotfiles && git submodule update --init
 
 ### Command-T
 
