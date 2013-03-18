@@ -55,18 +55,3 @@ to compile a **C** extension.
     ruby extconf.rb
     make
 
-### YouCompleteMe
-
-For [awesome autocompletion](https://github.com/Valloric/YouCompleteMe) bundle you will need to compile **C++** ycm
-package in order to get the match lookup fast.
-
-For archlinux steps are simple:
-You will need **cmake, clang** packages additionaly here.
-
-    cd ~/.vim/bundle/you-complete-me/cpp
-    cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON
-    make ycm_core
-    rm compile_commands.json
-
-Otherwise read [installation docs](http://valloric.github.com/YouCompleteMe/) carefully.
-

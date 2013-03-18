@@ -172,10 +172,6 @@ map <leader>u :call PhpInsertUse()<cr>
 
 " Snipmate
 let g:snips_author = 'Gediminas Morkevicius <gediminas.morkevicius@gmail.com>'
-let g:snips_trigger_key = '<C-j>'
-
-" Behat
-let feature_filetype = 'behat'
 
 "au FileType *.html,*.xhtml,*.xml,*.twig ru ftplugin/autoclose_tag.vim
 
