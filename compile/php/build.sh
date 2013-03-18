@@ -4,18 +4,21 @@
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-if [ $# -lt 1 ] ; then
-    echo -e "Wrong number of parameters."
-    echo -e "Usage:"
-    echo -e " build\n 'source' - php source directory, etc.: '~/php/php-5.4'\n"
-    echo -e " run make install afterwards, or make test first\n"
-    exit 0
+if [[ $# -lt 1 ]] || [[ "$1" == "?" ]] || [[ "$1" == "--help" ]] ||  [[ "$1" == "-h" ]]
+then
+    echo -e "Usage: build \033[33msource_dir\033[0m \033[32m[options]\033[0m"
+    echo -e "  Arguments:"
+    echo -e "    \033[33msource_dir\033[0m     php source directory, example: '~/php/php-5.4'"
+    echo -e "  Options:"
+    echo -e "    \033[32m--debug\033[0m        build with debug enabled"
+    echo -e "\n  When finished, run make install afterwards, or make test first"
+    exit 1
 fi
 
 if [ ! -d "$1" ]
 then
     echo "Php source is not a valid directory"
-    exit 1
+    exit 2
 fi
 
 CONF="--prefix=/usr \
@@ -74,10 +77,21 @@ CONF="--prefix=/usr \
     --with-pear \
     --enable-cli \
     --enable-fpm \
-    --with-fpm-user=http \
-    --with-fpm-group=http \
+    --with-fpm-user=gedi \
+    --with-fpm-group=users \
+"
+
+if [[ $# -gt 1 && "$2" == "--debug" ]]
+then
+    CONF="$CONF \
+    --enable-debug \
+    --enable-maintainer-zts
+"
+else
+    CONF="$CONF \
     --disable-debug
 "
+fi
 
 EXTENSION_DIR=/usr/lib/php/modules
 export EXTENSION_DIR
@@ -100,6 +114,26 @@ if [ ! -d "/usr/share/pear" ] ; then
 fi
 
 cd "$1"
+
+NA=`grep "pcre_info" ext/pcre/php_pcre.c | wc -l`
+
+# patch for older pcre based php versions
+if [ $NA -gt 0 ]; then
+    # recent pcre lib from version 8.30 does not support "pcre_info" anymore
+    sed 's/pcre_info/pcre_fullinfo/g' ext/pcre/php_pcre.c > temp
+    mv temp ext/pcre/php_pcre.c
+    sed 's/pcre_fullinfo(pce->re, NULL, NULL)/pcre_fullinfo\(pce->re, NULL, PCRE_INFO_CAPTURECOUNT, \&count\)/g' ext/pcre/php_pcre.c > temp
+    mv temp ext/pcre/php_pcre.c
+    sed 's/unsigned const char \*tables/int count = 0;unsigned const char \*tables/g' ext/pcre/php_pcre.c > temp
+    mv temp ext/pcre/php_pcre.c
+    sed 's/pcre_info/pcre_fullinfo/g' ext/pcre/pcrelib/pcre.h > temp
+    mv temp ext/pcre/pcrelib/pcre.h
+    sed 's/pcre_info/pcre_fullinfo/g' ext/pcre/pcrelib/pcreposix.c > temp
+    mv temp ext/pcre/pcrelib/pcreposix.c
+    sed 's/pcre_info/pcre_fullinfo/g' ext/pcre/pcrelib/pcre_info.c > temp
+    mv temp ext/pcre/pcrelib/pcre_info.c
+fi
+
 ./configure ${CONF}
 make
 

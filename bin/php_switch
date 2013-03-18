@@ -4,11 +4,14 @@
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-if [ $# -lt 1 ] ; then
-    echo -e "Wrong number of parameters."
-    echo -e "Usage:"
-    echo -e " php_switch\n 'to' - php version, like: '5.4.9'\n"
-    exit 0
+if [[ $# -lt 1 ]] || [[ "$1" == "?" ]] || [[ "$1" == "--help" ]] ||  [[ "$1" == "-h" ]]
+then
+    echo -e "Usage: php_switch version [options]"
+    echo -e "  Arguments:"
+    echo -e "    version        php version, like: '5.4.9'"
+    echo -e "  Options:"
+    echo -e "    --debug        build with debug enabled"
+    exit 1
 fi
 
 VERSION_OK="$(echo "$1" | grep '5.[2-4].*')"
@@ -18,11 +21,17 @@ then
     exit 1
 fi
 
+CMD_ARGS="php-$1"
+if [[ $# -gt 1 && "$2" == "--debug" ]]
+then
+    CMD_ARGS="$CMD_ARGS --debug"
+fi
+
 cd "$DIR/../compile/php"
 if [ ! -d "$DIR/../compile/php/php-$1" ]
 then
     wget "http://lt1.php.net/get/php-${1}.tar.gz/from/this/mirror" -O - | tar zxpf -
-    ./build.sh "php-$1"
+    ./build.sh $CMD_ARGS
 fi
 
 # install php

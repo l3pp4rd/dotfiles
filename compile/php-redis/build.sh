@@ -8,7 +8,7 @@ if [ -d "$D/phpredis" ]; then
 fi
 
 NA=`which git | grep "not found" | wc -l`
-if [ $NA -eq 0 ]; then
+if [ $NA -eq 1 ]; then
     echo "Install git version control"
     exit 1
 fi

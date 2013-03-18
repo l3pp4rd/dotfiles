@@ -16,3 +16,7 @@ alias grep="ag"
 alias jirafe-freebird="ssh -A jirafe-freebird -t tmux attach"
 alias gediminasm="ssh -A gediminasm -t tmux attach"
 
+# systemd system messages
+alias sys-log-now="sudo journalctl -f"
+alias sys-log-boot="sudo journalctl -b"
+alias sys-log-last-boot="sudo journalctl --since=today | tac | sed -n '/-- Reboot --/{n;:r;/-- Reboot --/q;p;n;b r}' | tac"
