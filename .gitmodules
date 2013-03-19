@@ -7,18 +7,12 @@
 [submodule "vim/bundle/fugitive"]
 	path = vim/bundle/fugitive
 	url = git://github.com/tpope/vim-fugitive.git
-[submodule "vim/bundle/surround"]
-	path = vim/bundle/surround
-	url = git://github.com/tpope/vim-surround.git
 [submodule "vim/bundle/lusty"]
 	path = vim/bundle/lusty
 	url = git://github.com/sjbach/lusty.git
 [submodule "vim/bundle/powerline"]
 	path = vim/bundle/powerline
 	url = git://github.com/Lokaltog/vim-powerline.git
-[submodule "vim/bundle/abolish"]
-	path = vim/bundle/abolish
-	url = git://github.com/tpope/vim-abolish.git
 [submodule "vim/bundle/php-namespace"]
 	path = vim/bundle/php-namespace
 	url = git://github.com/arnaud-lb/vim-php-namespace.git
@@ -28,24 +22,12 @@
 [submodule "vim/bundle/command-t"]
 	path = vim/bundle/command-t
 	url = git://git.wincent.com/command-t.git
-[submodule "vim/bundle/js"]
-	path = vim/bundle/js
-	url = git://github.com/pangloss/vim-javascript.git
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
-[submodule "vim/bundle/matrix"]
-	path = vim/bundle/matrix
-	url = git://github.com/vim-scripts/matrix.vim--Yang.git
 [submodule "vim/bundle/go"]
 	path = vim/bundle/go
 	url = git://github.com/jnwhiteh/vim-golang.git
-[submodule "vim/bundle/scala"]
-	path = vim/bundle/scala
-	url = git://github.com/ornicar/vim-scala.git
-[submodule "vim/bundle/play2"]
-	path = vim/bundle/play2
-	url = git://github.com/gre/play2vim.git
 [submodule "vim/bundle/solarized"]
 	path = vim/bundle/solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
@@ -58,9 +40,6 @@
 [submodule "vim/bundle/delimit-mate"]
 	path = vim/bundle/delimit-mate
 	url = git://github.com/Raimondi/delimitMate.git
-[submodule "vim/bundle/vim2hs"]
-	path = vim/bundle/vim2hs
-	url = git://github.com/dag/vim2hs.git
 [submodule "vim/bundle/commentary"]
 	path = vim/bundle/commentary
 	url = git://github.com/tpope/vim-commentary.git
