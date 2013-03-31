@@ -10,9 +10,6 @@
 [submodule "vim/bundle/lusty"]
 	path = vim/bundle/lusty
 	url = git://github.com/sjbach/lusty.git
-[submodule "vim/bundle/powerline"]
-	path = vim/bundle/powerline
-	url = git://github.com/Lokaltog/vim-powerline.git
 [submodule "vim/bundle/php-namespace"]
 	path = vim/bundle/php-namespace
 	url = git://github.com/arnaud-lb/vim-php-namespace.git
