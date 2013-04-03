@@ -15,6 +15,7 @@ fi
 
 $(git clone git://github.com/mongodb/mongo-php-driver.git ${D}/phpmongo)
 cd $D/phpmongo
+git checkout 1.3.6
 
 phpize &&
 ./configure &&

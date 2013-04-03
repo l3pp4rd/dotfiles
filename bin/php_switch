@@ -41,12 +41,10 @@ sudo make install
 
 # build and install mongo extension
 cd ../../php-mongo
-sudo rm -rf phpmongo
 ./build.sh
 
 # build and install redis extension
 cd ../php-redis
-sudo rm -rf phpredis
 ./build.sh
 
 # restart php-fpm service

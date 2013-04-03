@@ -21,14 +21,18 @@ then
     exit 2
 fi
 
-CONF="--prefix=/usr \
+PHP_CONF="--config-cache \
+    --prefix=/usr \
+    --sysconfdir=/etc/php \
     --localstatedir=/var \
     --with-layout=GNU \
-    --sysconfdir=/etc/php \
     --with-config-file-path=/etc/php \
     --with-config-file-scan-dir=/etc/php/conf.d \
+    --disable-rpath \
     --mandir=/usr/share/man \
-    --enable-calendar \
+"
+
+EXT_CONF="--enable-calendar \
     --enable-exif \
     --enable-ftp \
     --enable-mbstring \
@@ -72,24 +76,18 @@ CONF="--prefix=/usr \
     --with-pdo-sqlite=/usr \
     --with-tidy=/usr \
     --with-xmlrpc \
-    --with-xsl=/usr \
-    --enable-pcntl \
-    --with-pear \
-    --enable-cli \
-    --enable-fpm \
-    --with-fpm-user=gedi \
-    --with-fpm-group=users \
+    --with-xsl=/usr
 "
 
 if [[ $# -gt 1 && "$2" == "--debug" ]]
 then
-    CONF="$CONF \
+    PHP_CONF="$PHP_CONF \
     --enable-debug \
-    --enable-maintainer-zts
+    --enable-maintainer-zts \
 "
 else
-    CONF="$CONF \
-    --disable-debug
+    PHP_CONF="$PHP_CONF \
+    --disable-debug \
 "
 fi
 
@@ -134,6 +132,15 @@ if [ $NA -gt 0 ]; then
     mv temp ext/pcre/pcrelib/pcre_info.c
 fi
 
-./configure ${CONF}
+./configure ${PHP_CONF} \
+    --disable-cgi \
+    --with-readline \
+    --enable-pcntl \
+    --enable-cli \
+    --with-pear \
+    --enable-fpm \
+    --with-fpm-user=gedi \
+    --with-fpm-group=users \
+    ${EXT_CONF}
 make
 
