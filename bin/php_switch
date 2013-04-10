@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # For ArchLinux environment
+# NOTE: other extensions and "pear" should be installed manually
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
@@ -10,7 +11,7 @@ then
     echo -e "  Arguments:"
     echo -e "    version        php version, like: '5.4.9'"
     echo -e "  Options:"
-    echo -e "    --debug        build with debug enabled"
+    echo -e "    --debug        build with debug enabled" # for extension development
     exit 1
 fi
 
@@ -19,6 +20,11 @@ if [ ! "$VERSION_OK" ]
 then
     echo "PHP versions supported are only between 5.2.x to 5.4.x"
     exit 1
+fi
+
+if [[ `which php | grep "not found" | wc -l` -eq 0 && `php --version | grep "$1" | wc -l` -eq 1 ]]; then
+    # version is the same as installed
+    exit 0
 fi
 
 CMD_ARGS="php-$1"
@@ -35,8 +41,8 @@ then
 fi
 
 # install php
-./build.sh "php-$1"
 cd "php-$1"
+sudo systemctl stop php-fpm
 sudo make install
 
 # build and install mongo extension
@@ -47,6 +53,6 @@ cd ../../php-mongo
 cd ../php-redis
 ./build.sh
 
-# restart php-fpm service
-sudo systemctl restart php-fpm
+# start php-fpm service
+sudo systemctl start php-fpm
 

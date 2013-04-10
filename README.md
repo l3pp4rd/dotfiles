@@ -17,8 +17,6 @@ unread gmail checks, dzen2 status bar shell script and maby other scripts which 
 
 ## Installation
 
-If you are tired of bloated desktops like gnome, kde.. whatever, would recommend to try [dwm](http://dwm.suckless.org/)
-
 Clone the repository:
 
     clone git://github.com/l3pp4rd/dotfiles.git ~/.dotfiles
@@ -54,4 +52,11 @@ to compile a **C** extension.
     cd ~/.vim/bundle/command-t/ruby/command-t
     ruby extconf.rb
     make
+
+## Window Manager
+
+If you are tired of bloated desktops like gnome, kde.. whatever, would recommend to try [dwm](http://dwm.suckless.org/)
+
+**NOTE:** if you use my **~/.dotfiles/bin/startdwm** to start a window manager it most probably will not work with login
+managers if you chose it as executable to run on successful login.
 
