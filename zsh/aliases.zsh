@@ -6,8 +6,10 @@ alias start="sudo systemctl start"
 alias restart="sudo systemctl restart"
 alias stop="sudo systemctl stop"
 
-# use ag instead of grep (much more faster)
-alias grep="ag"
+# if available use silver searcher instead of grep (much more faster)
+if [ `which ag | grep "not found" | wc -l` -eq 0 ]; then
+    alias grep="ag"
+fi
 
 # ssh servers
 alias jirafe-freebird="ssh -A jirafe-freebird -t tmux attach"
