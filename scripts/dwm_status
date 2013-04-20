@@ -15,7 +15,7 @@ INTERVAL=1
 
 # Functions
 fdate() {
-    icon="^i($DZEN_ICONPATH/clock.xpm)"
+    icon="^i($DZEN_ICONPATH/clock2.xbm)"
     today=$(date +$DATE_FORMAT)
     printf "^fg(white)%s %s^fg()" "$icon" "$today"
 }
@@ -24,6 +24,11 @@ fgtime() {
     print -n "AU:" $(TZ='Australia/Sydney' date +'%H:%M')
 }
 
+_kb_layout() {
+    layout=`setxkbmap -print | awk -F"+" '/xkb_symbols/ {print $2}'`
+    layout=`echo $layout | tr '[a-z]' '[A-Z]'`
+    printf "^fg(white)%s^fg()" "$layout"
+}
 
 # BATTERY
 fbattery() {
@@ -122,6 +127,7 @@ while true; do
     MEM=$(fmem)
     TEMP=$(_cpu_temp)
     SOUND=$(_sound)
+    KB_LAYOUT=$(_kb_layout)
 
     # mailbox info
     if [ "$MAILCHECK_INTERVAL" -gt 60 ]; then
@@ -133,7 +139,7 @@ while true; do
     else
         mailClr=""
     fi
-    echo -n "^i($DZEN_ICONPATH/mail.xbm)^fg(${mailClr}) ${UNREAD_GEDI} ^fg()"
+    echo -n "$KB_LAYOUT ^i($DZEN_ICONPATH/mail.xbm)^fg(${mailClr}) ${UNREAD_GEDI} ^fg()"
 
     # use active network interface
     CURR_IFACE=$(_active_network_interface)

@@ -9,6 +9,7 @@ feh --bg-scale $BG_IMG &        # set the background wallpaper
 urxvtd -q -f -o &               # start the rxvt daemon
 xsetroot -name "" &             # we have dzen2 status bar, set main WM window title to none
 mpd &                           # start music player daemon
+devmon &                        # automount removable devices
 thunar --daemon &               # start file manager daemon yo hook usb devices
 
 # start apps
