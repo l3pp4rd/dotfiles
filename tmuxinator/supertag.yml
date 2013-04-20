@@ -1,0 +1,16 @@
+project_name: supertag
+project_root: ~/php/supertag
+tabs:
+    - vim: cd ~/php/supertag/tms && vim
+    - shell: cd ~/php/supertag/tms
+    - js: cd ~/php/supertag/supertjs
+    - logs:
+        layout: even-horizontal
+        panes:
+            - cd ~/php/supertag/tms/app/logs && tail -f app_dev.log | grep -B 3 ERROR # show also 3 lines before error
+            - tail -f /var/log/nginx/tms.error.log # nginx error log
+    - daemons:
+        layout: even-horizontal
+        panes:
+            - cd ~/php/supertag/tms && php app/console assetic:dump --watch
+
