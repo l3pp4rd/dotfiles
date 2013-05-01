@@ -54,12 +54,12 @@
     prepare = rebase -i @{u}
 
     # nice format for a commit history log
-    hist = log --graph --pretty="format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %C()%s %C(blue) [%an]%Creset'" --abbrev-commit --date=relative
+    hist = log --graph --pretty="format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %C(blue)[%an]%Creset" --abbrev-commit --date=relative
 
     # show list of contributors in descending order by number of commits
     rank = shortlog -sn --no-merges
 
     # log formats
     changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
-    changelog = log --pretty=format:\" * %s\"
+    changelog = log --graph --pretty=format:\"%Cred%h%Creset - %s %C(blue)[%an]%Creset\"
 
