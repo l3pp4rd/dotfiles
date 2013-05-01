@@ -5,10 +5,10 @@ DATE_FORMAT='%a %d %b %H:%M'
 DZEN_ICONPATH=$HOME/.dotfiles/xbm
 BG='#073642'
 FG='#839496'
-X=800
+X=780
 Y=0
 HEIGHT=20
-WIDTH=690
+WIDTH=710
 FONT='InconsolataSansMono:size=11'
 # Main loop interval in seconds
 INTERVAL=1
