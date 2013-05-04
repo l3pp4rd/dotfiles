@@ -32,4 +32,5 @@ link "$D/tmuxinator" "$HOME/.tmuxinator"
 link "$D/mpd" "$HOME/.mpd"
 link "$D/ranger" "$HOME/.config/ranger"
 link "$D/gemrc" "$HOME/.gemrc"
+link "$D/tigrc" "$HOME/.tigrc"
 

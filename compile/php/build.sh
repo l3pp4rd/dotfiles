@@ -60,7 +60,7 @@ EXT_CONF="--enable-calendar \
     --with-mcrypt=/usr \
     --with-mhash \
     --with-mysql-sock=/var/run/mysqld/mysqld.sock \
-    --with-mysql=/usr \
+    --with-mysql=mysqlnd \
     --with-mysqli=mysqlnd \
     --with-openssl \
     --with-openssl-dir=/usr/bin \
@@ -130,6 +130,10 @@ if [ $NA -gt 0 ]; then
     mv temp ext/pcre/pcrelib/pcreposix.c
     sed 's/pcre_info/pcre_fullinfo/g' ext/pcre/pcrelib/pcre_info.c > temp
     mv temp ext/pcre/pcrelib/pcre_info.c
+fi
+
+if [ ! -f "$DIR/configure" ]; then
+    ./buildconf --force # build configure, not included in git versions
 fi
 
 ./configure ${PHP_CONF} \
