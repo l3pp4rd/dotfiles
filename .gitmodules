@@ -73,3 +73,6 @@
 [submodule "vim/bundle/tlib"]
 	path = vim/bundle/tlib
 	url = git://github.com/tomtom/tlib_vim.git
+[submodule "vim/bundle/autotag"]
+	path = vim/bundle/autotag
+	url = git://github.com/vim-scripts/AutoTag.git
