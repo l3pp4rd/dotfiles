@@ -27,6 +27,12 @@ for zsh_file ($DOTFILES/zsh/*.zsh) source $zsh_file
         source $DOTFILES/zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
         # Add history substring search
         source $DOTFILES/zsh/history-substring-search/zsh-history-substring-search.zsh
+        # bind UP and DOWN arrow keys
+        for keycode in '[' '0'; do
+          bindkey "^[${keycode}A" history-substring-search-up
+          bindkey "^[${keycode}B" history-substring-search-down
+        done
+        unset keycode
     # }
 # }
 
