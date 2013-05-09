@@ -1,6 +1,5 @@
 # human friendly output
 alias df="df -h"
-alias ls="ls -Gh"
 alias du="du -h -d 2"
 
 # archlinux services

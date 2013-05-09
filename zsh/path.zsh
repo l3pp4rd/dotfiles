@@ -1,22 +1,19 @@
 #!/usr/bin/env zsh
 
+# making sure all system bin dirs are exported
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+
+# bin dir at home
 if [ -d "$HOME/bin" ]; then
     export PATH=$PATH:$HOME/bin
 fi
+
 # go
 if [ -d "$HOME/go" ]; then
-    export GOPATH=$HOME/go
-fi
-# scala
-if [ -d "$HOME/scala/play" ]; then
-    export PATH=$PATH:$HOME/scala/play
-fi
-
-# perl stuff
-if [ -d "/usr/bin/vendor_perl" ]; then
-    export PATH=$PATH:/usr/bin/core_perl
-    export PATH=$PATH:/usr/bin/vendor_perl
+    export GOPATH=$HOME/go # this one for 3rd party
+    if [ -d "$HOME/golang" ]; then
+        export GOPATH=$GOPATH:$HOME/golang # this one for local development
+    fi
 fi
 
 # bin of dotfiles
