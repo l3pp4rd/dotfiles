@@ -8,11 +8,15 @@ if [ -d "$HOME/bin" ]; then
     export PATH=$PATH:$HOME/bin
 fi
 
-# go
+# golang
 if [ -d "$HOME/go" ]; then
     export GOPATH=$HOME/go # this one for 3rd party
     if [ -d "$HOME/golang" ]; then
         export GOPATH=$GOPATH:$HOME/golang # this one for local development
+    fi
+    if [ -d "$HOME/go/bin" ]; then
+        export GOBIN=$HOME/go/bin # google binary path
+        export PATH=$PATH:$GOBIN # export in path as well
     fi
 fi
 
