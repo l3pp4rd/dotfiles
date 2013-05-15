@@ -23,3 +23,8 @@ fi
 # bin of dotfiles
 export PATH=$PATH:$HOME/.dotfiles/bin
 
+# ruby rvm
+if [ -d "$HOME/.rvm" ]; then
+    export PATH=$PATH:$HOME/.rvm/bin
+    source $HOME/.rvm/scripts/rvm
+fi
