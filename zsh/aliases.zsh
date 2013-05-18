@@ -8,9 +8,7 @@ alias restart="sudo systemctl restart"
 alias stop="sudo systemctl stop"
 
 # if available use silver searcher instead of grep (much more faster)
-if [ `which ag | grep "not found" | wc -l` -eq 0 ]; then
-    alias grep="ag"
-fi
+has_executable "ag" && alias grep="ag"
 
 # ssh servers
 alias gediminasm="ssh -A gediminasm -t tmux attach"

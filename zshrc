@@ -7,6 +7,12 @@
 DOTFILES=$HOME/.dotfiles
 OHMYZSH=$DOTFILES/oh-my-zsh
 
+# helper method
+has_executable() {
+    TMP=`which $1 2> /dev/null`
+    [ $? -eq 0 ]
+}
+
 # Load all of the config files in oh-my-zsh that end in .zsh
 for config_file ($OHMYZSH/lib/*.zsh) source $config_file
 
@@ -20,7 +26,7 @@ for zsh_file ($DOTFILES/zsh/*.zsh) source $zsh_file
 
 # plugins {
     # from oh-my-zsh {
-        source $OHMYZSH/plugins/archlinux/archlinux.plugin.zsh
+        #source $OHMYZSH/plugins/archlinux/archlinux.plugin.zsh # uncomment if needed
     # }
     # from other vendors {
         # Add fish-like syntax highlighting (must be done before substring search!)
@@ -44,4 +50,5 @@ for zsh_file ($DOTFILES/zsh/*.zsh) source $zsh_file
 [[ $(tty) == /dev/tty1 ]] && startx
 
 # tell me a fortune :)
-if [[ `which fortune | grep "not found" | wc -l` -eq 0 && `which cowsay | grep "not found" | wc -l` -eq 0 ]] fortune | cowsay
+has_executable "fortune" && has_executable "cowsay" && fortune | cowsay
+

@@ -4,6 +4,7 @@ BG_IMG="$HOME/.dotfiles/wallpapers/blue-1920x1080.png"
 
 xrdb -merge $HOME/.Xresources   # custom URxvt configurations and colorization
 
+setxkbmap -option ctrl:nocaps & # disable caps lock
 xbindkeys &                     # extra key mappings
 feh --bg-scale $BG_IMG &        # set the background wallpaper
 urxvtd -q -f -o &               # start the rxvt daemon

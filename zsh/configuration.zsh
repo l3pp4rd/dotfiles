@@ -22,9 +22,7 @@ stty -ixon -ixoff
 eval $(dircolors $DOTFILES/zsh/dircolors-solarized/dircolors.ansi-dark)
 
 # Remember ssh key authentication, check for availability first
-if [ `which keychain | grep "not found" | wc -l` -eq 0 ]; then
-    eval `keychain --eval --agents ssh --nogui -Q -q id_rsa`
-fi
+has_executable "keychain" && eval `keychain --eval --agents ssh --nogui -Q -q id_rsa`
 
 export EDITOR=vim
 
