@@ -32,10 +32,17 @@ PHP_CONF="--config-cache \
     --mandir=/usr/share/man \
 "
 
-EXT_CONF="--enable-calendar \
+MAY_BE_USED="--enable-ftp \
     --enable-exif \
-    --enable-ftp \
-    --enable-mbstring \
+    --enable-calendar \
+    --with-snmp=/usr \
+    --with-pspell \
+    --with-tidy=/usr \
+    --with-xmlrpc \
+    --with-xsl=/usr \
+"
+
+EXT_CONF="--enable-mbstring \
     --enable-mbregex \
     --enable-phar \
     --enable-posix \
@@ -49,7 +56,6 @@ EXT_CONF="--enable-calendar \
     --enable-intl \
     --with-icu-dir=/usr \
     --with-curl=/usr/bin \
-    --with-snmp=/usr \
     --with-gd \
     --with-jpeg-dir=/usr \
     --with-png-dir=shared,/usr \
@@ -59,24 +65,19 @@ EXT_CONF="--enable-calendar \
     --with-iconv-dir=/usr \
     --with-mcrypt=/usr \
     --with-mhash \
-    --with-mysql-sock=/var/run/mysqld/mysqld.sock \
-    --with-mysql=mysqlnd \
-    --with-mysqli=mysqlnd \
-    --with-openssl \
-    --with-openssl-dir=/usr/bin \
     --with-zlib-dir=/usr \
     --with-xpm-dir=/usr \
+    --with-regex=php \
     --with-pcre-regex=/usr \
+    --with-openssl \
+    --with-openssl-dir=/usr/bin \
+    --with-mysql-sock=/var/run/mysqld/mysqld.sock \
+    --with-mysqli=mysqlnd \
+    --with-pgsql=/usr \
+    --with-sqlite3=/usr \
     --with-pdo-mysql=/usr \
     --with-pdo-pgsql=/usr \
-    --with-pgsql=/usr \
-    --with-regex=php \
-    --with-pspell \
-    --with-sqlite3=/usr \
-    --with-pdo-sqlite=/usr \
-    --with-tidy=/usr \
-    --with-xmlrpc \
-    --with-xsl=/usr
+    --with-pdo-sqlite=/usr
 "
 
 if [[ $# -gt 1 && "$2" == "--debug" ]]
