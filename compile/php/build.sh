@@ -72,6 +72,7 @@ EXT_CONF="--enable-mbstring \
     --with-openssl \
     --with-openssl-dir=/usr/bin \
     --with-mysql-sock=/var/run/mysqld/mysqld.sock \
+    --with-mysql=mysqlnd \
     --with-mysqli=mysqlnd \
     --with-pgsql=/usr \
     --with-sqlite3=/usr \
