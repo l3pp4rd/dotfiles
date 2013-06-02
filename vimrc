@@ -204,6 +204,9 @@ set completeopt=menu,menuone,longest
 set pumheight=15
 let g:SuperTabDefaultCompletionType = "context"
 
+" Zencoding
+let g:user_zen_leader_key = '<c-l>'
+
 " -------------FUNCTIONS-------------
 function! <SID>StripTrailingWhitespaces()
     " Preparation save last search, and cursor position.
