@@ -108,6 +108,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 
 " ------ Actions on file types -----
 au FileType helpfile setlocal nonumber
+au FileType php set omnifunc=phpcomplete#CompletePHP " php autocompletion specifics
 
 au BufRead,BufNewFile *.html.twig,*.html    setlocal filetype=htmldjango
 au BufRead,BufNewFile *.js.twig,*.json      setlocal filetype=javascript
@@ -195,6 +196,13 @@ set statusline+=%*
 
 " Alternate
 nnoremap <leader>h :A<cr>
+
+" Supertab
+
+" Complete options (disable preview scratch window)
+set completeopt=menu,menuone,longest
+set pumheight=15
+let g:SuperTabDefaultCompletionType = "context"
 
 " -------------FUNCTIONS-------------
 function! <SID>StripTrailingWhitespaces()

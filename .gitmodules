@@ -76,3 +76,6 @@
 [submodule "vim/bundle/autotag"]
 	path = vim/bundle/autotag
 	url = git://github.com/vim-scripts/AutoTag.git
+[submodule "vim/bundle/phpcomplete"]
+	path = vim/bundle/phpcomplete
+	url = git://github.com/shawncplus/phpcomplete.vim.git
