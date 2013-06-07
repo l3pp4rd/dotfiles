@@ -1,25 +1,32 @@
 #!/bin/sh
 
 # current directory
-D="$( cd "$( dirname "$0" )" && pwd )"
+DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-if [ -d "$D/phpmongo" ]; then
-    rm -rf $D/phpmongo
+if [ -d "$DIR/build" ]; then
+    rm -rf $DIR/build
 fi
 
-NA=`which git | grep "not found" | wc -l`
-if [ $NA -eq 1 ]; then
+has() {
+    TMP=`which $1 2> /dev/null`
+    [ $? -eq 0 ]
+}
+
+has "git" && git clone git://github.com/mongodb/mongo-php-driver.git $DIR/build
+
+if [ ! -d "$DIR/build" ]; then
     echo "Install git version control"
     exit 1
 fi
 
-$(git clone git://github.com/mongodb/mongo-php-driver.git ${D}/phpmongo)
-cd $D/phpmongo
-git checkout 1.3.6
+cd $DIR/build
+
+git checkout 1.4.1
 
 phpize &&
 ./configure &&
 make &&
 sudo make install &&
-echo "extension=mongo.so" > $D/phpmongo/mongo.ini &&
-sudo cp -f $D/phpmongo/mongo.ini /etc/php/conf.d/mongo.ini
+echo "extension=mongo.so" > $DIR/build/mongo.ini &&
+sudo cp -f $DIR/build/mongo.ini /etc/php/conf.d/mongo.ini
+

@@ -1,21 +1,27 @@
 #!/bin/sh
 
 # current directory
-D="$( cd "$( dirname "$0" )" && pwd )"
+DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-if [ -d "$D/vim" ]; then
-    rm -rf $D/vim
+if [ -d "$DIR/build" ]; then
+    rm -rf $DIR/build
 fi
 
-NA=`which hg | grep "not found" | wc -l`
-if [ $NA -eq 0 ]; then
-    echo "Install mercurial version control aka hg"
+has() {
+    TMP=`which $1 2> /dev/null`
+    [ $? -eq 0 ]
+}
+
+has "hg" && hg clone https://vim.googlecode.com/hg/ $DIR/build
+
+if [ ! -d "$DIR/build" ]; then
+    echo "Install mercurial version control"
     exit 1
 fi
 
-$(hg clone https://vim.googlecode.com/hg/ ${D}/vim)
-cd $D/vim
+cd $DIR/build
 
 ./configure --with-features=huge --disable-largefile --enable-perlinterp --enable-rubyinterp --enable-pythoninterp &&
 make &&
 sudo make install
+

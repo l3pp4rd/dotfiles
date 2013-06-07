@@ -23,6 +23,7 @@ fi
 
 PHP_CONF="--config-cache \
     --prefix=/usr \
+    --sbindir=/usr/bin \
     --sysconfdir=/etc/php \
     --localstatedir=/var \
     --with-layout=GNU \

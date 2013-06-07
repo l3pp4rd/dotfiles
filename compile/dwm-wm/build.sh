@@ -3,15 +3,25 @@
 # current directory
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-if [ -d "$DIR/dwm" ]; then
-    rm -rf $DIR/dwm
+if [ -d "$DIR/build" ]; then
+    rm -rf $DIR/build
 fi
 
-# $(hg clone http://hg.suckless.org/dwm ${DIR}/dwm)
-cp -r $HOME/c-dev/dwm $DIR/dwm # just copy local version, later will pull from git
-cd $DIR
+has() {
+    TMP=`which $1 2> /dev/null`
+    [ $? -eq 0 ]
+}
+
+has "git" && git clone git://github.com/l3pp4rd/dwm.git $DIR/build
+
+if [ ! -d "$DIR/build" ]; then
+    echo "Install git version control"
+    exit 1
+fi
+
+cd $DIR/build
 
 # install
-cd dwm
-make clean install
+make
+sudo make install
 

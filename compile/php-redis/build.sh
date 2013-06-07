@@ -1,24 +1,30 @@
 #!/bin/sh
 
 # current directory
-D="$( cd "$( dirname "$0" )" && pwd )"
+DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-if [ -d "$D/phpredis" ]; then
-    rm -rf $D/phpredis
+if [ -d "$DIR/build" ]; then
+    rm -rf $DIR/build
 fi
 
-NA=`which git | grep "not found" | wc -l`
-if [ $NA -eq 1 ]; then
+has() {
+    TMP=`which $1 2> /dev/null`
+    [ $? -eq 0 ]
+}
+
+has "git" && git clone git://github.com/nicolasff/phpredis.git $DIR/build
+
+if [ ! -d "$DIR/build" ]; then
     echo "Install git version control"
     exit 1
 fi
 
-$(git clone git://github.com/nicolasff/phpredis.git ${D}/phpredis)
-cd $D/phpredis
+cd $DIR/build
 
 phpize &&
 ./configure &&
 make &&
 sudo make install &&
-echo "extension=redis.so" > $D/phpredis/redis.ini &&
-sudo cp -f $D/phpredis/redis.ini /etc/php/conf.d/redis.ini
+echo "extension=redis.so" > $DIR/build/redis.ini &&
+sudo cp -f $DIR/build/redis.ini /etc/php/conf.d/redis.ini
+

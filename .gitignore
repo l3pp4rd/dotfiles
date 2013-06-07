@@ -1,7 +1,5 @@
 /vim/tmp/*
 !vim/tmp/.empty
 /vim/.netrwhist
-/bin/dwm
-/man
 /tags
 /.vimrc.local
