@@ -14,5 +14,5 @@ tabs:
         layout: even-horizontal
         panes:
             - cd ~/php/behemoth #&& php bin/console assets:dump --watch
-            - cd ~/php/behemoth #
+            - cd ~/php/behemoth && guard # ruby guard daemon to generate ctags
 
