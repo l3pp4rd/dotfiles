@@ -1,0 +1,18 @@
+
+project_name: behemoth
+project_root: ~/php/behemoth
+tabs:
+    - vim: cd ~/php/behemoth && vim
+    - shell: cd ~/php/behemoth
+    - tests: cd ~/php/behemoth
+    - logs:
+        layout: even-horizontal
+        panes:
+            - tail -f ~/php/behemoth/tmp/logs/app.log # main log
+            - tail -f /var/log/nginx/behemoth.error.log # nginx error log
+    - daemons:
+        layout: even-horizontal
+        panes:
+            - cd ~/php/behemoth #&& php bin/console assets:dump --watch
+            - cd ~/php/behemoth #
+
