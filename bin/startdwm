@@ -1,7 +1,10 @@
 #!/bin/sh
 
 DZEN2_STATUS="$HOME/.dotfiles/scripts/dwm_status"
-REBUILD_DWM="$HOME/.dotfiles/compile/dwm-wm/build.sh"
+
+if [ !-f "$DZEN2_STATUS" ]; then
+    DZEN2_STATUS="echo 'dzen2 status is unavailable' | dzen2 -x 780 -y 0 -w 710 -h 20 -ta 'r' -p"
+fi
 
 while true; do
     (sleep 0.5 && $DZEN2_STATUS) & # run dzen2 status bar, need to make sure wm loads first
@@ -14,8 +17,7 @@ while true; do
     elif [ $? -ne 5 ]; then
         mv ~/.dwm.log ~/.dwm.failure.log # a failure occured, save the log, never happened so far
     fi
-    # recompile dwm and start again
-    $REBUILD_DWM
+    # dwm should be recompiled if changes were done
     # kill running processes
     killall dwm_status
 done
