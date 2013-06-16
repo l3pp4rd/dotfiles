@@ -189,8 +189,8 @@ map <leader>u :call PhpInsertUse()<cr>
 
 " Snipmate
 let g:snips_author = 'Gediminas Morkevicius <gediminas.morkevicius@gmail.com>'
-
-"au FileType *.html,*.xhtml,*.xml,*.twig ru ftplugin/autoclose_tag.vim
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Command-T fix the arrow keys
 if &term =~ "rxvt" || &term =~ "xterm"
