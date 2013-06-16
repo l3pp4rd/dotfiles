@@ -140,11 +140,21 @@ nmap <silent> <leader>nw :set nowrap!<cr>
 " Clear search highlight
 nmap <silent> <leader>/ :let @/=""<cr>
 
+" Pull word under cursor into LHS of a substitute (for quick search and replace)
+nmap <leader>ss :%s#<C-r>=expand("<cword>")<cr>#
+
+" Global quick search-replace
+nmap <leader>sr :!ack -l <C-r>=expand("<cword>")<cr> \|
+      \ xargs perl -pi -E 's/<C-r>=expand("<cword>")<cr>//g'<left><left><left>
+
 " run write with root perms
 cmap w!! w !sudo tee % >/dev/null<CR>:e!<CR><CR>
 
 " strip tralling whitespaces
 nmap <silent> <leader>cw :call <SID>StripTrailingWhitespaces()<cr>
+
+" Select all text
+nmap <C-a> ggVG$
 
 " exclude vendor directory
 nmap <leader>ev :se wig+=*/vendor<CR>:CommandTFlush<CR>
@@ -160,6 +170,11 @@ map <leader>p :r !xclip -o<CR>
 nmap <leader>ct :!ctags&<cr><cr>
 
 " ------------PLUGINS---------------
+
+" Easy Motion
+
+let g:EasyMotion_leader_key = '<Leader><Leader>'
+let g:EasyMotion_mapping_f = 'o'
 
 " Nerd tree
 nmap <Leader>lt :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<CR>

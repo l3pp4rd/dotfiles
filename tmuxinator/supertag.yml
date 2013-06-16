@@ -7,10 +7,11 @@ tabs:
     - logs:
         layout: even-horizontal
         panes:
-            - cd ~/php/supertag/tms/app/logs && tail -f app_dev.log | grep -B 3 ERROR # show also 3 lines before error
+            - tail -f ~/php/supertag/tms/app/logs/dev.crit.log | grep -B 3 ERROR # show also 3 lines before error
             - tail -f /var/log/nginx/tms.error.log # nginx error log
     - daemons:
         layout: even-horizontal
         panes:
             - cd ~/php/supertag/tms && php app/console assetic:dump --watch
+            - cd ~/php/supertag/tms && guard # ruby guard daemon to generate ctags
 

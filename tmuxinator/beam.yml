@@ -1,0 +1,9 @@
+
+project_name: beam
+project_root: ~/go/src/github.com/l3pp4rd/beam-analytics
+tabs:
+    - vim: cd ~/go/src/github.com/l3pp4rd/beam-analytics && vim
+    - shell: cd ~/go/src/github.com/l3pp4rd/beam-analytics
+    - server: cd ~/go/src/github.com/l3pp4rd/beam-analytics
+    - tests: cd ~/go/src/github.com/l3pp4rd/beam-analytics
+
