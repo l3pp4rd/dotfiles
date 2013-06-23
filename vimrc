@@ -161,20 +161,27 @@ nmap <leader>ev :se wig+=*/vendor<CR>:CommandTFlush<CR>
 " include vendor directory
 nmap <leader>iv :se wig-=*/vendor<CR>:CommandTFlush<CR>
 
-" XClip, sometimes x register just does not work
-vmap <leader>y :!xclip -f -sel clip<CR>
-map <leader>p :r !xclip -o<CR>
+" delete without yanking by default
+nnoremap d "_d
+vnoremap d "_d
+" yank only when <leader> is used
+nnoremap <leader>d "+d
+vnoremap <leader>d "+d
 
-" CTAGS
-" Rebuild tags
+" replace currently selected text with default register, without yanking it
+vnoremap p "_dP
+" replace with yanking, only when <leader> is used
+vnoremap <leader>p "+dP
+
+" CTAGS - Rebuild tags
 nmap <leader>ct :!ctags&<cr><cr>
 
 " ------------PLUGINS---------------
 
 " Easy Motion
 
-let g:EasyMotion_leader_key = '<Leader><Leader>'
-let g:EasyMotion_mapping_f = 'o'
+let g:EasyMotion_mapping_f = '}'
+let g:EasyMotion_mapping_F = '{'
 
 " Nerd tree
 nmap <Leader>lt :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<CR>
