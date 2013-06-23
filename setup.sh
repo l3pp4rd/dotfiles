@@ -3,19 +3,31 @@
 # current directory
 D="$( cd "$( dirname "$0" )" && pwd )"
 
+approve () {
+    while true; do
+        read -p "$1 " yn
+        case $yn in
+            [Yy]* ) return 0;;
+            [Nn]* ) return 1;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+}
+
 # $1 source $2 dest
 link()
 {
-    if [ -d $2 ]; then
-        rm -rf $2
+    if [ -d "$2" -o -f "$2" ]; then
+        if approve "Replace $2 with $1?"; then
+            rm -rf $2
+            ln -s $1 $2
+        fi
+    else
+        ln -s $1 $2
     fi
-    if [ -f $2 ]; then
-        rm $2
-    fi
-    ln -s $1 $2
 }
 
-if [ !-d "$HOME/.config" ]; then
+if [ ! -d "$HOME/.config" ]; then
     mkdir "$HOME/.config"
 fi
 
@@ -33,4 +45,6 @@ link "$D/mpd" "$HOME/.mpd"
 link "$D/ranger" "$HOME/.config/ranger"
 link "$D/gemrc" "$HOME/.gemrc"
 link "$D/tigrc" "$HOME/.tigrc"
+link "$D/gitignore" "$HOME/.gitignore"
+link "$D/gitconfig" "$HOME/.gitconfig"
 

@@ -34,6 +34,7 @@
 
 [core]
     editor = vim
+    excludesfile = ~/.gitignore
 
 [apply]
     whitespace = nowarn
