@@ -11,7 +11,6 @@ Xft.hinting: true
 Xft.rgba: rgb
 ! }}}
 ! Urxvt {{{
-URxvt.iconFile: /usr/share/icons/AwOken/clear/24x24/apps/terminal.png
 URxvt.font: xft:Inconsolata:size=14
 ! URxvt*termName: rxvt-unicode-256color
 
