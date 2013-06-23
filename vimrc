@@ -93,6 +93,10 @@ se textwidth=120
 se colorcolumn=120
 se formatoptions=qrn1
 
+" session options
+set ssop-=options               " do not store global and local values in a session
+set ssop-=folds                 " do not store folds
+
 " Use perl regex style
 nnoremap / /\v
 vnoremap / /\v
@@ -175,6 +179,9 @@ vnoremap <leader>p "+dP
 
 " CTAGS - Rebuild tags
 nmap <leader>ct :!ctags&<cr><cr>
+
+" save a session
+nmap <leader>s :mksession!
 
 " ------------PLUGINS---------------
 
