@@ -183,6 +183,12 @@ nmap <leader>ct :!ctags&<cr><cr>
 " save a session
 nmap <leader>s :mksession!
 
+" go to previous most recent file opened
+nmap <leader>m :e#<cr>
+
+" open or create a file in currently opened file directory
+nmap <leader>c :e %:p:h/
+
 " ------------PLUGINS---------------
 
 " Easy Motion
@@ -201,10 +207,11 @@ nmap <leader>a :Ack
 " PHP namespace
 map <leader>u :call PhpInsertUse()<cr>
 
-" Snipmate
-let g:snips_author = 'Gediminas Morkevicius <gediminas.morkevicius@gmail.com>'
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" UltiSnips
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsListSnippets = '<c-tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
 " Command-T fix the arrow keys
 if &term =~ "rxvt" || &term =~ "xterm"
@@ -225,7 +232,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 " Alternate
-nnoremap <leader>h :A<cr>
+nmap <leader>h :A<cr>
 
 " Supertab
 
@@ -233,6 +240,7 @@ nnoremap <leader>h :A<cr>
 set completeopt=menu,menuone,longest
 set pumheight=15
 let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 " Zencoding
 let g:user_zen_leader_key = '<c-l>'

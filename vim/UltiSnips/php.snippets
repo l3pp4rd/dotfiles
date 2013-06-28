@@ -32,6 +32,32 @@ class `!p snip.rv = snip.basename`
 }
 endsnippet
 
+snippet cclass "Symfony controller class" !
+<?php
+`!p snip.rv = namespace(snip, path)`
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
+class `!p snip.rv = snip.basename` extends Controller
+{
+	${0}
+}
+endsnippet
+
+snippet act "Symfony controller action" !
+/**
+ * @Route(${1})
+ * @Templace()
+ */
+public function ${2}Action(Request $req)
+{
+	${0}
+	return array();
+}
+endsnippet
+
 snippet test "PHPUnit Test Case"
 <?php
 `!p snip.rv = namespace(snip, path)`
