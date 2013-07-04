@@ -6,4 +6,5 @@ tabs:
   - vim: cd ~/php/extensions && vim
   - shell: cd ~/php/extensions
   - tests: cd ~/php/extensions/tests
+  - daemons: cd ~/php/extensions && guard # ruby guard daemon to generate ctags
 
