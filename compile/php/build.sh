@@ -73,11 +73,10 @@ EXT_CONF="--enable-mbstring \
     --with-openssl \
     --with-openssl-dir=/usr/bin \
     --with-mysql-sock=/var/run/mysqld/mysqld.sock \
-    --with-mysql=mysqlnd \
     --with-mysqli=mysqlnd \
     --with-pgsql=/usr \
     --with-sqlite3=/usr \
-    --with-pdo-mysql=/usr \
+    --with-pdo-mysql=mysqlnd \
     --with-pdo-pgsql=/usr \
     --with-pdo-sqlite=/usr
 "
@@ -91,6 +90,14 @@ then
 else
     PHP_CONF="$PHP_CONF \
     --disable-debug \
+"
+fi
+
+SUPPORTS_OPCACHE="$(echo "$1" | grep '5.5.*')"
+if [ ! "$SUPPORTS_OPCACHE" ]
+then
+    PHP_CONF="$PHP_CONF \
+    --enable_opcache \
 "
 fi
 
