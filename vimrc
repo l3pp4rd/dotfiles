@@ -189,6 +189,9 @@ nmap <leader>m :e#<cr>
 " open or create a file in currently opened file directory
 nmap <leader>c :e %:p:h/
 
+" jump to a line which contains word under the cursor
+nmap <leader>f [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<cr>
+
 " ------------PLUGINS---------------
 
 " Easy Motion
