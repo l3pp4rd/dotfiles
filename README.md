@@ -32,12 +32,15 @@ If you do not have latest **ViM** with ruby support and all patches. You can use
 
 If you want nice colors with **vim** you must have a terminal client, which supports **256** colors. You may try:
 
-- **st** does not require weird patches, does not support transparency though.
+- **st** does not require weird patches, does not support transparency though. You can just grab my version of
+[st](https://github.com/l3pp4rd/st)
 - **rxvt-unicode** you would need to compile it yourself with an option for 256 colors, may add some xft support as well.
+it takes time to configure urxvt, I would suggest **st**
 
 #### Tmux
 
 You should consider reading about **tmux** and install it. **Tmuxinator** might come in handy after.
+If you use **st** tmux will provide tabs and history scrolling support. Mouse scroll in urxvt really suck.
 
 ### Zsh
 
@@ -69,6 +72,6 @@ to compile a **C** extension.
 
 If you are tired of bloated desktops like gnome, kde.. whatever, would recommend to try [dwm](http://dwm.suckless.org/)
 
-**NOTE:** if you use my **~/.dotfiles/bin/startdwm** to start a window manager it most probably will not work with login
-managers if you choose it as an executable to run on successful login.
+**NOTE:** if you dwm, look how to manage it as an xsession in order to provide a possibility to be used inline
+with a login manager like **slim**. You can find an examples in my dotfiles as well.
 
