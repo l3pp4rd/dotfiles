@@ -1,0 +1,9 @@
+[Unit]
+Description=Lock X session using slimlock
+
+[Service]
+User=gedi
+ExecStart=/usr/bin/slimlock
+
+[Install]
+WantedBy=sleep.target
