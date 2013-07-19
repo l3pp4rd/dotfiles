@@ -81,24 +81,15 @@ EXT_CONF="--enable-mbstring \
     --with-pdo-sqlite=/usr
 "
 
-if [[ $# -gt 1 && "$2" == "--debug" ]]
-then
-    PHP_CONF="$PHP_CONF \
-    --enable-debug \
-    --enable-maintainer-zts \
-"
+if [[ $# -gt 1 && "$2" == "--debug" ]]; then
+    PHP_CONF="$PHP_CONF --enable-debug --enable-maintainer-zts"
 else
-    PHP_CONF="$PHP_CONF \
-    --disable-debug \
-"
+    PHP_CONF="$PHP_CONF --disable-debug"
 fi
 
-SUPPORTS_OPCACHE="$(echo "$1" | grep '5.5.*')"
-if [ ! "$SUPPORTS_OPCACHE" ]
-then
-    PHP_CONF="$PHP_CONF \
-    --enable_opcache \
-"
+SUPPORTS_OPCACHE=$(echo $1 | grep -c 5\.5\.[0-9]+)
+if [ $SUPPORTS_OPCACHE -eq 1 ]; then
+    PHP_CONF="$PHP_CONF --enable_opcache"
 fi
 
 EXTENSION_DIR=/usr/lib/php/modules

@@ -47,7 +47,7 @@ for zsh_file ($DOTFILES/zsh/*.zsh) source $zsh_file
 # }
 
 # launch x when booted
-[[ $(tty) == /dev/tty1 ]] && startx
+[[ $(tty) == /dev/tty1 && -f "$HOME/.xinitrc" ]] && startx
 
 # tell me a fortune :)
 has_executable "fortune" && has_executable "cowsay" && fortune | cowsay

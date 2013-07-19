@@ -15,10 +15,10 @@ then
     exit 1
 fi
 
-VERSION_OK="$(echo "$1" | grep '5.[2-4].*')"
-if [ ! "$VERSION_OK" ]
+VERSION_OK=$(echo $1 | grep -c 5\.[2-5]\.[0-9]+)
+if [ $VERSION_OK -eq 0 ]
 then
-    echo "PHP versions supported are only between 5.2.x to 5.4.x"
+    echo "PHP versions supported are only between 5.2.x to 5.5.x"
     exit 1
 fi
 
