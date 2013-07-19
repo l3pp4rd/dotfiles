@@ -46,9 +46,6 @@ for zsh_file ($DOTFILES/zsh/*.zsh) source $zsh_file
     source "$OHMYZSH/themes/gentoo.zsh-theme"
 # }
 
-# launch x when booted
-[[ $(tty) == /dev/tty1 && -f "$HOME/.xinitrc" ]] && startx
-
 # tell me a fortune :)
 has_executable "fortune" && has_executable "cowsay" && fortune | cowsay
 
