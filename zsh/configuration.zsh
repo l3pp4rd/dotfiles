@@ -21,8 +21,6 @@ stty -ixon -ixoff
 # Add dircolors
 eval $(dircolors $DOTFILES/zsh/dircolors-solarized/dircolors.ansi-dark)
 
-# Remember ssh key authentication, check for availability first
-has_executable "keychain" && eval `keychain --eval --agents ssh --nogui -Q -q id_rsa`
-
+# default text editor
 export EDITOR=vim
 
