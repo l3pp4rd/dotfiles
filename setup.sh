@@ -3,6 +3,13 @@
 # current directory
 D="$( cd "$( dirname "$0" )" && pwd )"
 
+cd $D
+
+has() {
+    TMP=`which $1 2> /dev/null`
+    [ $? -eq 0 ]
+}
+
 approve () {
     while true; do
         read -p "$1 " yn
@@ -27,8 +34,48 @@ link()
     fi
 }
 
+has "git" || (echo "install git"; exit 1)
+# make sure modules are initialized
+git submodule update --init
+# first check vim availability
+has "vim" || (echo "install vim"; exit 1)
+
 if [ ! -d "$HOME/.config" ]; then
     mkdir "$HOME/.config"
+fi
+
+if [ -z "$XDG_CONFIG_HOME" ]; then
+    echo "export XDG_CONFIG_HOME for powerline fonts to be configured"
+    exit 1
+else
+    if [ ! -d "$XDG_CONFIG_HOME/fontconfig/conf.d" ]; then
+        mkdir -p "$XDG_CONFIG_HOME/fontconfig/conf.d"
+    fi
+    if [ ! -d "$HOME/.fonts" ]; then
+        mkdir "$HOME/.fonts"
+    fi
+    if [ ! -d "$D/vim/plugin" ]; then
+        mkdir "$D/vim/plugin"
+    fi
+    link "$D/powerline/font/10-powerline-symbols.conf" "$XDG_CONFIG_HOME/fontconfig/conf.d/10-powerline-symbols.conf"
+    link "$D/powerline/font/PowerlineSymbols.otf" "$HOME/.fonts/PowerlineSymbols.otf"
+    link "$D/powerline/powerline/bindings/vim/plugin/powerline.vim" "$D/vim/plugin/powerline.vim"
+    link "$D/powerline/powerline/bindings/zsh/powerline.zsh" "$D/zsh/powerline.zsh"
+    link "$D/powerline/powerline/bindings/tmux/powerline.conf" "$D/tmux/powerline.conf"
+
+    PY3=$(vim --version | grep -c '+python3')
+    PY2=$(vim --version | grep -c '+python')
+    CMD="setup.py install --optimize=1"
+    cd $D/powerline
+    # guess python executables
+    if [ $PY3 -eq 1 ]; then
+        has "python3" && (sudo python3 $CMD || (has "python" && sudo python $CMD) || echo "Failed to run setup.py")
+    elif [ $PY2 -eq 1 ]; then
+        has "python2" && (sudo python2 $CMD || (has "python" && sudo python $CMD) || echo "Failed to run setup.py")
+    else
+        echo "in order to install powerline - vim should be compiled with python support"
+        exit 1
+    fi
 fi
 
 link "$D/scripts" "$HOME/scripts"

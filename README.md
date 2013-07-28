@@ -49,9 +49,7 @@ of bash - install **zsh** first and use it as your default shell by running:
 
     chsh -s $(which zsh)
 
-### Install modules and configurations
-
-    cd ~/.dotfiles && git submodule update --init
+### Install dotfiles
 
 Execute the setup script:
 
