@@ -63,6 +63,9 @@ else
     link "$D/powerline/powerline/bindings/zsh/powerline.zsh" "$D/zsh/powerline.zsh"
     link "$D/powerline/powerline/bindings/tmux/powerline.conf" "$D/tmux/powerline.conf"
 
+    # get fixed inconsolata fonts
+    wget -O ~/.fonts/Inconsolata.otf https://raw.github.com/Lokaltog/powerline-fonts/master/Inconsolata/Inconsolata%20for%20Powerline.otf
+
     PY3=$(vim --version | grep -c '+python3')
     PY2=$(vim --version | grep -c '+python')
     CMD="setup.py install --optimize=1"
