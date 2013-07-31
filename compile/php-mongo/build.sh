@@ -12,16 +12,13 @@ has() {
     [ $? -eq 0 ]
 }
 
-has "git" && git clone git://github.com/mongodb/mongo-php-driver.git $DIR/build
+has "git" || (echo "Install git"; exit 1)
 
-if [ ! -d "$DIR/build" ]; then
-    echo "Install git version control"
-    exit 1
-fi
+git clone git://github.com/mongodb/mongo-php-driver.git $DIR/build
 
 cd $DIR/build
 
-git checkout 1.4.1
+git checkout 1.4.2
 
 phpize &&
 ./configure &&

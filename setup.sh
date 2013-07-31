@@ -76,6 +76,8 @@ else
         echo "in order to install powerline - vim should be compiled with python support"
         exit 1
     fi
+    # update fonts
+    fc-cache -vf ~/.fonts
 fi
 
 link "$D/scripts" "$HOME/scripts"

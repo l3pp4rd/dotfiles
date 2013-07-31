@@ -25,12 +25,9 @@ has() {
     [ $? -eq 0 ]
 }
 
-has "git" && git clone git://github.com/ariya/phantomjs.git $DIR/build
+has "git" || (echo "Install git"; exit 1)
 
-if [ ! -d "$DIR/build" ]; then
-    echo "Install git version control"
-    exit 1
-fi
+git clone git://github.com/ariya/phantomjs.git $DIR/build
 
 cd $DIR/build
 
