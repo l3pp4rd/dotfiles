@@ -1,9 +1,8 @@
 # About my dotfiles
 
-My .dotfiles **ViM, DWM, zsh** and I use **ArchLinux** as my linux distribution
+My .dotfiles **ViM, DWM, zsh, st** and I use **ArchLinux** as my linux distribution
 Mainly inspired by [ornicar](https://github.com/ornicar/dotfiles). For all my programs and shell I use [solarized
-colors](http://ethanschoonover.com/solarized). There are some other scripts for convenience, like
-unread gmail checks, dzen2 status bar shell script and maybe other scripts which might not be needed for others at all.
+colors](http://ethanschoonover.com/solarized) and mainly **Inconsolata** font.
 
 ## Requirements
 
@@ -28,19 +27,20 @@ If you do not have latest **ViM** with ruby support and all patches. You can use
 
     ./.dotfiles/compile/vim/build.sh
 
-#### Terminal client
+### Terminal client
 
 If you want nice colors with **vim** you must have a terminal client, which supports **256** colors. You may try:
 
-- **st** does not require weird patches, does not support transparency though. You can just grab my version of
-[st](https://github.com/l3pp4rd/st)
+- **st** does not require weird patches, it is small and works perfectly well. You can just grab my version of
+[st](https://github.com/l3pp4rd/st) and compile it. If you need transparency, use **xcompmgr** and **transset-df**.
 - **rxvt-unicode** you would need to compile it yourself with an option for 256 colors, may add some xft support as well.
-it takes time to configure urxvt, I would suggest **st**
+it takes time to configure urxvt, I would prefer **st**.
 
-#### Tmux
+### Tmux
 
-You should consider reading about **tmux** and install it. **Tmuxinator** might come in handy after.
-If you use **st** tmux will provide tabs and history scrolling support. Mouse scroll in urxvt really suck.
+You should consider reading about **tmux** and install it. **Tmuxinator** is also a handy tool to be used with tmux.
+If you use **st** tmux will provide tabs and history scrolling support. Mouse scroll in urxvt sucks. Tmux will provide
+history scrolling and tabs.
 
 ### Zsh
 
@@ -70,6 +70,6 @@ to compile a **C** extension.
 
 If you are tired of bloated desktops like gnome, kde.. whatever, would recommend to try [dwm](http://dwm.suckless.org/)
 
-**NOTE:** if you dwm, look how to manage it as an xsession in order to provide a possibility to be used inline
-with a login manager like **slim**. You can find an examples in my dotfiles as well.
+**NOTE:** look how to manage it as an xsession in order to provide a possibility to be used inline
+with a login manager like **slim**. You can find an example in my dotfiles.
 
