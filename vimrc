@@ -245,8 +245,8 @@ set pumheight=15
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
-" Zencoding
-let g:user_zen_leader_key = '<c-l>'
+" Zencoding - aka emmet-vim
+let g:user_emmet_leader_key = '<c-l>'
 
 " -------------FUNCTIONS-------------
 function! <SID>StripTrailingWhitespaces()
