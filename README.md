@@ -62,7 +62,7 @@ Execute the setup script:
 After that, for [command-t](http://github.com/wincent/Command-T) bundle you will need
 to compile a **C** extension.
 
-    cd ~/.vim/bundle/command-t/ruby/command-t
+    cd ~/.vim/bundle/vim-command-t/ruby/command-t
     ruby extconf.rb
     make
 
