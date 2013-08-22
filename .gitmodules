@@ -13,9 +13,6 @@
 [submodule "vim/bundle/php-namespace"]
 	path = vim/bundle/php-namespace
 	url = git://github.com/arnaud-lb/vim-php-namespace.git
-[submodule "vim/bundle/command-t"]
-	path = vim/bundle/command-t
-	url = git://git.wincent.com/command-t.git
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
