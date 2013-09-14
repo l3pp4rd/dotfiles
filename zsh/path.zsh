@@ -10,12 +10,9 @@ fi
 
 # golang
 if [ -d "$HOME/go" ]; then
-    export GOPATH=$HOME/go # this one for 3rd party
-    if [ -d "$HOME/golang" ]; then
-        export GOPATH=$GOPATH:$HOME/golang # this one for local development
-    fi
+    export GOPATH=$HOME/go # golang workspace
     if [ -d "$HOME/go/bin" ]; then
-        export GOBIN=$HOME/go/bin # google binary path
+        export GOBIN=$HOME/go/bin # go executables path
         export PATH=$PATH:$GOBIN # export in path as well
     fi
 fi
@@ -28,3 +25,4 @@ if [ -d "$HOME/.rvm" ]; then
     export PATH=$PATH:$HOME/.rvm/bin
     source $HOME/.rvm/scripts/rvm
 fi
+

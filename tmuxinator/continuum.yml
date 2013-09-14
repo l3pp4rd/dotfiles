@@ -1,0 +1,9 @@
+
+project_name: continuum
+project_root: ~/go/src/github.com/l3pp4rd/continuum
+tabs:
+    - vim: cd ~/go/src/github.com/l3pp4rd/continuum && vim
+    - shell: cd ~/go/src/github.com/l3pp4rd/continuum
+    - server: cd ~/go/src/github.com/l3pp4rd/continuum
+    - tests: cd ~/go/src/github.com/l3pp4rd/continuum
+
