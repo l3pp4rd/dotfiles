@@ -44,6 +44,9 @@ if [ ! -d "$HOME/.config" ]; then
     mkdir "$HOME/.config"
 fi
 
+# NOTE: powerline installation might require some python packages:
+#   psutil, setuptools
+# and python version 2.7 or 3.3 or higher
 if approve "Install powerline ?"; then
     if [ -z "$XDG_CONFIG_HOME" ]; then
         echo "export XDG_CONFIG_HOME for powerline fonts to be configured"
@@ -61,6 +64,7 @@ if approve "Install powerline ?"; then
         link "$D/powerline/font/10-powerline-symbols.conf" "$XDG_CONFIG_HOME/fontconfig/conf.d/10-powerline-symbols.conf"
         link "$D/powerline/font/PowerlineSymbols.otf" "$HOME/.fonts/PowerlineSymbols.otf"
         link "$D/powerline/powerline/bindings/vim/plugin/powerline.vim" "$D/vim/plugin/powerline.vim"
+        # powerline for zsh and tmux might be annoying, put it on if you need it
         link "$D/powerline/powerline/bindings/zsh/powerline.zsh" "$D/zsh/powerline.zsh"
         link "$D/powerline/powerline/bindings/tmux/powerline.conf" "$D/tmux/powerline.conf"
 
