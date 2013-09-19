@@ -1,0 +1,6 @@
+--exclude=*_test.go
+--exclude=.git
+--exclude=.svn
+--exclude=web
+--exclude=public
+--exclude=tests
