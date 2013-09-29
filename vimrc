@@ -97,6 +97,15 @@ se formatoptions=qrn1
 set ssop-=options               " do not store global and local values in a session
 set ssop-=folds                 " do not store folds
 
+" Diff options
+if &diff
+  nmap <leader>do :diffget<space>
+  nmap <leader>dp :diffput<space>
+endif
+
+set diffopt=filler,vertical
+set diffopt+=iwhite
+
 " Use perl regex style
 nnoremap / /\v
 vnoremap / /\v
@@ -131,6 +140,7 @@ au BufWrite * :call <SID>MkdirsIfNotExists(expand('<afile>:h'))
 let mapleader=","       " Use the comma as leader
 nmap <leader>2 :setlocal tabstop=2<cr>:setlocal shiftwidth=2<cr>:setlocal softtabstop=2<cr>
 nmap <leader>4 :setlocal tabstop=4<cr>:setlocal shiftwidth=4<cr>:setlocal softtabstop=4<cr>
+nmap <leader>8 :setlocal tabstop=8<cr>:setlocal shiftwidth=8<cr>:setlocal softtabstop=8<cr>
 
 " Toggle line numbering
 nmap <silent> <leader>nn :set nonumber!<cr>

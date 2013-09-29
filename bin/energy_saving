@@ -1,0 +1,27 @@
+#!/bin/zsh
+
+function help() {
+    echo -e "Usage: energy_saving \033[33mmode\033[0m"
+    echo -e "  Arguments:"
+    echo -e "    \033[33mmode\033[0m     switch \033[32mon\033[0m or \033[32moff\033[0m services to save some resource usage"
+    exit 1
+}
+
+if [[ $# -lt 1 ]] || [[ "$1" == "?" ]] || [[ "$1" == "--help" ]] ||  [[ "$1" == "-h" ]]
+then
+    help
+fi
+
+SERVICES="postgresql mysqld mongodb ntpd cups redis bluetooth"
+
+for SERV in "$SERVICES"; do
+    if [[ "$1" == "on" ]]; then
+        sudo systemctl start $SERV
+    elif [[ "$1" == "off" ]]; then
+        sudo systemctl stop $SERV
+    else
+        help
+    fi
+done
+
+

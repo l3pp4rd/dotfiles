@@ -25,7 +25,7 @@
     untracked = red
 
 [merge]
-    tool = meld
+    tool = vimdiff
     summary = true
     verbosity = 1
 
