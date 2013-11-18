@@ -63,6 +63,10 @@ se wildignore+=*/tags,*/vendor.tags,*.phar
 se tags+=vendor.tags            " read vendor.tags also
 se gdefault                     " the /g flag on :s substitutions by default
 
+" Enables the reading of .vimrc, .exrc and .gvimrc in the current directory. http://stackoverflow.com/a/7541744/186355
+se exrc
+se secure " disable unsafe commands in them
+
 " Search related options
 
 se smartcase                    " case-sensitive search if expression contains a capital letter.
@@ -286,7 +290,3 @@ function! CleanCode()
 endfunction
 nmap <leader>C :call CleanCode()<cr>
 
-" Source project settings
-if filereadable('.vimrc.local')
-  source .vimrc.local
-endif
