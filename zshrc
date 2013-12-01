@@ -19,6 +19,8 @@ for config_file ($OHMYZSH/lib/*.zsh) source $config_file
 # Load all of my zsh files in zsh/
 for zsh_file ($DOTFILES/zsh/*.zsh) source $zsh_file
 
+fpath=($DOTFILES/zsh/autocompletions/src $fpath)
+
 # Enable completion {
     autoload -U compinit
     compinit -i

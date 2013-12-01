@@ -1,0 +1,19 @@
+# Write your default config options here!
+
+stop-xscreensaver=yes
+
+# Subtitles
+font=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf
+subfont-text-scale=3
+sub-fuzziness=1
+
+ass=yes
+ass-color=FFFF0000
+ass-border-color=00000000
+
+# multithreaded decoding of H264/MPEG-1/2 (valid: 1-8)
+lavdopts=threads=2
+# prefer using six channels audio
+# channels = 6
+
+dvd-device=/dev/sr0

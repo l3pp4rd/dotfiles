@@ -73,3 +73,6 @@
 [submodule "vim/bundle/vim-command-t"]
 	path = vim/bundle/vim-command-t
 	url = https://github.com/wincent/Command-T.git
+[submodule "zsh/autocompletions"]
+	path = zsh/autocompletions
+	url = https://github.com/zsh-users/zsh-completions.git
