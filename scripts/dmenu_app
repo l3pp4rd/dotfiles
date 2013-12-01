@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# uses custom dmenu with XFT and historical priority
+
+source ${XDG_CONFIG_HOME:-$HOME/.config}/solarized/colors.ini
+
+FN="xft:Inconsolata:size=16"
+HIST="$HOME/.dmenu/path_hist"
+APP=$(dmenu -pe -i -nb $base03 -nf $base0 -sb $base02 -sf $orange -fn "$FN" -p "Run" -hf "$HIST")
+echo $APP
