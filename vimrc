@@ -174,11 +174,6 @@ nmap <silent> <leader>cw :call <SID>StripTrailingWhitespaces()<cr>
 " Select all text
 nmap <C-a> ggVG$
 
-" exclude vendor directory
-nmap <leader>ev :se wig+=*/vendor<CR>:CommandTFlush<CR>
-" include vendor directory
-nmap <leader>iv :se wig-=*/vendor<CR>:CommandTFlush<CR>
-
 " delete without yanking by default
 nnoremap d "_d
 vnoremap d "_d
@@ -208,11 +203,6 @@ nmap <leader>f [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<cr
 
 " ------------PLUGINS---------------
 
-" Easy Motion
-
-let g:EasyMotion_mapping_f = '}'
-let g:EasyMotion_mapping_F = '{'
-
 " Nerd tree
 nmap <Leader>lt :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<CR>
 nmap <Leader>ld :let NERDTreeQuitOnOpen = 0<bar>NERDTreeToggle<CR>
@@ -231,11 +221,16 @@ let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
 " Command-T fix the arrow keys
-if &term =~ "rxvt" || &term =~ "xterm"
-  let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
+if &term =~ "st" || &term =~ "screen"
+  let g:CommandTCancelMap     = ['<Esc>', '<C-c>']
   let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
   let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
 endif
+" exclude vendor directory
+nmap <leader>ev :se wig+=*/vendor<CR>:CommandTFlush<CR>
+" include vendor directory
+nmap <leader>iv :se wig-=*/vendor<CR>:CommandTFlush<CR>
+nmap <leader><leader>r :CommandTFlush<CR>
 
 " Delimit mate
 let delimitMate_autoclose = 1
