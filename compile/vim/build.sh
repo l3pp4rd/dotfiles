@@ -21,7 +21,23 @@ fi
 
 cd $DIR/build
 
-./configure --with-features=huge --disable-largefile --enable-perlinterp --enable-rubyinterp --enable-pythoninterp &&
-make &&
+./configure \
+--prefix=/usr/local \
+--with-features=huge \
+--disable-largefile \
+--enable-perlinterp \
+--enable-rubyinterp \
+--enable-python3interp \
+--enable-luainterp
+--with-compiledby='Gedi' \
+--enable-gpm \
+--enable-acl \
+--with-x=no \
+--disable-gui \
+--enable-multibyte \
+--enable-cscope \
+--disable-netbeans
+
+make
 sudo make install
 

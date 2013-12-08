@@ -1,7 +1,7 @@
-# ~/.tmuxinator/blog.yml
+# ~/.tmuxinator/gorouter.yml
 
-name: blog
-root: ~/php/blog
+name: gorouter
+root: ~/go/src/github.com/l3pp4rd/gorouter
 
 # Optional tmux socket
 # socket_name: foo
@@ -21,14 +21,9 @@ root: ~/php/blog
 windows:
   - vim: vim
   - shell: ~
-  - demo: cd ~/php/demo
-  - logs:
+  - tests: ~
+  - daemons:
       layout: even-horizontal
       panes:
-        - tail -f ~/php/demo/app/logs/prod.log | grep -B 3 ERROR # show also 3 lines before error
-        - tail -f tmp/logs/app.log # main blog log
-        - tail -f /var/log/nginx/blog.error.log # nginx error log
-  - assets:
-      layout: even-horizontal
-      panes:
-        - cd php bin/console assets:dump --watch
+        - ~
+        - ~

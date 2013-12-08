@@ -1,10 +1,12 @@
 # ~/.tmuxinator/home.yml
 
-project_name: home
-project_root: ~/.dotfiles
-tabs:
-  - music: cd && music
-  - dotfiles: cd ~/.dotfiles
-  - dwm: cd ~/c-dev/dwm && vim
-  - vim: cd ~/.dotfiles && vim
+name: home
+root: ~/.dotfiles
+
+windows:
+  - music: music
+  - vim: vim
+  - dotfiles: ~
+  - dwm: cd ~/c-dev/dwm
+  - cdev: cd ~/c-dev
 

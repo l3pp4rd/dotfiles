@@ -1,17 +1,35 @@
-project_name: supertag
-project_root: ~/php/supertag
-tabs:
-    - vim: cd ~/php/supertag/tms && vim
-    - shell: cd ~/php/supertag/tms
-    - js: cd ~/php/supertag/supertjs
-    - logs:
-        layout: even-horizontal
-        panes:
-            - tail -f ~/php/supertag/tms/app/logs/dev.crit.log | grep -B 3 ERROR # show also 3 lines before error
-            - tail -f /var/log/nginx/tms.error.log # nginx error log
-    - daemons:
-        layout: even-horizontal
-        panes:
-            - cd ~/php/supertag/tms && php app/console assetic:dump --watch
-            - cd ~/php/supertag/tms && guard # ruby guard daemon to generate ctags
+# ~/.tmuxinator/supertag.yml
+
+name: supertag
+root: ~/php/supertag/tms
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - vim: vim
+  - shell: ~
+  - js: ~
+  - logs:
+      layout: even-horizontal
+      panes:
+        - tail -f app/logs/dev.crit.log | grep -B 3 ERROR # show also 3 lines before error
+        - tail -f /var/log/nginx/tms.error.log # nginx error log
+  - daemons:
+      layout: even-horizontal
+      panes:
+        - php app/console assetic:dump --watch
+        - guard # ruby guard daemon to generate ctags
 
