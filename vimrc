@@ -1,11 +1,49 @@
-" General behavior
+se nocompatible             " Use vim defaults, should be first entry
 
-se nocompatible         " Use vim defaults, should be first entry
+""" Load bundles
+filetype off                " must be off for vundle
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
 
-" Initialize bundles, `call pathogen#helptags()` to regenerate docs
-" Infect Vim with pathogen >:)
-runtime bundle/pathogen/autoload/pathogen.vim
-call pathogen#infect()
+""" Dependencies for bundles
+Bundle 'gmarik/vundle'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+
+""" Appearance
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'bling/vim-airline'
+
+""" General
+Bundle 'tComment'
+Bundle 'tlib'
+Bundle 'Rename'
+Bundle 'vim-addon-mw-utils'
+Bundle 'mileszs/ack.vim'
+Bundle 'Align'
+
+""" Navigation
+Bundle 'wincent/Command-T'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'LustyExplorer'
+Bundle 'scrooloose/nerdtree'
+
+""" Editing {
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-fugitive'
+Bundle 'garbas/vim-snipmate'
+Bundle 'Raimondi/delimitMate'
+Bundle 'SirVer/ultisnips'
+Bundle 'ervandew/supertab'
+Bundle 'mattn/emmet-vim'
+
+""" Language specific
+Bundle 'tpope/vim-markdown'
+Bundle 'evanmiller/nginx-vim-syntax'
+Bundle 'arnaud-lb/vim-php-namespace'
+Bundle 'jnwhiteh/vim-golang'
+Bundle 'shawncplus/phpcomplete.vim'
+Bundle 'vim-scripts/a.vim'
 
 filetype plugin indent on       " enable detection, plugins and indenting in one step
 syntax on                       " syntax highlighting

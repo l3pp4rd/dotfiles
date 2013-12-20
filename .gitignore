@@ -1,9 +1,8 @@
 /vim/tmp/*
 !vim/tmp/.empty
 /vim/.netrwhist
-/vim/plugin/powerline.vim
-/tmux/powerline.conf
-/zsh/powerline.zsh
 /zsh/local.zsh
 /tags
 /.vimrc.local
+/vim/bundle/*
+!/vim/bundle/vundle

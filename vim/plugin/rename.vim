@@ -69,4 +69,3 @@ function! Rename(name, bang)
 
     return l:status
 endfunction
-
