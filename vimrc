@@ -15,7 +15,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'bling/vim-airline'
 
 """ General
-Bundle 'tComment'
+Bundle 'tpope/vim-commentary'
 Bundle 'tlib'
 Bundle 'Rename'
 Bundle 'vim-addon-mw-utils'
@@ -241,6 +241,11 @@ nmap <leader>f [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<cr
 
 " ------------PLUGINS---------------
 
+" Airline
+let g:airline_theme='solarized'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
 " Nerd tree
 nmap <Leader>lt :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<CR>
 nmap <Leader>ld :let NERDTreeQuitOnOpen = 0<bar>NERDTreeToggle<CR>
@@ -283,8 +288,6 @@ set statusline+=%*
 
 " Alternate
 nmap <leader>h :A<cr>
-
-" Supertab
 
 " Complete options (disable preview scratch window)
 set completeopt=menu,menuone,longest

@@ -9,6 +9,25 @@ colors](http://ethanschoonover.com/solarized) and mainly **Inconsolata** font.
 - You will need latest **ViM** with a support of **ruby** interpreter
 - **git**
 - **zsh**
+- **wget**
+- **256** color terminal client
+
+To use tmuxinator:
+
+    gem install tmuxinator
+
+To install dmenu:
+
+    git clone https://github.com/l3pp4rd/dmenu.git ~/.dmenu && cd ~/.dmenu
+
+You most probably need to change the **X11** lib header file location if you are not using arch linux:
+
+    vim config.mk
+    make
+    sudo make install # will install it in /usr/local/bin
+
+Dmenu shortcut to list all path executables is available at **~/.dotfiles/scripts/path_dmenu**
+It will cache all recently used applications, that way it will show up first in search results.
 
 ## Screen
 
@@ -51,9 +70,13 @@ of bash - install **zsh** first and use it as your default shell by running:
 
 ### Install dotfiles
 
-Execute the setup script:
+Execute the setup script, follow the configuration options, you may not need to replace all configs:
 
     ./.dotfiles/setup.sh
+
+Load vim bundles:
+
+    vim +BundleInstall +qall
 
 **NOTE:** most configurations use **Inconsolata** fonts, you should install or change it.
 
@@ -62,7 +85,7 @@ Execute the setup script:
 After that, for [command-t](http://github.com/wincent/Command-T) bundle you will need
 to compile a **C** extension.
 
-    cd ~/.vim/bundle/vim-command-t/ruby/command-t
+    cd ~/.vim/bundle/Command-T/ruby/command-t
     ruby extconf.rb
     make
 
@@ -72,4 +95,9 @@ If you are tired of bloated desktops like gnome, kde.. whatever, would recommend
 
 **NOTE:** look how to manage it as an xsession in order to provide a possibility to be used inline
 with a login manager like **slim**. You can find an example in my dotfiles.
+
+## changelog
+
+- **2013-12-20** - switched from pathogen to vundle
+- **2013-12-20** - switched powerline to airline, does not require big python setup
 

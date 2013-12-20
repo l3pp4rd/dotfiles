@@ -10,6 +10,9 @@
 [submodule "zsh/autocompletions"]
 	path = zsh/autocompletions
 	url = https://github.com/zsh-users/zsh-completions.git
+[submodule "zsh/dircolors-solarized"]
+	path = zsh/dircolors-solarized
+	url = git://github.com/seebi/dircolors-solarized.git
 [submodule "vim/bundle/vundle"]
 	path = vim/bundle/vundle
 	url = https://github.com/gmarik/vundle.git

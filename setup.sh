@@ -47,47 +47,24 @@ fi
 # NOTE: powerline installation might require some python packages:
 #   psutil, setuptools
 # and python version 2.7 or 3.3 or higher
-if approve "Install powerline ?"; then
-    if [ -z "$XDG_CONFIG_HOME" ]; then
-        echo "export XDG_CONFIG_HOME for powerline fonts to be configured"
-        exit 1
-    else
-        if [ ! -d "$XDG_CONFIG_HOME/fontconfig/conf.d" ]; then
-            mkdir -p "$XDG_CONFIG_HOME/fontconfig/conf.d"
-        fi
-        if [ ! -d "$HOME/.fonts" ]; then
-            mkdir "$HOME/.fonts"
-        fi
-        if [ ! -d "$D/vim/plugin" ]; then
-            mkdir "$D/vim/plugin"
-        fi
-        link "$D/powerline/font/10-powerline-symbols.conf" "$XDG_CONFIG_HOME/fontconfig/conf.d/10-powerline-symbols.conf"
-        link "$D/powerline/font/PowerlineSymbols.otf" "$HOME/.fonts/PowerlineSymbols.otf"
-        link "$D/powerline/powerline/bindings/vim/plugin/powerline.vim" "$D/vim/plugin/powerline.vim"
-        # powerline for zsh and tmux might be annoying, put it on if you need it
-        link "$D/powerline/powerline/bindings/zsh/powerline.zsh" "$D/zsh/powerline.zsh"
-        link "$D/powerline/powerline/bindings/tmux/powerline.conf" "$D/tmux/powerline.conf"
-
-        # get fixed inconsolata fonts
-        wget -O ~/.fonts/Inconsolata.otf https://raw.github.com/Lokaltog/powerline-fonts/master/Inconsolata/Inconsolata%20for%20Powerline.otf
-
-        PY3=$(vim --version | grep -c '+python3')
-        PY2=$(vim --version | grep -c '+python')
-        CMD="setup.py install --optimize=1"
-        cd $D/powerline
-        # guess python executables
-        if [ $PY3 -eq 1 ]; then
-            has "python3" && (sudo python3 $CMD || (has "python" && sudo python $CMD) || echo "Failed to run setup.py")
-        elif [ $PY2 -eq 1 ]; then
-            has "python2" && (sudo python2 $CMD || (has "python" && sudo python $CMD) || echo "Failed to run setup.py")
-        else
-            echo "in order to install powerline - vim should be compiled with python support"
-            exit 1
-        fi
-        # update fonts
-        fc-cache -vf ~/.fonts
+if approve "Install powerline font for airline? (defaults to inconsolata fonts)"; then
+    has "wget" || (echo "Install wget to download patched fonts"; exit 1)
+    FONT_CONF_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/fontconfig/conf.d"
+    if [ ! -d "$FONT_CONF_DIR" ]; then
+        mkdir -p "$FONT_CONF_DIR"
     fi
-fi # end powerline installation
+    if [ ! -d "$HOME/.fonts" ]; then
+        mkdir "$HOME/.fonts"
+    fi
+    # download font configuration
+    wget -O "$FONT_CONF_DIR/10-powerline-symbols.conf" https://raw.github.com/Lokaltog/powerline/develop/font/10-powerline-symbols.conf
+    wget -O "$HOME/.fonts/PowerlineSymbols.otf" https://raw.github.com/Lokaltog/powerline/develop/font/PowerlineSymbols.otf
+    # get fixed inconsolata fonts
+    wget -O "$HOME/.fonts/Inconsolata.otf" https://raw.github.com/Lokaltog/powerline-fonts/master/Inconsolata/Inconsolata%20for%20Powerline.otf
+
+    # update fonts
+    fc-cache -vf ~/.fonts
+fi # end powerline font installation
 
 link "$D/scripts" "$HOME/scripts"
 link "$D/vim" "$HOME/.vim"
