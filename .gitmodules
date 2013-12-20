@@ -1,78 +1,12 @@
-[submodule "vim/bundle/ack"]
-	path = vim/bundle/ack
-	url = git://github.com/mileszs/ack.vim.git
-[submodule "vim/bundle/markdown"]
-	path = vim/bundle/markdown
-	url = git://github.com/tpope/vim-markdown.git
-[submodule "vim/bundle/fugitive"]
-	path = vim/bundle/fugitive
-	url = git://github.com/tpope/vim-fugitive.git
-[submodule "vim/bundle/lusty"]
-	path = vim/bundle/lusty
-	url = git://github.com/sjbach/lusty.git
-[submodule "vim/bundle/php-namespace"]
-	path = vim/bundle/php-namespace
-	url = git://github.com/arnaud-lb/vim-php-namespace.git
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
-[submodule "vim/bundle/go"]
-	path = vim/bundle/go
-	url = git://github.com/jnwhiteh/vim-golang.git
-[submodule "vim/bundle/solarized"]
-	path = vim/bundle/solarized
-	url = git://github.com/altercation/vim-colors-solarized.git
-[submodule "vim/bundle/syntastic"]
-	path = vim/bundle/syntastic
-	url = git://github.com/scrooloose/syntastic.git
-[submodule "vim/bundle/easymotion"]
-	path = vim/bundle/easymotion
-	url = git://github.com/Lokaltog/vim-easymotion.git
-[submodule "vim/bundle/delimit-mate"]
-	path = vim/bundle/delimit-mate
-	url = git://github.com/Raimondi/delimitMate.git
-[submodule "vim/bundle/commentary"]
-	path = vim/bundle/commentary
-	url = git://github.com/tpope/vim-commentary.git
 [submodule "zsh/syntax-highlighting"]
 	path = zsh/syntax-highlighting
 	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "zsh/history-substring-search"]
 	path = zsh/history-substring-search
 	url = git://github.com/zsh-users/zsh-history-substring-search.git
-[submodule "vim/bundle/pathogen"]
-	path = vim/bundle/pathogen
-	url = git://github.com/tpope/vim-pathogen.git
-[submodule "zsh/dircolors-solarized"]
-	path = zsh/dircolors-solarized
-	url = git://github.com/seebi/dircolors-solarized.git
-[submodule "vim/bundle/alternate"]
-	path = vim/bundle/alternate
-	url = git://github.com/vim-scripts/a.vim.git
-[submodule "vim/bundle/nerdtree"]
-	path = vim/bundle/nerdtree
-	url = git://github.com/scrooloose/nerdtree.git
-[submodule "vim/bundle/super-tab"]
-	path = vim/bundle/super-tab
-	url = git://github.com/ervandew/supertab.git
-[submodule "vim/bundle/surround"]
-	path = vim/bundle/surround
-	url = git://github.com/tpope/vim-surround.git
-[submodule "vim/bundle/phpcomplete"]
-	path = vim/bundle/phpcomplete
-	url = git://github.com/shawncplus/phpcomplete.vim.git
-[submodule "vim/bundle/ultisnips"]
-	path = vim/bundle/ultisnips
-	url = git://github.com/SirVer/ultisnips.git
-[submodule "powerline"]
-	path = powerline
-	url = https://github.com/Lokaltog/powerline.git
-[submodule "vim/bundle/emmet-vim"]
-	path = vim/bundle/emmet-vim
-	url = https://github.com/mattn/emmet-vim.git
-[submodule "vim/bundle/vim-command-t"]
-	path = vim/bundle/vim-command-t
-	url = https://github.com/wincent/Command-T.git
 [submodule "zsh/autocompletions"]
 	path = zsh/autocompletions
 	url = https://github.com/zsh-users/zsh-completions.git
