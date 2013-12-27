@@ -31,10 +31,9 @@ Bundle 'scrooloose/nerdtree'
 """ Editing {
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
-Bundle 'garbas/vim-snipmate'
 Bundle 'Raimondi/delimitMate'
-Bundle 'SirVer/ultisnips'
 Bundle 'ervandew/supertab'
+Bundle 'SirVer/ultisnips'
 Bundle 'mattn/emmet-vim'
 
 """ Language specific
