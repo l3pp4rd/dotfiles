@@ -5,10 +5,10 @@ DATE_FORMAT='%a %d %b %H:%M'
 DZEN_ICONPATH=$HOME/.dotfiles/xbm
 BG='#073642'
 FG='#839496'
-X=780
+X=-820 # move from the right, so the status bar would be always aligned right. leave some space for systray
 Y=0
 HEIGHT=20
-WIDTH=710
+WIDTH=710 # adjust it if theres less items used to show in status bar
 FONT='InconsolataSansMono:size=11'
 # Main loop interval in seconds
 INTERVAL=1
@@ -188,5 +188,5 @@ while true; do
 
     MAILCHECK_INTERVAL=$((MAILCHECK_INTERVAL + 1))
     sleep $INTERVAL
-done | dzen2 -x $X -y $Y -w $WIDTH -h $HEIGHT -bg $BG -fg $FG -ta 'r' -fn $FONT -p
+done | dzen2 -x $X -y $Y -w $WIDTH -h $HEIGHT -bg $BG -fg $FG -ta r -fn $FONT -p
 
