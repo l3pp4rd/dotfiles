@@ -27,9 +27,9 @@ cd $DIR/build
 --disable-largefile \
 --enable-perlinterp \
 --enable-rubyinterp \
+--enable-pythoninterp \
 --enable-python3interp \
 --enable-luainterp
---with-compiledby='Gedi' \
 --enable-gpm \
 --enable-acl \
 --with-x=no \

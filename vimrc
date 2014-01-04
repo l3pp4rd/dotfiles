@@ -29,6 +29,7 @@ Bundle 'LustyExplorer'
 Bundle 'scrooloose/nerdtree'
 
 """ Editing {
+Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Raimondi/delimitMate'
@@ -244,6 +245,7 @@ nmap <leader>f [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<cr
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
 
 " Nerd tree
 nmap <Leader>lt :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<CR>
