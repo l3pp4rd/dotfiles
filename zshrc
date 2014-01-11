@@ -26,15 +26,12 @@ fpath=($DOTFILES/zsh/autocompletions/src $fpath)
     compinit -i
 # }
 
-# plugins {
-    # from oh-my-zsh {
-        #source $OHMYZSH/plugins/archlinux/archlinux.plugin.zsh # uncomment if needed
-    # }
+# Plugins {
+    # main zsh repository
+    plugins=(git extract go history-substring-search symfony2 systemd)
     # from other vendors {
         # Add fish-like syntax highlighting (must be done before substring search!)
         source $DOTFILES/zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
-        # Add history substring search
-        source $DOTFILES/zsh/history-substring-search/zsh-history-substring-search.zsh
         # bind UP and DOWN arrow keys
         for keycode in '[' '0'; do
           bindkey "^[${keycode}A" history-substring-search-up
