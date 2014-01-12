@@ -5,7 +5,7 @@
 
 # Path to your oh-my-zsh configuration.
 DOTFILES=$HOME/.dotfiles
-OHMYZSH=$DOTFILES/oh-my-zsh
+ZSH=$DOTFILES/oh-my-zsh
 
 # helper method
 has_executable() {
@@ -14,7 +14,7 @@ has_executable() {
 }
 
 # Load all of the config files in oh-my-zsh that end in .zsh
-for config_file ($OHMYZSH/lib/*.zsh) source $config_file
+for config_file ($ZSH/lib/*.zsh) source $config_file
 
 # Load all of my zsh files in zsh/
 for zsh_file ($DOTFILES/zsh/*.zsh) source $zsh_file
@@ -29,6 +29,9 @@ fpath=($DOTFILES/zsh/autocompletions/src $fpath)
 # Plugins {
     # main zsh repository
     plugins=(git extract go history-substring-search symfony2 systemd)
+    for plugin in $plugins; do
+        source $ZSH/plugins/$plugin/$plugin.plugin.zsh
+    done
     # from other vendors {
         # Add fish-like syntax highlighting (must be done before substring search!)
         source $DOTFILES/zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -42,7 +45,7 @@ fpath=($DOTFILES/zsh/autocompletions/src $fpath)
 # }
 
 # Theme {
-    source "$OHMYZSH/themes/gentoo.zsh-theme"
+    source "$ZSH/themes/gentoo.zsh-theme"
 # }
 
 # tell me a fortune :)
