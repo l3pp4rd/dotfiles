@@ -7,8 +7,6 @@ call vundle#rc()
 
 """ Dependencies for bundles
 Bundle 'gmarik/vundle'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
 
 """ Appearance
 Bundle 'altercation/vim-colors-solarized'
@@ -20,7 +18,6 @@ Bundle 'tlib'
 Bundle 'Rename'
 Bundle 'vim-addon-mw-utils'
 Bundle 'mileszs/ack.vim'
-Bundle 'Align'
 
 """ Navigation
 Bundle 'wincent/Command-T'
@@ -36,6 +33,7 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'ervandew/supertab'
 Bundle 'SirVer/ultisnips'
 Bundle 'mattn/emmet-vim'
+Bundle 'Tabular'
 
 """ Language specific
 Bundle 'tpope/vim-markdown'
@@ -187,8 +185,11 @@ nmap <leader>8 :setlocal tabstop=8<cr>:setlocal shiftwidth=8<cr>:setlocal softta
 " Toggle line numbering
 nmap <silent> <leader>nn :set nonumber!<cr>
 
-" Rename current file
-nmap <leader>r :Rename
+" Rename current file, sugget the same name
+nmap <leader>r :Rename <c-r>=@%<cr>
+
+" create a new file, suggest current directory of the file edited
+nmap <leader>c :e <c-r>=expand('%:h')<cr>/
 
 " Toggle nowrap
 nmap <silent> <leader>nw :set nowrap!<cr>
@@ -212,20 +213,30 @@ nmap <silent> <leader>cw :call <SID>StripTrailingWhitespaces()<cr>
 " Select all text
 nmap <C-a> ggVG$
 
+" YANKING BEHAVIOR
+
+" I found my self the default vim behavior less useful in day to day work
+" when it yanks removed text into the default registry. So the default registry
+" will be used only in case if command was followed by <leader>.
+"
+" It might be useful to use a different registry in that case, while maintaining default behavior.
+
 " delete without yanking by default
 nnoremap d "_d
 vnoremap d "_d
 " yank only when <leader> is used
 nnoremap <leader>d "+d
 vnoremap <leader>d "+d
-
+" remove character without yanking
+nnoremap x "_x
+vnoremap x "_x
+" yank only when <leader> is used
+nnoremap <leader>x "+x
+vnoremap <leader>x "+x
 " replace currently selected text with default register, without yanking it
 vnoremap p "_dP
 " replace with yanking, only when <leader> is used
 vnoremap <leader>p "+dP
-
-" CTAGS - Rebuild tags
-nmap <leader>ct :!ctags&<cr><cr>
 
 " save a session
 nmap <leader>s :mksession!
@@ -233,13 +244,14 @@ nmap <leader>s :mksession!
 " go to previous most recent file opened
 nmap <leader>m :e#<cr>
 
-" open or create a file in currently opened file directory
-nmap <leader>c :e %:p:h/
-
 " jump to a line which contains word under the cursor
 nmap <leader>f [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<cr>
 
 " ------------PLUGINS---------------
+
+" Tabular
+
+nnoremap <leader><tab> :Tab /
 
 " Airline
 let g:airline_theme='solarized'
