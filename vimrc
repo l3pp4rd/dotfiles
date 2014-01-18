@@ -249,8 +249,10 @@ nmap <leader>f [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<cr
 
 " ------------PLUGINS---------------
 
-" Tabular
+" Easymotion
+let g:EasyMotion_leader_key='.' " not using . anyways, that is way more comfortable
 
+" Tabular
 nnoremap <leader><tab> :Tab /
 
 " Airline
