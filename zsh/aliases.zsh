@@ -22,5 +22,4 @@ alias sys-log-last-boot="sudo journalctl --since=today | tac | sed -n '/-- Reboo
 alias reload=". ~/.zshrc"
 
 # misc
-alias music="ncmpc"
 alias halt="echo 'Use poweroff instead'"

@@ -1,0 +1,32 @@
+#!/bin/zsh
+
+function help() {
+    echo -e "Usage: dev \033[33maction\033[0m"
+    echo -e "  Arguments:"
+    echo -e "    \033[33maction\033[0m - can be one of:"
+    echo -e "       \033[32mstart\033[0m:   Start in development mode, turn on needed services."
+    echo -e "       \033[32mstop\033[0m:    Stop development mode, turn off some services."
+    exit 1
+}
+
+if [[ "$#" -lt 1 ]] || [[ "$1" == "?" ]] || [[ "$1" == "--help" ]] || [[ "$1" == "-h" ]]; then
+    help
+fi
+
+SERVICES=("postgresql" "mysqld" "mongodb" "ntpd" "cups" "redis" "bluetooth" "beanstalkd" "nginx")
+case "$1" in
+    start)
+        for SERV in $SERVICES; do
+            sudo systemctl start $SERV > /dev/null
+        done
+        ;;
+    stop)
+        for SERV in $SERVICES; do
+            sudo systemctl stop $SERV > /dev/null
+        done
+        ;;
+    *)
+        help
+        ;;
+esac
+
