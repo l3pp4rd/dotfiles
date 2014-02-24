@@ -42,6 +42,7 @@ Bundle 'arnaud-lb/vim-php-namespace'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'vim-scripts/a.vim'
+Bundle 'Herzult/phpspec-vim'
 
 filetype plugin indent on       " enable detection, plugins and indenting in one step
 syntax on                       " syntax highlighting
