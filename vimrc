@@ -68,9 +68,12 @@ if $TERM =~ "-256color"
   let g:solarized_termtrans=1
 endif
 
-if has#colorscheme('solarized')
-    colo solarized
-endif
+" loads color scheme if available
+try
+    colorscheme solarized
+catch /^Vim\%((\a\+)\)\=:E185/
+    " deal with it
+endtry
 
 " General options
 se autoread                     " Automatically read a file that has changed on disk
@@ -334,12 +337,6 @@ function! <SID>MkdirsIfNotExists(directory)
     if(!isdirectory(a:directory))
         call system('mkdir -p '.shellescape(a:directory))
     endif
-endfunction
-
-" checks if there is colorscheme
-function! has#colorscheme(name)
-    pat = 'colors/'.a:name.'.vim'
-    return !empty(globpath(&rtp, pat))
 endfunction
 
 "  Clean code function
