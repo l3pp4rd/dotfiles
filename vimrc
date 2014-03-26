@@ -175,6 +175,10 @@ au BufRead,BufNewFile *.js.twig,*.json      setlocal filetype=javascript
 
 " set tab width to 2
 au BufRead,BufNewFile *.feature,*.css,*.scss,*.js,*.scala,*.yml,*.html,*.twig,*.sql setlocal tabstop=2 shiftwidth=2 softtabstop=2
+" go lang use tabs instead spaces, trailing tabs change color to black, should be as background
+au BufRead,BufNewFile *.go setlocal noet ts=4 sw=4 sts=0 ci pi lcs=tab:\ \ ,trail:·,extends:>,precedes:<,nbsp:·
+highlight StartTab ctermbg=16 guibg=#000000
+au BufRead,BufNewFile *.go match StartTab /\t/
 
 " strip trailing space on write
 au BufWrite * :call <SID>StripTrailingWhitespaces()
