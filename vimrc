@@ -39,7 +39,7 @@ Bundle 'Tabular'
 Bundle 'tpope/vim-markdown'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'arnaud-lb/vim-php-namespace'
-Bundle 'jnwhiteh/vim-golang'
+Bundle 'Blackrush/vim-gocode'
 Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'vim-scripts/a.vim'
 Bundle 'Herzult/phpspec-vim'
@@ -287,7 +287,7 @@ let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsListSnippets = '<c-tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-let g:UltiSnipsSnippetDirectories = ["snippets"]
+let g:UltiSnipsSnippetDirectories = ["ultisnips"]
 
 " Command-T fix the arrow keys
 if &term =~ "st" || &term =~ "screen"
