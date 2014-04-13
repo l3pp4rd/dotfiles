@@ -50,16 +50,18 @@ If you do not have latest **ViM** with ruby support and all patches. You can use
 
 If you want nice colors with **vim** you must have a terminal client, which supports **256** colors. You may try:
 
-- **st** does not require weird patches, it is small and works perfectly well. You can just grab my version of
+- **st** the simplest and most stable terminal client, supports all general features. You can just grab my version of
 [st](https://github.com/l3pp4rd/st) and compile it. If you need transparency, use **xcompmgr** and **transset-df**.
-- **rxvt-unicode** you would need to compile it yourself with an option for 256 colors, may add some xft support as well.
-it takes time to configure urxvt, I would prefer **st**.
+- **rxvt-unicode** you may need to compile it with **256** color support, but it may come with all features from package
+manager.
+- some others **terminator**, **guake** whatever you like.
 
 ### Tmux
 
-You should consider reading about **tmux** and install it. **Tmuxinator** is also a handy tool to be used with tmux.
-If you use **st** tmux will provide tabs and history scrolling support. Mouse scroll in urxvt sucks. Tmux will provide
-history scrolling and tabs.
+You should consider reading about **tmux** (terminal session manager) and install it. **Tmuxinator** is also a
+handy tool to be used with tmux. If you use **st** tmux will provide tabs and history scrolling support.
+Mouse scroll in urxvt suck and most of the times, tabs and history scrolling are not working well as general
+terminal features. So lets just follow UNIX philosophy and install tmux which is a tool built to handle it.
 
 ### Zsh
 
@@ -98,6 +100,7 @@ with a login manager like **slim**. You can find an example in my dotfiles.
 
 ## changelog
 
+- **2014-04-13** - refactored zsh configuration, to reuse core oh-my-zsh loading features
 - **2013-12-20** - switched from pathogen to vundle
 - **2013-12-20** - switched powerline to airline, does not require big python setup
 

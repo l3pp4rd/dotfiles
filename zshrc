@@ -27,10 +27,10 @@ plugins=(
   git                           # git source control
   extract                       # archive extraction shortcut
   golang                        # golang completions
-  zsh-syntax-highlighting       # bracket highlighters
   zsh-history-substring-search  # history substring search
   symfony2                      # symfony2 helpers
   systemd                       # systemd shortcuts
+  zsh-syntax-highlighting       # bracket highlighters
 )
 
 # source all oh-my-zsh libs, plugins, cust files
