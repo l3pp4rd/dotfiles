@@ -27,14 +27,19 @@ plugins=(
   git                           # git source control
   extract                       # archive extraction shortcut
   golang                        # golang completions
-  syntax-highlighting           # bracket highlighters
-  history-substring-search      # history substring search
+  zsh-syntax-highlighting       # bracket highlighters
+  zsh-history-substring-search  # history substring search
   symfony2                      # symfony2 helpers
   systemd                       # systemd shortcuts
 )
 
 # source all oh-my-zsh libs, plugins, cust files
 source $ZSH/oh-my-zsh.sh
+
+# bind UP and DOWN arrow keys for history substring search
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
 
 # tell me a fortune :)
 has_bin "fortune" && has_bin "cowsay" && fortune | cowsay
