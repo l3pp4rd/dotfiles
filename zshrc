@@ -3,51 +3,39 @@
 # This is my main zsh configuration.
 # It loads scripts from zsh/ and oh-my-zsh/
 
-# Path to your oh-my-zsh configuration.
+# Dotfiles path
 DOTFILES=$HOME/.dotfiles
+
+# Main oh-my-zsh path
 ZSH=$DOTFILES/oh-my-zsh
 
-# helper method
-has_executable() {
-    TMP=`which $1 2> /dev/null`
-    [ $? -eq 0 ]
-}
+# theme
+ZSH_THEME="gentoo"
 
-# Load all of the config files in oh-my-zsh that end in .zsh
-for config_file ($ZSH/lib/*.zsh) source $config_file
+# custom plugins and scripts
+ZSH_CUSTOM=$DOTFILES/zsh
 
-# Load all of my zsh files in zsh/
-for zsh_file ($DOTFILES/zsh/*.zsh) source $zsh_file
+# some settings
+DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_TITLE="true"
 
-fpath=($DOTFILES/zsh/autocompletions/src $fpath)
+# additional autocompletions
+fpath=($ZSH_CUSTOM/autocompletions/src $fpath)
 
-# Enable completion {
-    autoload -U compinit
-    compinit -i
-# }
+# list of plugins
+plugins=(
+  git                           # git source control
+  extract                       # archive extraction shortcut
+  golang                        # golang completions
+  syntax-highlighting           # bracket highlighters
+  history-substring-search      # history substring search
+  symfony2                      # symfony2 helpers
+  systemd                       # systemd shortcuts
+)
 
-# Plugins {
-    # main zsh repository
-    plugins=(git extract go history-substring-search symfony2 systemd)
-    for plugin in $plugins; do
-        source $ZSH/plugins/$plugin/$plugin.plugin.zsh
-    done
-    # from other vendors {
-        # Add fish-like syntax highlighting (must be done before substring search!)
-        source $DOTFILES/zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
-        # bind UP and DOWN arrow keys
-        for keycode in '[' '0'; do
-          bindkey "^[${keycode}A" history-substring-search-up
-          bindkey "^[${keycode}B" history-substring-search-down
-        done
-        unset keycode
-    # }
-# }
-
-# Theme {
-    source "$ZSH/themes/gentoo.zsh-theme"
-# }
+# source all oh-my-zsh libs, plugins, cust files
+source $ZSH/oh-my-zsh.sh
 
 # tell me a fortune :)
-has_executable "fortune" && has_executable "cowsay" && fortune | cowsay
+has_bin "fortune" && has_bin "cowsay" && fortune | cowsay
 

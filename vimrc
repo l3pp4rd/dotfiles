@@ -268,7 +268,6 @@ nnoremap <leader><tab> :Tab /
 " Airline
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 
 " Nerd tree
@@ -308,7 +307,7 @@ let delimitMate_matchpairs = "(:),[:],{:}"
 " Syntastic
 let g:syntastic_enable_signs=1
 let g:syntastic_enable_balloons=1
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['scala'] }
+set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
