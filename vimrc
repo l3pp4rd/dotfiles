@@ -20,10 +20,10 @@ Bundle 'vim-addon-mw-utils'
 Bundle 'mileszs/ack.vim'
 
 """ Navigation
-Bundle 'wincent/Command-T'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'LustyExplorer'
 Bundle 'scrooloose/nerdtree'
+Bundle 'kien/ctrlp.vim'
 
 """ Editing {
 Bundle 'scrooloose/syntastic'
@@ -172,6 +172,7 @@ au FileType php set omnifunc=phpcomplete#CompletePHP " php autocompletion specif
 
 au BufRead,BufNewFile *.html.twig,*.html    setlocal filetype=htmldjango
 au BufRead,BufNewFile *.js.twig,*.json      setlocal filetype=javascript
+au BufRead,BufNewFile *.md                  setlocal spell spelllang=en_us
 
 " set tab width to 2
 au BufRead,BufNewFile *.feature,*.css,*.scss,*.js,*.scala,*.yml,*.html,*.twig,*.sql setlocal tabstop=2 shiftwidth=2 softtabstop=2
@@ -259,6 +260,14 @@ nmap <leader>f [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<cr
 
 " ------------PLUGINS---------------
 
+" CtrlP
+nmap <leader>lp :CtrlP<cr>
+nmap <leader>b :CtrlPBuffer<cr>
+nmap <leader>t :CtrlP<cr>
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(vendor|assets|web)$',
+  \ }
+
 " Easymotion
 let g:EasyMotion_leader_key='.' " not using . anyways, that is way more comfortable
 
@@ -287,18 +296,6 @@ let g:UltiSnipsListSnippets = '<c-tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 let g:UltiSnipsSnippetDirectories = ["ultisnips"]
-
-" Command-T fix the arrow keys
-if &term =~ "st" || &term =~ "screen"
-  let g:CommandTCancelMap     = ['<Esc>', '<C-c>']
-  let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
-  let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
-endif
-" exclude vendor directory
-nmap <leader>ev :se wig+=*/vendor<CR>:CommandTFlush<CR>
-" include vendor directory
-nmap <leader>iv :se wig-=*/vendor<CR>:CommandTFlush<CR>
-nmap <leader><leader>r :CommandTFlush<CR>
 
 " Delimit mate
 let delimitMate_autoclose = 1

@@ -7,9 +7,6 @@ alias start="sudo systemctl start"
 alias restart="sudo systemctl restart"
 alias stop="sudo systemctl stop"
 
-# if available use silver searcher instead of grep (much more faster)
-has_executable "ag" && alias grep="ag"
-
 # ssh servers
 alias gediminasm="ssh -A gediminasm -t tmux attach"
 

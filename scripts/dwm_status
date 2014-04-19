@@ -78,7 +78,7 @@ fmem() {
 
 _cpu_temp() {
     # CPUs temp
-    temp=$(sensors | awk -F+ '{print $2}' | grep 'crit' | awk -F. '{print $1}')
+    temp=$(sensors | awk -F+ '{print $2}' | grep 'C' | awk -F. '{print $1}' | head -1)
     if [ "$temp" -gt 80 ]; then
         modifier='^bg(#dc322f)^fg(white)'
     elif [ "$temp" -gt 60 ]; then

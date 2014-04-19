@@ -6,11 +6,11 @@ colors](http://ethanschoonover.com/solarized) and mainly **Inconsolata** font.
 
 ## Requirements
 
-- You will need latest **ViM** with a support of **ruby** interpreter
+- Recent **ViM** version, does not require any interpreters like ruby or python.
 - **git**
 - **zsh**
 - **wget**
-- **256** color terminal client
+- **256** color terminal client for the best experience
 
 To use tmuxinator:
 
@@ -39,16 +39,9 @@ Clone the repository:
 
     clone git://github.com/l3pp4rd/dotfiles.git ~/.dotfiles
 
-### ViM
-
-If you do not have latest **ViM** with ruby support and all patches. You can use a shell script to install it.
-**Note:** you will need GCC and all that build stuff to compile it.
-
-    ./.dotfiles/compile/vim/build.sh
-
 ### Terminal client
 
-If you want nice colors with **vim** you must have a terminal client, which supports **256** colors. You may try:
+If you want nice colors with **vim** you should have a terminal client, which supports **256** colors. You may try:
 
 - **st** the simplest and most stable terminal client, supports all general features. You can just grab my version of
 [st](https://github.com/l3pp4rd/st) and compile it. If you need transparency, use **xcompmgr** and **transset-df**.
@@ -78,18 +71,9 @@ Execute the setup script, follow the configuration options, you may not need to 
 
 Load vim bundles:
 
-    vim +BundleInstall +qall
+    vim +PluginInstall +qall
 
 **NOTE:** most configurations use **Inconsolata** fonts, you should install or change it.
-
-### Command-T
-
-After that, for [command-t](http://github.com/wincent/Command-T) bundle you will need
-to compile a **C** extension.
-
-    cd ~/.vim/bundle/Command-T/ruby/command-t
-    ruby extconf.rb
-    make
 
 ## Window Manager
 
