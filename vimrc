@@ -268,6 +268,21 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(vendor|assets|web)$',
   \ }
 
+let g:ctrlp_buffer_func = { 'enter': 'MyCtrlPMappings' }
+
+func! MyCtrlPMappings()
+    " remove from buffer
+    nnoremap <buffer> <silent> <c-@> :call <sid>DeleteBuffer()<cr>
+endfunc
+
+func! s:DeleteBuffer()
+    let line = getline('.')
+    let bufid = line =~ '\[\d\+\*No Name\]$' ? str2nr(matchstr(line, '\d\+'))
+        \ : fnamemodify(line[2:], ':p')
+    exec "bd" bufid
+    exec "norm \<F5>"
+endfunc
+
 " Easymotion
 let g:EasyMotion_leader_key='.' " not using . anyways, that is way more comfortable
 
