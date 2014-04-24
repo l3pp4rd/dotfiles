@@ -179,6 +179,10 @@ nmap <leader>4 :setlocal tabstop=4<cr>:setlocal shiftwidth=4<cr>:setlocal softta
 nmap <leader>8 :setlocal tabstop=8<cr>:setlocal shiftwidth=8<cr>:setlocal softtabstop=8<cr>
 nmap <leader>16 :setlocal tabstop=16<cr>:setlocal shiftwidth=16<cr>:setlocal softtabstop=16<cr>
 
+" Reselect visual block after indent
+vnoremap < <gv
+vnoremap > >gv
+
 " Toggle line numbering
 nmap <silent> <leader>nn :set nonumber!<cr>
 
@@ -240,7 +244,7 @@ nmap <leader>m :e#<cr>
 
 " replace all tabs to spaces, windows new lines to normal
 nmap <leader>C :call CleanCode()<cr>
-
+nmap <leader>C$ :call StripTrailingWhitespaces()<cr>
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 "|
 "|  > PLUGINS
