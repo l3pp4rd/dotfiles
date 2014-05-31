@@ -1,15 +1,12 @@
 #!/bin/sh
 
-DZEN2_STATUS="$HOME/.dotfiles/scripts/dwm_status"
+DZEN2_STATUS="$HOME/bin/status_bar"
 BG_IMG="$HOME/.dotfiles/wallpapers/blue-1920x1080.png"
 
-#setxkbmap -option ctrl:nocaps & # disable caps lock
-#xbindkeys &                     # extra key mappings
 feh --bg-scale $BG_IMG &        # set the background wallpaper
 xsetroot -name "" &             # we have dzen2 status bar, set main WM window title to none
 mpd &                           # start music player daemon
 devmon &                        # automount removable devices
-thunar --daemon &               # start file manager daemon yo hook usb devices
 
 if [ ! -f "$DZEN2_STATUS" ]; then
     DZEN2_STATUS="echo 'dzen2 status is unavailable' | dzen2 -x 780 -y 0 -w 710 -h 20 -ta 'r' -p"
@@ -19,15 +16,13 @@ while true; do
     (sleep 0.5 && $DZEN2_STATUS) & # run dzen2 status bar, need to make sure wm loads first
 
     # start dwm
-    dwm > ~/.dwm.log
-    # read exit status
+    dwm > /dev/null # never had any errors anyway
+    # if dwm exists with any error code, restart it
     if [ $? -eq 0 ]; then
         exit 0 # means exit clean => quit
-    elif [ $? -ne 5 ]; then
-        mv ~/.dwm.log ~/.dwm.failure.log # a failure occured, save the log, never happened so far
     fi
     # dwm should be recompiled if changes were done
-    # kill running processes
-    killall dwm_status
+    # kill status bar so it can be restarted
+    killall status_bar
 done
 

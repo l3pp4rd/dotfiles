@@ -39,6 +39,8 @@ has "git" || (echo "install git"; exit 1)
 git submodule update --init
 # first check vim availability
 has "vim" || (echo "install vim"; exit 1)
+# for z, need to have file at home
+touch ~/.z
 
 if [ ! -d "$HOME/.config" ]; then
     mkdir "$HOME/.config"
@@ -66,18 +68,32 @@ if approve "Install powerline font for airline? (defaults to inconsolata fonts)"
     fc-cache -vf ~/.fonts
 fi # end powerline font installation
 
-link "$D/scripts" "$HOME/scripts"
 link "$D/vim" "$HOME/.vim"
 link "$D/vimrc" "$HOME/.vimrc"
 link "$D/zshrc" "$HOME/.zshrc"
 link "$D/ctags" "$HOME/.ctags"
 link "$D/tmux.conf" "$HOME/.tmux.conf"
-link "$D/tmux" "$HOME/.tmux"
 link "$D/mpd" "$HOME/.mpd"
 link "$D/mplayer" "$HOME/.mplayer"
-link "$D/ranger" "$HOME/.config/ranger"
+link "$D/config/ranger" "$HOME/.config/ranger"
+link "$D/config/solarized" "$HOME/.config/solarized"
 link "$D/gemrc" "$HOME/.gemrc"
 link "$D/tigrc" "$HOME/.tigrc"
 link "$D/gitignore" "$HOME/.gitignore"
 link "$D/gitconfig" "$HOME/.gitconfig"
+link "$D/xsession" "$HOME/.xsession"
 
+# binaries in $HOME
+if [ ! -d $HOME/bin ]; then
+    mkdir $HOME/bin
+fi
+
+for binary in $(ls -1 $D/bin); do
+    link "$D/bin/$binary" "$HOME/bin/$binary"
+done
+
+if approve "Install DWM xsession?"; then
+    sudo mkdir -p $D/usr/share/xsessions
+    sudo cp -f $D/usr/share/xsessions/dwm-personalized.desktop /usr/share/xsessions/dwm-personalized.desktop
+    sudo cp -f $D/usr/local/bin/dwm-personalized /usr/local/bin/dwm-personalized
+fi

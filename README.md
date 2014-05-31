@@ -26,7 +26,7 @@ You most probably need to change the **X11** lib header file location if you are
     make
     sudo make install # will install it in /usr/local/bin
 
-Dmenu shortcut to list all path executables is available at **~/.dotfiles/scripts/path_dmenu**
+Dmenu shortcut to list all path executables is available at **~/.dotfiles/bin/dmenu_run**
 It will cache all recently used applications, that way it will show up first in search results.
 
 ## Screen
@@ -44,7 +44,7 @@ Clone the repository:
 If you want nice colors with **vim** you should have a terminal client, which supports **256** colors. You may try:
 
 - **st** the simplest and most stable terminal client, supports all general features. You can just grab my version of
-[st](https://github.com/l3pp4rd/st) and compile it. If you need transparency, use **xcompmgr** and **transset-df**.
+[st](https://github.com/l3pp4rd/st) and compile it. If you need transparency, use **xcompmgr**.
 - **rxvt-unicode** you may need to compile it with **256** color support, but it may come with all features from package
 manager.
 - some others **terminator**, **guake** whatever you like.
@@ -67,7 +67,7 @@ of bash - install **zsh** first and use it as your default shell by running:
 
 Execute the setup script, follow the configuration options, you may not need to replace all configs:
 
-    ./.dotfiles/setup.sh
+    ./.dotfiles/setup
 
 Load vim bundles:
 
@@ -80,10 +80,11 @@ Load vim bundles:
 If you are tired of bloated desktops like gnome, kde.. whatever, would recommend to try [dwm](http://dwm.suckless.org/)
 
 **NOTE:** look how to manage it as an xsession in order to provide a possibility to be used inline
-with a login manager like **slim**. You can find an example in my dotfiles.
+with a login manager like **slim**.
 
-## changelog
+## Changelog
 
+- **2014-05-31** - **ViM** does not depend on any interpreters. Restructured files
 - **2014-04-13** - refactored zsh configuration, to reuse core oh-my-zsh loading features
 - **2013-12-20** - switched from pathogen to vundle
 - **2013-12-20** - switched powerline to airline, does not require big python setup

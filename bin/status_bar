@@ -116,7 +116,7 @@ RXB=`cat /sys/class/net/${CURR_IFACE}/statistics/rx_bytes`
 TXB=`cat /sys/class/net/${CURR_IFACE}/statistics/tx_bytes`
 
 # will check and update unread count every minute
-UNREAD_GEDI=0
+MAIL_OUTPUT=""
 MAILCHECK_INTERVAL=60
 
 while true; do
@@ -129,17 +129,27 @@ while true; do
     SOUND=$(_sound)
     KB_LAYOUT=$(_kb_layout)
 
-    # mailbox info
-    if [ "$MAILCHECK_INTERVAL" -gt 60 ]; then
-        MAILCHECK_INTERVAL=0
-        UNREAD_GEDI=`zsh -c '~/scripts/email/check_mailbox.sh ~/accounts.dat Gedi'`
+    # mailbox info, only if accounts are set
+    if [ -f "$HOME/.gmail-accounts" ]; then
+        if [ $MAILCHECK_INTERVAL -gt 60 ]; then
+            MAIL_OUTPUT="^i($DZEN_ICONPATH/mail.xbm)"
+            for line in $(cat "$HOME/.gmail-accounts"); do
+                USR=$(echo $line | awk -F';' '{print $2;}')
+                PSW=$(echo $line | awk -F';' '{print $3;}')
+                UNREAD=$(gmail-stats -u $USR -p $PSW -c)
+                if [ $? -gt 0 ]; then
+                    UNREAD=0
+                fi
+                CLR=""
+                if [ $UNREAD -gt 0 ]; then
+                    CLR="#dc322f"
+                fi
+                MAIL_OUTPUT="$MAIL_OUTPUT^fg($CLR) $UNREAD ^fg()"
+            done
+            MAILCHECK_INTERVAL=0
+        fi
     fi
-    if [[ "$UNREAD_GEDI" -gt 0 ]]; then
-        mailClr="#dc322f"
-    else
-        mailClr=""
-    fi
-    echo -n "$KB_LAYOUT ^i($DZEN_ICONPATH/mail.xbm)^fg(${mailClr}) ${UNREAD_GEDI} ^fg()"
+    echo -n "$KB_LAYOUT $MAIL_OUTPUT"
 
     # use active network interface
     CURR_IFACE=$(_active_network_interface)
