@@ -7,11 +7,10 @@ echo -e " replace\n 'filepat' - file pattern, etc.: '*.php'\n 'findstring' - str
 exit 1
 fi
 
-#echo $1 $2 $3
 for i in `find . -name "$1" -exec grep -l "$2" {} \;`
 do
-	mv "$i" "$i.sedsave"
-	sed "s/$2/$3/g" "$i.sedsave" > "$i"
-	echo $i
-	rm "$i.sedsave"
-done 
+    mv "$i" "$i.sedsave"
+    sed "s/$2/$3/g" "$i.sedsave" > "$i"
+    echo $i
+    rm "$i.sedsave"
+done

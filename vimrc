@@ -129,7 +129,7 @@ se showmatch
 
 " Indentation
 se backspace=indent,eol,start                                   " Intuitive backspacing.
-se list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:·    " Highlight trailing spaces and tabs
+"se list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:·    " Highlight trailing spaces and tabs
 se autoindent                                                   " automatic indent new lines
 se expandtab                                                    " expand tabs to spaces
 se smartindent
@@ -416,7 +416,8 @@ if has('autocmd')
     augroup FileTypes
         autocmd!
         au FileType helpfile setlocal nonumber
-        au FileType php set omnifunc=phpcomplete#CompletePHP " php autocompletion specifics
+        " php autocompletion sucks with ctags
+        "au FileType php set omnifunc=phpcomplete#CompletePHP " php autocompletion specifics
 
         au BufRead,BufNewFile *.html.twig,*.html    setlocal filetype=htmldjango
         au BufRead,BufNewFile *.js.twig,*.json      setlocal filetype=javascript
@@ -426,9 +427,9 @@ if has('autocmd')
         au BufRead,BufNewFile *.feature,*.css,*.scss,*.js       setlocal ts=2 sw=2 sts=2
         au BufRead,BufNewFile *.scala,*.yml,*.html,*.twig,*.sql setlocal ts=2 sw=2 sts=2
 
-        " go lang use tabs instead spaces, trailing tabs change color to black, should be as background
+        " go lang use tab indentation instead spaces
         au BufRead,BufNewFile *.go setlocal noet ts=4 sw=4 sts=0 ci pi lcs=tab:\ \ ,trail:·,extends:>,precedes:<,nbsp:·
-        highlight StartTab ctermbg=16 guibg=#000000
+        highlight StartTab ctermbg=NONE guibg=NONE " no color, otherwise highlighted as SpecialKey
         au BufRead,BufNewFile *.go match StartTab /\t/
     augroup END
 
