@@ -111,8 +111,8 @@ se wildmenu                     " command line autocompletion
 se wildmode=list:longest,full   " options for autocompletion
 " ignore in most cases
 se wildignore+=*.o,*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs,*/tmp,*.swp,*.jpg
-se wildignore+=*.png,*.xpm,*.gif,*.ico,*/vendor,web/css,web/js,web/bundles,*/target/*
-se wildignore+=*/tags,*/vendor.tags,*.phar
+se wildignore+=*.png,*.xpm,*.gif,*.ico,*/vendor,web/dist,web/bundles,*/target/*
+se wildignore+=*/tags,*/vendor.tags,*.phar,*/node_modules
 se tags+=vendor.tags            " read vendor.tags also
 se gdefault                     " the /g flag on :s substitutions by default
 
