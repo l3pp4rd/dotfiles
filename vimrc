@@ -231,6 +231,12 @@ vnoremap x "_x
 " yank only when <leader> is used
 nnoremap <leader>x "+x
 vnoremap <leader>x "+x
+" replace character without yanking
+nnoremap c "_c
+vnoremap c "_c
+" yank only when <leader> is used
+" nnoremap <leader>c "+c
+" vnoremap <leader>c "+c
 " replace currently selected text with default register, without yanking it
 vnoremap p "_dP
 " replace with yanking, only when <leader> is used
