@@ -39,7 +39,7 @@ Bundle 'Tabular'
 Bundle 'tpope/vim-markdown'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'arnaud-lb/vim-php-namespace'
-Bundle 'Blackrush/vim-gocode'
+Plugin 'fatih/vim-go'
 Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'vim-scripts/a.vim'
 Bundle 'Herzult/phpspec-vim'
@@ -407,6 +407,14 @@ if ! has('gui_running')
 endif
 
 if has('autocmd')
+    augroup Golang
+        autocmd!
+        " go lang use tab indentation instead spaces
+        au BufRead,BufNewFile *.go setlocal noet ts=4 sw=4 sts=0 ci pi lcs=tab:\ \ ,trail:·,extends:>,precedes:<,nbsp:·
+        highlight StartTab ctermbg=NONE guibg=NONE " no color, otherwise highlighted as SpecialKey
+        au BufRead,BufNewFile *.go match StartTab /\t/
+    augroup END
+
     augroup Cursor
         autocmd!
         au FocusLost silent! :wa
@@ -432,14 +440,9 @@ if has('autocmd')
         " set tab width to 2
         au BufRead,BufNewFile *.feature,*.css,*.scss,*.js       setlocal ts=2 sw=2 sts=2
         au BufRead,BufNewFile *.scala,*.yml,*.html,*.twig,*.sql setlocal ts=2 sw=2 sts=2
-
-        " go lang use tab indentation instead spaces
-        au BufRead,BufNewFile *.go setlocal noet ts=4 sw=4 sts=0 ci pi lcs=tab:\ \ ,trail:·,extends:>,precedes:<,nbsp:·
-        highlight StartTab ctermbg=NONE guibg=NONE " no color, otherwise highlighted as SpecialKey
-        au BufRead,BufNewFile *.go match StartTab /\t/
     augroup END
 
-    augroup Commands
+    augroup OnSave
         autocmd!
         " strip trailing space on write
         au BufWrite * :call <SID>StripTrailingWhitespaces()
