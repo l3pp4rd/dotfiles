@@ -21,7 +21,9 @@ Bundle 'mileszs/ack.vim'
 
 """ Navigation
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'LustyExplorer'
+if has('ruby')
+    Bundle 'LustyExplorer'
+endif
 Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
 
@@ -31,7 +33,9 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Raimondi/delimitMate'
 Bundle 'ervandew/supertab'
-Bundle 'SirVer/ultisnips'
+if has('python') || has('python3')
+    Bundle 'SirVer/ultisnips'
+endif
 Bundle 'mattn/emmet-vim'
 Bundle 'Tabular'
 
@@ -407,14 +411,6 @@ if ! has('gui_running')
 endif
 
 if has('autocmd')
-    augroup Golang
-        autocmd!
-        " go lang use tab indentation instead spaces
-        au BufRead,BufNewFile *.go setlocal noet ts=4 sw=4 sts=0 ci pi lcs=tab:\ \ ,trail:·,extends:>,precedes:<,nbsp:·
-        highlight StartTab ctermbg=NONE guibg=NONE " no color, otherwise highlighted as SpecialKey
-        au BufRead,BufNewFile *.go match StartTab /\t/
-    augroup END
-
     augroup Cursor
         autocmd!
         au FocusLost silent! :wa
