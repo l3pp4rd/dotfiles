@@ -368,7 +368,7 @@ nmap <silent> <leader>gw :Gwrite<CR>
 nmap <silent> <leader>gr :Gremove<CR>
 
 " Zencoding - aka emmet-vim
-let g:user_emmet_leader_key = '<c-l>'
+let g:user_emmet_leader_key = '<c-l>' " CTRL + L + <leader>
 
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
