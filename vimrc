@@ -6,47 +6,47 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 """ Dependencies for bundles
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 """ Appearance
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'bling/vim-airline'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
 
 """ General
-Bundle 'tpope/vim-commentary'
-Bundle 'tlib'
-Bundle 'Rename'
-Bundle 'vim-addon-mw-utils'
-Bundle 'mileszs/ack.vim'
+Plugin 'tpope/vim-commentary'
+Plugin 'Rename'
+Plugin 'mileszs/ack.vim'
 
 """ Navigation
-Bundle 'Lokaltog/vim-easymotion'
+Plugin 'Lokaltog/vim-easymotion'
 if has('ruby')
-    Bundle 'LustyExplorer'
+    Plugin 'LustyExplorer'
 endif
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
 
 """ Editing {
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-Bundle 'Raimondi/delimitMate'
-Bundle 'ervandew/supertab'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Raimondi/delimitMate'
 if has('python') || has('python3')
-    Bundle 'SirVer/ultisnips'
+    Plugin 'SirVer/ultisnips'
+    Plugin 'Valloric/YouCompleteMe'
+else
+    Plugin 'ervandew/supertab'
 endif
-Bundle 'mattn/emmet-vim'
-Bundle 'Tabular'
+Plugin 'mattn/emmet-vim'
+Plugin 'Tabular'
 
 """ Language specific
-Bundle 'tpope/vim-markdown'
-Bundle 'evanmiller/nginx-vim-syntax'
-Bundle 'arnaud-lb/vim-php-namespace'
+Plugin 'tpope/vim-markdown'
+Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'fatih/vim-go'
-Bundle 'shawncplus/phpcomplete.vim'
-Bundle 'vim-scripts/a.vim'
-Bundle 'Herzult/phpspec-vim'
+Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'vim-scripts/a.vim'
+Plugin 'Herzult/phpspec-vim'
 
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -313,11 +313,29 @@ nmap <leader>u :call PhpInsertUse()<cr>
 nmap <leader>e :call PhpExpandClass()<cr>
 
 " UltiSnips
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsListSnippets = '<c-tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 let g:UltiSnipsSnippetDirectories = ["ultisnips"]
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-e>"
+" this mapping Enter key to <C-y> to chose the current highlight item
+" and close the selection list, same as other IDEs.
+" CONFLICT with some plugins like tpope/Endwise
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Delimit mate
 let delimitMate_autoclose = 1
