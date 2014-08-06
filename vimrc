@@ -454,6 +454,10 @@ if has('autocmd')
         " set tab width to 2
         au BufRead,BufNewFile *.feature,*.css,*.scss,*.js       setlocal ts=2 sw=2 sts=2
         au BufRead,BufNewFile *.scala,*.yml,*.html,*.twig,*.sql setlocal ts=2 sw=2 sts=2
+
+
+        " Highlight whitespace for non GO files
+        au BufRead,BufNewFile * if index(['go'], &ft) < 0 | setlocal list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:·
     augroup END
 
     augroup OnSave
