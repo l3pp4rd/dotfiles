@@ -44,7 +44,9 @@ Plugin 'tpope/vim-markdown'
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'fatih/vim-go'
-Plugin 'shawncplus/phpcomplete.vim'
+"Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'evidens/vim-twig'
+Plugin 'docteurklein/vim-symfony'
 Plugin 'vim-scripts/a.vim'
 Plugin 'Herzult/phpspec-vim'
 
@@ -447,9 +449,8 @@ if has('autocmd')
         " php autocompletion sucks with ctags
         "au FileType php set omnifunc=phpcomplete#CompletePHP " php autocompletion specifics
 
-        au BufRead,BufNewFile *.html.twig,*.html    setlocal filetype=htmldjango
-        au BufRead,BufNewFile *.js.twig,*.json      setlocal filetype=javascript
-        au BufRead,BufNewFile *.md                  setlocal spell spelllang=en_us
+        au BufRead,BufNewFile *.json    setlocal filetype=javascript
+        au BufRead,BufNewFile *.md      setlocal spell spelllang=en_us
 
         " set tab width to 2
         au BufRead,BufNewFile *.feature,*.css,*.scss,*.js       setlocal ts=2 sw=2 sts=2
