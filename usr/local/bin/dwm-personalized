@@ -5,7 +5,7 @@ BG_IMG="$HOME/.dotfiles/wallpapers/blue-1920x1080.png"
 
 feh --bg-scale $BG_IMG &        # set the background wallpaper
 xsetroot -name "" &             # we have dzen2 status bar, set main WM window title to none
-mpd &                           # start music player daemon
+mpd $HOME/.mpdconf &            # start music player daemon
 devmon &                        # automount removable devices
 
 if [ ! -f "$DZEN2_STATUS" ]; then

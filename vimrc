@@ -42,9 +42,7 @@ Plugin 'Tabular'
 """ Language specific
 Plugin 'tpope/vim-markdown'
 Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'fatih/vim-go'
-"Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'evidens/vim-twig'
 Plugin 'docteurklein/vim-symfony'
 Plugin 'vim-scripts/a.vim'
@@ -310,10 +308,6 @@ if executable('ag')
 endif
 nmap <leader>a :Ack
 
-" PHP namespace
-nmap <leader>u :call PhpInsertUse()<cr>
-nmap <leader>e :call PhpExpandClass()<cr>
-
 " UltiSnips
 let g:UltiSnipsSnippetDirectories = ["ultisnips"]
 function! g:UltiSnips_Complete()
@@ -352,12 +346,6 @@ set statusline+=%*
 
 " Alternate
 nmap <leader>h :A<cr>
-
-" Complete options (disable preview scratch window)
-set completeopt=menu,menuone,longest
-set pumheight=15
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 " Fugitive
 nmap <silent> <leader>gs :Gstatus<CR>
@@ -446,8 +434,6 @@ if has('autocmd')
     augroup FileTypes
         autocmd!
         au FileType helpfile setlocal nonumber
-        " php autocompletion sucks with ctags
-        "au FileType php set omnifunc=phpcomplete#CompletePHP " php autocompletion specifics
 
         au BufRead,BufNewFile *.json    setlocal filetype=javascript
         au BufRead,BufNewFile *.md      setlocal spell spelllang=en_us

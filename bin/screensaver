@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# screensaving when streaming video
+
+usage() {
+    printf "%s\n" "Usage: ${0##*/} on|off"
+    exit 1
+}
+
+case "$1" in
+    on) xautolock -disable &&
+        xset s off; xset s noblank; xset -dpms
+        printf "%s\n" "Blanking disabled"
+        ;;
+    off) xautolock -enable &&
+        xset s on; xset s blank; xset +dpms
+        printf "%s\n" "Blanking enabled"
+        ;;
+    *) usage
+        ;;
+esac
