@@ -215,6 +215,9 @@ cmap w!! w !sudo tee % >/dev/null<CR>:e!<CR><CR>
 " Select all text
 nmap <C-a> ggVG$
 
+" Paste from System register on insert mode
+inoremap <C-v> <C-o>"+p
+
 " YANKING BEHAVIOR
 
 " I found my self the default vim behavior less useful in day to day work
@@ -245,9 +248,6 @@ vnoremap c "_c
 vnoremap p "_dP
 " replace with yanking, only when <leader> is used
 vnoremap <leader>p "+dP
-
-" save a session
-nmap <leader>s :mksession!
 
 " go to previous most recent file opened
 nmap <leader>m :e#<cr>
@@ -298,7 +298,6 @@ let g:airline#extensions#syntastic#enabled = 1
 
 " Nerd tree
 nmap <Leader>lt :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<CR>
-nmap <Leader>lT :let NERDTreeQuitOnOpen = 0<bar>NERDTreeToggle<CR>
 
 " ACK, used for silver search aka ag
 if executable('ag')

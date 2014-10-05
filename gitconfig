@@ -24,10 +24,11 @@
     changed = yellow
     untracked = red
 
+[diff]
+    tool = vimdiff
+
 [merge]
     tool = vimdiff
-    summary = true
-    verbosity = 1
 
 [branch]
     autosetupmerge = true
