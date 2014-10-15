@@ -359,6 +359,9 @@ nmap <silent> <leader>gr :Gremove<CR>
 " Zencoding - aka emmet-vim
 let g:user_emmet_leader_key = '<c-l>' " CTRL + L + <leader>
 
+" ViM GO
+let g:go_fmt_command = "goimports"
+
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 "|
