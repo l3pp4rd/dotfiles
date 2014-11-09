@@ -1,3 +1,5 @@
+# vim: set ft=dosini :
+
 [usae]
     name = gedi
 

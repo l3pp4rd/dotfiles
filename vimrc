@@ -16,6 +16,7 @@ Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-commentary'
 Plugin 'Rename'
 Plugin 'mileszs/ack.vim'
+Plugin 'haya14busa/incsearch.vim'
 
 """ Navigation
 Plugin 'Lokaltog/vim-easymotion'
@@ -199,9 +200,6 @@ nmap <leader>c :e <c-r>=expand('%:h')<cr>/
 " Toggle nowrap
 nmap <silent> <leader>nw :set nowrap!<cr>
 
-" Clear search highlight
-nmap <silent> <leader>/ :let @/=""<cr>
-
 " Pull word under cursor into LHS of a substitute (for quick search and replace)
 nmap <leader>ss :%s#<C-r>=expand("<cword>")<cr>#
 
@@ -275,7 +273,11 @@ func! MyCtrlPMappings()
 endfunc
 
 " Easymotion
-let g:EasyMotion_leader_key='t' " always associated 't' AS 'to'
+map <leader><leader> <Plug>(easymotion-prefix)
+map <leader>/ <Plug>(easymotion-sn)
+omap <leader>/ <Plug>(easymotion-tn)
+map n <Plug>(easymotion-next)
+map N <Plug>(easymotion-prev)
 
 " Tabular
 nmap <Leader>a& :Tabularize /&<CR>
@@ -361,6 +363,19 @@ let g:user_emmet_leader_key = '<c-l>' " CTRL + L + <leader>
 
 " ViM GO
 let g:go_fmt_command = "goimports"
+
+" highlight searching
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+let g:incsearch#auto_nohlsearch = 1
+let g:incsearch#magic = '\v'
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
 
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
