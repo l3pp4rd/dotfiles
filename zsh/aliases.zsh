@@ -20,3 +20,6 @@ alias reload=". ~/.zshrc"
 
 # misc
 alias halt="echo 'Use poweroff instead'"
+
+# hub
+has_bin "fortune" && eval "$(hub alias -s)"
