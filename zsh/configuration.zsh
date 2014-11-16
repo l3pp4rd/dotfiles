@@ -19,8 +19,3 @@ eval $(dircolors $DOTFILES/zsh/dircolors-solarized/dircolors.ansi-dark)
 # default text editor
 export EDITOR=vim
 
-# checks if binary exists in path
-has_bin() {
-    TMP=`which $1 2> /dev/null`
-    [ $? -eq 0 ]
-}

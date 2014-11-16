@@ -3,6 +3,12 @@
 # This is my main zsh configuration.
 # It loads scripts from zsh/ and oh-my-zsh/
 
+# checks if binary exists in path
+has_bin() {
+    TMP=`which $1 2> /dev/null`
+    [ $? -eq 0 ]
+}
+
 # Dotfiles path
 DOTFILES=$HOME/.dotfiles
 
