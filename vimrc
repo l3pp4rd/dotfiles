@@ -14,7 +14,6 @@ Plugin 'bling/vim-airline'
 
 """ General
 Plugin 'tpope/vim-commentary'
-Plugin 'Rename'
 Plugin 'mileszs/ack.vim'
 Plugin 'haya14busa/incsearch.vim'
 
@@ -46,7 +45,6 @@ Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'fatih/vim-go'
 Plugin 'evidens/vim-twig'
 Plugin 'docteurklein/vim-symfony'
-Plugin 'vim-scripts/a.vim'
 Plugin 'Herzult/phpspec-vim'
 
 "
@@ -117,8 +115,7 @@ se wildmode=list:longest,full   " options for autocompletion
 " ignore in most cases
 se wildignore+=*.o,*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs,*/tmp,*.swp,*.jpg
 se wildignore+=*.png,*.xpm,*.gif,*.ico,*/vendor,web/dist,web/bundles,*/target/*
-se wildignore+=*/tags,*/vendor.tags,*.phar,*/node_modules
-se tags+=vendor.tags            " read vendor.tags also
+se wildignore+=*/tags,*.phar,*/node_modules
 se gdefault                     " the /g flag on :s substitutions by default
 
 " Enables the reading of .vimrc, .exrc and .gvimrc in the current directory. http://stackoverflow.com/a/7541744/186355
@@ -172,36 +169,20 @@ vnoremap / /\v
 nnoremap ? ?\v
 vnoremap ? ?\v
 
-"
-"+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-"|
-"|  > MAPPINGS
-"|
-"|
+" === MAPPINGS ===
 let mapleader=","       " Use the comma as leader
 nmap <leader>2 :setlocal tabstop=2<cr>:setlocal shiftwidth=2<cr>:setlocal softtabstop=2<cr>
 nmap <leader>4 :setlocal tabstop=4<cr>:setlocal shiftwidth=4<cr>:setlocal softtabstop=4<cr>
-nmap <leader>8 :setlocal tabstop=8<cr>:setlocal shiftwidth=8<cr>:setlocal softtabstop=8<cr>
-nmap <leader>16 :setlocal tabstop=16<cr>:setlocal shiftwidth=16<cr>:setlocal softtabstop=16<cr>
 
 " Reselect visual block after indent
 vnoremap < <gv
 vnoremap > >gv
 
 " Toggle line numbering
-nmap <silent> <leader>nn :set nonumber!<cr>
-
-" Rename current file, sugget the same name
-nmap <leader>r :Rename <c-r>=@%<cr>
+nmap <silent> <leader>n :set nonumber!<cr>
 
 " Create a new file, suggest current directory of the file edited
 nmap <leader>c :e <c-r>=expand('%:h')<cr>/
-
-" Toggle nowrap
-nmap <silent> <leader>nw :set nowrap!<cr>
-
-" Pull word under cursor into LHS of a substitute (for quick search and replace)
-nmap <leader>ss :%s#<C-r>=expand("<cword>")<cr>#
 
 " Global quick search-replace
 nmap <leader>sr :!ack -l <C-r>=expand("<cword>")<cr> \|
@@ -213,56 +194,15 @@ cmap w!! w !sudo tee % >/dev/null<CR>:e!<CR><CR>
 " Select all text
 nmap <C-a> ggVG$
 
-" Paste from System register on insert mode
-inoremap <C-v> <C-o>"+p
-
-" YANKING BEHAVIOR
-
-" I found my self the default vim behavior less useful in day to day work
-" when it yanks removed text into the default registry. So the default registry
-" will be used only in case if command was followed by <leader>.
-"
-" It might be useful to use a different registry in that case, while maintaining default behavior.
-
-" delete without yanking by default
-nnoremap d "_d
-vnoremap d "_d
-" yank only when <leader> is used
-nnoremap <leader>d "+d
-vnoremap <leader>d "+d
-" remove character without yanking
-nnoremap x "_x
-vnoremap x "_x
-" yank only when <leader> is used
-nnoremap <leader>x "+x
-vnoremap <leader>x "+x
-" replace character without yanking
-nnoremap c "_c
-vnoremap c "_c
-" yank only when <leader> is used
-" nnoremap <leader>c "+c
-" vnoremap <leader>c "+c
-" replace currently selected text with default register, without yanking it
-vnoremap p "_dP
-" replace with yanking, only when <leader> is used
-vnoremap <leader>p "+dP
-
 " go to previous most recent file opened
 nmap <leader>m :e#<cr>
 
 " replace all tabs to spaces, windows new lines to normal
 nmap <leader>C :call CleanCode()<cr>
-nmap <leader>C$ :call StripTrailingWhitespaces()<cr>
-"+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-"|
-"|  > PLUGINS
-"|
-"|
 
-" CtrlP
-nmap <leader>lp :CtrlP<cr>
+" === PLUGINS ===
 nmap <leader>b :CtrlPBuffer<cr>
-nmap <leader>t :CtrlP<cr>
+nmap <leader>l :CtrlP<cr>
 
 let g:ctrlp_custom_ignore = '\v[\/](vendor|\.git|\.hg|\.svn)$'
 let g:ctrlp_buffer_func = { 'enter': 'MyCtrlPMappings' }
@@ -279,27 +219,13 @@ omap <leader>/ <Plug>(easymotion-tn)
 map n <Plug>(easymotion-next)
 map N <Plug>(easymotion-prev)
 
-" Tabular
-nmap <Leader>a& :Tabularize /&<CR>
-vmap <Leader>a& :Tabularize /&<CR>
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-nmap <Leader>a> :Tabularize /=><CR>
-vmap <Leader>a> :Tabularize /=><CR>
-nmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-
 " Airline
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 1
 
 " Nerd tree
-nmap <Leader>lt :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<CR>
+nmap <Leader>. :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<CR>
 
 " ACK, used for silver search aka ag
 if executable('ag')
@@ -307,7 +233,6 @@ if executable('ag')
     set grepformat=%f:%l:%c:%m
     let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
-nmap <leader>a :Ack
 
 " UltiSnips
 let g:UltiSnipsSnippetDirectories = ["ultisnips"]
@@ -344,9 +269,6 @@ let g:syntastic_enable_balloons=1
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-" Alternate
-nmap <leader>h :A<cr>
 
 " Fugitive
 nmap <silent> <leader>gs :Gstatus<CR>
