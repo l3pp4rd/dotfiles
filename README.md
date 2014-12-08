@@ -67,7 +67,7 @@ of bash - install **zsh** first and use it as your default shell by running:
 
 Execute the setup script, follow the configuration options, you may not need to replace all configs:
 
-    ./.dotfiles/setup
+    ./.dotfiles/setup.sh
 
 Load vim bundles:
 

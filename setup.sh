@@ -39,8 +39,6 @@ has "git" || (echo "install git"; exit 1)
 git submodule update --init
 # first check vim availability
 has "vim" || (echo "install vim"; exit 1)
-# for z, need to have file at home
-touch ~/.z
 
 if [ ! -d "$HOME/.config" ]; then
     mkdir "$HOME/.config"
@@ -77,11 +75,8 @@ link "$D/mpd" "$HOME/.mpd"
 link "$D/mplayer" "$HOME/.mplayer"
 link "$D/config/ranger" "$HOME/.config/ranger"
 link "$D/config/solarized" "$HOME/.config/solarized"
-link "$D/gemrc" "$HOME/.gemrc"
-link "$D/tigrc" "$HOME/.tigrc"
 link "$D/gitignore" "$HOME/.gitignore"
 link "$D/gitconfig" "$HOME/.gitconfig"
-link "$D/xsession" "$HOME/.xsession"
 
 # binaries in $HOME
 if [ ! -d $HOME/bin ]; then
