@@ -19,9 +19,6 @@ Plugin 'haya14busa/incsearch.vim'
 
 """ Navigation
 Plugin 'Lokaltog/vim-easymotion'
-if has('ruby')
-    Plugin 'LustyExplorer'
-endif
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 
@@ -251,7 +248,6 @@ function! g:UltiSnips_Complete()
     return ""
 endfunction
 
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-e>"
 " this mapping Enter key to <C-y> to chose the current highlight item
@@ -370,6 +366,11 @@ if has('autocmd')
         au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm$"|endif|endif
     augroup END
 
+    augroup Ultisnips
+        autocmd!
+        au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+    augroup END
+
     augroup FileTypes
         autocmd!
         au FileType helpfile setlocal nonumber
@@ -378,8 +379,8 @@ if has('autocmd')
         au BufRead,BufNewFile *.md      setlocal spell spelllang=en_us
 
         " set tab width to 2
-        au BufRead,BufNewFile *.feature,*.css,*.scss,*.js       setlocal ts=2 sw=2 sts=2
-        au BufRead,BufNewFile *.scala,*.yml,*.html,*.twig,*.sql setlocal ts=2 sw=2 sts=2
+        au BufRead,BufNewFile *.feature,*.css,*.scss,*.js,*.json    setlocal ts=2 sw=2 sts=2
+        au BufRead,BufNewFile *.scala,*.yml,*.html,*.twig,*.sql     setlocal ts=2 sw=2 sts=2
 
 
         " Highlight whitespace for non GO files
