@@ -35,6 +35,7 @@ else
 endif
 Plugin 'mattn/emmet-vim'
 Plugin 'Tabular'
+Plugin 'editorconfig/editorconfig-vim'
 
 """ Language specific
 Plugin 'tpope/vim-markdown'
