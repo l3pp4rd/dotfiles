@@ -144,7 +144,6 @@ se scrolloff=3
 
 " wrapping linebreak
 se wrap linebreak
-se textwidth=120
 se colorcolumn=120
 se formatoptions=qrn1
 
