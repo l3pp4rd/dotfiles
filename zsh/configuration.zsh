@@ -13,6 +13,9 @@ stty -ixon -ixoff
 # Add dircolors
 eval $(dircolors $DOTFILES/zsh/dircolors-solarized/dircolors.ansi-dark)
 
+# git templates
+export GIT_TEMPLATE_DIR=$DOTFILES/git/template
+
 # default text editor
 export EDITOR=vim
 

@@ -76,7 +76,6 @@ link "$D/config/ranger" "$HOME/.config/ranger"
 link "$D/config/solarized" "$HOME/.config/solarized"
 link "$D/git/gitignore" "$HOME/.gitignore"
 link "$D/git/gitconfig" "$HOME/.gitconfig"
-link "$D/git/githooks" "$HOME/.githooks"
 
 # binaries in $HOME
 if [ ! -d $HOME/bin ]; then
