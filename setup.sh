@@ -69,14 +69,14 @@ fi # end powerline font installation
 link "$D/vim" "$HOME/.vim"
 link "$D/vimrc" "$HOME/.vimrc"
 link "$D/zshrc" "$HOME/.zshrc"
-link "$D/ctags" "$HOME/.ctags"
 link "$D/tmux.conf" "$HOME/.tmux.conf"
 link "$D/mpd" "$HOME/.mpd"
 link "$D/mplayer" "$HOME/.mplayer"
 link "$D/config/ranger" "$HOME/.config/ranger"
 link "$D/config/solarized" "$HOME/.config/solarized"
-link "$D/gitignore" "$HOME/.gitignore"
-link "$D/gitconfig" "$HOME/.gitconfig"
+link "$D/git/gitignore" "$HOME/.gitignore"
+link "$D/git/gitconfig" "$HOME/.gitconfig"
+link "$D/git/githooks" "$HOME/.githooks"
 
 # binaries in $HOME
 if [ ! -d $HOME/bin ]; then

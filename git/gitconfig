@@ -51,6 +51,9 @@
 [github]
     user = l3pp4rd
 
+[init]
+    templatedir = ~/.githooks
+
 [alias]
     unstage = reset HEAD
 
