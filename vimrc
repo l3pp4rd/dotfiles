@@ -34,6 +34,7 @@ else
     Plugin 'ervandew/supertab'
 endif
 Plugin 'mattn/emmet-vim'
+Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'Tabular'
 Plugin 'editorconfig/editorconfig-vim'
 
@@ -294,6 +295,10 @@ map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
+
+" Splitjoin
+nmap <Leader>sj :SplitjoinJoin<cr>
+nmap <Leader>ss :SplitjoinSplit<cr>
 
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
