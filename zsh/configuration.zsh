@@ -19,3 +19,5 @@ export GIT_TEMPLATE_DIR=$DOTFILES/git/template
 # default text editor
 export EDITOR=vim
 
+# default browser
+export BROWSER=chromium

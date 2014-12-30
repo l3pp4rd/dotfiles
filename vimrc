@@ -42,8 +42,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'tpope/vim-markdown'
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'fatih/vim-go'
-Plugin 'evidens/vim-twig'
-Plugin 'docteurklein/vim-symfony'
+Plugin 'mitsuhiko/vim-jinja'
 Plugin 'Herzult/phpspec-vim'
 
 "
@@ -380,12 +379,13 @@ if has('autocmd')
         autocmd!
         au FileType helpfile setlocal nonumber
 
-        au BufRead,BufNewFile *.json    setlocal filetype=javascript
-        au BufRead,BufNewFile *.md      setlocal spell spelllang=en_us
+        au BufRead,BufNewFile *.json setlocal filetype=javascript
+        au BufRead,BufNewFile *.md setlocal spell spelllang=en_us
+        au BufRead,BufNewFile *.twig,*.html,*.htm setlocal filetype=htmljinja
 
         " set tab width to 2
-        au BufRead,BufNewFile *.feature,*.css,*.scss,*.js,*.json    setlocal ts=2 sw=2 sts=2
-        au BufRead,BufNewFile *.scala,*.yml,*.html,*.twig,*.sql     setlocal ts=2 sw=2 sts=2
+        au BufRead,BufNewFile *.feature,*.css,*.scss,*.js,*.json setlocal ts=2 sw=2 sts=2
+        au BufRead,BufNewFile *.scala,*.yml,*.html,*.twig,*.sql setlocal ts=2 sw=2 sts=2
 
 
         " Highlight whitespace for non GO files
