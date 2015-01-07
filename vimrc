@@ -39,6 +39,7 @@ Plugin 'Tabular'
 Plugin 'editorconfig/editorconfig-vim'
 
 """ Language specific
+Plugin 'groenewege/vim-less'
 Plugin 'tpope/vim-markdown'
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'fatih/vim-go'
