@@ -1,11 +1,11 @@
 #!/bin/sh
 
-FN="xft:Inconsolata:size=16"
+FN="Inconsolata:size=16"
 HIST="$HOME/.dmenu/workspace"
 source ${XDG_CONFIG_HOME:-$HOME/.config}/solarized/colors.ini
 
-project=$(ls -1 ~/.tmuxinator | cut -d. -f1 | dmenu -i -nb $base03 -nf $base0 -sb $base02 -sf $orange -fn $FN -hf $HIST -p 'TMUX workspace ')
+project=$(ls -1 $HOME/.tmuxinator | cut -d. -f1 | dmenu -i -nb $base03 -nf $base0 -sb $base02 -sf $orange -fn $FN -hf $HIST -p 'TMUX workspace ')
 
 [ -z "$project" ] && exit
 
-mux "$project"
+tmuxinator "$project"

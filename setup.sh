@@ -87,7 +87,7 @@ for binary in $(ls -1 $D/bin); do
 done
 
 if approve "Install DWM xsession?"; then
-    sudo mkdir -p $D/usr/share/xsessions
+    sudo mkdir -p /usr/share/xsessions
     sudo cp -f $D/usr/share/xsessions/dwm-personalized.desktop /usr/share/xsessions/dwm-personalized.desktop
     sudo cp -f $D/usr/local/bin/dwm-personalized /usr/local/bin/dwm-personalized
 fi
