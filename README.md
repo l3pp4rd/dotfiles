@@ -63,6 +63,34 @@ of bash - install **zsh** first and use it as your default shell by running:
 
     chsh -s $(which zsh)
 
+### ViM
+
+A **python** and **X** support may be useful in most cases to have with vim. **X** support will allow to copy and paste
+from the same buffer and with python come some useful plugins. Anyway it is not necessary to compile vim on your own to
+setup these dotfiles, but if you do:
+
+```
+hg clone https://vim.googlecode.com/hg/ /tmp/vim-build
+cd /tmp/vim-build
+
+./configure \
+--prefix=/usr/local \
+--with-features=huge \
+--with-compiledby='Custom edition' \
+--enable-gpm \
+--enable-acl \
+--with-x=yes \
+--disable-gui \
+--enable-multibyte \
+--enable-cscope \
+--disable-netbeans \
+--enable-pythoninterp \
+--disable-python3interp
+
+make
+sudo make install
+```
+
 ### Install dotfiles
 
 Execute the setup script, follow the configuration options, you may not need to replace all configs:
