@@ -20,10 +20,6 @@ fdate() {
     printf "^fg(white)%s %s^fg()" "$icon" "$today"
 }
 
-fgtime() {
-    print -n "AU:" $(TZ='Australia/Sydney' date +'%H:%M')
-}
-
 _kb_layout() {
     layout=`setxkbmap -print | awk -F"+" '/xkb_symbols/ {print $2}'`
     layout=`echo $layout | tr '[a-z]' '[A-Z]'`
@@ -65,7 +61,7 @@ fload() {
 fmem() {
     # MEMORY
 
-    memory=$(free | awk '/buffers\/cache:/ {printf "%.0f", 100*$3/($3 + $4)}')
+    memory=$(free | grep 'Mem:' | awk '{printf "%.0f", 100 * $3 / $2}')
     if [ "$memory" -gt 90 ]; then modifier="^bg(#dc322f)^fg(white)"
     elif [ "$memory" -gt 80 ]; then modifier="^bg(#cb4b16)^fg(white)"
     elif [ "$memory" -gt 70 ]; then modifier="^fg(#b58900)"
@@ -121,13 +117,11 @@ MAIL_OUTPUT=""
 MAILCHECK_INTERVAL=60
 
 while true; do
-    PGTIME=$(fgtime)
     PDATE=$(fdate)
     PBAT=$(fbattery)
     LOAD=$(fload)
     MEM=$(fmem)
     TEMP=$(_cpu_temp)
-    SOUND=$(_sound)
     KB_LAYOUT=$(_kb_layout)
 
     # mailbox info, only if accounts are set. the file follows pattern
@@ -197,7 +191,7 @@ while true; do
         echo -n "^i($netIcon)"
     fi
     # Arrange and print the status line
-    print " $TEMP $PBAT $LOAD $MEM $SOUND | $PGTIME $PDATE"
+    print " $TEMP $PBAT $LOAD $MEM | $PDATE"
 
     MAILCHECK_INTERVAL=$((MAILCHECK_INTERVAL + 1))
     sleep $INTERVAL
