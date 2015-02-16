@@ -45,6 +45,7 @@ Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'fatih/vim-go'
 Plugin 'mitsuhiko/vim-jinja'
 Plugin 'Herzult/phpspec-vim'
+Plugin 'mxw/vim-jsx'
 
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -266,6 +267,8 @@ let g:syntastic_enable_balloons=1
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+" npm install -g jsxhint
+let g:syntastic_javascript_checkers = ['jsxhint']
 
 " Fugitive
 nmap <silent> <leader>gs :Gstatus<CR>
