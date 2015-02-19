@@ -389,7 +389,7 @@ if has('autocmd')
 
         " set tab width to 2
         au BufRead,BufNewFile *.feature,*.css,*.scss,*.js,*.json setlocal ts=2 sw=2 sts=2
-        au BufRead,BufNewFile *.scala,*.yml,*.html,*.twig,*.sql setlocal ts=2 sw=2 sts=2
+        au BufRead,BufNewFile *.scala,*.yml,*.html,*.twig,*.sql,*.jsx setlocal ts=2 sw=2 sts=2
 
 
         " Highlight whitespace for non GO files
