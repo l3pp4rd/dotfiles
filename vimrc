@@ -135,10 +135,10 @@ se backspace=indent,eol,start                                   " Intuitive back
 se autoindent                                                   " automatic indent new lines
 se expandtab                                                    " expand tabs to spaces
 se smartindent
-se tabstop=4
+se tabstop=2
 se tildeop
-se shiftwidth=4
-se softtabstop=4
+se shiftwidth=2
+se softtabstop=2
 
 " scrolling
 se scrolljump=3
@@ -387,10 +387,8 @@ if has('autocmd')
         au BufRead,BufNewFile *.md setlocal spell spelllang=en_us
         au BufRead,BufNewFile *.twig,*.html,*.htm setlocal filetype=htmljinja
 
-        " set tab width to 2
-        au BufRead,BufNewFile *.feature,*.css,*.scss,*.js,*.json setlocal ts=2 sw=2 sts=2
-        au BufRead,BufNewFile *.scala,*.yml,*.html,*.twig,*.sql,*.jsx setlocal ts=2 sw=2 sts=2
-
+        " set tab width to 4
+        au BufRead,BufNewFile *.php,*.go setlocal ts=4 sw=4 sts=4
 
         " Highlight whitespace for non GO files
         au BufRead,BufNewFile * if index(['go'], &ft) < 0 | setlocal list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:·
