@@ -30,6 +30,7 @@ Plugin 'Raimondi/delimitMate'
 if has('python') || has('python3')
     Plugin 'SirVer/ultisnips'
     Plugin 'Valloric/YouCompleteMe'
+    Plugin 'sjl/gundo.vim'
 else
     Plugin 'ervandew/supertab'
 endif
@@ -285,6 +286,10 @@ let g:user_emmet_leader_key = '<c-l>' " CTRL + L + <leader>
 
 " ViM GO
 let g:go_fmt_command = "goimports"
+
+" Gundo
+nmap <F10> :GundoToggle<cr>
+let g:gundo_close_on_revert = 1
 
 " highlight searching
 map /  <Plug>(incsearch-forward)
