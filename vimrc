@@ -204,7 +204,7 @@ nmap <leader>C :call CleanCode()<cr>
 nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>l :CtrlP<cr>
 
-let g:ctrlp_custom_ignore = '\v[\/](vendor|\.git|\.hg|\.svn)$'
+let g:ctrlp_custom_ignore = '\v[\/](vendor|\.git|\.hg|\.svn|node_modules|dist)$'
 let g:ctrlp_buffer_func = { 'enter': 'MyCtrlPMappings' }
 
 func! MyCtrlPMappings()
@@ -393,10 +393,16 @@ if has('autocmd')
         au BufRead,BufNewFile *.twig,*.html,*.htm setlocal filetype=htmljinja
 
         " set tab width to 4
-        au BufRead,BufNewFile *.php,*.go setlocal ts=4 sw=4 sts=4
+        au BufRead,BufNewFile *.php,*.go,*.md setlocal ts=4 sw=4 sts=4
 
         " Highlight whitespace for non GO files
         au BufRead,BufNewFile * if index(['go'], &ft) < 0 | setlocal list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:·
+    augroup END
+
+    augroup Comments
+      autocmd!
+      au BufRead,BufNewFile *.twig setlocal commentstring=\{#\ %s\ #\}
+      au BufRead,BufNewFile *.php setlocal commentstring=//\ %s
     augroup END
 
     augroup OnSave
