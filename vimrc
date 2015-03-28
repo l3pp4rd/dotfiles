@@ -174,6 +174,14 @@ let mapleader=","       " Use the comma as leader
 nmap <leader>2 :setlocal tabstop=2<cr>:setlocal shiftwidth=2<cr>:setlocal softtabstop=2<cr>
 nmap <leader>4 :setlocal tabstop=4<cr>:setlocal shiftwidth=4<cr>:setlocal softtabstop=4<cr>
 
+" reformat spacing to 4 spaces
+nmap <F4> :set ts=2 sts=2 noet<cr>:retab!<cr>:set ts=4 sts=4 et<cr>:retab!<cr>
+" reformat spacing to 2 spaces
+nmap <F2> :set ts=4 sts=4 noet<cr>:retab!<cr>:set ts=2 sts=2 et<cr>:retab!<cr>
+
+" pretty print json
+nnoremap <leader>jq :%!jq .<cr>
+
 " Reselect visual block after indent
 vnoremap < <gv
 vnoremap > >gv
@@ -199,11 +207,6 @@ nmap <leader>m :e#<cr>
 
 " replace all tabs to spaces, windows new lines to normal
 nmap <leader>C :call CleanCode()<cr>
-
-" reformat spacing to 4 spaces
-nmap <F4> :set ts=2 sts=2 noet<cr>:retab!<cr>:set ts=4 sts=4 et<cr>:retab!<cr>
-" reformat spacing to 2 spaces
-nmap <F2> :set ts=4 sts=4 noet<cr>:retab!<cr>:set ts=2 sts=2 et<cr>:retab!<cr>
 
 " === PLUGINS ===
 nmap <leader>b :CtrlPBuffer<cr>
