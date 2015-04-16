@@ -93,13 +93,13 @@ sudo make install
 
 ### Install dotfiles
 
-Execute the setup script, follow the configuration options, you may not need to replace all configs:
+**NOTE:** analyze **Makefile** before you execute, it will force symlinks make sure to update for your needs..
 
-    ./.dotfiles/setup.sh
+    make
 
-Load vim bundles:
+To update **git modules**, **fonts** and **vim** plugins:
 
-    vim +PluginInstall +qall
+    make update
 
 **NOTE:** most configurations use **Inconsolata** fonts, you should install or change it.
 
@@ -112,6 +112,7 @@ with a login manager like **slim**.
 
 ## Changelog
 
+- **2015-04-16** - Makefile for setup and updates
 - **2014-05-31** - **ViM** does not depend on any interpreters. Restructured files
 - **2014-04-13** - refactored zsh configuration, to reuse core oh-my-zsh loading features
 - **2013-12-20** - switched from pathogen to vundle
