@@ -48,5 +48,5 @@ bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
 # tell me a fortune :)
-has_bin "fortune" && has_bin "cowsay" && fortune | cowsay
+has_bin "fortune" && has_bin "cowsay" && fortune -a /usr/share/fortune/chucknorris | cowsay
 
