@@ -112,6 +112,7 @@ with a login manager like **slim**.
 
 ## Changelog
 
+- **2015-05-10** - switched vim plugin manager to [vim-plug](https://github.com/junegunn/vim-plug)
 - **2015-04-16** - Makefile for setup and updates
 - **2014-05-31** - **ViM** does not depend on any interpreters. Restructured files
 - **2014-04-13** - refactored zsh configuration, to reuse core oh-my-zsh loading features

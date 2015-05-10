@@ -6,11 +6,11 @@ HOME_BIN := "$(HOME)/bin"
 DIR := $(shell cd "$( dirname "$0" )" && pwd)
 
 install: .deps fonts symlinks bins
-	vim +PluginInstall +qall
+	vim +PlugInstall +qall
 
 update: .deps fonts
 	git submodule foreach git pull origin master
-	vim +PluginUpdate +qall
+	vim +PlugUpdate +qall
 
 symlinks:
 	@if [ ! -d "$(HOME)/.config" ]; then mkdir "$(HOME)/.config"; fi

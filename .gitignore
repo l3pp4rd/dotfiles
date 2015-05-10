@@ -4,5 +4,4 @@
 /zsh/local.zsh
 /tags
 /.vimrc.local
-/vim/bundle/*
-!/vim/bundle/vundle
+/vim/plugged

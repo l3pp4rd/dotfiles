@@ -1,52 +1,46 @@
 se nocompatible             " Use vim defaults, should be first entry
 
-""" Load bundles
-filetype off                " must be off for vundle
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
-
-""" Dependencies for bundles
-Plugin 'gmarik/vundle'
-
+call plug#begin('~/.vim/plugged')
 """ Appearance
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
+Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
 
 """ General
-Plugin 'tpope/vim-commentary'
-Plugin 'mileszs/ack.vim'
-Plugin 'haya14busa/incsearch.vim'
+Plug 'tpope/vim-commentary'
+Plug 'mileszs/ack.vim'
+Plug 'haya14busa/incsearch.vim'
 
 """ Navigation
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
 
 """ Editing {
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'Raimondi/delimitMate'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'Raimondi/delimitMate'
 if has('python') || has('python3')
-    Plugin 'SirVer/ultisnips'
-    Plugin 'Valloric/YouCompleteMe'
-    Plugin 'sjl/gundo.vim'
+    Plug 'SirVer/ultisnips'
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+    Plug 'sjl/gundo.vim'
 else
-    Plugin 'ervandew/supertab'
+    Plug 'ervandew/supertab'
 endif
-Plugin 'mattn/emmet-vim'
-Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'Tabular'
-Plugin 'editorconfig/editorconfig-vim'
+Plug 'mattn/emmet-vim'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'Tabular'
+Plug 'editorconfig/editorconfig-vim'
 
 """ Language specific
-Plugin 'groenewege/vim-less'
-Plugin 'tpope/vim-markdown'
-Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'fatih/vim-go'
-Plugin 'mitsuhiko/vim-jinja'
-Plugin 'Herzult/phpspec-vim'
-Plugin 'mxw/vim-jsx'
+Plug 'groenewege/vim-less'
+Plug 'tpope/vim-markdown'
+Plug 'evanmiller/nginx-vim-syntax'
+Plug 'fatih/vim-go'
+Plug 'mitsuhiko/vim-jinja'
+Plug 'Herzult/phpspec-vim'
+Plug 'mxw/vim-jsx'
+call plug#end()
 
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
