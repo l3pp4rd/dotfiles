@@ -1,6 +1,4 @@
 *.log
 /tags
 /vendor.tags
-/vimrc.local
-/Guardfile
 /.vimrc

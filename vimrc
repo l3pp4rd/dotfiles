@@ -1,16 +1,18 @@
-se nocompatible             " Use vim defaults, should be first entry
+se nocompatible                         " use vim defaults, should be first entry
 
 call plug#begin('~/.vim/plugged')
 """ Base
-Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sensible'               " sensible defaults for ViM
+Plug 'vim-scripts/gitignore'            " use gitignore for wildignore
 
 """ Appearance
-Plug 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized' " solorized color scheme
 Plug 'bling/vim-airline'
 
 """ Navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'kien/ctrlp.vim'
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
 """ Editing
 Plug 'tmhedberg/matchit'
@@ -46,12 +48,6 @@ call plug#end()
 "|
 set background=dark
 
-let g:solarized_termcolors=16
-let g:solarized_termtrans=0
-let g:solarized_degrade=0
-let g:solarized_bold=1
-let g:solarized_underline=1
-let g:solarized_italic=1
 let g:solarized_contrast="low"
 let g:solarized_visibility="high"
 
@@ -82,19 +78,13 @@ se nowritebackup                " And again.
 se noswapfile                   " Use an SCM instead of swap files
 se nospell                      " Disable spell checking
 se number                       " line numbers
-" ignore in most cases
-se wildignore+=*.o,*/.git/*,*/.hg/*,*/.svn/*,*/*cache,*/logs,*/tmp,*.swp,*.jpg
-se wildignore+=*.png,*.xpm,*.gif,*.ico,*/vendor,web/dist,web/bundles,*/target/*
-se wildignore+=*/tags,*.phar,*/node_modules
-
-" Enables the reading of .vimrc, .exrc and .gvimrc in the current directory. http://stackoverflow.com/a/7541744/186355
-se exrc
-se secure " disable unsafe commands in them
-
-" Search related options
 se hlsearch                     " Highlight matches.
-se incsearch                    " Highlight matches as you type.
-se showmatch
+
+se wildignore+=*/.git/*,*/.hg/*,*/.svn/*                          " ignore VCS
+se wildignore+=*.swp,*.jpg,*.jpeg,*.bmp,*.png,*.xpm,*.gif,*.ico   " ignore media
+
+se exrc   " Enables the reading of .vimrc, .exrc and .gvimrc in the current directory. http://stackoverflow.com/a/7541744/186355
+se secure " disable unsafe commands in them
 
 " Indentation
 se expandtab                                                    " expand tabs to spaces
@@ -121,7 +111,12 @@ vnoremap / /\v
 nnoremap ? ?\v
 vnoremap ? ?\v
 
-" === MAPPINGS ===
+"
+"+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+"|
+"|  > MAPPINGS
+"|
+"|
 let mapleader=","       " Use the comma as leader
 
 " Reselect visual block after indent
@@ -146,17 +141,16 @@ nmap <leader>m :e#<cr>
 " replace all tabs to spaces, windows new lines to normal
 nmap <leader>C :call CleanCode()<cr>
 
-" === PLUGINS ===
+"
+"+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+"|
+"|  > PLUGINS
+"|
+"|
 nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>l :CtrlP<cr>
 
 let g:ctrlp_custom_ignore = '\v[\/](vendor|\.git|\.hg|\.svn|node_modules|dist)$'
-let g:ctrlp_buffer_func = { 'enter': 'MyCtrlPMappings' }
-
-func! MyCtrlPMappings()
-    " remove from buffer
-    nnoremap <buffer> <silent> <c-@> :call <sid>DeleteBuffer()<cr>
-endfunc
 
 " Airline
 let g:airline_theme='solarized'
@@ -220,9 +214,12 @@ let g:user_emmet_install_global = 0
 " ViM GO
 let g:go_fmt_command = "goimports"
 
-" Gundo
+" Gundo - handles undo branches
 nmap <F10> :GundoToggle<cr>
 let g:gundo_close_on_revert = 1
+
+" Sayonara - deletes a file from all buffers
+nmap <F9> :Sayonara!<cr>
 
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -247,15 +244,6 @@ function! <SID>MkdirsIfNotExists(directory)
     call system('mkdir -p '.shellescape(a:directory))
   endif
 endfunction
-
-" delete from buffer, based on current line (used for ctrlp)
-func! s:DeleteBuffer()
-  let line = getline('.')
-  let bufid = line =~ '\[\d\+\*No Name\]$' ? str2nr(matchstr(line, '\d\+'))
-    \ : fnamemodify(line[2:], ':p')
-  exec "bd" bufid
-  exec "norm \<F5>"
-endfunc
 
 "  Clean code function
 function! CleanCode()
@@ -313,10 +301,10 @@ if has('autocmd')
 
   augroup OnSave
     autocmd!
-    " strip trailing space on write
-    au BufWrite * :call <SID>StripTrailingWhitespaces()
+    " strip trailing space on write, go runs FMT anyways
+    au BufWrite * if index(['go'], &ft) < 0 | :call <SID>StripTrailingWhitespaces()
 
-    " create directory when writing
+    " create parent directory when writing new file
     au BufWrite * :call <SID>MkdirsIfNotExists(expand('<afile>:h'))
   augroup END
 
