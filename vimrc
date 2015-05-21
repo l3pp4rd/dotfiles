@@ -79,6 +79,7 @@ se noswapfile                   " Use an SCM instead of swap files
 se nospell                      " Disable spell checking
 se number                       " line numbers
 se hlsearch                     " Highlight matches.
+se hidden                       " Handle multiple buffers better.
 
 se wildignore+=*/.git/*,*/.hg/*,*/.svn/*                          " ignore VCS
 se wildignore+=*.swp,*.jpg,*.jpeg,*.bmp,*.png,*.xpm,*.gif,*.ico   " ignore media
