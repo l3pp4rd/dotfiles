@@ -9,6 +9,6 @@ HIST="$HOME/.dmenu/path_hist"
 APP=$(dmenu -pe -i -nb $base03 -nf $base0 -sb $base02 -sf $orange -fn $FN -hf $HIST -p "Run")
 
 if [ "$APP" ]; then
-    zsh -c $APP
+    sh -c $APP
 fi
 
