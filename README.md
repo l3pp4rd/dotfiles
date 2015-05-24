@@ -12,10 +12,6 @@ colors](http://ethanschoonover.com/solarized) and mainly **Inconsolata** font.
 - **wget**
 - **256** color terminal client for the best experience
 
-To use tmuxinator:
-
-    gem install tmuxinator
-
 To install dmenu:
 
     git clone https://github.com/l3pp4rd/dmenu.git ~/.dmenu && cd ~/.dmenu
@@ -28,6 +24,12 @@ You most probably need to change the **X11** lib header file location if you are
 
 Dmenu shortcut to list all path executables is available at **~/.dotfiles/bin/dmenu_run**
 It will cache all recently used applications, that way it will show up first in search results.
+
+## tmuxstart
+
+To prevent ruby dependencies, I manage my **tmux** sessions with [tmuxstart](https://github.com/treyhunner/tmuxstart).
+Before that I was using **tmuxinator**. One session example is **~/.dotfiles/tmuxstart/dotfiles**. There is a **dmenu**
+executable to run **workspace** switch - **~/.dotfiles/bin/dmenu_workspace**
 
 ## Screen
 
@@ -51,7 +53,7 @@ manager.
 
 ### Tmux
 
-You should consider reading about **tmux** (terminal session manager) and install it. **Tmuxinator** is also a
+You should consider reading about **tmux** (terminal session manager) and install it. **tmuxstart** is also a
 handy tool to be used with tmux. If you use **st** tmux will provide tabs and history scrolling support.
 Mouse scroll in urxvt suck and most of the times, tabs and history scrolling are not working well as general
 terminal features. So lets just follow UNIX philosophy and install tmux which is a tool built to handle it.
@@ -112,6 +114,7 @@ with a login manager like **slim**.
 
 ## Changelog
 
+- **2015-05-24** - switched tmuxinator to tmuxstart, does not require ruby
 - **2015-05-10** - switched vim plugin manager to [vim-plug](https://github.com/junegunn/vim-plug)
 - **2015-04-16** - Makefile for setup and updates
 - **2014-05-31** - **ViM** does not depend on any interpreters. Restructured files

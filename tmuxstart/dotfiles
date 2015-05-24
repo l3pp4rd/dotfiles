@@ -1,0 +1,13 @@
+# base project path
+path=~/.dotfiles
+
+new_session -n vim
+send_line 0 vim
+new_window -n dotfiles
+new_window -n split
+
+# split window into panes
+split 2 -h
+split 2.1 -v
+
+# vi: set ft=sh :
