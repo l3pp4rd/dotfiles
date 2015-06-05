@@ -1,6 +1,6 @@
 se nocompatible                         " use vim defaults, should be first entry
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/bundle')
 """ Base
 Plug 'tpope/vim-sensible'               " sensible defaults for ViM
 Plug 'vim-scripts/gitignore'            " use gitignore for wildignore
@@ -261,7 +261,7 @@ endfunction
 "|
 "|
 if has('autocmd')
-  augroup Cursor
+  augroup CURSOR
     autocmd!
     au FocusLost silent! :wa
     " Highlight cursor line
@@ -273,7 +273,7 @@ if has('autocmd')
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm$"|endif|endif
   augroup END
 
-  augroup FileTypes
+  augroup FILE_TYPE_DIFFERENCES
     autocmd!
     au FileType helpfile setlocal nonumber
 
@@ -288,26 +288,23 @@ if has('autocmd')
     au BufRead,BufNewFile * if index(['go'], &ft) < 0 | setlocal list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:·
   augroup END
 
-  augroup Comments
+  augroup COMMENTS
     autocmd!
     au BufRead,BufNewFile *.twig setlocal commentstring=\{#\ %s\ #\}
     au BufRead,BufNewFile *.php setlocal commentstring=//\ %s
   augroup END
 
-  augroup Plugins
+  augroup PLUGINS
     autocmd!
     au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
     au FileType html,css,htmljinja EmmetInstall
   augroup END
 
-  augroup OnSave
+  augroup ON_SAVE
     autocmd!
     " strip trailing space on write, go runs FMT anyways
-    au BufWrite * if index(['go'], &ft) < 0 | :call <SID>StripTrailingWhitespaces()
-
+    au BufWrite * :call <SID>StripTrailingWhitespaces()
     " create parent directory when writing new file
     au BufWrite * :call <SID>MkdirsIfNotExists(expand('<afile>:h'))
   augroup END
-
 endif
-
