@@ -28,7 +28,7 @@ _kb_layout() {
 
 # BATTERY
 fbattery() {
-  if [ -d "/sys/class/power_supply/BAT1" ]; then
+  if [ -d "/sys/class/power_supply/BAT0" ]; then
     ac=`acpi -a | grep on-line | wc -l`
     if [ $ac -gt 0 ]; then
       printf "^i($DZEN_ICONPATH/power-ac.xbm)"
