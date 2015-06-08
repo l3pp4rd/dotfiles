@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # Configuration
 DATE_FORMAT='%a %d %b %H:%M'
@@ -7,7 +7,7 @@ BG='#073642'
 FG='#839496'
 X=-820 # move from the right, so the status bar would be always aligned right. leave some space for systray
 Y=0
-HEIGHT=20
+HEIGHT=19
 WIDTH=710 # adjust it if theres less items used to show in status bar
 FONT='InconsolataSansMono:size=11'
 # Main loop interval in seconds
@@ -15,185 +15,197 @@ INTERVAL=1
 
 # Functions
 fdate() {
-    icon="^i($DZEN_ICONPATH/clock2.xbm)"
-    today=$(date +$DATE_FORMAT)
-    printf "^fg(white)%s %s^fg()" "$icon" "$today"
+  icon="^i($DZEN_ICONPATH/clock2.xbm)"
+  today=$(date +$DATE_FORMAT)
+  printf "^fg(white)%s %s^fg()" "$icon" "$today"
 }
 
 _kb_layout() {
-    layout=`setxkbmap -print | awk -F"+" '/xkb_symbols/ {print $2}'`
-    layout=`echo $layout | tr '[a-z]' '[A-Z]'`
-    printf "^fg(white)%s^fg()" "$layout"
+  layout=`setxkbmap -print | awk -F"+" '/xkb_symbols/ {print $2}'`
+  layout=`echo $layout | tr '[a-z]' '[A-Z]'`
+  printf "^fg(white)%s^fg()" "$layout"
 }
 
 # BATTERY
 fbattery() {
+  if [ -d "/sys/class/power_supply/BAT1" ]; then
     ac=`acpi -a | grep on-line | wc -l`
     if [ $ac -gt 0 ]; then
-        printf "^i($DZEN_ICONPATH/power-ac.xbm)"
+      printf "^i($DZEN_ICONPATH/power-ac.xbm)"
     else
-        infos=$(acpi -b)
-        percent=$(echo $infos|sed "s/Battery .: [a-z]*, \([0-9]*\)%\(,.*\|$\)/\1/i")
-        state=$(echo $infos|sed "s/Battery .: \([a-z]*\),.*/\1/i")
-        if [ "$percent" -lt 5 ]; then modifier="^bg(#dc322f)^fg(white)"
-        elif [ "$percent" -lt 20 ]; then modifier="^bg(#cb4b16)^fg(white)"
-        elif [ "$percent" -lt 50 ]; then modifier="^fg(#b58900)"
-        else modifier="^fg(#859900)"
-        fi
+      infos=$(acpi -b)
+      percent=$(echo $infos|sed "s/Battery .: [a-z]*, \([0-9]*\)%\(,.*\|$\)/\1/i")
+      state=$(echo $infos|sed "s/Battery .: \([a-z]*\),.*/\1/i")
+      if [ "$percent" -lt 5 ]; then modifier="^bg(#dc322f)^fg(white)"
+      elif [ "$percent" -lt 20 ]; then modifier="^bg(#cb4b16)^fg(white)"
+      elif [ "$percent" -lt 50 ]; then modifier="^fg(#b58900)"
+      else modifier="^fg(#859900)"
+      fi
 
-        percent="$percent%"
+      percent="$percent%"
 
-        sign="^i($DZEN_ICONPATH/power-bat.xbm)"
+      sign="^i($DZEN_ICONPATH/power-bat.xbm)"
 
-        printf "$modifier%s%s^fg()^bg()" "$percent" "$sign"
+      printf "$modifier%s%s^fg()^bg()" "$percent" "$sign"
     fi
+  else
+    printf "^i($DZEN_ICONPATH/power-ac.xbm)"
+  fi
 }
 
 # LOAD AVERAGE
 
 fload() {
-    load=$(awk '{print $1}' /proc/loadavg)
-    icon="^i($DZEN_ICONPATH/load.xbm)"
-    printf "%s%.01f %s^fg()" "^fg(#6c71c4)" "$load" "$icon"
+  load=$(awk '{print $1}' /proc/loadavg)
+  icon="^i($DZEN_ICONPATH/load.xbm)"
+  printf "%s%.01f %s^fg()" "^fg(#6c71c4)" "$load" "$icon"
 }
 
 
 fmem() {
-    # MEMORY
+  # MEMORY
 
-    memory=$(free | grep 'Mem:' | awk '{printf "%.0f", 100 * $3 / $2}')
-    if [ "$memory" -gt 90 ]; then modifier="^bg(#dc322f)^fg(white)"
-    elif [ "$memory" -gt 80 ]; then modifier="^bg(#cb4b16)^fg(white)"
-    elif [ "$memory" -gt 70 ]; then modifier="^fg(#b58900)"
-    else modifier="^fg(#859900)"
-    fi
+  memory=$(free | grep 'Mem:' | awk '{printf "%.0f", 100 * $3 / $2}')
+  if [ "$memory" -gt 90 ]; then modifier="^bg(#dc322f)^fg(white)"
+  elif [ "$memory" -gt 80 ]; then modifier="^bg(#cb4b16)^fg(white)"
+  elif [ "$memory" -gt 70 ]; then modifier="^fg(#b58900)"
+  else modifier="^fg(#859900)"
+  fi
 
-    icon="^i($DZEN_ICONPATH/mem.xbm)"
-    printf "%s%s%% %s^fg()^bg()" "$modifier" "$memory" "$icon"
+  icon="^i($DZEN_ICONPATH/mem.xbm)"
+  printf "%s%s%% %s^fg()^bg()" "$modifier" "$memory" "$icon"
 }
 
 _cpu_temp() {
-    # CPUs temp
-    # NOTE: lm sernsors needs to be available
-    temp=$(sensors | awk -F+ '{print $2}' | grep 'C' | awk -F. '{print $1}' | head -1)
-    if [ "$temp" -gt 80 ]; then
-        modifier='^bg(#dc322f)^fg(white)'
-    elif [ "$temp" -gt 60 ]; then
-        modifier='^fg(#b58900)'
-    else
-        modifier='^fg(#859900)'
-    fi
-    printf "%s%s°C^fg()^bg()" "$modifier" "$temp"
+  # CPUs temp
+  # NOTE: lm sernsors needs to be available
+  temp=$(sensors | awk -F+ '{print $2}' | grep 'C' | awk -F. '{print $1}' | head -1)
+  if [ "$temp" -gt 80 ]; then
+    modifier='^bg(#dc322f)^fg(white)'
+  elif [ "$temp" -gt 60 ]; then
+    modifier='^fg(#b58900)'
+  else
+    modifier='^fg(#859900)'
+  fi
+  printf "%s%s°C^fg()^bg()" "$modifier" "$temp"
 }
 
 _sound() {
-    on=`amixer get Master | awk -F '[' '{print $4}' | grep on | wc -l`
-    if [ $on -gt 0 ]; then
-        percent=$(amixer get Master | awk -F '[' '{print $2}' | grep '%' | awk -F '%' '{print $1}')
-        printf "%s ^i($DZEN_ICONPATH/vol-hi.xbm)" "$percent%"
-    else
-        printf "^i($DZEN_ICONPATH/vol-mute.xbm)"
-    fi
+  on=`amixer get Master | awk -F '[' '{print $4}' | grep on | wc -l`
+  if [ $on -gt 0 ]; then
+    percent=$(amixer get Master | awk -F '[' '{print $2}' | grep '%' | awk -F '%' '{print $1}')
+    printf "%s ^i($DZEN_ICONPATH/vol-hi.xbm)" "$percent%"
+  else
+    printf "^i($DZEN_ICONPATH/vol-mute.xbm)"
+  fi
 }
 
 _active_network_interface() {
-    ACTIVE="none" # default to eth0 in case if none active
-    for iface in  `ifconfig | egrep 'eth[0-9]|wlan[0-9]' | awk -F': ' '{print $1}'` ; do
-        ifconfig $iface | grep -q 'inet ' && ACTIVE="$iface"
-    done
+  ACTIVE="none" # default to eth0 in case if none active
+  for iface in  `ifconfig | egrep 'eth[0-9]|wlan[0-9]|enp[0-9]' | awk -F': ' '{print $1}'` ; do
+    ifconfig $iface | grep -q 'inet ' && ACTIVE="$iface"
+  done
 
-    echo $ACTIVE
+  echo $ACTIVE
 }
 
 # network interface active
 CURR_IFACE=$(_active_network_interface)
 
 # Here we remember the previous rx/tx counts
-RXB=`cat /sys/class/net/${CURR_IFACE}/statistics/rx_bytes`
-TXB=`cat /sys/class/net/${CURR_IFACE}/statistics/tx_bytes`
+RXB=0
+TXB=0
 
 # will check and update unread count every minute
 MAIL_OUTPUT=""
 MAILCHECK_INTERVAL=60
 
 while true; do
-    PDATE=$(fdate)
-    PBAT=$(fbattery)
-    LOAD=$(fload)
-    MEM=$(fmem)
-    TEMP=$(_cpu_temp)
-    KB_LAYOUT=$(_kb_layout)
+  PDATE=$(fdate)
+  PBAT=$(fbattery)
+  LOAD=$(fload)
+  MEM=$(fmem)
+  TEMP=$(_cpu_temp)
+  KB_LAYOUT=$(_kb_layout)
 
-    # mailbox info, only if accounts are set. the file follows pattern
-    # Name;Username;Password
-    if [ -f "$HOME/.gmail-accounts" ]; then
-        if [ $MAILCHECK_INTERVAL -gt 60 ]; then
-            MAIL_OUTPUT="^i($DZEN_ICONPATH/mail.xbm)"
-            for line in $(cat "$HOME/.gmail-accounts"); do
-                USR=$(echo $line | awk -F';' '{print $2;}')
-                PSW=$(echo $line | awk -F';' '{print $3;}')
-                UNREAD=$(gmail-stats -u $USR -p $PSW -c)
-                if [ $? -gt 0 ]; then
-                    UNREAD=0
-                fi
-                CLR=""
-                if [ $UNREAD -gt 0 ]; then
-                    CLR="#dc322f"
-                fi
-                MAIL_OUTPUT="$MAIL_OUTPUT^fg($CLR) $UNREAD ^fg()"
-            done
-            MAILCHECK_INTERVAL=0
+  # mailbox info, only if accounts are set. the file follows pattern
+  # Name;Username;Password
+  if [ -f "$HOME/.gmail-accounts" ]; then
+    if [ $MAILCHECK_INTERVAL -gt 60 ]; then
+      MAIL_OUTPUT="^i($DZEN_ICONPATH/mail.xbm)"
+      for line in $(cat "$HOME/.gmail-accounts"); do
+        USR=$(echo $line | awk -F';' '{print $2;}')
+        PSW=$(echo $line | awk -F';' '{print $3;}')
+        UNREAD=$(gmail-stats -u $USR -p $PSW -c)
+        if [ $? -gt 0 ]; then
+          UNREAD=0
         fi
+        CLR=""
+        if [ $UNREAD -gt 0 ]; then
+          CLR="#dc322f"
+        fi
+        MAIL_OUTPUT="$MAIL_OUTPUT^fg($CLR) $UNREAD ^fg()"
+      done
+      MAILCHECK_INTERVAL=0
     fi
-    echo -n "$KB_LAYOUT $MAIL_OUTPUT"
+  fi
+  echo -n "$KB_LAYOUT $MAIL_OUTPUT"
 
-    # use active network interface
-    CURR_IFACE=$(_active_network_interface)
-    if [ "$CURR_IFACE" != "none" ]; then
-        # get new rx/tx counts
-        RXBN=`cat /sys/class/net/${CURR_IFACE}/statistics/rx_bytes`
-        TXBN=`cat /sys/class/net/${CURR_IFACE}/statistics/tx_bytes`
-
-        # calculate the rates
-        # format the values to 4 digit fields
-        # NOTE: bc needs to be available
-        RXR=$(printf "%4d\n" $(echo "($RXBN - $RXB) / 1024/${INTERVAL}" | bc))
-        TXR=$(printf "%4d\n" $(echo "($TXBN - $TXB) / 1024/${INTERVAL}" | bc))
-
-        if [ $RXR -eq 0 ]; then
-            rxColor=""
-        else
-            rxColor="#859900"
-        fi
-
-        if [ $TXR -eq 0 ]; then
-            txColor=""
-        else
-            txColor="#dc322f"
-        fi
-
-        if [ "$CURR_IFACE" = "wlan0" ]; then
-            # wifi
-            netIcon="$DZEN_ICONPATH/net-wifi5.xbm"
-        else
-            # wired
-            netIcon="$DZEN_ICONPATH/net-wired2.xbm"
-        fi
-
-        # print out the rates with some nice formatting
-        echo -n "^i($netIcon)^fg($rxColor)${RXR} K^p(3)^i($DZEN_ICONPATH/arr_down.xbm)^fg($txColor)${TXR} K^i($DZEN_ICONPATH/arr_up.xbm)^fg()"
-
-        # reset old rates
-        RXB=$RXBN; TXB=$TXBN
+  # use active network interface
+  CURR_IFACE=$(_active_network_interface)
+  if [ "$CURR_IFACE" != "none" ]; then
+    # get new rx/tx counts
+    if [ -f "/sys/class/net/${CURR_IFACE}/statistics/rx_bytes" ]; then
+      RXBN=`cat /sys/class/net/${CURR_IFACE}/statistics/rx_bytes`
     else
-        # not connected
-        netIcon="$DZEN_ICONPATH/net-wired.xbm"
-        echo -n "^i($netIcon)"
+      RXBN=0
     fi
-    # Arrange and print the status line
-    print " $TEMP $PBAT $LOAD $MEM | $PDATE"
+    if [ -f "/sys/class/net/${CURR_IFACE}/statistics/tx_bytes" ]; then
+      TXBN=`cat /sys/class/net/${CURR_IFACE}/statistics/tx_bytes`
+    else
+      TXBN=0
+    fi
 
-    MAILCHECK_INTERVAL=$((MAILCHECK_INTERVAL + 1))
-    sleep $INTERVAL
+    # calculate the rates
+    # format the values to 4 digit fields
+    # NOTE: bc needs to be available
+    RXR=$(printf "%4d\n" $(echo "($RXBN - $RXB) / 1024/${INTERVAL}" | bc))
+    TXR=$(printf "%4d\n" $(echo "($TXBN - $TXB) / 1024/${INTERVAL}" | bc))
+
+    if [ $RXR -eq 0 ]; then
+      rxColor=""
+    else
+      rxColor="#859900"
+    fi
+
+    if [ $TXR -eq 0 ]; then
+      txColor=""
+    else
+      txColor="#dc322f"
+    fi
+
+    if [ "$CURR_IFACE" = "wlan0" ]; then
+      # wifi
+      netIcon="$DZEN_ICONPATH/net-wifi5.xbm"
+    else
+      # wired
+      netIcon="$DZEN_ICONPATH/net-wired2.xbm"
+    fi
+
+    # print out the rates with some nice formatting
+    echo -n "^i($netIcon)^fg($rxColor)${RXR} K^p(3)^i($DZEN_ICONPATH/arr_down.xbm)^fg($txColor)${TXR} K^i($DZEN_ICONPATH/arr_up.xbm)^fg()"
+
+    # reset old rates
+    RXB=$RXBN; TXB=$TXBN
+  else
+    # not connected
+    netIcon="$DZEN_ICONPATH/net-wired.xbm"
+    echo -n "^i($netIcon)"
+  fi
+  # Arrange and print the status line
+  print " $TEMP $PBAT $LOAD $MEM | $PDATE"
+
+  MAILCHECK_INTERVAL=$((MAILCHECK_INTERVAL + 1))
+  sleep $INTERVAL
 done | dzen2 -x $X -y $Y -w $WIDTH -h $HEIGHT -bg $BG -fg $FG -ta r -fn $FONT -p
 

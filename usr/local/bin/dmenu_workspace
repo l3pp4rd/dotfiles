@@ -8,4 +8,4 @@ project=$(ls -1 $HOME/.tmuxstart | dmenu -i -nb $base03 -nf $base0 -sb $base02 -
 
 [ -z "$project" ] && exit
 
-$HOME/bin/tmuxstart $project
+tmuxstart $project
