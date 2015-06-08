@@ -2,7 +2,6 @@
 
 FONT_CONF_DIR := $(HOME)/.config/fontconfig/conf.d
 FONT_DIR := $(HOME)/.fonts
-HOME_BIN := $(HOME)/bin
 DIR := $(shell cd "$( dirname "$0" )" && pwd)
 
 install: .deps fonts symlinks bins tmuxstart
@@ -28,8 +27,9 @@ symlinks:
 	@ln -sfn $(DIR)/git/gitconfig $(HOME)/.gitconfig
 
 tmuxstart:
-	curl -L https://raw.githubusercontent.com/treyhunner/tmuxstart/master/tmuxstart > bin/tmuxstart
-	chmod +x bin/tmuxstart
+	curl -L https://raw.githubusercontent.com/treyhunner/tmuxstart/master/tmuxstart > /tmp/tmuxstart
+	chmod +x /tmp/tmuxstart
+	sudo mv /tmp/tmuxstart /usr/local/bin/tmuxstart
 	mkdir -p $(HOME)/.tmuxstart
 	cp tmuxstart/dotfiles $(HOME)/.tmuxstart/dotfiles
 
@@ -38,8 +38,7 @@ systemd:
 	@sudo cp $(DIR)/usr/lib/systemd/system/slimlock.service /usr/lib/systemd/system/slimlock.service
 
 bins:
-	@mkdir -p $(HOME_BIN)
-	@for BINARY in $(shell ls -1 $(DIR)/bin); do ln -sf "$(DIR)/bin/$$BINARY" "$(HOME_BIN)/$$BINARY"; done
+	@for BINARY in $(shell ls -1 $(DIR)/usr/local/bin); do sudo cp -f "$(DIR)/usr/local/bin/$$BINARY" "/usr/local/bin/$$BINARY"; done
 
 fonts:
 	@command -v curl >/dev/null 2>&1 || (echo "curl needs to be installed"; exit 1)
