@@ -1,4 +1,4 @@
-.PHONY: install symlinks fonts bins tmuxstart
+.PHONY: install symlinks fonts bins tmuxstart vim peco
 
 FONT_CONF_DIR := $(HOME)/.config/fontconfig/conf.d
 FONT_DIR := $(HOME)/.fonts
@@ -49,6 +49,27 @@ fonts:
 	@curl -L https://raw.github.com/Lokaltog/powerline/develop/font/PowerlineSymbols.otf > $(FONT_DIR)/PowerlineSymbols.otf
 	@curl -L 'https://raw.github.com/Lokaltog/powerline-fonts/master/Inconsolata/Inconsolata%20for%20Powerline.otf' > $(FONT_DIR)/Inconsolata.otf
 	@fc-cache -vf $(FONT_DIR)
+
+peco:
+	@curl -L $(shell curl -L https://github.com/peco/peco/releases/latest | grep '/peco_linux_amd64' | awk -F'"' '{print "https://github.com"$$2}') | tar -zx
+	@sudo mv peco_linux_amd64/peco /usr/local/bin/peco
+	@rm -rf peco_linux_amd64
+
+vim:
+	@if [ ! -d "/tmp/vim_src" ]; then git clone https://github.com/vim/vim.git /tmp/vim_src; fi
+	@cd /tmp/vim_src && ./configure \
+--prefix=/usr/local \
+--with-features=huge \
+--with-compiledby="Custom edition" \
+--enable-gpm \
+--enable-acl \
+--with-x=yes \
+--disable-gui \
+--enable-multibyte \
+--enable-cscope \
+--disable-netbeans \
+--enable-pythoninterp \
+--disable-python3interp && make && sudo make install
 
 .deps:
 	@command -v git >/dev/null 2>&1 || (echo "git needs to be installed"; exit 1)
