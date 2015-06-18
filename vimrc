@@ -38,6 +38,7 @@ Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'mitsuhiko/vim-jinja'
 Plug 'Herzult/phpspec-vim'
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
+Plug 'vim-scripts/sql.vim--Stinson', { 'for': 'sql' }
 call plug#end()
 
 "
