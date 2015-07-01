@@ -12,7 +12,6 @@ Plug 'bling/vim-airline'
 """ Navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'kien/ctrlp.vim'
-Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
 """ Editing
 Plug 'tmhedberg/matchit'
@@ -219,9 +218,6 @@ let g:go_fmt_command = "goimports"
 " Gundo - handles undo branches
 nmap <F10> :GundoToggle<cr>
 let g:gundo_close_on_revert = 1
-
-" Sayonara - deletes a file from all buffers
-nmap <F9> :Sayonara!<cr>
 
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

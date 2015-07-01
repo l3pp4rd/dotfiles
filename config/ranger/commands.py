@@ -156,7 +156,7 @@ class run_with(Command):
     def execute(self):
         import subprocess
         import os
-        dmenu = os.getenv("HOME") + '/bin/dmenu_app'
+        dmenu = '/usr/local/bin/dmenu_app'
         if os.path.isfile(dmenu):
             proc = subprocess.Popen([dmenu], stdout=subprocess.PIPE)
             app = proc.communicate()[0].rstrip().decode('utf-8')
