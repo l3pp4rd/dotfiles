@@ -38,7 +38,6 @@ systemd:
 	@sudo cp $(DIR)/usr/lib/systemd/system/slimlock.service /usr/lib/systemd/system/slimlock.service
 
 bins:
-	@mkdir -p $(HOME)/.dmenu # needed for dmenu cache
 	@for BINARY in $(shell ls -1 $(DIR)/usr/local/bin); do sudo cp -f "$(DIR)/usr/local/bin/$$BINARY" "/usr/local/bin/$$BINARY"; done
 
 fonts:

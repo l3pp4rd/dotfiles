@@ -122,3 +122,6 @@ with a login manager like **slim**.
 - **2013-12-20** - switched from pathogen to vundle
 - **2013-12-20** - switched powerline to airline, does not require big python setup
 
+## Some general stuff
+
+- manage [wifi from console](http://www.blackmoreops.com/2014/09/18/connect-to-wifi-network-from-command-line-in-linux/)
