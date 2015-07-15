@@ -21,12 +21,14 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'Raimondi/delimitMate'
+let hasUltisnips = 0
 if has('python') || has('python3')
-    Plug 'SirVer/ultisnips'
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-    Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
+  let hasUltisnips = 1
+  Plug 'SirVer/ultisnips'
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+  Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 else
-    Plug 'ervandew/supertab'
+  Plug 'ervandew/supertab'
 endif
 
 """ Language specific
@@ -80,6 +82,9 @@ se nospell                      " Disable spell checking
 se number                       " line numbers
 se hlsearch                     " Highlight matches.
 se hidden                       " Handle multiple buffers better.
+se complete-=i                  " do not scan all included files
+se complete-=t                  " do not scan tag files, slow anyways
+se foldmethod=manual            " increases the autocompletion speed
 
 se wildignore+=*/.git/*,*/.hg/*,*/.svn/*                          " ignore VCS
 se wildignore+=*.swp,*.jpg,*.jpeg,*.bmp,*.png,*.xpm,*.gif,*.ico   " ignore media
@@ -293,7 +298,15 @@ if has('autocmd')
 
   augroup PLUGINS
     autocmd!
-    au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+    " If you prefer the Omni-Completion tip window to close when a selection is
+    " made, these lines close it on movement in insert mode or when leaving
+    " insert mode
+    au CursorMovedI * if pumvisible() == 0|pclose|endif
+    au InsertLeave * if pumvisible() == 0|pclose|endif
+
+    if hasUltisnips
+      au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+    endif
     au FileType html,css,htmljinja EmmetInstall
   augroup END
 
