@@ -135,6 +135,9 @@ nmap <silent> <leader>n :set nonumber!<cr>
 " Create a new file, suggest current directory of the file edited
 nmap <leader>c :e <c-r>=expand('%:h')<cr>/
 
+" Force reload all buffers
+nmap <leader>r :bufdo e!
+
 " Run write with root perms
 cmap w!! w !sudo tee % >/dev/null<CR>:e!<CR><CR>
 
@@ -310,11 +313,15 @@ if has('autocmd')
     au FileType html,css,htmljinja EmmetInstall
   augroup END
 
-  augroup ON_SAVE
+  augroup GENERAL
     autocmd!
     " strip trailing space on write, go runs FMT anyways
     au BufWrite * :call <SID>StripTrailingWhitespaces()
     " create parent directory when writing new file
     au BufWrite * :call <SID>MkdirsIfNotExists(expand('<afile>:h'))
+    " when buffer activated reread
+    au FocusGained,BufEnter * :silent! !
+    " when focus lost save
+    au FocusLost,WinLeave * :silent! w
   augroup END
 endif
