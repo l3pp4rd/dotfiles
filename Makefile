@@ -1,13 +1,13 @@
-.PHONY: install symlinks fonts bins tmuxstart vim peco
+.PHONY: install symlinks fonts bins tmuxstart vim pt
 
 FONT_CONF_DIR := $(HOME)/.config/fontconfig/conf.d
 FONT_DIR := $(HOME)/.fonts
 DIR := $(shell cd "$( dirname "$0" )" && pwd)
 
-install: .deps fonts symlinks bins tmuxstart
+install: .deps fonts symlinks bins tmuxstart pt
 	vim +PlugInstall +qall
 
-update: .deps fonts tmuxstart
+update: .deps fonts tmuxstart pt
 	git submodule foreach git pull origin master
 	vim +PlugUpdate +qall
 
@@ -64,6 +64,11 @@ vim:
 --disable-netbeans \
 --enable-pythoninterp \
 --disable-python3interp && make && sudo make install
+
+pt:
+	@curl -L $(shell curl -L https://github.com/monochromegane/the_platinum_searcher/releases/latest | grep '/pt_linux_amd64' | awk -F'"' '{print "https://github.com"$$2}') | tar -zx
+	@sudo mv pt_linux_amd64/pt /usr/local/bin/pt
+	@rm -rf pt_linux_amd64
 
 .deps:
 	@command -v git >/dev/null 2>&1 || (echo "git needs to be installed"; exit 1)

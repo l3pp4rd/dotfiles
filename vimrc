@@ -84,6 +84,7 @@ se hlsearch                     " Highlight matches.
 se hidden                       " Handle multiple buffers better.
 se complete-=i                  " do not scan all included files
 se complete-=t                  " do not scan tag files, slow anyways
+se completeopt-=preview         " disable scratch preview window
 se foldmethod=manual            " increases the autocompletion speed
 
 se wildignore+=*/.git/*,*/.hg/*,*/.svn/*                          " ignore VCS

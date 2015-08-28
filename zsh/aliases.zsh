@@ -20,6 +20,8 @@ alias reload=". ~/.zshrc"
 
 # misc
 alias halt="echo 'Use poweroff instead'"
+alias ag="pt" # use platinum searcher instead of silver
+alias grep="pt"
 
 # hub
 has_bin "fortune" && eval "$(hub alias -s)"
