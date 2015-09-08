@@ -288,7 +288,7 @@ if has('autocmd')
     au BufRead,BufNewFile *.twig,*.html,*.htm setlocal filetype=htmljinja
 
     " set tab width to 4
-    au BufRead,BufNewFile *.php,*.go,*.md setlocal ts=4 sw=4 sts=4
+    au BufRead,BufNewFile *.java,*.php,*.go,*.md setlocal ts=4 sw=4 sts=4
 
     " Highlight whitespace for non GO files
     au BufRead,BufNewFile * if index(['go'], &ft) < 0 | setlocal list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:·
@@ -321,8 +321,8 @@ if has('autocmd')
     " create parent directory when writing new file
     au BufWrite * :call <SID>MkdirsIfNotExists(expand('<afile>:h'))
     " when buffer activated reread
-    au FocusGained,BufEnter * :silent! !
+    " au FocusGained,BufEnter * :silent! !
     " when focus lost save
-    au FocusLost,WinLeave * :silent! w
+    " au FocusLost,WinLeave * :silent! w
   augroup END
 endif
