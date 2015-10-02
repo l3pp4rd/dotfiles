@@ -37,8 +37,7 @@ Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'mitsuhiko/vim-jinja'
-Plug 'Herzult/phpspec-vim'
-Plug 'mxw/vim-jsx', { 'for': 'jsx' }
+" Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'vim-scripts/sql.vim--Stinson', { 'for': 'sql' }
 call plug#end()
 
