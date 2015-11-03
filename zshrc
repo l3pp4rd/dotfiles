@@ -25,17 +25,10 @@ ZSH_CUSTOM=$DOTFILES/zsh
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
 
-# additional autocompletions
-fpath=($ZSH_CUSTOM/autocompletions/src $fpath)
-
 # list of plugins
 plugins=(
-  git                           # git source control
-  extract                       # archive extraction shortcut
   golang                        # golang completions
   zsh-history-substring-search  # history substring search
-  symfony2                      # symfony2 helpers
-  systemd                       # systemd shortcuts
   zsh-syntax-highlighting       # bracket highlighters
 )
 

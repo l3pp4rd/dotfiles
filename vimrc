@@ -7,7 +7,7 @@ Plug 'vim-scripts/gitignore'            " use gitignore for wildignore
 
 """ Appearance
 Plug 'altercation/vim-colors-solarized' " solorized color scheme
-Plug 'bling/vim-airline'
+Plug 'bling/vim-airline'                " status bar without interpreter dependencies
 
 """ Navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -21,9 +21,7 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'Raimondi/delimitMate'
-let hasUltisnips = 0
 if has('python') || has('python3')
-  let hasUltisnips = 1
   Plug 'SirVer/ultisnips'
   Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
   Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -35,9 +33,8 @@ endif
 Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'evanmiller/nginx-vim-syntax'
-Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'fatih/vim-go'
 Plug 'mitsuhiko/vim-jinja'
-" Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'vim-scripts/sql.vim--Stinson', { 'for': 'sql' }
 call plug#end()
 
@@ -307,7 +304,7 @@ if has('autocmd')
     au CursorMovedI * if pumvisible() == 0|pclose|endif
     au InsertLeave * if pumvisible() == 0|pclose|endif
 
-    if hasUltisnips
+    if has('python') || has('python3')
       au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
     endif
     au FileType html,css,htmljinja EmmetInstall
