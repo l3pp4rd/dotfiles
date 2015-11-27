@@ -202,6 +202,9 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 " npm install -g jsxhint
 let g:syntastic_javascript_checkers = ['jsxhint']
+" fixes for go
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Fugitive
 nmap <silent> <leader>gs :Gstatus<CR>
@@ -320,5 +323,16 @@ if has('autocmd')
     " au FocusGained,BufEnter * :silent! !
     " when focus lost save
     " au FocusLost,WinLeave * :silent! w
+  augroup END
+
+  augroup GOLANG
+    autocmd!
+
+    au FileType go nmap <Leader>r <Plug>(go-rename)
+    au FileType go nmap <Leader>i <Plug>(go-implements)
+    au FileType go nmap <Leader>d <Plug>(go-def)
+    au FileType go nmap <Leader>c <Plug>(go-callers)
+    au FileType go nmap <Leader>s <Plug>(go-callstack)
+    au FileType go nmap <Leader>x :GoMetaLinter<cr>
   augroup END
 endif

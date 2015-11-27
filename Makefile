@@ -6,11 +6,13 @@ DIR := $(shell cd "$( dirname "$0" )" && pwd)
 
 install: .deps fonts symlinks bins tmuxstart pt
 	vim +PlugInstall +qall
+	vim +GoUpdateBinaries +qall
 
 update: .deps fonts tmuxstart pt
 	curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	git submodule foreach git pull origin master
 	vim +PlugUpdate +qall
+	vim +GoUpdateBinaries +qall
 
 symlinks:
 	@mkdir -p $(HOME)/.config
