@@ -71,27 +71,7 @@ A **python** and **X** support may be useful in most cases to have with vim. **X
 from the same buffer and with python come some useful plugins. Anyway it is not necessary to compile vim on your own to
 setup these dotfiles, but if you do:
 
-```
-hg clone https://vim.googlecode.com/hg/ /tmp/vim-build
-cd /tmp/vim-build
-
-./configure \
---prefix=/usr/local \
---with-features=huge \
---with-compiledby='Custom edition' \
---enable-gpm \
---enable-acl \
---with-x=yes \
---disable-gui \
---enable-multibyte \
---enable-cscope \
---disable-netbeans \
---enable-pythoninterp \
---disable-python3interp
-
-make
-sudo make install
-```
+    make vim
 
 ### Install dotfiles
 
@@ -104,6 +84,10 @@ To update **git modules**, **fonts** and **vim** plugins:
     make update
 
 **NOTE:** most configurations use **Inconsolata** fonts, you should install or change it.
+
+## Status bar
+
+This fancy statusbar has now [separate repository](https://github.com/l3pp4rd/statusbar).
 
 ## Window Manager
 
