@@ -203,8 +203,8 @@ set statusline+=%*
 " npm install -g jsxhint
 let g:syntastic_javascript_checkers = ['jsxhint']
 " fixes for go
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Fugitive
 nmap <silent> <leader>gs :Gstatus<CR>

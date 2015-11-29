@@ -4,19 +4,22 @@ BG_IMG="$HOME/.dotfiles/wallpapers/blue-1920x1080.png"
 
 command -v feh >/dev/null 2>&1 && feh --bg-scale $BG_IMG &    # set the background wallpaper
 xsetroot -name "" &                                           # we have dzen2 status bar, set main WM window title to none
-command -v devmon >/dev/null 2>&1 && devmon &                 # automount removable devices
+wmname LG3D
 
 while true; do
-    (sleep 0.5 && status_bar) & # run dzen2 status bar, need to make sure wm loads first
+  (sleep 0.5 && statusbar /usr/local/etc/accounts.json | dzen2 \
+    -x -820 -y 0 -bg '#073642' -fg '#839496' \
+    -ta r -p -fn 'InconsolataSansMono:size=11' \
+    -h 19 -w 710) & # run dzen2 status bar, need to make sure wm loads first
 
-    # start dwm
-    dwm >/dev/null 2>&1 # never had any errors anyway
-    # if dwm exists with any error code, restart it
-    if [ $? -eq 0 ]; then
-        exit 0 # means exit clean => quit
-    fi
-    # dwm should be recompiled if changes were done
-    # kill status bar so it can be restarted
-    killall status_bar
+  # start dwm
+  dwm >/dev/null 2>&1 # never had any errors anyway
+  # if dwm exists with any error code, restart it
+  if [ $? -eq 0 ]; then
+      exit 0 # means exit clean => quit
+  fi
+  # dwm should be recompiled if changes were done
+  # kill status bar so it can be restarted
+  killall statusbar
 done
 

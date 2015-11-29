@@ -16,12 +16,10 @@ update: .deps fonts tmuxstart pt
 
 symlinks:
 	@mkdir -p $(HOME)/.config
-	@mkdir -p $(HOME)/.mpd/playlists
 	@ln -sfn $(DIR)/vim $(HOME)/.vim
 	@ln -sfn $(DIR)/vimrc $(HOME)/.vimrc
 	@ln -sfn $(DIR)/zshrc $(HOME)/.zshrc
 	@ln -sfn $(DIR)/tmux.conf $(HOME)/.tmux.conf
-	@ln -sfn $(DIR)/mpd.conf $(HOME)/.mpdconf
 	@ln -sfn $(DIR)/mplayer $(HOME)/.mplayer
 	@ln -sfn $(DIR)/config/ranger $(HOME)/.config/ranger
 	@ln -sfn $(DIR)/config/solarized $(HOME)/.config/solarized
