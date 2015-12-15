@@ -1,18 +1,19 @@
 # About my dotfiles
 
-My .dotfiles **ViM, DWM, zsh, st** and I use **ArchLinux** as my linux distribution
-Mainly inspired by [ornicar](https://github.com/ornicar/dotfiles). For all my programs and shell I use [solarized
-colors](http://ethanschoonover.com/solarized) and mainly **Inconsolata** font.
+My _.dotfiles_ **ViM, DWM, zsh, st** for linux based distributions. For all my programs and shell,
+I mainly use [solarized colors](http://ethanschoonover.com/solarized) and **Inconsolata** font.
 
 ## Requirements
 
-- Recent **ViM** version, does not require any interpreters like ruby or python.
-- **git**
-- **zsh**
-- **wget**
-- **256** color terminal client for the best experience
+- **ViM** recent version, does not require any interpreters like **ruby** or **python**. Run **make vim** to compile
+with python2 support.
+- **git** to manage modules and install vim
+- **zsh** if used as a default shell client
+- **wget** to download fonts
+- **256** color terminal client for the best experience, consider [st](http://st.suckless.org/)
+or [urxvt](https://wiki.gentoo.org/wiki/Rxvt-unicode)
 
-To install dmenu:
+To install **dmenu** as application launcher:
 
     git clone https://github.com/l3pp4rd/dmenu.git ~/.dmenu && cd ~/.dmenu
 
@@ -22,34 +23,21 @@ You most probably need to change the **X11** lib header file location if you are
     make
     sudo make install # will install it in /usr/local/bin
 
-Dmenu shortcut to list all path executables is available at **~/.dotfiles/bin/dmenu_run**
-It will cache all recently used applications, that way it will show up first in search results.
-
 ## tmuxstart
 
 To prevent ruby dependencies, I manage my **tmux** sessions with [tmuxstart](https://github.com/treyhunner/tmuxstart).
 Before that I was using **tmuxinator**. One session example is **~/.dotfiles/tmuxstart/dotfiles**. There is a **dmenu**
-executable to run **workspace** switch - **~/.dotfiles/bin/dmenu_workspace**
+executable to run **workspace** switch.
 
 ## Screen
 
-![Screenshot](https://raw.github.com/l3pp4rd/dotfiles/master/screen.png)
+![Screenshot](https://cloud.githubusercontent.com/assets/132389/11821998/fde7b18c-a374-11e5-9c56-102ac54c70ae.png)
 
 ## Installation
 
 Clone the repository:
 
     clone git://github.com/l3pp4rd/dotfiles.git ~/.dotfiles
-
-### Terminal client
-
-If you want nice colors with **vim** you should have a terminal client, which supports **256** colors. You may try:
-
-- **st** the simplest and most stable terminal client, supports all general features. You can just grab my version of
-[st](https://github.com/l3pp4rd/st) and compile it. If you need transparency, use **xcompmgr**.
-- **rxvt-unicode** you may need to compile it with **256** color support, but it may come with all features from package
-manager.
-- some others **terminator**, **guake** whatever you like.
 
 ### Tmux
 
@@ -98,6 +86,7 @@ with a login manager like **slim**.
 
 ## Changelog
 
+- **2015-12-15** - **Makefile** has update or install command.
 - **2015-05-24** - switched tmuxinator to tmuxstart, does not require ruby
 - **2015-05-10** - switched vim plugin manager to [vim-plug](https://github.com/junegunn/vim-plug)
 - **2015-04-16** - Makefile for setup and updates
@@ -106,6 +95,3 @@ with a login manager like **slim**.
 - **2013-12-20** - switched from pathogen to vundle
 - **2013-12-20** - switched powerline to airline, does not require big python setup
 
-## Some general stuff
-
-- manage [wifi from console](http://www.blackmoreops.com/2014/09/18/connect-to-wifi-network-from-command-line-in-linux/)

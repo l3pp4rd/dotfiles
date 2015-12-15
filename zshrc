@@ -28,8 +28,8 @@ DISABLE_AUTO_TITLE="true"
 # list of plugins
 plugins=(
   golang                        # golang completions
-  zsh-history-substring-search  # history substring search
   zsh-syntax-highlighting       # bracket highlighters
+  zsh-history-substring-search  # history substring search
 )
 
 # source all oh-my-zsh libs, plugins, cust files

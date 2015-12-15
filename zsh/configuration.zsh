@@ -7,11 +7,11 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 # this colon-separated list of directories for your destination.
 CDPATH=$HOME:..:/etc
 
-# Disable flow control in rxvt, frees ctrl-s & ctrl-q mappings
-stty -ixon -ixoff
-
 # Add dircolors
 eval $(dircolors $DOTFILES/zsh/dircolors-solarized/dircolors.ansi-dark)
+
+# hub
+has_bin "hub" && eval "$(hub alias -s)"
 
 # git templates
 export GIT_TEMPLATE_DIR=$DOTFILES/git/template
