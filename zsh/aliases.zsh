@@ -20,8 +20,10 @@ alias reload=". ~/.zshrc"
 
 # misc
 alias halt="echo 'Use poweroff instead'"
-alias ag="pt" # use platinum searcher instead of silver
-alias grep="pt"
+
+# git
+# remove all merged branches, except current and master
+alias git-clean-branches="git branch --merged | grep -v '\*' | grep -v master | xargs -n 1 git branch -d"
 
 # hub
 has_bin "fortune" && eval "$(hub alias -s)"
