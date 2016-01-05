@@ -1,69 +1,72 @@
 # vim: set ft=dosini :
 
 [usae]
-    name = gedi
+name = gedi
 
 [user]
-    name = gedi
-    email = gediminas.morkevicius@gmail.com
+name = gedi
+email = gediminas.morkevicius@gmail.com
 
 [color]
-    ui = true
+ui = true
 
 [color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
+current = yellow reverse
+local = yellow
+remote = green
 
 [color "diff"]
-    meta = yellow
-    frag = magenta
-    old = red
-    new = green
+meta = yellow
+frag = magenta
+old = red
+new = green
 
 [color "status"]
-    added = green
-    changed = yellow
-    untracked = red
+added = green
+changed = yellow
+untracked = red
 
 [diff]
-    tool = vimdiff
+tool = vimdiff
 
 [merge]
-    tool = vimdiff
+tool = vimdiff
 
 [branch]
-    autosetupmerge = true
+autosetupmerge = true
 
 [core]
-    editor = vim
-    excludesfile = ~/.gitignore
+editor = vim
+excludesfile = ~/.gitignore
 
 [apply]
-    whitespace = nowarn
+whitespace = nowarn
 
 [pull]
-    rebase = true
+rebase = true
 
 [push]
-    default = tracking
+default = tracking
+
+[rebase]
+autostash = true
 
 [github]
-    user = l3pp4rd
+user = l3pp4rd
 
 [alias]
-    unstage = reset HEAD
+unstage = reset HEAD
 
-    # rebase upstream commits, since git v1.7.0
-    prepare = rebase -i @{u}
+# rebase upstream commits, since git v1.7.0
+prepare = rebase -i @{u}
 
-    # nice format for a commit history log
-    hist = log --graph --pretty=format:\"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %C(blue)[%an]%Creset\" --abbrev-commit --date=relative
+# nice format for a commit history log
+hist = log --graph --pretty=format:\"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %C(blue)[%an]%Creset\" --abbrev-commit --date=relative
 
-    # show list of contributors in descending order by number of commits
-    rank = shortlog -sn --no-merges
+# show list of contributors in descending order by number of commits
+rank = shortlog -sn --no-merges
 
-    # log formats
-    changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
-    changelog = log --graph --pretty=format:\"%Cred%h%Creset - %s %C(blue)[%an]%Creset\"
+# log formats
+changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+changelog = log --graph --pretty=format:\"%Cred%h%Creset - %s %C(blue)[%an]%Creset\"
 
