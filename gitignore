@@ -1,0 +1,7 @@
+# global gitignore file
+*.log
+/.idea
+/.netbeans
+/tags
+/vendor.tags
+/.vimrc
