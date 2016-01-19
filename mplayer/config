@@ -17,3 +17,6 @@ lavdopts=threads=2
 # channels = 6
 
 dvd-device=/dev/sr0
+
+# pulseaudio
+ao=pulse
