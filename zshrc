@@ -24,6 +24,7 @@ ZSH_CUSTOM=$DOTFILES/zsh
 # some settings
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 # list of plugins
 plugins=(

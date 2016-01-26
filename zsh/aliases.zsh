@@ -7,9 +7,6 @@ alias start="sudo systemctl start"
 alias restart="sudo systemctl restart"
 alias stop="sudo systemctl stop"
 
-# ssh servers
-alias blog="ssh -A blog -t tmux attach"
-
 # systemd system messages
 alias journal-now="sudo journalctl -f"
 alias journal-boot="sudo journalctl -b"

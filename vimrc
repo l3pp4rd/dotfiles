@@ -15,7 +15,6 @@ Plug 'kien/ctrlp.vim'
 
 """ Editing
 Plug 'tmhedberg/matchit'
-Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
