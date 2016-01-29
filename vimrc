@@ -310,7 +310,6 @@ if has('autocmd')
     if has('python') || has('python3')
       au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
     endif
-    au FileType html,css,htmljinja EmmetInstall
   augroup END
 
   augroup GENERAL
