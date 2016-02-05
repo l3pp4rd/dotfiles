@@ -33,6 +33,11 @@ plugins=(
   zsh-history-substring-search  # history substring search
 )
 
+# load autojump if installed in system https://github.com/wting/autojump.git
+if [ -f "/etc/profile.d/autojump.zsh" ]; then
+  source /etc/profile.d/autojump.zsh
+fi
+
 # source all oh-my-zsh libs, plugins, cust files
 source $ZSH/oh-my-zsh.sh
 
