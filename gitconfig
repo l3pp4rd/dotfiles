@@ -1,8 +1,4 @@
 # vim: set ft=dosini :
-
-[usae]
-name = gedi
-
 [user]
 name = gedi
 email = gediminas.morkevicius@gmail.com
@@ -32,23 +28,25 @@ tool = vimdiff
 [merge]
 tool = vimdiff
 
-[branch]
-autosetupmerge = true
-
 [core]
 editor = vim
+# default patterns to ignore, .idea and etc.
 excludesfile = ~/.gitignore
 
 [apply]
 whitespace = nowarn
 
 [pull]
+# when doing 'git pull', rebase instead of merging
 rebase = true
 
 [push]
+# 'git push' will push the current branch to its tracking branch
+# the usual default is to push all branches
 default = tracking
 
 [rebase]
+# stash, rebase, pop - since git v2.6.0
 autostash = true
 
 [github]
