@@ -8,6 +8,7 @@ Plug 'vim-scripts/gitignore'            " use gitignore for wildignore
 """ Appearance
 Plug 'altercation/vim-colors-solarized' " solorized color scheme
 Plug 'bling/vim-airline'                " status bar without interpreter dependencies
+Plug 'vim-airline/vim-airline-themes'   " themes for status bar
 
 """ Navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
