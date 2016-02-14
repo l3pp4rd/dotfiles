@@ -15,6 +15,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'kien/ctrlp.vim'
 
 """ Editing
+Plug 'reedes/vim-pencil'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/syntastic'
@@ -334,5 +335,11 @@ if has('autocmd')
     au FileType go nmap <Leader>c <Plug>(go-callers)
     au FileType go nmap <Leader>s <Plug>(go-callstack)
     au FileType go nmap <Leader>x :GoMetaLinter<cr>
+  augroup END
+
+  augroup PENCIL
+    autocmd!
+    autocmd FileType markdown,mkd call pencil#init()
+    autocmd FileType text         call pencil#init()
   augroup END
 endif
