@@ -31,7 +31,11 @@ plugins=(
   golang                        # golang completions
   zsh-syntax-highlighting       # bracket highlighters
   zsh-history-substring-search  # history substring search
+  zsh-completions               # completions
 )
+
+# init completions
+autoload -U compinit && compinit
 
 # load autojump if installed in system https://github.com/wting/autojump.git
 if [ -f "/etc/profile.d/autojump.zsh" ]; then
