@@ -9,7 +9,7 @@ wmname LG3D
 while true; do
   (sleep 0.5 && statusbar /usr/local/etc/accounts.json | dzen2 \
     -x -820 -y 0 -bg '#073642' -fg '#839496' \
-    -ta r -p -fn 'InconsolataSansMono:size=11' \
+    -ta r -p -fn 'LiberationSerif:style=Bold:size=11' \
     -h 19 -w 710) & # run dzen2 status bar, need to make sure wm loads first
 
   # start dwm
