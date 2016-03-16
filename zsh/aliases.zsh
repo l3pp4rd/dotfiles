@@ -19,3 +19,9 @@ alias reload=". ~/.zshrc"
 # remove all merged branches, except current and master
 alias git-clean-branches="git branch --merged | grep -v '\*' | grep -v master | xargs -n 1 git branch -d"
 
+# systemd now manages ACPI
+pidof systemd > /dev/null && (
+  alias reboot="sudo systemctl reboot"
+  alias poweroff="sudo systemctl poweroff"
+  alias suspend="sudo systemctl suspend"
+)
