@@ -168,6 +168,9 @@ let g:airline#extensions#syntastic#enabled = 1
 " Nerd tree
 nmap <Leader>. :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<CR>
 
+" commentary
+nmap \\ :Commentary<CR>
+
 " UltiSnips
 let g:UltiSnipsSnippetDirectories = ["ultisnips"]
 function! g:UltiSnips_Complete()
