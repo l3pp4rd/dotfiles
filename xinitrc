@@ -13,5 +13,8 @@ eval $(ssh-agent)
 # start pulseaudio
 pulseaudio --start
 
+# custom key mapping modifications
+xmodmap ~/.xmodmap
+
 exec dwm-personalized
 

@@ -31,6 +31,7 @@ symlinks: .deps
 	@$(call dot,vim)
 	@$(call dot,vimrc)
 	@$(call dot,xinitrc)
+	@$(call dot,xmodmap)
 	@$(call dot,zshrc)
 	@$(call dot,tmux.conf)
 	@$(call dot,mplayer)
