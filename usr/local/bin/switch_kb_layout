@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# switches to next or first keyboard layout
+# based on current. Available list to switch
+# from is $LAYOUTS
+
+LAYOUTS='us lt'
+CUR=$(setxkbmap -query | grep layout | awk '{print $2}')
+
+FOUND=0
+SWITCH=$(echo $LAYOUTS | awk '{print $1}')
+for layout in $LAYOUTS; do
+  if [ $FOUND == 1 ]; then
+    SWITCH=$layout
+    break
+  fi
+  if [ "$layout" == "$CUR" ]; then
+    FOUND=1
+  fi
+done
+
+setxkbmap -layout $SWITCH
+xmodmap ~/.xmodmap
