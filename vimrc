@@ -23,7 +23,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'Raimondi/delimitMate'
 if has('python') || has('python3')
-  Plug 'SirVer/ultisnips'
   Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
   Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 else
@@ -171,30 +170,6 @@ nmap <Leader>. :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<CR>
 " commentary
 nmap \\ :Commentary<CR>
 
-" UltiSnips
-let g:UltiSnipsSnippetDirectories = ["ultisnips"]
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
-    endif
-    return ""
-endfunction
-
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsListSnippets="<c-e>"
-" this mapping Enter key to <C-y> to chose the current highlight item
-" and close the selection list, same as other IDEs.
-" CONFLICT with some plugins like tpope/Endwise
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
 " Delimit mate
 let delimitMate_autoclose = 1
 let delimitMate_matchpairs = "(:),[:],{:}"
@@ -304,29 +279,12 @@ if has('autocmd')
     au BufRead,BufNewFile *.php setlocal commentstring=//\ %s
   augroup END
 
-  augroup PLUGINS
-    autocmd!
-    " If you prefer the Omni-Completion tip window to close when a selection is
-    " made, these lines close it on movement in insert mode or when leaving
-    " insert mode
-    au CursorMovedI * if pumvisible() == 0|pclose|endif
-    au InsertLeave * if pumvisible() == 0|pclose|endif
-
-    if has('python') || has('python3')
-      au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-    endif
-  augroup END
-
   augroup GENERAL
     autocmd!
     " strip trailing space on write, go runs FMT anyways
     au BufWrite * :call <SID>StripTrailingWhitespaces()
     " create parent directory when writing new file
     au BufWrite * :call <SID>MkdirsIfNotExists(expand('<afile>:h'))
-    " when buffer activated reread
-    " au FocusGained,BufEnter * :silent! !
-    " when focus lost save
-    " au FocusLost,WinLeave * :silent! w
   augroup END
 
   augroup GOLANG
