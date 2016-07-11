@@ -28,10 +28,10 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 # list of plugins
 plugins=(
-  golang                        # golang completions
-  zsh-syntax-highlighting       # bracket highlighters
-  zsh-history-substring-search  # history substring search
-  zsh-completions               # completions
+  golang                    # golang completions
+  zsh-syntax-highlighting   # bracket highlighters
+  history-substring-search  # history substring search
+  zsh-completions           # completions
 )
 
 # init completions
