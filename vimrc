@@ -183,8 +183,8 @@ set statusline+=%*
 " npm install -g jsxhint
 let g:syntastic_javascript_checkers = ['jsxhint']
 " fixes for go
-" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_list_type = "quickfix"
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck', 'go']
 
 " Fugitive
 nmap <silent> <leader>gs :Gstatus<CR>
@@ -195,10 +195,6 @@ nmap <silent> <leader>gl :Glog<CR>
 nmap <silent> <leader>gp :Git push<CR>
 nmap <silent> <leader>gw :Gwrite<CR>
 nmap <silent> <leader>gr :Gremove<CR>
-
-" Zencoding - aka emmet-vim
-let g:user_emmet_leader_key = '<c-l>' " CTRL + L + <leader>
-let g:user_emmet_install_global = 0
 
 " ViM GO
 let g:go_fmt_command = "goimports"
