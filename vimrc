@@ -130,9 +130,6 @@ vnoremap > >gv
 " Toggle line numbering
 nmap <silent> <leader>n :set nonumber!<cr>
 
-" Create a new file, suggest current directory of the file edited
-nmap <leader>c :e <c-r>=expand('%:h')<cr>/
-
 " Force reload all buffers
 nmap <leader>r :bufdo e!
 
@@ -146,7 +143,7 @@ nmap <C-a> ggVG$
 nmap <leader>m :e#<cr>
 
 " replace all tabs to spaces, windows new lines to normal
-nmap <leader>C :call CleanCode()<cr>
+nmap <leader>c :call CleanCode()<cr>
 
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -157,7 +154,9 @@ nmap <leader>C :call CleanCode()<cr>
 nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>l :CtrlP<cr>
 
-let g:ctrlp_custom_ignore = '\v[\/](vendor|\.git|\.hg|\.svn|node_modules|dist)$'
+" Make ctrlp ignore files from gitignore
+" From https://github.com/kien/ctrlp.vim/issues/174#issuecomment-215829892
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 
 " Airline
 let g:airline_theme='solarized'
@@ -166,9 +165,6 @@ let g:airline#extensions#syntastic#enabled = 1
 
 " Nerd tree
 nmap <Leader>. :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<CR>
-
-" commentary
-nmap \\ :Commentary<CR>
 
 " Delimit mate
 let delimitMate_autoclose = 1
