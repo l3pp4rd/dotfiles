@@ -4,6 +4,7 @@ call plug#begin('~/.vim/bundle')
 """ Base
 Plug 'tpope/vim-sensible'               " sensible defaults for ViM
 Plug 'vim-scripts/gitignore'            " use gitignore for wildignore
+Plug 'tpope/vim-dispatch'               " asynchronous build and test dispatcher
 
 """ Appearance
 Plug 'altercation/vim-colors-solarized' " solorized color scheme
@@ -180,7 +181,7 @@ set statusline+=%*
 let g:syntastic_javascript_checkers = ['jsxhint']
 " fixes for go
 let g:go_list_type = "quickfix"
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck', 'go']
+let g:syntastic_go_checkers = ['govet', 'errcheck', 'go']
 
 " Fugitive
 nmap <silent> <leader>gs :Gstatus<CR>
