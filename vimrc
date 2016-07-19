@@ -36,7 +36,7 @@ Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'fatih/vim-go'
 Plug 'mitsuhiko/vim-jinja'
-Plug 'vim-scripts/sql.vim--Stinson', { 'for': 'sql' }
+Plug 'vim-scripts/SQLComplete.vim'
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 call plug#end()
 
