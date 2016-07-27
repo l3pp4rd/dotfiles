@@ -1,4 +1,4 @@
-.PHONY: install symlinks fonts bins tmuxstart vim systemd xsessions
+.PHONY: install dotfiles fonts bins tmuxstart vim systemd xsessions
 
 FONT_CONF_DIR := $(HOME)/.config/fontconfig/conf.d
 FONT_DIR := $(HOME)/.fonts
@@ -14,10 +14,10 @@ ln -sfn $(DIR)/$(1) $(HOME)/.$(1)
 endef
 
 define installed =
-command -v $(1) >/dev/null 2>&1 || (echo "$(1) needs to be installed"; exit 1)
+command -v $(1) >/dev/null 2>&1 || (echo "$(1) needs to be installed and available in $$PATH"; exit 1)
 endef
 
-install: .deps fonts symlinks bins tmuxstart
+install: .deps fonts dotfiles bins tmuxstart
 	@git submodule update --init
 	vim +PlugInstall +GoUpdateBinaries +qall
 
@@ -27,7 +27,8 @@ update: .deps fonts tmuxstart
 	git submodule foreach git pull origin master
 	vim +PlugInstall +PlugUpdate +GoUpdateBinaries +qall
 
-symlinks: .deps
+# WARNING: will overwrite these dotfiles in $HOME
+dotfiles: .deps
 	@$(call dot,vim)
 	@$(call dot,vimrc)
 	@$(call dot,xinitrc)
@@ -49,13 +50,16 @@ tmuxstart: .deps
 bins:
 	@for BINARY in $(BINS); do sudo cp -f $$BINARY /$$BINARY; done
 
+POWERLINE := https://raw.github.com/Lokaltog/powerline
+
 fonts: .deps
-	@curl -L https://raw.github.com/Lokaltog/powerline/develop/font/10-powerline-symbols.conf > $(FONT_CONF_DIR)/10-powerline-symbols.conf
-	@curl -L https://raw.github.com/Lokaltog/powerline/develop/font/PowerlineSymbols.otf > $(FONT_DIR)/PowerlineSymbols.otf
-	@curl -L 'https://raw.github.com/Lokaltog/powerline-fonts/master/Inconsolata/Inconsolata%20for%20Powerline.otf' > $(FONT_DIR)/Inconsolata.otf
+	@curl -L $(POWERLINE)/develop/font/10-powerline-symbols.conf > $(FONT_CONF_DIR)/10-powerline-symbols.conf
+	@curl -L $(POWERLINE)/develop/font/PowerlineSymbols.otf > $(FONT_DIR)/PowerlineSymbols.otf
+	@curl -L $(POWERLINE)-fonts/master/Inconsolata/Inconsolata%20for%20Powerline.otf > $(FONT_DIR)/Inconsolata.otf
 	@fc-cache -vf $(FONT_DIR)
 
 vim:
+	@$(call installed,git)
 	@if [ ! -d "/tmp/vim_src" ]; then git clone https://github.com/vim/vim.git /tmp/vim_src; fi
 	@cd /tmp/vim_src && ./configure \
 --prefix=/usr/local \
