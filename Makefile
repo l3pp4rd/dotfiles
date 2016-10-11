@@ -19,7 +19,8 @@ endef
 
 install: .deps fonts dotfiles bins tmuxstart
 	@git submodule update --init
-	vim +PlugInstall +GoUpdateBinaries +qall
+	vim +PlugInstall +qall
+	vim +GoUpdateBinaries +qall
 
 update: .deps fonts tmuxstart
 	@git submodule update --init
@@ -73,7 +74,7 @@ vim:
 --enable-cscope \
 --disable-netbeans \
 --enable-pythoninterp \
---disable-python3interp && make && sudo make install
+--enable-python3interp && make && sudo make install
 
 systemd:
 	@$(call installed,systemctl)
