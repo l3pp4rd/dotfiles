@@ -145,6 +145,9 @@ nmap <leader>m :e#<cr>
 " replace all tabs to spaces, windows new lines to normal
 nmap <leader>c :call CleanCode()<cr>
 
+" map leader + x to execute selected text through shell
+xnoremap <leader>x <esc>:'<,'>:w !sh<CR>
+
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 "|
