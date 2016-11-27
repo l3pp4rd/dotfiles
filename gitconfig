@@ -40,11 +40,6 @@ whitespace = nowarn
 # when doing 'git pull', rebase instead of merging
 rebase = true
 
-[push]
-# 'git push' will push the current branch to its tracking branch
-# the usual default is to push all branches
-default = tracking
-
 [rebase]
 # stash, rebase, pop - since git v2.6.0
 autostash = true
