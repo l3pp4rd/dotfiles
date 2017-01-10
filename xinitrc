@@ -24,5 +24,8 @@ is_bin xcompmgr && xcompmgr -c &
 # custom key mapping modifications
 xmodmap ~/.xmodmap
 
+# disable screen saver
+is_bin xset && xset -dpms s off
+
 exec dwm-personalized
 
