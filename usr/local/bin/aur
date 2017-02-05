@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+if [ ! -f "$1" ]; then
+  echo -n "argument is not a file, expecting tar archive."
+  exit 1
+fi
+
+WD=$(echo $1 | sed 's/.tar.gz$//')
+
+if [ "${WD}" == "${1}" ]; then
+  echo -n "argument is not an archive file, expecting tar archive."
+  exit 1
+fi
+
+tar -xzf $1
+cd $WD
+
+makepkg -cs
+sudo pacman -U $(find . -name '*.xz')
