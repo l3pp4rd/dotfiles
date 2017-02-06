@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# this script installs given version of go and links
+# binaries to override default installation. Requires
+# initial go installation which in arch-linux defaults
+# to /usr/local/go as GOROOT
+
+set -e
+
+VER=$1
+REL=$GOPATH/versions/$VER
+
+mkdir -p versions
+
+if [ "$VER" == "local" ]; then
+  echo -e "switching to local go version.."
+  sudo rm /usr/local/bin/go
+  sudo rm /usr/local/bin/gofmt
+  exit 0
+fi
+
+if [ ! -d "$REL" ]; then
+  mkdir -p $REL
+  echo -e "downloading go at: $VER"
+  curl -s -L https://github.com/golang/go/tarball/$VER | tar -C $REL -zx --strip-components 1
+  echo -e "building go at: $VER"
+  cd $REL/src
+  GOROOT_BOOTSTRAP=/usr/lib/go ./all.bash
+else
+  echo -e "already available: $VER"
+fi
+
+sudo cp $REL/bin/go /usr/local/bin/go
+sudo cp $REL/bin/gofmt /usr/local/bin/gofmt
+
+echo -e "go version: $(go version)"
+
