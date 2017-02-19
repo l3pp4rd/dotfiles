@@ -1,6 +1,7 @@
 # vim: set ft=dosini :
 [user]
 name = gedi
+signingkey = 56604CDCCC201556
 email = gediminas.morkevicius@gmail.com
 
 [color]
