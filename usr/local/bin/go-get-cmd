@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# this script installs given go command binary
+# from remote through go get, but exports GOPATH
+# elsewhere, so it could no trash your favourite
+# GOPATH/src with all the dependencies for this
+# command.
+
+# example: go-get-cmd github.com/gongo/9t/cmd/9t
+
+set -e
+
+GOBIN=${GOBIN:-$GOPATH/bin}
+
+FAKE=/tmp/fakego
+CMD=$1
+
+mkdir -p $FAKE
+
+GOPATH=$FAKE
+
+go get $CMD
+
+rm -rf $FAKE

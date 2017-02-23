@@ -52,9 +52,6 @@ alias rsa-dec="openssl base64 -d | openssl rsautl -decrypt -inkey ~/.ssh/id_rsa"
 alias gpg-enc="gpg --recipient gediminas.morkevicius@gmail.com --encrypt --armor"
 alias gpg-dec="gpg --decrypt"
 
-# if go is available install 9t as multi tail command
-has_bin go && alias mtail="9t" && (has_bin 9t || go get github.com/gongo/9t/cmd/9t)
-
 # systemd now manages ACPI
 pidof systemd > /dev/null && (
   alias reboot="sudo systemctl reboot"
