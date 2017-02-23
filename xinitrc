@@ -26,7 +26,7 @@ fi
 is_bin pulseaudio && pulseaudio --start
 
 # start transparency daemon
-is_bin compton && compton -c &
+is_bin compton && compton -b
 
 # custom key mapping modifications
 xmodmap ~/.xmodmap
