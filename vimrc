@@ -14,6 +14,7 @@ Plug 'vim-airline/vim-airline-themes'   " themes for status bar
 """ Navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'kien/ctrlp.vim'
+Plug 'easymotion/vim-easymotion'
 
 """ Editing
 Plug 'reedes/vim-pencil'
@@ -156,6 +157,9 @@ xnoremap <leader>x <esc>:'<,'>:w !sh<CR>
 "|
 nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>l :CtrlP<cr>
+
+" easymation, I do not use f
+map f <Plug>(easymotion-prefix)
 
 " Make ctrlp ignore files from gitignore
 " From https://github.com/kien/ctrlp.vim/issues/174#issuecomment-215829892
