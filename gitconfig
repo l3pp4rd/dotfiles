@@ -23,6 +23,10 @@ added = green
 changed = yellow
 untracked = red
 
+[commit]
+# sign all commits
+gpgsign = true
+
 [diff]
 tool = vimdiff
 
