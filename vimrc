@@ -84,6 +84,7 @@ se hidden                       " Handle multiple buffers better.
 se complete-=t                  " do not scan tag files, slow anyways
 se completeopt-=preview         " disable scratch preview window
 se foldmethod=manual            " increases the autocompletion speed
+se showcmd
 
 se wildignore+=*/.git/*,*/.hg/*,*/.svn/*                          " ignore VCS
 se wildignore+=*.swp,*.jpg,*.jpeg,*.bmp,*.png,*.xpm,*.gif,*.ico   " ignore media
