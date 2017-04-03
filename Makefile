@@ -1,4 +1,4 @@
-.PHONY: install dotfiles fonts bins tmuxstart vim systemd xsessions
+.PHONY: install dotfiles fonts bins tmuxstart vim systemd
 
 FONT_CONF_DIR := $(HOME)/.config/fontconfig/conf.d
 FONT_DIR := $(HOME)/.fonts
@@ -6,7 +6,6 @@ DIR := $(shell pwd)
 
 BINS := $(shell find usr/local/bin -executable -type f)
 SERVICES := $(shell find usr/lib/systemd/system -name '*.service')
-XSESSIONS := $(shell find usr/share/xsessions -name '*.desktop')
 
 # make a symlink to home directory for given dotfile
 define dot =
@@ -79,9 +78,6 @@ vim:
 systemd:
 	@$(call installed,systemctl)
 	@for REL in $(SERVICES); do sudo cp -f $$REL /$$REL; done
-
-xsessions:
-	@for REL in $(XSESSIONS); do sudo cp -f $$REL /$$REL; done
 
 .deps:
 	@$(call installed,git)

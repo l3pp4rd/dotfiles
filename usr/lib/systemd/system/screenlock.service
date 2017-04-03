@@ -1,0 +1,9 @@
+[Unit]
+Description=Lock X session using LXDM
+
+[Service]
+User=gedi
+ExecStart=/usr/bin/lxdm -c USER_SWITCH
+
+[Install]
+WantedBy=sleep.target

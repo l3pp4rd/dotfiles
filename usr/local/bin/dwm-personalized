@@ -1,5 +1,7 @@
 #!/bin/sh
 
+source ~/.xinitrc
+
 BG_IMG="$HOME/.dotfiles/wallpapers/blue-1920x1080.png"
 
 command -v feh >/dev/null 2>&1 && feh --bg-scale $BG_IMG &    # set the background wallpaper
