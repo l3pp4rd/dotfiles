@@ -14,8 +14,8 @@ mkdir -p versions
 
 if [ "$VER" == "local" ]; then
   echo -e "switching to local go version.."
-  sudo rm /usr/local/bin/go
-  sudo rm /usr/local/bin/gofmt
+  sudo rm -f /usr/local/bin/go
+  sudo rm -f /usr/local/bin/gofmt
   exit 0
 fi
 

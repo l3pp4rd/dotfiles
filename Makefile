@@ -1,4 +1,4 @@
-.PHONY: install dotfiles fonts bins tmuxstart vim systemd
+.PHONY: install dotfiles fonts bins tmuxstart vim systemd tools
 
 FONT_CONF_DIR := $(HOME)/.config/fontconfig/conf.d
 FONT_DIR := $(HOME)/.fonts
@@ -57,6 +57,15 @@ fonts: .deps
 	@curl -L $(POWERLINE)/develop/font/PowerlineSymbols.otf > $(FONT_DIR)/PowerlineSymbols.otf
 	@curl -L $(POWERLINE)-fonts/master/Inconsolata/Inconsolata%20for%20Powerline.otf > $(FONT_DIR)/Inconsolata.otf
 	@fc-cache -vf $(FONT_DIR)
+
+tools: bins
+	@$(call installed,go)
+	@go-get-cmd github.com/davecheney/httpstat
+	@go-get-cmd github.com/gongo/9t
+	@go-get-cmd github.com/DATA-DOG/goup
+	@curl -Lo $(HOME)/go/bin/ctop https://github.com/bcicen/ctop/releases/download/v0.5/ctop-0.5-linux-amd64
+	@chmod +x $(HOME)/go/bin/ctop
+
 
 vim:
 	@$(call installed,git)
