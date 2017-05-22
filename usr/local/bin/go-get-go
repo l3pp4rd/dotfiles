@@ -8,9 +8,7 @@
 set -e
 
 VER=$1
-REL=$GOPATH/versions/$VER
-
-mkdir -p versions
+REL=/tmp/go-versions/$VER
 
 if [ "$VER" == "local" ]; then
   echo -e "switching to local go version.."

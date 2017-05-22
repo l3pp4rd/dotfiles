@@ -13,18 +13,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # bin for golang
-if [ -d "$HOME/go" ]; then
-    export GOPATH=$HOME/go # golang workspace
-    if [ -d "$HOME/go/bin" ]; then
-        export GOBIN=$HOME/go/bin # go executables path
-        export PATH=$PATH:$GOBIN # export in path as well
-    fi
-fi
-
-# bin dir at home
-if [ -d "$HOME/bin" ]; then
-    export PATH=$PATH:$HOME/bin
-fi
+export GOPATH=$HOME
+export GOBIN=$GOPATH/bin
+export PATH=$GOBIN:$PATH
 
 # java
 if [ -z "${MAVEN_OPTS}" ]; then
