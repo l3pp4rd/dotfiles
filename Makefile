@@ -69,7 +69,9 @@ tools: bins
 
 vim:
 	@$(call installed,git)
-	@if [ ! -d "/tmp/vim_src" ]; then git clone https://github.com/vim/vim.git /tmp/vim_src; fi
+	@rm -rf /tmp/vim_src
+	@mkdir -p /tmp/vim_src
+	@curl -s -L https://github.com/vim/vim/tarball/master | tar -C /tmp/vim_src -zx --strip-components 1
 	@cd /tmp/vim_src && ./configure \
 --prefix=/usr/local \
 --with-features=huge \
