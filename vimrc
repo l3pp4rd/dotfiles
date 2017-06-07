@@ -202,6 +202,7 @@ nmap <silent> <leader>gr :Gremove<CR>
 
 " ViM GO
 let g:go_fmt_command = "goimports"
+let g:go_addtags_transform = 'camelcase' " or snakecase for underscore
 
 " Gundo - handles undo branches
 nmap <F10> :GundoToggle<cr>
@@ -296,6 +297,8 @@ if has('autocmd')
     au FileType go nmap <Leader>c <Plug>(go-callers)
     au FileType go nmap <Leader>s <Plug>(go-callstack)
     au FileType go nmap <Leader>x :GoMetaLinter<cr>
+    au FileType go nmap <Leader>k :GoKeyify<cr>
+    au FileType go nmap <Leader>t :GoAddTags<cr>
   augroup END
 
   augroup PENCIL
