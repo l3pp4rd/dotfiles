@@ -63,8 +63,9 @@ tools: bins
 	@go-get-cmd github.com/davecheney/httpstat
 	@go-get-cmd github.com/gongo/9t
 	@go-get-cmd github.com/DATA-DOG/goup
-	@curl -Lo $(HOME)/go/bin/ctop https://github.com/bcicen/ctop/releases/download/v0.5/ctop-0.5-linux-amd64
-	@chmod +x $(HOME)/go/bin/ctop
+	@go-get-cmd github.com/vektorlab/slackcat
+	@curl -Lo $(GOPATH)/bin/ctop https://github.com/bcicen/ctop/releases/download/v0.5.1/ctop-0.5.1-linux-amd64
+	@chmod +x $(GOPATH)/bin/ctop
 
 
 vim:
