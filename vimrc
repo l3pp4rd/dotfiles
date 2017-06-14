@@ -17,12 +17,14 @@ Plug 'kien/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 
 """ Editing
+Plug 'PeterRincker/vim-argumentative'
 Plug 'reedes/vim-pencil'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
 Plug 'Raimondi/delimitMate'
 if has('python') || has('python3')
   Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
@@ -207,6 +209,19 @@ let g:go_addtags_transform = 'camelcase' " or snakecase for underscore
 " Gundo - handles undo branches
 nmap <F10> :GundoToggle<cr>
 let g:gundo_close_on_revert = 1
+
+" Argumentative
+nmap [; <Plug>Argumentative_Prev
+nmap ]; <Plug>Argumentative_Next
+xmap [; <Plug>Argumentative_XPrev
+xmap ]; <Plug>Argumentative_XNext
+nmap <; <Plug>Argumentative_MoveLeft
+nmap >; <Plug>Argumentative_MoveRight
+xmap i; <Plug>Argumentative_InnerTextObject
+xmap a; <Plug>Argumentative_OuterTextObject
+omap i; <Plug>Argumentative_OpPendingInnerTextObject
+omap a; <Plug>Argumentative_OpPendingOuterTextObject
+
 
 "
 "+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
