@@ -36,7 +36,6 @@ endif
 """ Language specific
 Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
-Plug 'evanmiller/nginx-vim-syntax'
 Plug 'fatih/vim-go'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'vim-scripts/SQLComplete.vim'
