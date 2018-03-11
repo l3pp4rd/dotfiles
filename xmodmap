@@ -1,4 +1,5 @@
-clear lock
-clear control
-add control = Caps_Lock Control_L Control_R
-keycode 66 = Control_L Caps_Lock NoSymbol NoSymbol
+remove Lock = Caps_Lock
+!keysym Escape = Caps_Lock
+keysym Caps_Lock = Escape
+!add Lock = Caps_Lock
+keycode 108 = Multi_key
