@@ -27,7 +27,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'Raimondi/delimitMate'
 if has('python') || has('python3')
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --go-completer --clang-completer' }
   Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 else
   Plug 'ervandew/supertab'
@@ -200,6 +200,8 @@ nmap <silent> <leader>gl :Glog<CR>
 nmap <silent> <leader>gp :Git push<CR>
 nmap <silent> <leader>gw :Gwrite<CR>
 nmap <silent> <leader>gr :Gremove<CR>
+
+let g:ycm_global_ycm_extra_conf = '~/.dotfiles/ycm.py'
 
 " ViM GO
 let g:go_fmt_command = "goimports"
