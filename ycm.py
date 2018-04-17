@@ -25,6 +25,7 @@ flags = [
 '-x',
 'c',
 '-isystem',
+'/usr/include',
 ]
 
 
