@@ -12,7 +12,7 @@ Plug 'bling/vim-airline'                " status bar without interpreter depende
 Plug 'vim-airline/vim-airline-themes'   " themes for status bar
 
 """ Navigation
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 

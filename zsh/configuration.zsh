@@ -24,7 +24,13 @@ fi
 
 #### ALIASES
 
-# archlinux services
+# pacman
+function pac_unused {
+  sudo pacman -Rns $(pacman -Qtdq)
+}
+alias pac_clean="sudo paccache -rk 1"
+
+# systemd
 alias start="sudo systemctl start"
 alias restart="sudo systemctl restart"
 alias stop="sudo systemctl stop"
