@@ -17,6 +17,9 @@ export GOPATH=$HOME
 export GOBIN=$GOPATH/bin
 export PATH=$GOBIN:$PATH
 
+# rust
+export PATH=$PATH:$HOME/.cargo/bin
+
 # java
 if [ -z "${MAVEN_OPTS}" ]; then
   export MAVEN_OPTS="-Xmx1024m -Djava.security.egd=file:/dev/./urandom"
