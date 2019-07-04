@@ -23,7 +23,7 @@ elif hash ssh-agent 2> /dev/null; then
 fi
 
 # start pulseaudio
-is_bin pulseaudio && pulseaudio --start
+# is_bin pulseaudio && pulseaudio --start
 
 # start transparency daemon
 is_bin compton && compton -b
@@ -33,4 +33,3 @@ xmodmap ~/.xmodmap
 
 # disable screen saver
 is_bin xset && xset -dpms s off
-

@@ -40,7 +40,6 @@ Plug 'fatih/vim-go'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'vim-scripts/SQLComplete.vim'
 Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'chrisbra/csv.vim'
 call plug#end()
 
 "
