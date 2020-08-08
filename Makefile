@@ -31,6 +31,7 @@ update: .deps fonts tmuxstart
 dotfiles: .deps
 	@$(call dot,vim)
 	@$(call dot,vimrc)
+	@$(call dot,alacritty.yml)
 	@$(call dot,xinitrc)
 	@$(call dot,xmodmap)
 	@$(call dot,zshrc)

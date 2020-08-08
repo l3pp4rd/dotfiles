@@ -1,7 +1,7 @@
 # About my dotfiles
 
-My _.dotfiles_ for **ViM, DWM, zsh, st** for linux based distributions.
-For all my programs and shell, I mainly use [solarized
+My _.dotfiles_ for **ViM, DWM, zsh, alacritty** for linux based
+distributions. For all my programs and shell, I mainly use [solarized
 colors](http://ethanschoonover.com/solarized) and **Inconsolata** font.
 
 ## Requirements
@@ -104,6 +104,9 @@ a possibility to be used inline with a login manager like **slim**.
 
 ## Changelog
 
+- **2020-08-08** - removed syntastic, add
+  [alacritty](https://github.com/alacritty/alacritty) config, fixes python
+  dependency in vimrc
 - **2016-07-11** - plugins and modules were updated, was not compatible
   anymore with the **upstream**.
 - **2015-12-15** - **Makefile** has update or install command.
