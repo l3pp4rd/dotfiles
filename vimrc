@@ -1,6 +1,16 @@
 se nocompatible                         " use vim defaults, should be first entry
 
 call plug#begin('~/.vim/bundle')
+
+" make sure these lines are first, since vim must use python3 if available
+" otherwie it would use python2 if present
+if has('python3')
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --go-completer --clang-completer' }
+  Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
+else
+  Plug 'ervandew/supertab'
+endif
+
 """ Base
 Plug 'tpope/vim-sensible'               " sensible defaults for ViM
 Plug 'vim-scripts/gitignore'            " use gitignore for wildignore
@@ -21,17 +31,10 @@ Plug 'PeterRincker/vim-argumentative'
 Plug 'reedes/vim-pencil'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'Raimondi/delimitMate'
-if has('python') || has('python3')
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --go-completer --clang-completer' }
-  Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
-else
-  Plug 'ervandew/supertab'
-endif
 
 """ Language specific
 Plug 'groenewege/vim-less', { 'for': 'less' }
@@ -178,18 +181,6 @@ nmap <Leader>. :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<CR>
 " Delimit mate
 let delimitMate_autoclose = 1
 let delimitMate_matchpairs = "(:),[:],{:}"
-
-" Syntastic
-let g:syntastic_enable_signs=1
-let g:syntastic_enable_balloons=1
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" npm install -g jsxhint
-let g:syntastic_javascript_checkers = ['jsxhint']
-" fixes for go
-let g:go_list_type = "quickfix"
-let g:syntastic_go_checkers = ['govet', 'errcheck', 'go']
 
 " Fugitive
 nmap <silent> <leader>gs :Gstatus<CR>
