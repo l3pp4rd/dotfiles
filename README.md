@@ -104,6 +104,7 @@ a possibility to be used inline with a login manager like **slim**.
 
 ## Changelog
 
+- **2020-08-09** - switch Ctrlp to FZF in vim
 - **2020-08-08** - removed syntastic, add
   [alacritty](https://github.com/alacritty/alacritty) config, fixes python
   dependency in vimrc

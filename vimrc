@@ -15,6 +15,7 @@ endif
 Plug 'tpope/vim-sensible'               " sensible defaults for ViM
 Plug 'vim-scripts/gitignore'            " use gitignore for wildignore
 Plug 'tpope/vim-dispatch'               " asynchronous build and test dispatcher
+Plug 'tpope/vim-eunuch'
 
 """ Appearance
 Plug 'altercation/vim-colors-solarized' " solorized color scheme
@@ -23,10 +24,12 @@ Plug 'vim-airline/vim-airline-themes'   " themes for status bar
 
 """ Navigation
 Plug 'scrooloose/nerdtree'
-Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 
 """ Editing
+Plug 'terryma/vim-multiple-cursors'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'reedes/vim-pencil'
 Plug 'tmhedberg/matchit'
@@ -160,8 +163,8 @@ xnoremap <leader>x <esc>:'<,'>:w !sh<CR>
 "|  > PLUGINS
 "|
 "|
-nmap <leader>b :CtrlPBuffer<cr>
-nmap <leader>l :CtrlP<cr>
+nmap <leader>b :Buffers<cr>
+nmap <leader>l :Files<cr>
 
 " easymation, I do not use f
 map f <Plug>(easymotion-prefix)
