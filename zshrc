@@ -28,19 +28,16 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 # list of plugins
 plugins=(
-  golang                    # golang completions
   zsh-syntax-highlighting   # bracket highlighters
   history-substring-search  # history substring search
   zsh-completions           # completions
+  autojump                  # efficient shortcuts to directories
+  golang                    # golang completions
+  zsh-autosuggestions       # history based suggestions
 )
 
 # init completions
 autoload -U compinit && compinit
-
-# load autojump if installed in system https://github.com/wting/autojump.git
-if [ -f "/etc/profile.d/autojump.zsh" ]; then
-  source /etc/profile.d/autojump.zsh
-fi
 
 # source all oh-my-zsh libs, plugins, cust files
 source $ZSH/oh-my-zsh.sh
@@ -49,6 +46,9 @@ source $ZSH/oh-my-zsh.sh
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
+
+# color for autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=11"
 
 # tell me a fortune :)
 has_bin "fortune" && has_bin "cowsay" && fortune -a /usr/share/fortune/chucknorris | cowsay
