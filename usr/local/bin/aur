@@ -17,5 +17,5 @@ fi
 tar -xzf $1
 cd $WD
 
-makepkg -cs
-sudo pacman -U $(find . -name '*.xz')
+makepkg -si
+# sudo pacman -U $(find . -name '*.xz')
