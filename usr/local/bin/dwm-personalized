@@ -3,10 +3,12 @@
 source ~/.xinitrc
 
 BG_IMG="$HOME/.dotfiles/wallpapers/blue-1920x1080.png"
+if [ -f "$BG_IMG"]; then
+  command -v feh >/dev/null 2>&1 && feh --bg-scale $BG_IMG &    # set the background wallpaper
+fi
 
-command -v feh >/dev/null 2>&1 && feh --bg-scale $BG_IMG &    # set the background wallpaper
-xsetroot -name "" &                                           # we have dzen2 status bar, set main WM window title to none
-wmname LG3D
+xsetroot -name "" &   # we have dzen2 status bar, set main WM window title to none
+wmname LG3D           # makes Java applets work in DWM window manager
 
 while true; do
   # run dzen2 status bar, need to make sure wm loads first

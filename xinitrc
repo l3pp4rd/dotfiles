@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Note:
+# 1. pulseaudio uses user systemd service
+
 is_bin() {
     TMP=`which $1 2> /dev/null`
     [ $? -eq 0 ]
@@ -21,9 +24,6 @@ if hash gpg-agent 2> /dev/null; then
 elif hash ssh-agent 2> /dev/null; then
   eval $(ssh-agent)
 fi
-
-# start pulseaudio
-# is_bin pulseaudio && pulseaudio --start
 
 # start transparency daemon
 is_bin compton && compton -b
