@@ -26,7 +26,8 @@ elif hash ssh-agent 2> /dev/null; then
 fi
 
 # start transparency daemon
-is_bin compton && compton -b
+# NOTE: is not compatible with ranger image preview (w3m, ueberzug)
+# is_bin compton && compton -b
 
 # custom key mapping modifications
 xmodmap ~/.xmodmap
