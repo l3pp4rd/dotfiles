@@ -2,6 +2,7 @@
 
 # Note:
 # 1. pulseaudio uses user systemd service
+export LIBGL_ALWAYS_SOFTWARE=1
 
 is_bin() {
     TMP=`which $1 2> /dev/null`
