@@ -28,10 +28,16 @@ untracked = red
 gpgsign = true
 
 [diff]
-tool = vimdiff
+tool = difftastic
 
 [merge]
 tool = vimdiff
+
+[difftool]
+prompt = false
+
+[difftool "difftastic"]
+cmd = difft "$LOCAL" "$REMOTE"
 
 [core]
 editor = vim
