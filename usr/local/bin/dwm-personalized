@@ -9,6 +9,7 @@ fi
 
 xsetroot -name "" &   # we have dzen2 status bar, set main WM window title to none
 wmname LG3D           # makes Java applets work in DWM window manager
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 while true; do
   # run dzen2 status bar, need to make sure wm loads first
