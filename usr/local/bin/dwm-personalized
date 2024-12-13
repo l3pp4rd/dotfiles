@@ -1,15 +1,42 @@
 #!/bin/sh
 
-source ~/.xinitrc
+# Note:
+# 1. pulseaudio uses user systemd service
+export LIBGL_ALWAYS_SOFTWARE=1
+export _JAVA_AWT_WM_NONREPARENTING=1
 
-BG_IMG="$HOME/.dotfiles/wallpapers/blue-1920x1080.png"
-if [ -f "$BG_IMG"]; then
-  command -v feh >/dev/null 2>&1 && feh --bg-scale $BG_IMG &    # set the background wallpaper
+# makes Java applets work in DWM window manager
+hash wmname 2> /dev/null && wmname LG3D
+# we have dzen2 status bar, set main WM window title to none
+hash xsetroot 2> /dev/null && xsetroot -name "" &
+
+# activate gpg or ssh agent whichever is available
+if hash gpg-agent 2> /dev/null; then
+  export GPG_TTY=$(tty)
+  gpg-connect-agent updatestartuptty /bye >/dev/null
+  # note that uses systemd services to manage gpg-agent
+  export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+elif hash ssh-agent 2> /dev/null; then
+  eval $(ssh-agent)
 fi
 
-xsetroot -name "" &   # we have dzen2 status bar, set main WM window title to none
-wmname LG3D           # makes Java applets work in DWM window manager
-export _JAVA_AWT_WM_NONREPARENTING=1
+# start transparency daemon
+# NOTE: is not compatible with ranger image preview (w3m, ueberzug)
+# is_bin compton && compton -b
+
+# custom key mapping modifications
+xmodmap ~/.xmodmap
+
+# export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
+
+# disable screen saver
+hash xset 2> /dev/null && xset -dpms s off
+
+# set background image
+hash feh 2> /dev/null && feh --bg-scale "$HOME/.dotfiles/wallpapers/blue-1920x1080.png"
+
+# enable transparent background
+hash picom 2> /dev/null && picom -b
 
 while true; do
   # run dzen2 status bar, need to make sure wm loads first
