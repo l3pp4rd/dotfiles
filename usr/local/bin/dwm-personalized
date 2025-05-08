@@ -38,6 +38,9 @@ hash feh 2> /dev/null && feh --bg-scale "$HOME/.dotfiles/wallpapers/blue-1920x10
 # enable transparent background
 hash picom 2> /dev/null && picom -b
 
+# start dunst notification manager
+hash dunst 2> /dev/null && sleep 2s && dunst &
+
 while true; do
   # run dzen2 status bar, need to make sure wm loads first
   (sleep 0.5 && statusbar /usr/local/etc/statusbar.json > /tmp/statusbar.log 2>&1) &
