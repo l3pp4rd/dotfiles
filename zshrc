@@ -53,3 +53,4 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=11"
 # tell me a fortune :)
 has_bin "fortune" && has_bin "cowsay" && fortune -a /usr/share/fortune/chucknorris | cowsay
 
+
