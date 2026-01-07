@@ -17,8 +17,17 @@ export GOPATH=$HOME
 export GOBIN=$GOPATH/bin
 export PATH=$GOBIN:$PATH
 
-# rust
-export PATH=$PATH:$HOME/.cargo/bin
+# rustup
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi
+
+# bun
+if [ -d "$HOME/.bun" ]; then
+  [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
 
 # java
 if [ -z "${MAVEN_OPTS}" ]; then
