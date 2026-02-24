@@ -29,6 +29,11 @@ if [ -d "$HOME/.bun" ]; then
   export PATH="$BUN_INSTALL/bin:$PATH"
 fi
 
+# .local/bin
+if [ -d "$HOME/.local/bin" ]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
 # java
 if [ -z "${MAVEN_OPTS}" ]; then
   export MAVEN_OPTS="-Xmx1024m -Djava.security.egd=file:/dev/./urandom"
