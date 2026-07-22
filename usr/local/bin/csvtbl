@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+"""Pretty-print CSV as an aligned table.
+
+Reads CSV from file arguments or stdin, handles quoting/embedded commas
+properly (unlike `column -s, -t`), and prints values verbatim (unlike
+duckdb, which re-parses them). Numeric-looking columns are right-aligned.
+
+Usage:
+  tbl file.csv [more.csv ...]
+  some-command | tbl
+  tbl -m file.csv      # emit GitHub-flavored Markdown instead of a box table
+  tbl -d ';' file.csv  # custom delimiter
+"""
+import argparse
+import csv
+import re
+import sys
+
+NUMERIC = re.compile(r"^[+-]?(\d[\d,]*\.?\d*%?|\d*\.\d+%?|\d{1,2}(:\d{2})+)$")
+
+
+def is_numeric(value):
+    return value == "" or bool(NUMERIC.match(value.strip()))
+
+
+def render(rows, markdown):
+    if not rows:
+        return
+    ncols = max(len(r) for r in rows)
+    rows = [r + [""] * (ncols - len(r)) for r in rows]
+    widths = [max(len(r[i]) for r in rows) for i in range(ncols)]
+    right = [all(is_numeric(r[i]) for r in rows[1:]) for i in range(ncols)]
+
+    def fmt(row):
+        return [
+            cell.rjust(widths[i]) if right[i] else cell.ljust(widths[i])
+            for i, cell in enumerate(row)
+        ]
+
+    if markdown:
+        print("| " + " | ".join(fmt(rows[0])) + " |")
+        print(
+            "|"
+            + "|".join(
+                ("-" * (w + 1) + ":") if right[i] else ("-" * (w + 2))
+                for i, w in enumerate(widths)
+            )
+            + "|"
+        )
+        for row in rows[1:]:
+            print("| " + " | ".join(fmt(row)) + " |")
+        return
+
+    edge = lambda l, m, r: l + m.join("─" * (w + 2) for w in widths) + r
+    print(edge("┌", "┬", "┐"))
+    print("│ " + " │ ".join(fmt(rows[0])) + " │")
+    print(edge("├", "┼", "┤"))
+    for row in rows[1:]:
+        print("│ " + " │ ".join(fmt(row)) + " │")
+    print(edge("└", "┴", "┘"))
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("files", nargs="*", help="CSV files (stdin if omitted)")
+    ap.add_argument("-m", "--markdown", action="store_true", help="emit Markdown table")
+    ap.add_argument("-d", "--delimiter", default=",", help="field delimiter (default ,)")
+    args = ap.parse_args()
+
+    sources = [open(f, newline="") for f in args.files] or [sys.stdin]
+    for i, src in enumerate(sources):
+        if i:
+            print()
+        with src:
+            render(list(csv.reader(src, delimiter=args.delimiter)), args.markdown)
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except BrokenPipeError:
+        sys.exit(0)
+    except KeyboardInterrupt:
+        sys.exit(130)

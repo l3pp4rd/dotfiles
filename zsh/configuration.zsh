@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# claude related
+export CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1
+
 # Add dircolors
 eval $(dircolors $DOTFILES/zsh/dircolors-solarized/dircolors.ansi-dark)
 
