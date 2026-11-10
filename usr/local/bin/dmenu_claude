@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# Pick a stored Claude Code session with dmenu and resume it in a tmux pane.
+#
+# Usage: dmenu_claude [tmux-pane-id]
+#   With a pane id (or inside tmux) the resume command is typed into that
+#   pane's shell; otherwise claude is exec'ed in the calling shell.
+#
+# tmux binding:
+#   bind-key -n C-l run-shell -b "~/.local/bin/dmenu_claude #{pane_id}"
+
+PROJECTS_DIR=$HOME/.claude/projects
+FONT="Inconsolata-16"
+PANE=${1:-$TMUX_PANE}
+TAB=$(printf '\t')
+
+# last value of a top-level string field from records of the given type
+field() { # file type key
+  grep "^{\"type\":\"$2\"" "$1" | tail -n 1 | jq -r ".$3 // empty" 2>/dev/null
+}
+
+# display<TAB>session id<TAB>project dir, most recently used first
+SESSIONS=$(
+  ls -t "$PROJECTS_DIR"/*/*.jsonl 2>/dev/null | while read -r file; do
+    id=$(basename "$file" .jsonl)
+    cwd=$(grep -m 1 -o '"cwd":"[^"]*"' "$file" | cut -d'"' -f4)
+    [ -d "$cwd" ] || continue
+
+    title=$(field "$file" custom-title customTitle)
+    [ -n "$title" ] || title=$(field "$file" ai-title aiTitle)
+    [ -n "$title" ] || title=$(field "$file" last-prompt lastPrompt)
+    [ -n "$title" ] || continue
+    title=$(printf '%s' "$title" | tr '\t\n' '  ' | cut -c1-100)
+
+    printf '%s  %-12s %s  [%.8s]\t%s\t%s\n' \
+      "$(date -r "$file" '+%m-%d %H:%M')" "$(basename "$cwd")" "$title" "$id" "$id" "$cwd"
+  done
+)
+
+[ -n "$SESSIONS" ] || exit 0
+
+CHOICE=$(
+  printf '%s\n' "$SESSIONS" | cut -f1 | dmenu \
+    -nb '#002b36' -nf '#839496' -sb '#073642' -sf '#cb4b16' \
+    -fn $FONT -i -l 20 -p "Claude"
+)
+
+[ -n "$CHOICE" ] || exit 0
+
+ROW=$(printf '%s\n' "$SESSIONS" | awk -F"$TAB" -v c="$CHOICE" '$1 == c { print; exit }')
+[ -n "$ROW" ] || exit 0
+ID=$(printf '%s' "$ROW" | cut -f2)
+DIR=$(printf '%s' "$ROW" | cut -f3)
+
+if [ -n "$PANE" ]; then
+  tmux send-keys -t "$PANE" "cd '$DIR' && claude --resume $ID" Enter
+else
+  cd "$DIR" && exec claude --resume "$ID"
+fi
