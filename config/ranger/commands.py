@@ -12,6 +12,7 @@ from ranger.api.commands import *
 
 # You can import any python module as needed.
 import subprocess
+import shutil
 import os
 
 class run_with(Command):
@@ -26,8 +27,8 @@ class run_with(Command):
     resolve_macros = False
 
     def execute(self):
-        dmenu = '/usr/local/bin/dmenu_app'
-        if os.path.isfile(dmenu):
+        dmenu = shutil.which('dmenu_app')
+        if dmenu:
             proc = subprocess.Popen([dmenu], stdout=subprocess.PIPE)
             app = proc.communicate()[0].rstrip().decode('utf-8')
             if len(app):

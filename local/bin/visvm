@@ -1,0 +1,3 @@
+#!/bin/bash
+
+_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd' visualvm

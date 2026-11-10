@@ -1,0 +1,15 @@
+[Unit]
+Description=Auto-mirror displays on hotplug
+After=default.target
+# my own project binary, not installed by the dotfiles
+ConditionPathExists=%h/.local/bin/randr
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=%h/.local/bin/randr
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

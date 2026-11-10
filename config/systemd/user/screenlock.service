@@ -1,0 +1,14 @@
+[Unit]
+Description=Lock X session on suspend and on loginctl lock-session
+After=default.target
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+# the user manager is not part of the login session, so point xss-lock to the graphical one
+ExecStart=/bin/sh -c 'exec xss-lock -s "$$(loginctl show-user %u -p Display --value)" -- %h/.local/bin/screenlock'
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

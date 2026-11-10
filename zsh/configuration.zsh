@@ -15,6 +15,9 @@ export BROWSER=google-chrome-stable
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
+# keep PATH entries unique, the first occurrence wins
+typeset -U path PATH
+
 # bin for golang
 export GOPATH=$HOME
 export GOBIN=$GOPATH/bin

@@ -43,7 +43,7 @@ hash dunst 2> /dev/null && sleep 2s && dunst &
 
 while true; do
   # run dzen2 status bar, need to make sure wm loads first
-  (sleep 0.5 && statusbar /usr/local/etc/statusbar.json > /tmp/statusbar.log 2>&1) &
+  (sleep 0.5 && statusbar $HOME/.config/statusbar.json > /tmp/statusbar.log 2>&1) &
 
   # start dwm
   dwm >/dev/null 2>&1 # never had any errors anyway

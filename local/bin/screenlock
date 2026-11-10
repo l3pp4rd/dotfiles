@@ -1,0 +1,7 @@
+#!/bin/sh
+# lock the X session, used by the screenlock user systemd service (xss-lock)
+
+# make sure the password is typed in a known layout
+setxkbmap -layout us
+# -n: do not fork, xss-lock needs to know when the locker exits
+exec i3lock -n -i "$HOME/.dotfiles/wallpapers/blue-1920x1080.png"

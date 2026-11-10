@@ -25,7 +25,7 @@ you are not using arch linux:
 
     vim config.mk
     make
-    sudo make install # will install it in /usr/local/bin
+    make PREFIX=$HOME/.local install # will install it in ~/.local/bin
 
 ## tmuxstart
 

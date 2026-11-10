@@ -3,9 +3,11 @@
 FONT_CONF_DIR := $(HOME)/.config/fontconfig/conf.d
 FONT_DIR := $(HOME)/.fonts
 DIR := $(shell pwd)
+BIN_DIR := $(HOME)/.local/bin
 
-BINS := $(shell find usr/local/bin -executable -type f)
-SERVICES := $(shell find usr/lib/systemd/system -name '*.service')
+BINS := $(shell find local/bin -executable -type f)
+SYSTEMD_USER_DIR := $(HOME)/.config/systemd/user
+SERVICES := $(shell find config/systemd/user -name '*.service')
 
 # make a symlink to home directory for given dotfile
 define dot =
@@ -43,13 +45,13 @@ dotfiles: .deps
 	@$(call dot,config/solarized)
 
 tmuxstart: .deps
-	curl -L https://raw.githubusercontent.com/treyhunner/tmuxstart/master/tmuxstart > /tmp/tmuxstart
-	chmod +x /tmp/tmuxstart
-	sudo mv /tmp/tmuxstart /usr/local/bin/tmuxstart
+	curl -L https://raw.githubusercontent.com/treyhunner/tmuxstart/master/tmuxstart > $(BIN_DIR)/tmuxstart
+	chmod +x $(BIN_DIR)/tmuxstart
 	cp tmuxstart/dotfiles $(HOME)/.tmuxstart/dotfiles
 
 bins:
-	@for BINARY in $(BINS); do sudo cp -f $$BINARY /$$BINARY; done
+	@mkdir -p $(BIN_DIR)
+	@cp -f $(BINS) $(BIN_DIR)/
 
 POWERLINE := https://raw.github.com/Lokaltog/powerline
 
@@ -75,7 +77,7 @@ vim:
 	@mkdir -p /tmp/vim_src
 	@curl -s -L https://github.com/vim/vim/tarball/master | tar -C /tmp/vim_src -zx --strip-components 1
 	@cd /tmp/vim_src && ./configure \
---prefix=/usr/local \
+--prefix=$(HOME)/.local \
 --with-features=huge \
 --with-compiledby="Custom edition" \
 --enable-gpm \
@@ -86,14 +88,19 @@ vim:
 --enable-cscope \
 --disable-netbeans \
 --enable-pythoninterp \
---enable-python3interp && make && sudo make install
+--enable-python3interp && make && make install
 
-systemd:
+systemd: bins
 	@$(call installed,systemctl)
-	@for REL in $(SERVICES); do sudo cp -f $$REL /$$REL; done
+	@$(call installed,xss-lock)
+	@$(call installed,i3lock)
+	@mkdir -p $(SYSTEMD_USER_DIR)
+	@cp -f $(SERVICES) $(SYSTEMD_USER_DIR)/
+	@systemctl --user daemon-reload
+	@systemctl --user enable --now $(notdir $(SERVICES))
 
 .deps:
 	@$(call installed,git)
 	@$(call installed,vim)
 	@$(call installed,curl)
-	@mkdir -p $(FONT_DIR) $(FONT_CONF_DIR) $(HOME)/.tmuxstart
+	@mkdir -p $(FONT_DIR) $(FONT_CONF_DIR) $(HOME)/.tmuxstart $(BIN_DIR)

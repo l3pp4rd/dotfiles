@@ -17,12 +17,12 @@
 # - Company security agents (mdatp, qualys-*, jcagent), Landscape and Ubuntu Pro/livepatch: IT usually installs these with company-specific setup.
 # - Old docker.io and docker-compose v1: replaced by docker-compose-plugin, so you'd use docker compose instead of docker-compose.
 # - Brother printer driver: it needs Brother's interactive installer, so the script just prints a reminder.
-# - zig: your /usr/local/bin/zig link points to ~/src/zig, which no longer exists.
+# - zig: the old /usr/local/bin/zig link pointed to ~/src/zig, which no longer exists.
 # - Your own project binaries in ~/.local/bin (routing, mynet, local-kanban and so on).
 
 # Back these up before upgrading, because the script can't recreate them:
 # - ~/src/statusbar has 1 commit that isn't pushed.
-# - /usr/local/etc/statusbar.json and ~/.dotfiles/zsh/local.zsh (not tracked in git).
+# - ~/.config/statusbar.json and ~/.dotfiles/zsh/local.zsh (not tracked in git).
 # - ~/.ssh, ~/.gnupg, and your personal projects in ~/src.
 
 # On a fresh system: clone the dotfiles over HTTPS first, since you won't have an SSH key yet, then run the script.
@@ -34,6 +34,10 @@ CODENAME="$(. /etc/os-release && echo "$VERSION_CODENAME")"
 KEYRINGS=/etc/apt/keyrings
 SRC="$HOME/src"
 LOCAL_BIN="$HOME/.local/bin"
+
+# everything of mine installs here, make it usable within this run
+mkdir -p "$LOCAL_BIN" "$HOME/.config"
+export PATH="$LOCAL_BIN:$PATH"
 
 log() { printf '\n\033[1;34m==> %s\033[0m\n' "$*"; }
 warn() { printf '\033[1;33mWARN: %s\033[0m\n' "$*" >&2; }
@@ -111,7 +115,7 @@ step_apt() {
     # X session, dwm, desktop utilities
     apt_install \
         xorg xserver-xorg xterm x11-xkb-utils x11-xserver-utils xclip xdg-utils \
-        slim suckless-tools arandr picom feh dunst dzen2 i3lock scrot libnotify-bin \
+        slim suckless-tools arandr picom feh dunst dzen2 i3lock xss-lock scrot libnotify-bin \
         gnome-keyring seahorse libsecret-tools pinentry-gtk2 dbus-x11 \
         fonts-inconsolata fonts-liberation alacritty
 
@@ -203,10 +207,11 @@ step_tools() {
     ln -sf "$HOME/.local/share/jdtls/bin/jdtls" "$LOCAL_BIN/jdtls"
 
     # jetbrains toolbox, run it once to install IntelliJ IDEA
-    sudo rm -rf /opt/jetbrains-toolbox && sudo mkdir -p /opt/jetbrains-toolbox
+    local toolbox="$HOME/.local/share/jetbrains-toolbox"
+    rm -rf "$toolbox" && mkdir -p "$toolbox"
     curl -fsSL 'https://data.services.jetbrains.com/products/download?platform=linux&code=TBA' |
-        sudo tar -xz -C /opt/jetbrains-toolbox --strip-components=1
-    sudo ln -sf /opt/jetbrains-toolbox/bin/jetbrains-toolbox /usr/local/bin/jetbrains-toolbox
+        tar -xz -C "$toolbox" --strip-components=1
+    ln -sf "$toolbox/bin/jetbrains-toolbox" "$LOCAL_BIN/jetbrains-toolbox"
 }
 
 step_suckless() {
@@ -215,17 +220,21 @@ step_suckless() {
     for name in dwm st dmenu; do
         clone "https://github.com/l3pp4rd/$name.git" "$SRC/$name"
         make -C "$SRC/$name" clean all
-        sudo make -C "$SRC/$name" install
+        make -C "$SRC/$name" PREFIX="$HOME/.local" install
     done
 
     clone https://github.com/l3pp4rd/statusbar.git "$SRC/statusbar"
-    (cd "$SRC/statusbar" && make install)
+    # its own "make install" target goes to /usr/local with sudo
+    (cd "$SRC/statusbar" && go build -o "$LOCAL_BIN/statusbar")
+    if [ ! -f "$HOME/.config/statusbar.json" ] && [ -f "$SRC/statusbar/statusbar.json" ]; then
+        cp "$SRC/statusbar/statusbar.json" "$HOME/.config/statusbar.json"
+    fi
 }
 
 step_dotfiles() {
     log "dotfiles"
     git -C "$DIR" submodule update --init
-    make -C "$DIR" vim     # vim from source with python3
+    make -C "$DIR" vim     # vim from source with python3, into ~/.local
     export GOPATH="$HOME" GOBIN="$HOME/bin"
     make -C "$DIR" install # fonts, symlinks, bins, tmuxstart, vim plugins, go binaries
     make -C "$DIR" systemd
