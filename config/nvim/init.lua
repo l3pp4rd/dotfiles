@@ -139,11 +139,11 @@ map({ 'n', 'v' }, '?', '?\\v')
 --|
 -- Replaces YouCompleteMe: completion menu as you type, fed by buffer words
 -- and omnifunc. Omnifunc comes from vim-go (gopls) for GO and from the
--- builtin LSP client for the servers below.
+-- builtin LSP client for the servers below (C, Rust, Java).
 vim.o.autocomplete = true
 vim.opt.complete:remove('t')      -- do not scan tag files, slow anyways
 vim.opt.complete:append('o')
-vim.opt.completeopt:append('noselect')
+vim.opt.completeopt:append({ 'menuone', 'noselect' })
 
 vim.lsp.config('clangd', {
   cmd = { 'clangd' },
@@ -155,11 +155,29 @@ vim.lsp.config('rust_analyzer', {
   filetypes = { 'rust' },
   root_markers = { 'Cargo.toml' },
 })
-for _, name in ipairs({ 'clangd', 'rust_analyzer' }) do
-  if vim.fn.executable(vim.lsp.config[name].cmd[1]) == 1 then
+vim.lsp.config('jdtls', {
+  -- keeps the eclipse workspace per project, the launcher default is in /tmp
+  cmd = function(dispatchers, config)
+    local root = config.root_dir or vim.fn.getcwd()
+    local data = vim.fn.stdpath('cache') .. '/jdtls/' .. vim.fn.sha256(root)
+    return vim.lsp.rpc.start({ 'jdtls', '-data', data }, dispatchers, { cwd = root })
+  end,
+  filetypes = { 'java' },
+  root_markers = { { 'pom.xml', 'build.gradle', 'build.gradle.kts' }, '.git' },
+})
+for name, bin in pairs({ clangd = 'clangd', rust_analyzer = 'rust-analyzer', jdtls = 'jdtls' }) do
+  if vim.fn.executable(bin) == 1 then
     vim.lsp.enable(name)
   end
 end
+
+-- accepting a completion with <C-y> applies its extra edits, like adding the import
+au('LspAttach', {
+  group = group('LSP'),
+  callback = function(ev)
+    vim.lsp.completion.enable(true, ev.data.client_id, ev.buf)
+  end,
+})
 
 --
 --+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
