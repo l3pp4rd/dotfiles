@@ -72,6 +72,14 @@ builtin, but if you do:
 
     make vim
 
+### Neovim
+
+Lives next to **ViM** with its own configuration in **config/nvim**, which
+is a migration of **vimrc**. Plugins are managed by the builtin
+**vim.pack**. To install the latest release into **~/.local**:
+
+    make nvim
+
 ### Install dotfiles
 
 **WARNING:** analyze **Makefile** before you execute it, this will force
@@ -104,6 +112,7 @@ a possibility to be used inline with a login manager like **slim**.
 
 ## Changelog
 
+- **2026-11-11** - added neovim next to vim, with migrated configuration
 - **2020-08-09** - switch Ctrlp to FZF in vim
 - **2020-08-08** - removed syntastic, add
   [alacritty](https://github.com/alacritty/alacritty) config, fixes python

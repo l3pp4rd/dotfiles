@@ -1,4 +1,4 @@
-.PHONY: install dotfiles fonts bins tmuxstart vim systemd tools
+.PHONY: install dotfiles fonts bins tmuxstart vim nvim systemd tools
 
 FONT_CONF_DIR := $(HOME)/.config/fontconfig/conf.d
 FONT_DIR := $(HOME)/.fonts
@@ -22,12 +22,14 @@ install: .deps fonts dotfiles bins tmuxstart
 	@git submodule update --init
 	vim +PlugInstall +qall
 	vim +GoUpdateBinaries +qall
+	nvim --headless +qall
 
 update: .deps fonts tmuxstart
 	@git submodule update --init
 	curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	git submodule foreach git pull origin master
 	vim +PlugInstall +PlugUpdate +GoUpdateBinaries +qall
+	nvim --headless "+lua vim.pack.update(nil, { force = true })" +qall
 
 # WARNING: will overwrite these dotfiles in $HOME
 dotfiles: .deps
@@ -42,6 +44,7 @@ dotfiles: .deps
 	@$(call dot,gitignore)
 	@$(call dot,gitconfig)
 	@$(call dot,config/ranger)
+	@$(call dot,config/nvim)
 	@$(call dot,config/solarized)
 
 tmuxstart: .deps
@@ -90,6 +93,16 @@ vim:
 --enable-pythoninterp \
 --enable-python3interp && make && make install
 
+NVIM_DIR := $(HOME)/.local/opt/nvim
+
+# official release build, lives next to vim
+nvim:
+	@$(call installed,curl)
+	@rm -rf $(NVIM_DIR)
+	@mkdir -p $(NVIM_DIR) $(BIN_DIR)
+	@curl -fsSL https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz | tar -C $(NVIM_DIR) -zx --strip-components 1
+	@ln -sfn $(NVIM_DIR)/bin/nvim $(BIN_DIR)/nvim
+
 systemd: bins
 	@$(call installed,systemctl)
 	@$(call installed,xss-lock)
@@ -102,5 +115,6 @@ systemd: bins
 .deps:
 	@$(call installed,git)
 	@$(call installed,vim)
+	@$(call installed,nvim)
 	@$(call installed,curl)
 	@mkdir -p $(FONT_DIR) $(FONT_CONF_DIR) $(HOME)/.tmuxstart $(BIN_DIR)

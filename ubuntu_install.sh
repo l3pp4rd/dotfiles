@@ -235,8 +235,9 @@ step_dotfiles() {
     log "dotfiles"
     git -C "$DIR" submodule update --init
     make -C "$DIR" vim     # vim from source with python3, into ~/.local
+    make -C "$DIR" nvim    # neovim release build, into ~/.local
     export GOPATH="$HOME" GOBIN="$HOME/bin"
-    make -C "$DIR" install # fonts, symlinks, bins, tmuxstart, vim plugins, go binaries
+    make -C "$DIR" install # fonts, symlinks, bins, tmuxstart, vim and nvim plugins, go binaries
     make -C "$DIR" systemd
 }
 
