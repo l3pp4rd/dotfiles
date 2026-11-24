@@ -7,7 +7,7 @@ export CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1
 eval $(dircolors $DOTFILES/zsh/dircolors-solarized/dircolors.ansi-dark)
 
 # default text editor
-export EDITOR=vim
+export EDITOR=nvim
 
 # default browser
 export BROWSER=google-chrome-stable
@@ -46,6 +46,8 @@ if [ -z "${MAVEN_OPTS}" ]; then
 fi
 
 #### ALIASES
+
+alias vim=nvim
 
 # pacman
 function pac_unused {

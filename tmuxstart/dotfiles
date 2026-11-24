@@ -1,8 +1,8 @@
 # base project path
 path=~/.dotfiles
 
-new_session -n vim
-send_line 0 vim
+new_session -n nvim
+send_line 0 nvim
 new_window -n dotfiles
 new_window -n split
 

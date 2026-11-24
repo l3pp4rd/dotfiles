@@ -31,7 +31,7 @@ gpgsign = true
 tool = difftastic
 
 [merge]
-tool = vimdiff
+tool = nvimdiff
 
 [difftool]
 prompt = false
@@ -40,7 +40,7 @@ prompt = false
 cmd = difft "$LOCAL" "$REMOTE"
 
 [core]
-editor = vim
+editor = nvim
 # default patterns to ignore, .idea and etc.
 excludesfile = ~/.gitignore
 

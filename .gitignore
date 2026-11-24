@@ -1,5 +1,1 @@
-/vim/tmp/*
-!vim/tmp/.empty
-/vim/.netrwhist
 /zsh/local.zsh
-/vim/bundle

@@ -1,4 +1,4 @@
--- Migrated from ~/.dotfiles/vimrc, sections kept in the same order.
+-- Migrated from the former vimrc, sections kept in the same order.
 -- Plugins are managed by the builtin vim.pack, revisions are pinned in
 -- nvim-pack-lock.json next to this file.
 

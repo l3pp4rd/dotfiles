@@ -1,16 +1,14 @@
 # About my dotfiles
 
-My _.dotfiles_ for **ViM, DWM, zsh, alacritty** for linux based
+My _.dotfiles_ for **Neovim, DWM, zsh, alacritty** for linux based
 distributions. For all my programs and shell, I mainly use [solarized
 colors](http://ethanschoonover.com/solarized) and **Inconsolata** font.
 
 ## Requirements
 
-- **ViM** decent version, does not require any interpreters like **ruby**
-  or **python**. Run **make vim** to compile with python2 support. When
-  python is available **YouCompleteMe** autocompletion plugin will be
-  plugged, otherwise supertab, which is less powerful.
-- **git** to manage modules and install vim
+- **Neovim** 0.12 or later, for the builtin **vim.pack** plugin manager.
+  Run **make nvim** to install the latest release.
+- **git** to manage modules and nvim plugins
 - **zsh** if used as a default shell client
 - **wget** to download fonts
 - **256** color terminal client for the best experience, consider [st](http://st.suckless.org/)
@@ -62,20 +60,9 @@ your default shell by running:
 
     chsh -s $(which zsh)
 
-### ViM
-
-A **python** and **X** support may be useful in most cases to have with
-vim. **X** support will allow to copy and paste from the same buffer and
-with python come some useful plugins. Anyway it is not necessary to
-compile vim on your own to setup these dotfiles, usually **python** is
-builtin, but if you do:
-
-    make vim
-
 ### Neovim
 
-Lives next to **ViM** with its own configuration in **config/nvim**, which
-is a migration of **vimrc**. Plugins are managed by the builtin
+Configuration lives in **config/nvim**. Plugins are managed by the builtin
 **vim.pack**. To install the latest release into **~/.local**:
 
     make nvim
@@ -88,7 +75,7 @@ your needs..
 
     make
 
-To update **git modules**, **fonts** and **vim** plugins from time to
+To update **git modules**, **fonts** and **nvim** plugins from time to
 time:
 
     make update
@@ -112,6 +99,7 @@ a possibility to be used inline with a login manager like **slim**.
 
 ## Changelog
 
+- **2026-11-24** - removed vim, neovim is the only editor
 - **2026-11-11** - added neovim next to vim, with migrated configuration
 - **2020-08-09** - switch Ctrlp to FZF in vim
 - **2020-08-08** - removed syntastic, add

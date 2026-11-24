@@ -1,4 +1,4 @@
-.PHONY: install dotfiles fonts bins tmuxstart vim nvim systemd tools
+.PHONY: install dotfiles fonts bins tmuxstart nvim systemd tools
 
 FONT_CONF_DIR := $(HOME)/.config/fontconfig/conf.d
 FONT_DIR := $(HOME)/.fonts
@@ -20,21 +20,17 @@ endef
 
 install: .deps fonts dotfiles bins tmuxstart
 	@git submodule update --init
-	vim +PlugInstall +qall
-	vim +GoUpdateBinaries +qall
 	nvim --headless +qall
+	nvim --headless +GoUpdateBinaries +qall
 
 update: .deps fonts tmuxstart
 	@git submodule update --init
-	curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	git submodule foreach git pull origin master
-	vim +PlugInstall +PlugUpdate +GoUpdateBinaries +qall
 	nvim --headless "+lua vim.pack.update(nil, { force = true })" +qall
+	nvim --headless +GoUpdateBinaries +qall
 
 # WARNING: will overwrite these dotfiles in $HOME
 dotfiles: .deps
-	@$(call dot,vim)
-	@$(call dot,vimrc)
 	@$(call dot,alacritty.toml)
 	@$(call dot,xinitrc)
 	@$(call dot,xmodmap)
@@ -74,28 +70,9 @@ tools: bins
 	@chmod +x $(GOPATH)/bin/ctop
 
 
-vim:
-	@$(call installed,git)
-	@rm -rf /tmp/vim_src
-	@mkdir -p /tmp/vim_src
-	@curl -s -L https://github.com/vim/vim/tarball/master | tar -C /tmp/vim_src -zx --strip-components 1
-	@cd /tmp/vim_src && ./configure \
---prefix=$(HOME)/.local \
---with-features=huge \
---with-compiledby="Custom edition" \
---enable-gpm \
---enable-acl \
---with-x=yes \
---disable-gui \
---enable-multibyte \
---enable-cscope \
---disable-netbeans \
---enable-pythoninterp \
---enable-python3interp && make && make install
-
 NVIM_DIR := $(HOME)/.local/opt/nvim
 
-# official release build, lives next to vim
+# official release build
 nvim:
 	@$(call installed,curl)
 	@rm -rf $(NVIM_DIR)
@@ -114,7 +91,6 @@ systemd: bins
 
 .deps:
 	@$(call installed,git)
-	@$(call installed,vim)
 	@$(call installed,nvim)
 	@$(call installed,curl)
 	@mkdir -p $(FONT_DIR) $(FONT_CONF_DIR) $(HOME)/.tmuxstart $(BIN_DIR)
